@@ -3,3 +3,4 @@ temp_backup
 troubleshooting_workspace.RData
 initialized_workspace_cBP.RData
 .Rhistory
+.gitignore
