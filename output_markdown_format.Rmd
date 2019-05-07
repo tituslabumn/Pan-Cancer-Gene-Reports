@@ -1,0 +1,127 @@
+---
+output: pdf_document
+title: "cBioPortal query report: **`r GOI`**"
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#  `r GOI` metadata 
+Gene symbol: **`r GOI`**  
+UniProtKB ID: **`r GOI_uniprot_id`**  
+Gene product name: **`r GOI_protein_feature_annotation$LABEL[GOI_protein_feature_annotation$TYPE == "CHAIN"]`**  
+Chromosome: **`r GOI_CHR`**  
+Strand: **`r GOI_exon_annotation_main_transcript$strand[1]`**  
+Number of unique Ensembl transcripts: **`r length(unique(GOI_exon_annotation$ensembl_transcript_id))`**  
+Number of unique Ensembl exons for all transcripts: **`r length(unique(GOI_exon_annotation$ensembl_exon_id))`**  
+
+## Primary representative transcript:
+Ensembl transcript ID **`r GOI_TRANSCRIPT`**  
+Number of exons: **`r length(unique(GOI_exon_annotation_main_transcript$ensembl_exon_id))`**  
+Transcript length: **`r GOI_exon_annotation_main_transcript$transcript_length[1]`**  
+Coding sequence length: **`r GOI_exon_annotation_main_transcript$cds_length[1]`**  
+Transcript start position: **`r GOI_exon_annotation_main_transcript$transcript_start[1]`**  
+Transcript end position: **`r GOI_exon_annotation_main_transcript$transcript_end[1]`**  
+
+\pagebreak
+
+# Protein features: Domains, Regions, Motifs and Modifications
+
+```{r echo=FALSE}
+if(length(F1_feature_df[,1])>0){
+  lolliplot(SNP.gr = F1_variants ,features = F1_features, ranges = F1_ranges, ylab = FALSE, xaxis = F1_x_axis)
+}else{
+  cat("No matching features\n")
+}
+```
+
+###Color legend
+
+```{r echo=FALSE}
+par(mar = c(0,0,0,0))
+plot.new()
+legend("center", legend = F1_feature_labels, fill = F1_features$fill,cex = 0.8)
+```
+
+\pagebreak
+
+#All features (minus variants and sequence conflicts)
+
+```{r echo=FALSE}
+kable(GOI_protein_feature_annotation, row.names = FALSE)
+```
+
+\pagebreak
+
+# Ensembl Transcripts
+
+All transcripts are ploted to their relative genomic positions with all shared intronic regions removed. Transcription start sites are always on the left regardless of strand. **'Main' representative transcript used for variant alignment is in red**  
+```{r echo=FALSE, fig.height=8}
+lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = FALSE, xaxis = F2_x_axis)
+```
+
+
+\pagebreak
+
+# Query metadata
+
+Total number of studies returned by cBioPortal: **`r length(all.studies[,1])`**  
+Total number of unique case IDs returned by cBioPortal: **`r (length(unique(master_case_df$case_id)))`**  
+
+Total number of studies with mutation/variant data available:  **`r length(all.mut.studies.filtered)`**  
+Total number of cases queried for **`r GOI`** variants: **`r sum(!duplicated(all_mut_cases$altered_case_id))`**  
+Total number of studies with **`r GOI`** variants: **`r length(unique(all_mut_cases$study))`**  
+Total number of unique cases represented in filtered mutation data: **`r length(unique(GOI_cBP_mutations$altered_case_id))`**  
+Total number of unique variants for **`r GOI`** returned:  **`r length(unique(GOI_cBP_mutations$amino_acid_change))`**  
+
+```{r echo=FALSE}
+kable(multi_mut_table, row.names = FALSE, align = 'l',caption = "Cases with multiple variants")
+```
+
+```{r echo=FALSE}
+kable(all_tissue_types_table, row.names = FALSE, align = 'l',caption = "Tissue types in all cases") #fix duplicates
+```
+
+\pagebreak
+
+#Gene fusions returned:
+
+```{r echo=FALSE}
+kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")], row.names = FALSE)
+```
+
+\pagebreak
+
+#All variants returned
+
+```{r echo=FALSE, fig.asp=1}
+lolliplot(SNP.gr = F3_variants ,features = F3_features, ranges = F3_ranges, ylab = FALSE, xaxis = F3_x_axis,cex = 1, jitter = "label")
+```
+
+##Top 50 variants
+```{r echo=FALSE, fig.asp=1}
+lolliplot(SNP.gr = F4_variants ,features = F4_features, ranges = F4_ranges, ylab = FALSE, xaxis = F4_x_axis,yaxis = F4_yaxis,cex = 1, jitter = "label")
+```
+
+```{r echo=FALSE}
+par(mar = c(0,0,0,0))
+  plot.new()
+  legend("center", legend = rownames(mut_type_color_key), fill = mut_type_color_key$color)
+```
+
+```{r echo=FALSE}
+par(mar = c(0,0,0,0))
+  plot.new()
+  legend("center", legend = F3_feature_labels, fill = F3_features$fill)
+```
+
+
+\pagebreak
+
+#R session infor
+
+```{r echo=FALSE}
+sessionInfo()
+```

@@ -1,0 +1,583 @@
+study	final_tissue	cancer_type	cancer_type_detailed	prefix	prefix_key_match
+paac_jhu_2014	Pancreas	Pancreatic Cancer	Acinar Cell Carcinoma of the Pancreas	paac	Acinar Cell Carcinoma of the Pancreas
+all_stjude_2015	Lymphoid	Leukemia	B-Cell Acute Lymphoid Leukemia	all	NA
+all_stjude_2015	Lymphoid	Leukemia	Acute Myeloid Leukemia	all	NA
+all_stjude_2015	Lymphoid	Leukemia	Acute Lymphoblastic Leukemia	all	NA
+all_stjude_2015	Lymphoid	Leukemia	T-Cell Acute Lymphoid Leukemia	all	NA
+all_stjude_2015	Lymphoid	Leukemia	Leukemia	all	NA
+all_stjude_2015	Lymphoid	Leukemia	Acute Undifferentiated Leukemia	all	NA
+all_stjude_2016	Lymphoid	Leukemia	Acute Lymphoid Leukemia	all	NA
+acyc_fmi_2014	Head and Neck	Salivary Cancer	Adenoid Cystic Carcinoma	acyc	Adenoid Cystic Carcinoma
+acbc_mskcc_2015	Breast	Invasive Breast Carcinoma	Adenoid Cystic Breast Cancer	acbc	Adenoid Cystic Breast Cancer
+acc_tcga_pan_can_atlas_2018	Adrenal Gland	Adrenocortical Carcinoma	Adrenocortical Carcinoma	acc	Adrenocortical Carcinoma
+sarc_tcga_pub	Soft Tissue	Soft Tissue Sarcoma	Myxofibrosarcoma	sarc	NA
+sarc_tcga_pub	Soft Tissue	Soft Tissue Sarcoma	Leiomyosarcoma	sarc	NA
+sarc_tcga_pub	Uterus	Uterine Sarcoma	Uterine Leiomyosarcoma	sarc	NA
+sarc_tcga_pub	Peripheral Nervous System	Nerve Sheath Tumor	Malignant Peripheral Nerve Sheath Tumor	sarc	NA
+sarc_tcga_pub	Soft Tissue	Soft Tissue Sarcoma	Undifferentiated Pleomorphic Sarcoma/Malignant Fibrous Histiocytoma/High-Grade Spindle Cell Sarcoma	sarc	NA
+sarc_tcga_pub	Soft Tissue	Soft Tissue Sarcoma	Dedifferentiated Liposarcoma	sarc	NA
+sarc_tcga_pub	Soft Tissue	Soft Tissue Sarcoma	Synovial Sarcoma	sarc	NA
+ampca_bcm_2016	Ampulla of Vater	Ampullary Cancer	Ampullary Carcinoma	ampca	Ampullary Carcinoma
+odg_msk_2017	CNS/Brain	Glioma	Anaplastic Oligoastrocytoma	odg	Oligodendroglioma
+odg_msk_2017	CNS/Brain	Glioma	Anaplastic Oligodendroglioma	odg	Oligodendroglioma
+blca_mskcc_solit_2014	Bladder/Urinary Tract	Bladder Cancer	Bladder Urothelial Carcinoma	blca	Bladder Urothelial Carcinoma
+blca_plasmacytoid_mskcc_2016	Bladder/Urinary Tract	Bladder Cancer	Plasmacytoid/Signet Ring Cell Bladder Carcinoma 	blca	Bladder Urothelial Carcinoma
+blca_tcga_pan_can_atlas_2018	Bladder/Urinary Tract	Bladder Urothelial Carcinoma	Bladder Urothelial Carcinoma	blca	Bladder Urothelial Carcinoma
+lgg_tcga_pan_can_atlas_2018	CNS/Brain	Diffuse Glioma	Oligoastrocytoma	lgg	NA
+lgg_tcga_pan_can_atlas_2018	CNS/Brain	Diffuse Glioma	Astrocytoma	lgg	NA
+lgg_tcga_pan_can_atlas_2018	CNS/Brain	Diffuse Glioma	Oligodendroglioma	lgg	NA
+lgg_tcga_pan_can_atlas_2018	CNS/Brain	Encapsulated Glioma	Low-Grade Glioma (NOS)	lgg	NA
+lgg_tcga	CNS/Brain	Glioma	Oligoastrocytoma	lgg	NA
+lgg_tcga	CNS/Brain	Glioma	Astrocytoma	lgg	NA
+lgg_tcga	CNS/Brain	Glioma	Anaplastic Astrocytoma	lgg	NA
+lgg_tcga	CNS/Brain	Glioma	Oligodendroglioma	lgg	NA
+lgg_tcga	CNS/Brain	Glioma	Diffuse Glioma	lgg	NA
+brca_metabric	Breast	Breast Cancer	Breast Invasive Ductal Carcinoma	brca	Invasive Breast Carcinoma
+brca_metabric	Breast	Breast Cancer	Breast Mixed Ductal and Lobular Carcinoma	brca	Invasive Breast Carcinoma
+brca_metabric	Breast	Breast Cancer		brca	Invasive Breast Carcinoma
+brca_metabric	Breast	Breast Cancer	Breast Invasive Lobular Carcinoma	brca	Invasive Breast Carcinoma
+brca_metabric	Breast	Breast Cancer	Breast Invasive Mixed Mucinous Carcinoma	brca	Invasive Breast Carcinoma
+brca_metabric	Breast	Breast Cancer	Breast	brca	Invasive Breast Carcinoma
+brca_metabric	Breast	Breast Sarcoma		brca	Invasive Breast Carcinoma
+brca_metabric	Breast	Breast Cancer	Metaplastic Breast Cancer	brca	Invasive Breast Carcinoma
+brca_metabric	Breast	Breast Sarcoma	Breast Invasive Ductal Carcinoma	brca	Invasive Breast Carcinoma
+breast_msk_2018	Breast	Breast Cancer, NOS	Breast	breast	Breast
+breast_msk_2018	Breast	Breast Cancer	Breast Invasive Cancer, NOS	breast	Breast
+breast_msk_2018	Breast	Breast Cancer	Invasive Breast Carcinoma	breast	Breast
+breast_msk_2018	Breast	Breast Cancer	Adenoid Cystic Breast Cancer	breast	Breast
+bfn_duke_nus_2015	Breast	Breast Sarcoma	Benign Phyllodes Tumor of the Breast	bfn	Breast Fibroepithelial Neoplasms
+bfn_duke_nus_2015	Breast	Breast Sarcoma	Borderline Phyllodes Tumor of the Breast	bfn	Breast Fibroepithelial Neoplasms
+bfn_duke_nus_2015	Breast	Breast Sarcoma	Malignant Phyllodes Tumor of the Breast	bfn	Breast Fibroepithelial Neoplasms
+brca_broad	Breast	Breast Cancer	Infiltrating Ductal Carcinoma	brca	Invasive Breast Carcinoma
+brca_broad	Breast	Breast Cancer	Infiltrating Lobular Carcinoma	brca	Invasive Breast Carcinoma
+brca_broad	Breast	Breast Cancer	Mucinous Carcinoma	brca	Invasive Breast Carcinoma
+brca_broad	Breast	Breast Cancer	Medullary Breast Carcinoma	brca	Invasive Breast Carcinoma
+brca_broad	Breast	Breast Cancer	Ductal Carcinoma In Situ (DCIS)	brca	Invasive Breast Carcinoma
+brca_broad	Breast	Breast Cancer	Mixed Carcinoma	brca	Invasive Breast Carcinoma
+brca_broad	Breast	Breast Cancer	Infiltrating Tubular Carcinoma	brca	Invasive Breast Carcinoma
+brca_tcga_pan_can_atlas_2018	Breast	Invasive Breast Carcinoma	Breast Invasive Mixed Mucinous Carcinoma	brca	Invasive Breast Carcinoma
+brca_tcga_pan_can_atlas_2018	Breast	Invasive Breast Carcinoma	Breast Invasive Lobular Carcinoma	brca	Invasive Breast Carcinoma
+brca_tcga_pan_can_atlas_2018	Breast	Invasive Breast Carcinoma	Breast Invasive Ductal Carcinoma	brca	Invasive Breast Carcinoma
+brca_tcga_pan_can_atlas_2018	Breast	Invasive Breast Carcinoma	Breast Invasive Carcinoma (NOS)	brca	Invasive Breast Carcinoma
+brca_tcga_pan_can_atlas_2018	Breast	Invasive Breast Carcinoma	Metaplastic Breast Cancer	brca	Invasive Breast Carcinoma
+brca_tcga_pan_can_atlas_2018	Breast	Invasive Breast Carcinoma	Invasive Breast Carcinoma	brca	Invasive Breast Carcinoma
+brca_tcga	Breast	Breast Cancer	Paget Disease of the Nipple	brca	Invasive Breast Carcinoma
+brca_tcga	Breast	Breast Cancer	Solid Papillary Carcinoma of the Breast	brca	Invasive Breast Carcinoma
+brca_tcga	Breast	Invasive Breast Carcinoma		brca	Invasive Breast Carcinoma
+brca_tcga	Skin	Skin Cancer, Non-Melanoma	Basal Cell Carcinoma	brca	Invasive Breast Carcinoma
+brca_tcga	Breast	Breast Cancer	Breast Invasive Carcinoma, NOS	brca	Invasive Breast Carcinoma
+cellline_ccle_broad	Other	Cancer of Unknown Primary	Mixed Cancer Types	cellline	NA
+cesc_tcga_pan_can_atlas_2018	Cervix	Cervical Squamous Cell Carcinoma	Cervical Squamous Cell Carcinoma	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga_pan_can_atlas_2018	Cervix	Cervical Adenocarcinoma	Endocervical Adenocarcinoma	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga_pan_can_atlas_2018	Cervix	Cervical Adenocarcinoma	Mucinous Carcinoma	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga_pan_can_atlas_2018	Cervix	Cervical Adenocarcinoma	Endometrioid Carcinoma	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga	Cervix	Cervical Cancer	Cervical Squamous Cell Carcinoma	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga	Cervix	Cervical Cancer	Endocervical Adenocarcinoma	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga	Cervix	Cervical Cancer	Mucinous Carcinoma	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga	Cervix	Cervical Cancer	Cervical Endometrioid Carcinoma	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga	Cervix	Cervical Cancer, NOS	Cervix	cesc	Cervical Squamous Cell Carcinoma
+cesc_tcga	Cervix	Cervical Cancer	Cervical Adenosquamous Carcinoma	cesc	Cervical Squamous Cell Carcinoma
+chol_msk_2018	Biliary Tract	Hepatobiliary Cancer	Extrahepatic Cholangiocarcinoma	chol	Cholangiocarcinoma
+chol_msk_2018	Biliary Tract	Hepatobiliary Cancer	Intrahepatic Cholangiocarcinoma	chol	Cholangiocarcinoma
+chol_nccs_2013	Biliary Tract	Hepatobiliary Cancer	Cholangiocarcinoma	chol	Cholangiocarcinoma
+chol_tcga_pan_can_atlas_2018	Biliary Tract	Cholangiocarcinoma	Perihilar Cholangiocarcinoma	chol	Cholangiocarcinoma
+chol_tcga_pan_can_atlas_2018	Biliary Tract	Cholangiocarcinoma	Intrahepatic Cholangiocarcinoma	chol	Cholangiocarcinoma
+chol_tcga_pan_can_atlas_2018	Biliary Tract	Cholangiocarcinoma	Cholangiocarcinoma	chol	Cholangiocarcinoma
+chol_tcga	Biliary Tract	Hepatobiliary Cancer	Perihilar Cholangiocarcinoma	chol	Cholangiocarcinoma
+lcll_broad_2013	Lymphoid	Mature B-Cell Neoplasms	Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma 	lcll	NA
+cll_iuopa_2015	Lymphoid	Leukemia	Chronic Lymphocytic Leukemia	cll	NA
+cll_iuopa_2015	Lymphoid	Monoclonal B-cell lymphocytosis	Monoclonal B-cell lymphocytosis	cll	NA
+cll_iuopa_2015	Lymphoid	Non-Hodgkin Lymphoma	Small Lymphocytic Lymphoma	cll	NA
+cllsll_icgc_2011	Lymphoid	Mature B-Cell Neoplasms	Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma	cllsll	Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma
+coadread_dfci_2016	Bowel	Colorectal Adenocarcinoma	Colorectal Adenocarcinoma	coadread	Colorectal Adenocarcinoma
+coadread_genentech	Bowel	Colorectal Cancer	Colorectal Adenocarcinoma	coadread	Colorectal Adenocarcinoma
+coadread_tcga_pub	Bowel	Colorectal Adenocarcinoma	Colon Adenocarcinoma	coadread	Colorectal Adenocarcinoma
+coadread_tcga_pub	Bowel	Colorectal Adenocarcinoma	Rectal Adenocarcinoma	coadread	Colorectal Adenocarcinoma
+coadread_tcga_pan_can_atlas_2018	Bowel	Colorectal Adenocarcinoma	Mucinous Adenocarcinoma of the Colon and Rectum	coadread	Colorectal Adenocarcinoma
+coadread_tcga	Bowel	Colorectal Cancer	Colon Adenocarcinoma	coadread	Colorectal Adenocarcinoma
+coadread_tcga	Bowel	Colorectal Cancer	Rectal Adenocarcinoma	coadread	Colorectal Adenocarcinoma
+coadread_tcga	Bowel	Colorectal Cancer	Mucinous Adenocarcinoma of the Colon and Rectum	coadread	Colorectal Adenocarcinoma
+cscc_dfarber_2015	Skin	Skin Cancer, Non-Melanoma	Cutaneous Squamous Cell Carcinoma	cscc	Cutaneous Squamous Cell Carcinoma
+ctcl_columbia_2015	Lymphoid	Mature T and NK Neoplasms	Primary Cutaneous CD8 Positive Aggressive Epidermotropic Cytotoxic T-Cell Lymphoma	ctcl	NA
+ctcl_columbia_2015	Lymphoid	Mature T and NK Neoplasms	Mycosis Fungoides	ctcl	NA
+ctcl_columbia_2015	Lymphoid	Mature T and NK Neoplasms	Sezary Syndrome	ctcl	NA
+ctcl_columbia_2015	Lymphoid	Mature T and NK Neoplasms	Primary Cutaneous CD30 Positive T-Cell Lymphoproliferative Disorders	ctcl	NA
+pact_jhu_2011	Pancreas	Pancreatic Cancer	Serous Cystadenoma of the Pancreas	pact	Cystic Tumor of the Pancreas
+pact_jhu_2011	Pancreas	Pancreatic Cancer	Mucinous Cystic Neoplasm	pact	Cystic Tumor of the Pancreas
+pact_jhu_2011	Pancreas	Pancreatic Cancer	Intraductal Papillary Mucinous Neoplasm	pact	Cystic Tumor of the Pancreas
+pact_jhu_2011	Pancreas	Pancreatic Cancer	Solid Pseudopapillary Neoplasm of the Pancreas	pact	Cystic Tumor of the Pancreas
+desm_broad_2015	Skin	Melanoma	Desmoplastic Melanoma	desm	Desmoplastic Melanoma
+dlbcl_dfci_2018	Lymphoid	Mature B-Cell Neoplasms	Germinal Center B-Cell Type	dlbcl	NA
+dlbcl_dfci_2018	Lymphoid	Mature B-Cell Neoplasms	Activated B-cell Type	dlbcl	NA
+dlbcl_dfci_2018	Lymphoid	Mature B-Cell Neoplasms	Diffuse Large B-Cell Lymphoma, NOS	dlbcl	NA
+ucec_msk_2018	Uterus	Endometrial Cancer	Uterine Endometrioid Carcinoma	ucec	Endometrial Carcinoma
+ucec_msk_2018	Uterus	Endometrial Cancer	Uterine Serous Carcinoma/Uterine Papillary Serous Carcinoma	ucec	Endometrial Carcinoma
+ucec_msk_2018	Uterus	Endometrial Cancer	Uterine Mixed Endometrial Carcinoma	ucec	Endometrial Carcinoma
+ucec_msk_2018	Uterus	Endometrial Cancer	Uterine Carcinosarcoma/Uterine Malignant Mixed Mullerian Tumor	ucec	Endometrial Carcinoma
+ucec_msk_2018	Uterus	Endometrial Cancer	Uterine Clear Cell Carcinoma	ucec	Endometrial Carcinoma
+ucec_msk_2018	Uterus	Endometrial Cancer	Uterine Undifferentiated Carcinoma	ucec	Endometrial Carcinoma
+ucec_msk_2018	Uterus	Endometrial Cancer	Uterine Dedifferentiated Carcinoma	ucec	Endometrial Carcinoma
+ucec_msk_2018	Uterus	Endometrial Cancer	Uterine Neuroendocrine Carcinoma	ucec	Endometrial Carcinoma
+esca_broad	Esophagus/Stomach	Esophagogastric Cancer	Esophageal Adenocarcinoma	esca	Esophageal Adenocarcinoma
+esca_tcga_pan_can_atlas_2018	Esophagus/Stomach	Esophagogastric Adenocarcinoma	Esophageal Adenocarcinoma	esca	Esophageal Adenocarcinoma
+esca_tcga_pan_can_atlas_2018	Esophagus/Stomach	Esophageal Squamous Cell Carcinoma	Esophageal Squamous Cell Carcinoma	esca	Esophageal Adenocarcinoma
+esca_tcga	Esophagus/Stomach	Esophagogastric Cancer	Esophageal Squamous Cell Carcinoma	esca	Esophageal Adenocarcinoma
+esca_tcga	Esophagus/Stomach	Esophageal/Stomach Cancer, NOS	Esophagus/Stomach	esca	Esophageal Adenocarcinoma
+es_iocurie_2014	Bone	Bone Cancer	Ewing Sarcoma	es	Ewing Sarcoma
+gbc_msk_2018	Biliary Tract	Hepatobiliary Cancer	Gallbladder Cancer	gbc	Gallbladder Cancer
+egc_tmucih_2015	Esophagus/Stomach	Esophagogastric Adenocarcinoma	Esophagogastric Adenocarcinoma	egc	Esophagogastric Adenocarcinoma
+gct_msk_2016	Testis	Germ Cell Tumor	Non-Seminomatous Germ Cell Tumor	gct	Granular Cell Tumor
+gct_msk_2016	Testis	Germ Cell Tumor	Seminoma	gct	Granular Cell Tumor
+gbm_tcga_pub2013	CNS/Brain	Glioma	Glioblastoma Multiforme	gbm	Glioblastoma Multiforme
+gbm_tcga_pan_can_atlas_2018	CNS/Brain	Glioblastoma	Glioblastoma Multiforme	gbm	Glioblastoma Multiforme
+glioma_msk_2018	CNS/Brain	Glioma	Gliosarcoma	glioma	NA
+glioma_msk_2018	CNS/Brain	Glioma	High-Grade Glioma, NOS	glioma	NA
+glioma_msk_2018	CNS/Brain	Glioma	Glioblastoma	glioma	NA
+hnsc_broad	Head and Neck	Head and Neck Cancer	Head and Neck Squamous Cell Carcinoma	hnsc	Head and Neck Squamous Cell Carcinoma
+hnsc_tcga_pan_can_atlas_2018	Head and Neck	Head and Neck Squamous Cell Carcinoma	Head and Neck Squamous Cell Carcinoma	hnsc	Head and Neck Squamous Cell Carcinoma
+liad_inserm_fr_2014	Biliary Tract	Hepatobiliary Cancer	Hepatocellular Adenoma	liad	Hepatocellular Adenoma
+hcc_mskimpact_2018	Biliary Tract	Hepatobiliary Cancer	Hepatocellular Carcinoma	hcc	Hepatocellular Carcinoma
+all_stjude_2013	Lymphoid	B-Lymphoblastic Leukemia/Lymphoma	B-Lymphoblastic Leukemia/Lymphoma	all	NA
+panet_shanghai_2013	Pancreas	Pancreatic Cancer	Pancreatic Neuroendocrine Tumor	panet	Pancreatic Neuroendocrine Tumor
+kich_tcga_pub	Kidney	Renal Cell Carcinoma	Chromophobe Renal Cell Carcinoma	kich	NA
+kich_tcga_pan_can_atlas_2018	Kidney	Renal Non-Clear Cell Carcinoma	Chromophobe Renal Cell Carcinoma	kich	NA
+kirc_bgi	Kidney	Renal Cell Carcinoma	Chromophobe Renal Cell Carcinoma 	kirc	NA
+ccrcc_irc_2014	Kidney	Renal Cell Carcinoma	Renal Clear Cell Carcinoma	ccrcc	Renal Clear Cell Carcinoma
+kirc_tcga_pan_can_atlas_2018	Kidney	Renal Clear Cell Carcinoma	Renal Clear Cell Carcinoma	kirc	NA
+kirp_tcga_pan_can_atlas_2018	Kidney	Renal Non-Clear Cell Carcinoma	Papillary Renal Cell Carcinoma	kirp	NA
+kirp_tcga	Kidney	Renal Cell Carcinoma	Papillary Renal Cell Carcinoma	kirp	NA
+lihc_riken	Liver	Heptocellular Carcinoma	Heptocellular Carcinoma	lihc	NA
+lihc_tcga_pan_can_atlas_2018	Liver	Hepatocellular Carcinoma	Hepatocellular Carcinoma	lihc	NA
+lihc_tcga_pan_can_atlas_2018	Liver	Fibrolamellar Carcinoma	Fibrolamellar Carcinoma	lihc	NA
+lihc_tcga	Liver	Hepatobiliary Cancer	Fibrolamellar Carcinoma	lihc	NA
+lihc_tcga	Liver	Hepatobiliary Cancer	Hepatocellular Carcinoma plus Intrahepatic Cholangiocarcinoma	lihc	NA
+lihc_tcga	Liver	Hepatobiliary Cancer		lihc	NA
+luad_broad	Lung	Non-Small Cell Lung Cancer	Lung Adenocarcinoma	luad	Lung Adenocarcinoma
+lusc_tcga_pub	Lung	Non-Small Cell Lung Cancer	Lung Squamous Cell Carcinoma	lusc	Lung Squamous Cell Carcinoma
+dlbc_tcga	Lymphoid	Non-Hodgkin Lymphoma	Diffuse Large B-Cell Lymphoma	dlbc	NA
+dlbc_tcga	Lymphoid	Lymphoid Cancer	Mature B-Cell Neoplasms	dlbc	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Upper Tract Urothelial Carcinoma	msk	NA
+msk_impact_2017	Skin	Melanoma	Cutaneous Melanoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Clear Cell Ovarian Cancer	msk	NA
+msk_impact_2017	Skin	Melanoma	Anorectal Mucosal Melanoma	msk	NA
+msk_impact_2017	Thyroid	Thyroid Cancer	Papillary Thyroid Cancer	msk	NA
+msk_impact_2017	Skin	Skin Cancer, Non-Melanoma	Merkel Cell Carcinoma	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Meningioma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Sinonasal Adenocarcinoma	msk	NA
+msk_impact_2017	Bowel	Anal Cancer	Anal Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	Cervix	Cervical Cancer	Gastric Type Mucinous Carcinoma	msk	NA
+msk_impact_2017	Pancreas	Pancreatic Cancer	Pancreatic Adenocarcinoma	msk	NA
+msk_impact_2017	Bowel	Small Bowel Cancer	Small Bowel Cancer	msk	NA
+msk_impact_2017	Testis	Germ Cell Tumor	Mixed Germ Cell Tumor	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Angiosarcoma	msk	NA
+msk_impact_2017	Prostate	Prostate Cancer	Prostate Adenocarcinoma	msk	NA
+msk_impact_2017	Other	Cancer of Unknown Primary	Neuroendocrine Carcinoma, NOS	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Histiocytic Dendritic Cell Sarcoma	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Unclassified Renal Cell Carcinoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	High-Grade Serous Ovarian Cancer	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Uterine Sarcoma, Other	msk	NA
+msk_impact_2017	Thyroid	Thyroid Cancer	Poorly Differentiated Thyroid Cancer	msk	NA
+msk_impact_2017	Prostate	Prostate Cancer	Prostate Neuroendocrine Carcinoma	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Esophagogastric Adenocarcinoma	msk	NA
+msk_impact_2017	Appendix	Appendiceal Cancer	Appendiceal Adenocarcinoma	msk	NA
+msk_impact_2017	Bowel	Gastrointestinal Neuroendocrine Tumor	Small Bowel Well-Differentiated Neuroendocrine Tumor	msk	NA
+msk_impact_2017	Thyroid	Thyroid Cancer	Hurthle Cell Thyroid Cancer	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Oral Cavity Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	Thyroid	Thyroid Cancer	Anaplastic Thyroid Cancer	msk	NA
+msk_impact_2017	Skin	Melanoma	Mucosal Melanoma of the Vulva/Vagina	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Perivascular Epithelioid Cell Tumor	msk	NA
+msk_impact_2017	Esophagus/Stomach	Gastrointestinal Stromal Tumor	Gastrointestinal Stromal Tumor	msk	NA
+msk_impact_2017	CNS/Brain	Glioma	Diffuse Intrinsic Pontine Glioma	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Poorly Differentiated Non-Small Cell Lung Cancer	msk	NA
+msk_impact_2017	Skin	Melanoma	Acral Melanoma	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Stomach Adenocarcinoma	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Atypical Lung Carcinoid	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Salivary Duct Carcinoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Mixed Ovarian Carcinoma	msk	NA
+msk_impact_2017	Thyroid	Thyroid Cancer	Medullary Thyroid Cancer	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Large Cell Neuroendocrine Carcinoma	msk	NA
+msk_impact_2017	Pleura	Mesothelioma	Pleural Mesothelioma	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Poorly Differentiated Carcinoma of the Stomach	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Adenocarcinoma of the Gastroesophageal Junction	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Endometrioid Ovarian Cancer	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Adenoid Cystic Carcinoma	msk	NA
+msk_impact_2017	Lymphoid	Mature T and NK Neoplasms	Angioimmunoblastic T-Cell Lymphoma	msk	NA
+msk_impact_2017	Other	Cancer of Unknown Primary	Cancer of Unknown Primary	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Pleomorphic Rhabdomyosarcoma	msk	NA
+msk_impact_2017	Lymphoid	Hodgkin Lymphoma	Hodgkin Lymphoma	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Salivary Carcinoma, Other	msk	NA
+msk_impact_2017	Pleura	Mesothelioma	Peritoneal Mesothelioma	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Mammary Analogue Secretory Carcinoma of Salivary Gland Origin	msk	NA
+msk_impact_2017	Cervix	Cervical Cancer	Small Cell Carcinoma of the Cervix	msk	NA
+msk_impact_2017	Peripheral Nervous System	Peripheral Nervous System	Neuroblastoma	msk	NA
+msk_impact_2017	Germ Cell	Germ Cell Tumor	Teratoma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Oropharynx Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	Germ Cell	Gestational Trophoblastic Disease	Choriocarcinoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Osteosarcoma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Head and Neck Squamous Cell Carcinoma of Unknown Primary	msk	NA
+msk_impact_2017	Lung	Small Cell Lung Cancer	Small Cell Lung Cancer	msk	NA
+msk_impact_2017	Germ Cell	Germ Cell Tumor	Yolk Sac Tumor	msk	NA
+msk_impact_2017	Peripheral Nervous System	Nerve Sheath Tumor	Schwannoma	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Low-Grade Endometrial Stromal Sarcoma	msk	NA
+msk_impact_2017	CNS/Brain	Pineal Tumor	Pineal Parenchymal Tumor of Intermediate Differentiation	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Chondroblastoma	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Renal Medullary Carcinoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Chondrosarcoma	msk	NA
+msk_impact_2017	Appendix	Appendiceal Cancer	Mucinous Adenocarcinoma of the Appendix	msk	NA
+msk_impact_2017	CNS/Brain	Glioma	Low-Grade Glioma, NOS	msk	NA
+msk_impact_2017	Skin	Melanoma	Melanoma of Unknown Primary	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Rhabdomyosarcoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Myxoid/Round-Cell Liposarcoma	msk	NA
+msk_impact_2017	Pituitary	Sellar Tumor	Granular Cell Tumor	msk	NA
+msk_impact_2017	Other	Sex Cord Stromal Tumor	Granulosa Cell Tumor	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Serous Borderline Ovarian Tumor, Micropapillary	msk	NA
+msk_impact_2017	Thymus	Thymic Tumor	Thymoma	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Intestinal Type Stomach Adenocarcinoma	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Non-Small Cell Lung Cancer	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Ependymoma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Larynx Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	Appendix	Gastrointestinal Neuroendocrine Tumor	Well-Differentiated Neuroendocrine Tumor of the Appendix	msk	NA
+msk_impact_2017	Ampulla of Vater	Ampullary Carcinoma	Pancreatobiliary Ampullary Carcinoma	msk	NA
+msk_impact_2017	Thyroid	Thyroid Cancer	Follicular Thyroid Cancer	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Sinonasal Undifferentiated Carcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Fibrosarcoma	msk	NA
+msk_impact_2017	Germ Cell	Germ Cell Tumor	Embryonal Carcinoma	msk	NA
+msk_impact_2017	Lymphoid	Non-Hodgkin Lymphoma	Non-Hodgkin Lymphoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Sclerosing Epithelioid Fibrosarcoma	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	High-Grade Endometrial Stromal Sarcoma	msk	NA
+msk_impact_2017	Lymphoid	Mature B-Cell Neoplasms	Mantle Cell Lymphoma	msk	NA
+msk_impact_2017	Skin	Penile Cancer	Penile Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	Pleura	Mesothelioma	Pleural Mesothelioma, Epithelioid Type	msk	NA
+msk_impact_2017	Skin	Melanoma	Uveal Melanoma	msk	NA
+msk_impact_2017	Germ Cell	Germ Cell Tumor	Immature Teratoma	msk	NA
+msk_impact_2017	Thymus	Thymic Tumor	Thymic Carcinoma	msk	NA
+msk_impact_2017	Peripheral Nervous System	Nerve Sheath Tumor	Melanotic Schwannoma	msk	NA
+msk_impact_2017	Skin	Vaginal Cancer	Squamous Cell Carcinoma of the Vulva/Vagina	msk	NA
+msk_impact_2017	Other	Sex Cord Stromal Tumor	Sex Cord Stromal Tumor	msk	NA
+msk_impact_2017	Bowel	Small Bowel Cancer	Duodenal Adenocarcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Solitary Fibrous Tumor/Hemangiopericytoma	msk	NA
+msk_impact_2017	Other	Histiocytosis	Erdheim-Chester Disease	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Desmoplastic Small-Round-Cell Tumor	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Alveolar Soft Part Sarcoma	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Uterine Epithelioid Leiomyosarcoma	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Undifferentiated Uterine Sarcoma	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Uterine Perivascular Epithelioid Cell Tumor	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Embryonal Rhabdomyosarcoma	msk	NA
+msk_impact_2017	Esophagus/Stomach	Gastrointestinal Neuroendocrine Tumor	Gastrointestinal Neuroendocrine Tumors	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Signet Ring Cell Carcinoma of the Stomach	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Spindle Cell Carcinoma of the Lung	msk	NA
+msk_impact_2017	Pleura	Mesothelioma	Testicular Mesothelioma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Nasopharyngeal Carcinoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Ovarian Carcinosarcoma/Malignant Mixed Mesodermal Tumor	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Lung Neuroendocrine Tumor	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Plasmacytoid/Signet Ring Cell Bladder Carcinoma	msk	NA
+msk_impact_2017	Kidney	Wilms Tumor	Wilms' Tumor	msk	NA
+msk_impact_2017	Lymphoid	Mature T and NK Neoplasms	Mature T and NK Neoplasms	msk	NA
+msk_impact_2017	Peripheral Nervous System	Nerve Sheath Tumor	Cellular Schwannoma	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Bladder Adenocarcinoma	msk	NA
+msk_impact_2017	Other	Cancer of Unknown Primary	Neuroendocrine Tumor, NOS	msk	NA
+msk_impact_2017	CNS/Brain	Miscellaneous Brain Tumor	Malignant Lymphoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Low-Grade Serous Ovarian Cancer	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Mucinous Stomach Adenocarcinoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Chondroblastic Osteosarcoma	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Tubular Stomach Adenocarcinoma	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Lung Carcinoid	msk	NA
+msk_impact_2017	Other	Cancer of Unknown Primary	Small Cell Carcinoma of Unknown Primary	msk	NA
+msk_impact_2017	Lymphoid	Soft Tissue Sarcoma	Follicular Dendritic Cell Sarcoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Small Cell Carcinoma of the Ovary	msk	NA
+msk_impact_2017	Prostate	Prostate Cancer	Prostate Small Cell Carcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Epithelioid Sarcoma	msk	NA
+msk_impact_2017	Pituitary	Sellar Tumor	Pituitary Adenoma	msk	NA
+msk_impact_2017	Lymphoid	Mature B-Cell Neoplasms	Mature B-Cell Neoplasms	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Translocation-Associated Renal Cell Carcinoma	msk	NA
+msk_impact_2017	Lymphoid	Mature B-Cell Neoplasms	Marginal Zone Lymphoma	msk	NA
+msk_impact_2017	Appendix	Appendiceal Cancer	Signet Ring Cell Type of the Appendix	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Chordoma	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Basaloid Large Cell Carcinoma of the Lung	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Sarcoma, NOS	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Epithelioid Hemangioendothelioma	msk	NA
+msk_impact_2017	Peripheral Nervous System	Miscellaneous Neuroepithelial Tumor	Rosette-forming Glioneuronal Tumor of the Fourth Ventricle	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Mucoepidermoid Carcinoma	msk	NA
+msk_impact_2017	Lymphoid	Mature B-Cell Neoplasms	Follicular Lymphoma	msk	NA
+msk_impact_2017	Bowel	Colorectal Cancer	Signet Ring Cell Adenocarcinoma of the Colon and Rectum	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Lung Adenosquamous Carcinoma	msk	NA
+msk_impact_2017	CNS/Brain	Pheochromocytoma	Pheochromocytoma	msk	NA
+msk_impact_2017	Pancreas	Pancreatic Cancer	Adenosquamous Carcinoma of the Pancreas	msk	NA
+msk_impact_2017	Pancreas	Pancreatic Cancer	Undifferentiated Carcinoma of the Pancreas	msk	NA
+msk_impact_2017	Other	Histiocytosis	Histiocytic and Dendritic Cell Neoplasms	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Sarcomatoid Carcinoma of the Lung	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Mucinous Ovarian Cancer	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Salivary Adenocarcinoma	msk	NA
+msk_impact_2017	Skin	Skin Cancer, Non-Melanoma	Extramammary Paget Disease	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Myoepithelial Carcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Pleomorphic Liposarcoma	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Renal Mucinous Tubular Spindle Cell Carcinoma	msk	NA
+msk_impact_2017	Appendix	Appendiceal Cancer	Goblet Cell Carcinoid of the Appendix	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Anaplastic Meningioma	msk	NA
+msk_impact_2017	Germ Cell	Germ Cell Tumor	Mature Teratoma	msk	NA
+msk_impact_2017	Other	Cancer of Unknown Primary	Poorly Differentiated Carcinoma, NOS	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Well-Differentiated Liposarcoma	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Endometrial Stromal Sarcoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Intimal Sarcoma	msk	NA
+msk_impact_2017	Bowel	Gastrointestinal Neuroendocrine Tumor	Well-Differentiated Neuroendocrine Tumor of the Rectum	msk	NA
+msk_impact_2017	Lymphoid	Hodgkin Lymphoma	Classical Hodgkin Lymphoma	msk	NA
+msk_impact_2017	Bowel	Gastrointestinal Neuroendocrine Tumor	High-Grade Neuroendocrine Carcinoma of the Colon and Rectum	msk	NA
+msk_impact_2017	Skin	Skin Cancer, Non-Melanoma	Sebaceous Carcinoma	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Solitary Fibrous Tumor of the Central Nervous System	msk	NA
+msk_impact_2017	CNS/Brain	Miscellaneous Brain Tumor	Hemangioblastoma	msk	NA
+msk_impact_2017	Lymphoid	Mature T and NK Neoplasms	Peripheral T-Cell lymphoma, NOS	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Acinic Cell Carcinoma	msk	NA
+msk_impact_2017	Breast	Breast Cancer	Breast Ductal Carcinoma In Situ	msk	NA
+msk_impact_2017	Cervix	Cervical Cancer	Mixed Cervical Carcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Spindle Cell Rhabdomyosarcoma	msk	NA
+msk_impact_2017	Adrenal Gland	Adrenocortical Adenoma	Adrenocortical Adenoma	msk	NA
+msk_impact_2017	Germ Cell	Germ Cell Tumor	Choriocarcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Myxoma	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Atypical Meningioma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Inflammatory Myofibroblastic Tumor	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Soft Tissue Myoepithelial Carcinoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Serous Borderline Ovarian Tumor	msk	NA
+msk_impact_2017	Pleura	Mesothelioma	Pleural Mesothelioma, Biphasic Type	msk	NA
+msk_impact_2017	CNS/Brain	Glioma	Anaplastic Pleomorphic Xanthoastrocytoma	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Urethral Adenocarcinoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Mesenchymal Chondrosarcoma	msk	NA
+msk_impact_2017	Myeloid	Mastocytosis	Systemic Mastocytosis	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Bladder Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Hemangiopericytoma of the Central Nervous System	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Urethral Urothelial Carcinoma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Epithelial-Myoepithelial Carcinoma	msk	NA
+msk_impact_2017	Breast	Breast Sarcoma	Breast Angiosarcoma	msk	NA
+msk_impact_2017	Skin	Melanoma	Mucosal Melanoma of the Urethra	msk	NA
+msk_impact_2017	Skin	Melanoma	Head and Neck Mucosal Melanoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Secondary Osteosarcoma	msk	NA
+msk_impact_2017	Skin	Skin Cancer, Non-Melanoma	Sweat Gland Carcinoma/Apocrine Eccrine Carcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Ossifying Fibromyxoid Tumor	msk	NA
+msk_impact_2017	Head and Neck	Salivary Gland Cancer	Salivary Carcinoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Extraskeletal Myxoid Chondrosarcoma	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Renal Angiomyolipoma	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Uterine Adenosarcoma	msk	NA
+msk_impact_2017	Cervix	Cervical Cancer	Cervical Clear Cell Carcinoma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Sinonasal Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Urachal Adenocarcinoma	msk	NA
+msk_impact_2017	Other	Sex Cord Stromal Tumor	Steroid Cell Tumor, NOS	msk	NA
+msk_impact_2017	Other	Cancer of Unknown Primary	Adenocarcinoma, NOS	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Dedifferentiated Chondrosarcoma	msk	NA
+msk_impact_2017	Pancreas	Pancreatic Cancer	Pancreatoblastoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Myofibroma	msk	NA
+msk_impact_2017	Other	Histiocytosis	Langerhans Cell Histiocytosis	msk	NA
+msk_impact_2017	Peripheral Nervous System	Miscellaneous Neuroepithelial Tumor	Paraganglioma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Alveolar Rhabdomyosarcoma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Head and Neck Neuroendocrine Carcinoma	msk	NA
+msk_impact_2017	Lymphoid	Mature B-Cell Neoplasms	Primary Mediastinal (Thymic) Large B-Cell Lymphoma	msk	NA
+msk_impact_2017	Germ Cell	Germ Cell Tumor	Teratoma with Malignant Transformation	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Small Cell Bladder Cancer	msk	NA
+msk_impact_2017	Cervix	Cervical Cancer	Intestinal Type Mucinous Carcinoma	msk	NA
+msk_impact_2017	Skin	Melanoma	Mucosal Melanoma of the Esophagus	msk	NA
+msk_impact_2017	Skin	Cancer of Unknown Primary	Squamous Cell Carcinoma, NOS	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Urethral Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Head and Neck Carcinoma, Other	msk	NA
+msk_impact_2017	Skin	Penile Cancer	Basaloid Penile Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Small Cell Osteosarcoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Clear Cell Sarcoma	msk	NA
+msk_impact_2017	Skin	Skin Cancer, Non-Melanoma	Sweat Gland Adenocarcinoma	msk	NA
+msk_impact_2017	Liver	Hepatobiliary Cancer	Hepatoblastoma	msk	NA
+msk_impact_2017	Pleura	Mesothelioma	Pleural Mesothelioma, Sarcomatoid Type	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Uterine Myxoid Leiomyosarcoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Myxoid Chondrosarcoma	msk	NA
+msk_impact_2017	Bone	Bone Cancer	Osteoblastic Osteosarcoma	msk	NA
+msk_impact_2017	Skin	Skin Cancer, Non-Melanoma	Dermatofibrosarcoma Protuberans	msk	NA
+msk_impact_2017	Uterus	Uterine Sarcoma	Uterine Smooth Muscle Tumor of Uncertain Malignant Potential	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Hypopharynx Squamous Cell Carcinoma	msk	NA
+msk_impact_2017	CNS/Brain	Miscellaneous Neuroepithelial Tumor	Astroblastoma	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Anaplastic Ependymoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Low-Grade Fibromyxoid Sarcoma	msk	NA
+msk_impact_2017	Lymphoid	Mature B-Cell Neoplasms	Plasma Cell Myeloma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Clear Cell Odontogenic Carcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Desmoid/Aggressive Fibromatosis	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Pleomorphic Carcinoma of the Lung	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Lymphoepithelioma-like Carcinoma of the Lung	msk	NA
+msk_impact_2017	CNS/Brain	Miscellaneous Neuroepithelial Tumor	Central Neurocytoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Ovarian Seromucinous Carcinoma	msk	NA
+msk_impact_2017	Head and Neck	Head and Neck Cancer	Odontogenic Carcinoma	msk	NA
+msk_impact_2017	Eye	Retinoblastoma	Retinoblastoma	msk	NA
+msk_impact_2017	Skin	Skin Cancer, Non-Melanoma	Skin Adnexal Carcinoma	msk	NA
+msk_impact_2017	CNS/Brain	Sellar Tumor	Craniopharyngioma, Adamantinomatous Type	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Ependymomal Tumor	msk	NA
+msk_impact_2017	Cervix	Cervical Cancer	Mesonephric Carcinoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Ovarian Cancer, Other	msk	NA
+msk_impact_2017	Lymphoid	Mature B-Cell Neoplasms	Extranodal Marginal Zone Lymphoma of Mucosa-Associated Lymphoid Tissue (MALT lymphoma)	msk	NA
+msk_impact_2017	CNS/Brain	Glioma	Pilocytic Astrocytoma	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Renal Oncocytoma	msk	NA
+msk_impact_2017	Lymphoid	Mature T and NK Neoplasms	Anaplastic Large Cell Lymphoma	msk	NA
+msk_impact_2017	Other	Sex Cord Stromal Tumor	Sertoli-Leydig Cell Tumor	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Renal Clear Cell Carcinoma with Sarcomatoid Features	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	High-Grade Neuroendocrine Carcinoma of the Ovary	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Renal Cell Carcinoma	msk	NA
+msk_impact_2017	CNS/Brain	Embryonal Tumor	Medulloblastoma	msk	NA
+msk_impact_2017	Bladder/Urinary Tract	Bladder Cancer	Sarcomatoid Carcinoma of the Urinary Bladder	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Clear Cell Papillary Renal Cell Carcinoma	msk	NA
+msk_impact_2017	Lymphoid	Mature B-Cell Neoplasms	Waldenstrom Macroglobulinemia	msk	NA
+msk_impact_2017	CNS/Brain	Glioma	Pleomorphic Xanthoastrocytoma	msk	NA
+msk_impact_2017	CNS/Brain	Embryonal Tumor	Olfactory Neuroblastoma	msk	NA
+msk_impact_2017	Skin	Skin Cancer, Non-Melanoma	Dermatofibroma	msk	NA
+msk_impact_2017	CNS/Brain	Embryonal Tumor	Primitive Neuroectodermal Tumor	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Esophageal Poorly Differentiated Carcinoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Serous Ovarian Cancer	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Ciliated Muconodular Papillary Tumor of the Lung	msk	NA
+msk_impact_2017	Esophagus/Stomach	Esophagogastric Cancer	Diffuse Type Stomach Adenocarcinoma	msk	NA
+msk_impact_2017	CNS/Brain	Glioma	Anaplastic Ganglioglioma	msk	NA
+msk_impact_2017	Esophagus/Stomach	Gastrointestinal Neuroendocrine Tumor	Well-Differentiated Neuroendocrine Tumors of the Stomach	msk	NA
+msk_impact_2017	CNS/Brain	Glioma	Ganglioglioma	msk	NA
+msk_impact_2017	Lymphoid	T-Lymphoblastic Leukemia/Lymphoma	T-Lymphoblastic Leukemia/Lymphoma	msk	NA
+msk_impact_2017	Ovary/Fallopian Tube	Ovarian Cancer	Ovarian Epithelial Tumor	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Proximal-Type Epithelioid Sarcoma	msk	NA
+msk_impact_2017	CNS/Brain	CNS Cancer	Myxopapillary Ependymoma	msk	NA
+msk_impact_2017	CNS/Brain	Miscellaneous Neuroepithelial Tumor	Extraventricular Neurocytoma	msk	NA
+msk_impact_2017	Bowel	Colorectal Cancer	Medullary Carcinoma of the Colon	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Liposarcoma	msk	NA
+msk_impact_2017	Kidney	Renal Cell Carcinoma	Collecting Duct Renal Cell Carcinoma	msk	NA
+msk_impact_2017	CNS/Brain	Sellar Tumor	Pituicytoma	msk	NA
+msk_impact_2017	Lung	Non-Small Cell Lung Cancer	Large Cell Lung Carcinoma	msk	NA
+msk_impact_2017	Soft Tissue	Soft Tissue Sarcoma	Glomangiosarcoma	msk	NA
+mixeden_2018_all	Skin	Melanoma	Melanoma	mixeden	NA
+mixeden_2018_all	Skin	Melanoma	Lentigo Maligna Melanoma	mixeden	NA
+mbl_sickkids_2016	CNS/Brain	Embryonal Tumor	Desmoplastic/Nodular Medulloblastoma	mbl	Medulloblastoma
+mbl_sickkids_2016	CNS/Brain	Embryonal Tumor	Large Cell/Anaplastic Medulloblastoma	mbl	Medulloblastoma
+meso_tcga_pan_can_atlas_2018	Pleura	Pleural Mesothelioma	Pleural Mesothelioma, Epithelioid Type	meso	NA
+meso_tcga_pan_can_atlas_2018	Pleura	Pleural Mesothelioma	Pleural Mesothelioma, Biphasic Type	meso	NA
+meso_tcga_pan_can_atlas_2018	Pleura	Pleural Mesothelioma	Pleural Mesothelioma, Sarcomatoid Type	meso	NA
+skcm_ucla_2016	Skin	Melanoma	Cutaneous Melanom	skcm	Cutaneous Melanoma
+prad_su2c_2015	Prostate	Prostate Adenocarcinoma	Prostate Adenocarcinoma	prad	Prostate Adenocarcinoma
+mds_tokyo_2011	Lymphoid	Myelodysplastic/Myeloproliferative Neoplasms	Chronic Myelomonocytic Leukemia	mds	Myelodysplastic Syndromes
+mds_tokyo_2011	Myeloid	Myelodysplastic Syndromes	Myelodysplastic Syndromes	mds	Myelodysplastic Syndromes
+cellline_nci60	Bowel	Colon	Colorectal Adenocarcinoma	cellline	NA
+cellline_nci60	Lung	Non-Small Cell Lung	Non-Small Cell Lung Cancer	cellline	NA
+cellline_nci60	Other	NA	NA	cellline	NA
+cellline_nci60	Ovary/Fallopian Tube	Ovarian	Ovary/Fallopian Tube	cellline	NA
+cellline_nci60	CNS/Brain	CNS	CNS/Brain	cellline	NA
+cellline_nci60	Myeloid	Myeloid Neoplasm	Myeloid Neoplasm	cellline	NA
+cellline_nci60	Kidney	Renal	Renal Cell Carcinoma	cellline	NA
+cellline_nci60	Prostate	Prostate	Prostate	cellline	NA
+cellline_nci60	Breast	Breast	Invasive Breast Carcinoma	cellline	NA
+nepc_wcm_2016	Prostate	Prostate Cancer	Castration-Resistant Prostate Cancer	nepc	NA
+hnsc_mdanderson_2013	Head and Neck	Head and Neck Cancer	Head and Neck Squamous Cell Carcinoma�?	hnsc	Head and Neck Squamous Cell Carcinoma
+ov_tcga_pan_can_atlas_2018	Ovary/Fallopian Tube	Ovarian Epithelial Tumor	Serous Ovarian Cancer	ov	NA
+paad_tcga_pan_can_atlas_2018	Pancreas	Pancreatic Adenocarcinoma	Pancreatic Adenocarcinoma	paad	Pancreatic Adenocarcinoma
+paad_tcga	Pancreas	Pancreatic Cancer, NOS	Pancreas	paad	Pancreatic Adenocarcinoma
+pediatric_dkfz_2017	Lymphoid	Ependymoma supratentorial	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	High-grade glioma K27Mwt	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Wilms' tumors	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Atypial teratoid/rhabdoid tumor	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	T-cell acute lymphoblastic leukemia	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Ependymoma infratentorial	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Burkitt's lymphoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	B-cell acute lymphoblastic leukemia, non-hypodiploid	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	High-grade glioma K27Mmut	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Medulloblastoma WNT	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Medulloblastoma Group4	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Medulloblastoma Group3	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Pilocytic astrocytoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Embryonal tumor with multilayered rosettes	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Neuroblastoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Osteosarcoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Medulloblastoma SHH	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Hepatoblastoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	B-cell acute lymphoblastic leukemia, hypodiploid	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Acute myeloid leukemias	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Ewing's sarcoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Rhabdomyosarcoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Adrenocortical carcinoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+pediatric_dkfz_2017	Lymphoid	Retinoblastoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA
+mixed_pipseq_2017	Bone	Bone Cancer	Telangiectatic Osteosarcoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Liver	Nested stromal epithelial tumor of the liver	Nested stromal epithelial tumor of the liver	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Liver	Liver Tumor	Hepatoblastoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Ependymomal Tumor	Anaplastic ependymoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Liver	Liver Tumor	Hepatocellular Carcinoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Peripheral Nervous System	Nerve Sheath Tumor	Plexiform Schwannoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Choroid Plexus Tumor	Choroid Plexus Papilloma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Glioblastoma	Glioblastoma multiforme	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Soft Tissue	Fibrosarcoma	Congenital Fibrosarcoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Kidney	Renal cancer	Nephroblastomatosis	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Lymphoid	Non-Hodgkin Lymphoma	Anaplastic Large Cell Lymphoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Embryonal Tumor	Neuroblastoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Lymphoid	Lymphoid Neoplasm	B-Lymphoblastic Leukemia/Lymphoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Brain Cancer	Medulloblastoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Lung	Lung Cancer	Pleuropulmonary blastoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Ovary/Fallopian Tube	Ovarian Germ Cell Tumor	Immature Teratoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Soft Tissue	Soft Tissue Tumor	Plexiform fibrohistiocytic tumor	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Ependymomal Tumor	Ependymoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Lymphoid	Leukemia	Chronic Myelogenous Leukemia	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Kidney	Renal cancer	Renal Cell Carcinoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Germ Cell	Non-Germinomatous Germ Cell Tumor	Pineal Germ Cell Tumor	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Head and Neck	Salivary Gland-Type Tumor of the Lung	Mucoepidermoid carcinoma of the lung	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Germ Cell	Pineal Tumor	Pineoblastoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Skin	Cutaneous malignancy of hair matrix cells	Pilomatrix carcinoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Kidney	Renal cancer	Wilms Tumor	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Brain Cancer	Anaplastic medulloblastoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Brain Cancer	Atypical Teratoid/Rhabdoid Tumor	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Soft Tissue	Soft Tissue Sarcoma	Rhabdomyosarcoma, Alveolar subtype	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Soft Tissue	Soft Tissue Sarcoma	Small round blue cell tumor/ Ewing Sarcoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Diffuse Glioma	Diffuse Intrinsic Pontine Glioma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Germ Cell	Non-Seminomatous Germ Cell Tumor	Non-seminomatous Mixed Germ Cell Tumor	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Germ Cell	Non-Seminomatous Germ Cell Tumor	Non-Seminomatous Germ Cell Tumor, predominantly yolk sac type	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Soft Tissue	Soft Tissue Tumor	Inflammatory myofibroblastic tumor	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Encapsulated Glioma	Anaplastic pleomorphic xanthoastrocytoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Brain Cancer	Glioma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Adrenal Gland	Adrenal Tumor	Adrenocortical carcinoma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	Lymphoid	Hodgkin Lymphoma-like PTLD	Hodgkin Lymphoma-like PTLD	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Brain Cancer	Optic nerve glioma	mixed	Mixed Cancer Types
+mixed_pipseq_2017	CNS/Brain	Encapsulated Glioma	Pilomyxoid astrocytoma	mixed	Mixed Cancer Types
+rt_target_2018_pub	Kidney	Rhabdoid Cancer	Rhabdoid Cancer	rt	NA
+pcpg_tcga	CNS/Brain	Miscellaneous Neuroepithelial Tumor	Miscellaneous Neuroepithelial Tumor	pcpg	NA
+thyroid_mskcc_2016	Thyroid	Thyroid Cancer	Poorly Differentiated Thyroid Carcinoma	thyroid	Thyroid
+thyroid_mskcc_2016	Thyroid	Thyroid Cancer	Anaplastic Thyroid Carcinoma	thyroid	Thyroid
+hnc_mskcc_2016	Head and Neck	Head and Neck Cancer	Cutaneous Squamous Cell Carcinoma	hnc	NA
+hnc_mskcc_2016	Head and Neck	Salivary Gland Cancer	Salivary Adenocarcinoma NOS	hnc	NA
+nccrcc_genentech_2014	Kidney	Renal Cell Carcinoma	Renal Non-Clear Cell Carcinoma	nccrcc	Renal Non-Clear Cell Carcinoma
+summit_2018	Cervix	Cervical Cancer	Cervical Adenocarcinoma	summit	NA
+summit_2018	Ampulla of Vater	Ampullary Carcinoma	Ampullary Carcinoma	summit	NA
+summit_2018	Bladder/Urinary Tract	Bladder/Urinary Tract Cancer, NOS	Bladder/Urinary Tract	summit	NA
+summit_2018	Bladder/Urinary Tract	Bladder Cancer	Urachal Carcinoma	summit	NA
+summit_2018	Biliary Tract	Biliary Tract Cancer, NOS	Biliary Tract	summit	NA
+summit_2018	Ovary/Fallopian Tube	Ovarian/Fallopian Tube Cancer, NOS	Ovary/Fallopian Tube	summit	NA
+summit_2018	Uterus	Endometrial Cancer	Endometrial Carcinoma	summit	NA
+summit_2018	Breast	Breast Cancer	Inflammatory Breast Cancer	summit	NA
+sarc_tcga_pan_can_atlas_2018	Soft Tissue	Sarcoma	Myxofibrosarcoma	sarc	NA
+sarc_tcga_pan_can_atlas_2018	Soft Tissue	Sarcoma	Leiomyosarcoma	sarc	NA
+sarc_tcga_pan_can_atlas_2018	Peripheral Nervous System	Sarcoma	Malignant Peripheral Nerve Sheath Tumor	sarc	NA
+sarc_tcga_pan_can_atlas_2018	Soft Tissue	Sarcoma	Dedifferentiated Liposarcoma	sarc	NA
+sarc_tcga_pan_can_atlas_2018	Soft Tissue	Sarcoma	Desmoid/Aggressive Fibromatosis	sarc	NA
+sarc_tcga_pan_can_atlas_2018	Soft Tissue	Sarcoma	Undifferentiated Pleomorphic Sarcoma/Malignant Fibrous Histiocytoma/High-Grade Spindle Cell Sarcoma	sarc	NA
+sarc_tcga_pan_can_atlas_2018	Soft Tissue	Sarcoma	Synovial Sarcoma	sarc	NA
+sarc_tcga	Soft Tissue	Soft Tissue Cancer, NOS	Soft Tissue	sarc	NA
+sarc_tcga	Soft Tissue	Soft Tissue Sarcoma	Soft Tissue Sarcoma	sarc	NA
+skcm_tcga	Skin	Melanoma		skcm	Cutaneous Melanoma
+stad_tcga_pan_can_atlas_2018	Esophagus/Stomach	Esophagogastric Adenocarcinoma	Diffuse Type Stomach Adenocarcinoma	stad	Stomach Adenocarcinoma
+stad_tcga_pan_can_atlas_2018	Esophagus/Stomach	Esophagogastric Adenocarcinoma	Intestinal Type Stomach Adenocarcinoma	stad	Stomach Adenocarcinoma
+stad_tcga_pan_can_atlas_2018	Esophagus/Stomach	Esophagogastric Adenocarcinoma	Tubular Stomach Adenocarcinoma	stad	Stomach Adenocarcinoma
+stad_tcga_pan_can_atlas_2018	Esophagus/Stomach	Esophagogastric Adenocarcinoma	Stomach Adenocarcinoma	stad	Stomach Adenocarcinoma
+stad_tcga_pan_can_atlas_2018	Esophagus/Stomach	Undifferentiated Stomach Adenocarcinoma	Signet Ring Cell Carcinoma of the Stomach	stad	Stomach Adenocarcinoma
+stad_tcga_pan_can_atlas_2018	Esophagus/Stomach	Esophagogastric Adenocarcinoma	Mucinous Stomach Adenocarcinoma	stad	Stomach Adenocarcinoma
+stad_tcga_pan_can_atlas_2018	Esophagus/Stomach	Esophagogastric Adenocarcinoma	Papillary Stomach Adenocarcinoma	stad	Stomach Adenocarcinoma
+stad_tcga	Esophagus/Stomach	Esophagogastric Cancer	Papillary Stomach Adenocarcinoma	stad	Stomach Adenocarcinoma
+tmb_mskcc_2018	CNS/Brain	Melanoma	Primary CNS Melanoma	tmb	NA
+tmb_mskcc_2018	Other	Cancer of Unknown Primary	Undifferentiated Malignant Neoplasm	tmb	NA
+tmb_mskcc_2018	Kidney	Renal Cell Carcinoma	FH-Deficient Renal Cell Carcinoma	tmb	NA
+tmb_mskcc_2018	Other	Cancer of Unknown Primary	Cancer of Unknown Primary, NOS	tmb	NA
+tgct_tcga	Germ Cell	Germ Cell Tumor		tgct	Tenosynovial Giant Cell Tumor Diffuse Type
+tgct_tcga_pan_can_atlas_2018	Testis	Seminoma	Seminoma	tgct	Tenosynovial Giant Cell Tumor Diffuse Type
+tgct_tcga_pan_can_atlas_2018	Germ Cell	Non-Seminomatous Germ Cell Tumor	Embryonal Carcinoma	tgct	Tenosynovial Giant Cell Tumor Diffuse Type
+tgct_tcga_pan_can_atlas_2018	Germ Cell	Non-Seminomatous Germ Cell Tumor	Mixed Germ Cell Tumor	tgct	Tenosynovial Giant Cell Tumor Diffuse Type
+tgct_tcga_pan_can_atlas_2018	Germ Cell	Non-Seminomatous Germ Cell Tumor	Yolk Sac Tumor	tgct	Tenosynovial Giant Cell Tumor Diffuse Type
+tgct_tcga_pan_can_atlas_2018	Germ Cell	Non-Seminomatous Germ Cell Tumor	Teratoma	tgct	Tenosynovial Giant Cell Tumor Diffuse Type
+lung_msk_pdx	Lung	Small Cell Lung Cancer	Combined Small Cell Lung Carcinoma	lung	Lung
+tet_nci_2014	Thymus	Thymic Tumor	Thymic Epithelial Tumor	tet	Thymic Epithelial Tumor
+thym_tcga_pan_can_atlas_2018	Thymus	Thymic Epithelial Tumor	Thymoma	thym	Thymoma
+thca_tcga_pan_can_atlas_2018	Thyroid	Well-Differentiated Thyroid Cancer	Papillary Thyroid Cancer	thca	NA
+thca_tcga	Thyroid	Thyroid Cancer		thca	NA
+thca_tcga	Thyroid	Thyroid Cancer	Well-Differentiated Thyroid Cancer	thca	NA
+ucs_tcga_pan_can_atlas_2018	Uterus	Endometrial Carcinoma	Uterine Carcinosarcoma/Uterine Malignant Mixed Mullerian Tumor	ucs	Uterine Carcinosarcoma/Uterine Malignant Mixed Mullerian Tumor
+ucec_tcga_pan_can_atlas_2018	Uterus	Endometrial Carcinoma	Uterine Mixed Endometrial Carcinoma	ucec	Endometrial Carcinoma
+ucec_tcga_pan_can_atlas_2018	Uterus	Endometrial Carcinoma	Uterine Serous Carcinoma/Uterine Papillary Serous Carcinoma	ucec	Endometrial Carcinoma
+ucec_tcga_pan_can_atlas_2018	Uterus	Endometrial Carcinoma	Uterine Endometrioid Carcinoma	ucec	Endometrial Carcinoma
+uvm_tcga_pan_can_atlas_2018	Eye	Ocular Melanoma	Uveal Melanoma	uvm	NA
