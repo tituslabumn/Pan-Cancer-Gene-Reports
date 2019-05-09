@@ -90,14 +90,6 @@ if("knitr" %in% row.names(installed.packages())){
   cat("installation complete\n\n")
 }
 
-#xtable: required for pdf report generation
-cat("xtable:\t")
-if("xtable" %in% row.names(installed.packages())){
-  cat("\talready installed\n")
-}else{
-  cat("installing...\n")
-  install.packages("xtable")
-  cat("installation complete\n\n")
-}
+
 
 cat("############# All packages installed ##################\n\n\n") #unsure if failed installations would still progress???

@@ -154,36 +154,24 @@ cat("\n\n","Generating master annotation data frame for all studies and their re
 #make master case id data frame (derived from each 'xxxxxxx_all'  case id list)
 cat("########### Making master case id data frame ##############","\n\n")
 all_clindata_colnames <- character()
-web_API_list <- character() #list of studies where clinical data was taken from the web API
 skipped_no_clindata_list <- character()
 y<-1
 z<- paste0(all.studies$cancer_study_id,"_all")
 for (x in z) {
-  cat("[",y,"/",length(z),"]","\t",x,"\n")
+  cat("[",y,"/",length(z),"]","\t",x,"\t")
   
-  #in some case_lists getClinicalData seems to be broken. In those instances query from web API
-  clindata <- tryCatch(
-    {
-      getClinicalData(mycgds,x)
-    },
-    error=function(err){
-      err_line <- as.numeric(unlist(strsplit(err$message,split = " "))[2])
-      cat("\n###########","getClinicalData() returned error for line",err_line,"###########\n")
-      cat("Retrieving clinical data via cBP web API","\n")
-      assign("web_API_list",c(web_API_list,x), envir = .GlobalEnv)
-      #will produce errors in some at least one case if fileEncoding arg is not specified
-      webdata <- read.delim(paste0('http://www.cbioportal.org/webservice.do?cmd=getClinicalData&case_set_id=',x),stringsAsFactors = FALSE, fileEncoding = "latin1")
-      cat("retrived data frame with the following dimensions",dim(webdata),"\n")
+  #in some case_lists getClinicalData seems to be broken. Query from web API in all cases
+      # getClinicalData(mycgds,x) no longer used
+      # will produce errors in some at least one case if fileEncoding arg is not specified
+      clindata <- read.delim(paste0('http://www.cbioportal.org/webservice.do?cmd=getClinicalData&case_set_id=',x),stringsAsFactors = FALSE, fileEncoding = "latin1")
+      cat("retrived data frame with the following dimensions",dim(clindata),"\n")
       #remove any duplicated rown names; has yet to be called for full cBP data
-      if(any(duplicated(webdata$CASE_ID))){
+      if(any(duplicated(clindata$CASE_ID))){
         cat("removing duplicate case ids")
-        webdata <- webdata[-duplicated(webdata$CASE_ID)]
+        clindata <- clindata[-duplicated(clindata$CASE_ID)]
       }
-      row.names(webdata) <- webdata$CASE_ID
-      return(webdata)
-    }
-  )
-  
+      row.names(clindata) <- clindata$CASE_ID
+
   #skip if no clinical data is returned (currently true for crc_msk_2017_all)
   if(length(clindata[1,])<1){
       cat("################ No clinical data; skipping... #######################\n")
@@ -193,18 +181,18 @@ for (x in z) {
     all_clindata_colnames <- c(all_clindata_colnames,colnames(clindata))
     
     #populate empty lists for instances of missing colnames (data that is not available for all studies)
-    for (xx in c("MUTATION_COUNT","AGE","SEX","GENDER","RACE","ETHNICITY","FRACTION_GENOME_ALTERED","OS_STATUS","OS_MONTHS","SAMPLE_TYPE")) {
+    for (xx in c("CANCER_TYPE","CANCER_TYPE_DETAILED","MUTATION_COUNT","AGE","SEX","GENDER","RACE","ETHNICITY","FRACTION_GENOME_ALTERED","OS_STATUS","OS_MONTHS","SAMPLE_TYPE")) {
       if(!(xx %in% colnames(clindata))) clindata[,xx] <- NA
     }  
     
     #apend data to master df
     current_case_df <- data.frame(
       case_id = row.names(clindata), 
-      study = rep(sub("_all","",x),length(row.names(clindata))), 
-      cancer_type = clindata$CANCER_TYPE, 
-      cancer_type_detailed = clindata$CANCER_TYPE_DETAILED, 
+      study = rep(sub("_all","",x),length(row.names(clindata))),
       sample_count = clindata$SAMPLE_COUNT,
       #below cols: data not available for all
+      cancer_type = clindata$CANCER_TYPE, 
+      cancer_type_detailed = clindata$CANCER_TYPE_DETAILED, 
       age = clindata$AGE,
       sex = clindata$SEX,
       gender = clindata$GENDER,
@@ -217,6 +205,15 @@ for (x in z) {
       sample_type = clindata$SAMPLE_TYPE,
       stringsAsFactors = FALSE
     )
+    #for cases missing cancer_type or cancer_type_detailed populate with study for unique manual tissue type annotation
+    if(anyNA(current_case_df$cancer_type) | anyNA(current_case_df$cancer_type_detailed)){
+      current_case_df$cancer_type <- current_case_df$study[1]
+      current_case_df$cancer_type_detailed <- current_case_df$study[1]
+    }
+    #some instances have empty char for cancer_type and cancer_type_detailed but not for entire study, replace these with study name for manual tissue type annotation
+    if(any(current_case_df$cancer_type == "")) current_case_df[current_case_df$cancer_type == "","cancer_type"] <- current_case_df[current_case_df$cancer_type == "","study"]
+    if(any(current_case_df$cancer_type_detailed == "")) current_case_df[current_case_df$cancer_type_detailed == "","cancer_type_detailed"] <- current_case_df[current_case_df$cancer_type_detailed == "","study"]
+    
     if(y == 1){
       master_case_df <- current_case_df
     } else {
@@ -229,42 +226,28 @@ rm(x,y,xx,z,clindata,current_case_df)
 
 save.image("troubleshooting_workspace.RData") #####################
 
+cat("\n\n\n")
+
+cat("altering case id dashes and underscores\n\n")
 #some studies share case ids but are encoded differently where '.' has been swapped for '_'
   #this may only be for cases where clinical data was obtained from web API
   #add col with case ideas with all '_'s and '-'s changed to '.'
   master_case_df$altered_case_id <- gsub("_",".",master_case_df$case_id)
   master_case_df$altered_case_id <- gsub("-",".",master_case_df$altered_case_id)
 
+  cat("################ Annotating cancer type #######################\n\n")
 #get cancer type key (not avaliable through CGDSR, only via web API).
 #this returns what is cancer_type_detailed in getClinicalData query
 cancer_types_key_web_API <- read.delim("http://www.cbioportal.org/webservice.do?cmd=getTypesOfCancer",stringsAsFactors = FALSE, fileEncoding = "latin1")
 #use this key to fill in empty ("") cancer typed in master case df
   master_case_df$webAPI_cancer_type <-  cancer_types_key_web_API$name[match(sapply(master_case_df$study, function(x) unlist(strsplit(x,split = "_"))[1]),cancer_types_key_web_API$type_of_cancer_id)]  
-  #make key to convert web-cancer_type_detailed to cgdsr-type cancer_type
-  #choosing cancer_type over_cancer type_detailed because it has ~1/3 the total unique values
-  cancer_types_key_CGDSR <- data.frame(
-    cancer_type_detailed = unique(master_case_df$cancer_type_detailed),
-    stringsAsFactors = FALSE
-  )
-  #if cancer_type_detailed maps to only one cancer_type (true for ~386/467 '_detailed values)
-  cancer_types_key_CGDSR$cancer_type_unique <- sapply(cancer_types_key_CGDSR$cancer_type_detailed, function(x){
-    if(length(unique(master_case_df$cancer_type[master_case_df$cancer_type_detailed == x])) == 1){
-      return(unique(master_case_df$cancer_type[master_case_df$cancer_type_detailed == x]))
-             } else {
-               return(NA)
-              }
-    })
-  #fill cases where possible (remaining empty ("") instances are converted to NA)
-  master_case_df$cancer_type[master_case_df$cancer_type == ""]<-cancer_types_key_CGDSR$cancer_type_unique[match(master_case_df$webAPI_cancer_type[master_case_df$cancer_type == ""],cancer_types_key_CGDSR$cancer_type_detailed)]
-  #for the remaining NA's, fill cancer_type and cancer_type_detailed with web_cancer_type; remaining NAs (cell lines etc) will stay as such
-  master_case_df$cancer_type[is.na(master_case_df$cancer_type)] <- master_case_df$webAPI_cancer_type[is.na(master_case_df$cancer_type)]
-  master_case_df$cancer_type_detailed[is.na(master_case_df$cancer_type)] <- master_case_df$webAPI_cancer_type[is.na(master_case_df$cancer_type)]
 
 save.image("troubleshooting_workspace.RData")   #####################
 
+cat("creating/writing manual annotation template tab delim file \n\n")
 #creatE manual annotation file to be manually annotated
     #keep "study","cancer_type","cancer_type_detailed" cols
-    master_case_manual_annotation_out <- master_case_df[,2:4]
+    master_case_manual_annotation_out <- master_case_df[,c("study","cancer_type","cancer_type_detailed")]
     #convert $study to prefix only for key matching with cancer_types_key_web_API
     master_case_manual_annotation_out$prefix <- sapply(master_case_manual_annotation_out$study, function(x) unlist(strsplit(x,split = "_"))[1])
     #some prefixes with internal '_' are truncated. These don't overlap anyway, ignore for now
@@ -276,11 +259,28 @@ save.image("troubleshooting_workspace.RData")   #####################
 #read in manual tissue type annotations
   # this is a tab delim file created via Manual_cancer_types_annotation.R
   # a manual tissue type (32 total types) is assigned for each unique cancer_type/cancer_type_detailed pair from master_case_df
+
+cat("reading in manual annotation file \n\n")
+if(!("cancer_type_manual_annotation_in.tab" %in% list.files())){
+  stop("'cancer_type_manual_annotation_in.tab' file not found:\n\tmanually annotate 'cancer_type_manual_annotation_out.tab' file \n\tadd final_tissue column \n\tsace as 'cancer_type_manual_annotation_in.tab'\n\trun again\n\n\n")
+}
 master_case_manual_annotation_in <- read.delim("cancer_type_manual_annotation_in.tab")
+all.studies.old <- read.delim("past_manual_annotation_all_studies.tab")
+
+cat("\tchecking that this file is up to date... \n\n")
+if(length(master_case_manual_annotation_in[,1]) != length(master_case_manual_annotation_out[,1])) {
+  cat("new studies in database with no manual annotation:\n")
+  print(all.studies$cancer_study_id[which(!(all.studies$cancer_study_id %in% all.studies.old$cancer_study_id))])
+  stop("manual annotation input and output files do not have equal number of rows:\n\tmanually annotate 'cancer_type_manual_annotation_out.tab' file \n\tadd final_tissue column \n\tsace as 'cancer_type_manual_annotation_in.tab'\n\trun again\n\n\n")
+}
+
+#overwrite past_manual_annotation_all_studies.tab if manual annotation passes check
+write.table(all.studies, file = "past_manual_annotation_all_studies.tab",sep = "\t", quote = FALSE) 
+
 #map these types to master_case_df
 #for cases that are new (not yet annotated) populate with NA
 #use _out data frames for pasted keys as manual annotation altered some escape characters and leads to small number of mismatch (i.e. "Head and Neck CancerHead and Neck Squamous Cell Carcinoma\xc3?" vs "Head and Neck CancerHead and Neck Squamous Cell Carcinoma�?")
-master_case_manual_annotation_in$match_key <- paste0(master_case_manual_annotation_out$cancer_type,master_case_manual_annotation_out$cancer_type_detailed)
+master_case_manual_annotation_in$match_key <- paste0(master_case_manual_annotation_in$cancer_type,master_case_manual_annotation_in$cancer_type_detailed)
 master_case_df$manual_tissue_annotation <- NA
 master_case_df$manual_tissue_annotation <- master_case_manual_annotation_in$final_tissue[match(paste0(master_case_df$cancer_type,master_case_df$cancer_type_detailed),master_case_manual_annotation_in$match_key)]
 

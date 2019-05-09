@@ -68,6 +68,8 @@ cat("\n")
 cat("done","\n\n\n")
 # use getCancerStudies(mycgds) to check if there are new studies not included in old workspace
 
+stop("############################################################### stop here for now")
+
 if(is.na(bash_args[2])){
   stop("\t","no gene of interest supplied as second argument")
 } else {
