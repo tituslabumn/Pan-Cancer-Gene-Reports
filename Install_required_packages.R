@@ -90,6 +90,14 @@ if("knitr" %in% row.names(installed.packages())){
   cat("installation complete\n\n")
 }
 
-
+#knitr: required for reading in ExAC restAPI pages from GOI queries
+cat("rjson:\t")
+if("rjson" %in% row.names(installed.packages())){
+  cat("\talready installed\n")
+}else{
+  cat("installing...\n")
+  install.packages('rjson')
+  cat("installation complete\n\n")
+}
 
 cat("############# All packages installed ##################\n\n\n") #unsure if failed installations would still progress???

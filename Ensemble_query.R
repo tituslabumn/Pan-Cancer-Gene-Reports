@@ -64,7 +64,15 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
                                              function(x){
                                                if(x == "Sequence unavailable") return(0) else return(nchar(x))
                                              })
-  
+  #assign GOI ENSG id
+  GOI_ENSG <<- getBM(
+    attributes = c(
+      "ensembl_gene_id"
+    ),
+    filters =  filter_type, 
+    values = value ,
+    mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
+  )
   
   #assign global data frames for both
   cat("\n\nassigning and writing","\n\n")

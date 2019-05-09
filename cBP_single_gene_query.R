@@ -102,6 +102,13 @@ cat("Ensembl query initiated\n")
 source("Ensemble_query.R")
 cat("Ensembl query complete\n\n\n")
 
+save.image("troubleshooting_workspace.RData") #####################
+
+#retrieve ExAC variant data for GOI
+source("ExAC_query.R")
+
+save.image("troubleshooting_workspace.RData") #####################
+
 #relative position mapping for visualization
 setwd(initial_directory)
 source("Relative_position_mapping.R")
