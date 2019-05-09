@@ -68,8 +68,6 @@ cat("\n")
 cat("done","\n\n\n")
 # use getCancerStudies(mycgds) to check if there are new studies not included in old workspace
 
-stop("############################################################### stop here for now")
-
 if(is.na(bash_args[2])){
   stop("\t","no gene of interest supplied as second argument")
 } else {
@@ -104,11 +102,26 @@ cat("Ensembl query initiated\n")
 source("Ensemble_query.R")
 cat("Ensembl query complete\n\n\n")
 
-#saving temp workspace
-cat("saving temp workspace image\n")
-setwd(output_directory)
-save.image("temp_workspace_cBP.RData")
-
+#relative position mapping for visualization
 setwd(initial_directory)
-cat("\n\n\n############################ stage one complete #########################################\n")
+source("Relative_position_mapping.R")
 
+save.image("troubleshooting_workspace.RData") #####################
+
+#analasis and figure data initialization
+source("Generate_figures.R")
+
+#Knit data to output PDF
+cat("############### Knitting report to PDF #################\n\n\n")
+Sys.setenv(RSTUDIO_PANDOC="/usr/lib/rstudio/bin/pandoc") #must specify if running in bash rather than Rstudio
+rmarkdown::render("output_markdown_format.Rmd",output_file = paste0(GOI," query output report (",Sys.Date(),").pdf"),output_dir = output_directory)
+
+#save final workspace
+cat("saving final workspace to GOI output folder\n\n\n")
+setwd(output_directory)
+save.image("final_workspace.RData") #####################
+
+cat("################################################ Session info #################################################\n\n\n")
+sessionInfo()
+
+cat("\n\n\n############################################# Pipeline finished :] ##########################################################\n\n\n")

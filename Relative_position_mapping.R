@@ -54,7 +54,7 @@ GOI_mapping_key <- data.frame(
   row.names = (GOI_exon_annotation_main_transcript$transcript_start[1]:GOI_exon_annotation_main_transcript$transcript_end[1]),
   relative_transcript = 1:(1+GOI_exon_annotation_main_transcript$transcript_end[1]-GOI_exon_annotation_main_transcript$transcript_start[1]),
   transcript = unlist(strsplit(as.character(getSeq(Hsapiens, 
-                                                   GOI_CHR, 
+                                                   as.character(GOI_CHR), 
                                                    start = GOI_exon_annotation_main_transcript$transcript_start[1], 
                                                    end = GOI_exon_annotation_main_transcript$transcript_end[1]
                                                    )
