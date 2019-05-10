@@ -16,7 +16,7 @@ GOI_exon_annotation <- get(paste0(GOI,"_exon_annotation"))
 GOI_peptide_sequence <- get(paste0(GOI,"_peptide_sequences"))
 GOI_protein_feature_annotation <- get(paste0(GOI,"_protein_feature_annotation"))
 
-GOI_STRAND <- GOI_exon_annotation_main_transcript$strand[1]
+GOI_STRAND <- GOI_exon_annotation$strand[1]
 
 save.image("troubleshooting_workspace.RData") #####################
 
@@ -25,7 +25,14 @@ cat("Check that UniProt coding sequence is the same length as main transcript se
 peptide_transcript_check <-GOI_UNIPROT_AA_LENGTH == (GOI_exon_annotation_main_transcript$cds_length[1]/3-1)
 cat("\t",peptide_transcript_check,"\n\n\n")
 #if fail stop
-if(peptide_transcript_check != TRUE) stop("peptide cds check against chosen GOI transcript FAILED")
+if(is.na(peptide_transcript_check)){
+  cat("No canonical cBP transcript; default to UniProt/n/n")
+  #select transcript (first that matches) with same cds size as uniprot product
+  GOI_TRANSCRIPT <- GOI_exon_annotation$ensembl_transcript_id[which((GOI_exon_annotation$cds_length/3-1) == GOI_UNIPROT_AA_LENGTH)][1]
+  GOI_exon_annotation_main_transcript <- GOI_exon_annotation[GOI_exon_annotation$ensembl_transcript_id == GOI_TRANSCRIPT,]
+}else if(peptide_transcript_check != TRUE) {
+  stop("peptide cds check against chosen GOI transcript FAILED/n/n")
+}
 
 
 #make new data frame that maps all introns based on transcript stat/end and exon boundries

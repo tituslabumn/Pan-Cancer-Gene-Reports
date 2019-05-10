@@ -13,10 +13,13 @@ library(RColorBrewer)
 #make combined qualitative color palette for max of 21 distinct features repeaded once (total = 42)
 combined_qualitative_palette <- c(brewer.pal(9,"Set1"),brewer.pal(12,"Set3"),brewer.pal(9,"Set1"),brewer.pal(12,"Set3"))
 
+cat("parse in some data to non-gene-specific names\n")
+
 #parse some data frames to non-gene-specific names
 GOI_cBP_mutations <- get(paste0(GOI,"_cBP_mutations"))
 GOI_cBP_fusions <- get(paste0(GOI,"_cBP_fusions"))
 
+cat("declare function to resolve overlapping features\n")
 #make function to segregate overlapped features between rows
 #acepts filtered data frame with AA_start and AA_end cols ; returns list of layer numbers
 sep_overlap_features <- function(df){
@@ -39,6 +42,7 @@ sep_overlap_features <- function(df){
   }
 }
 
+cat("declare function to truncate labels\n")
 #declare function that accepts full or subseted feature data frame and returns list of labels
 #number of characters to limit to as char_number_cap argument
 truncate.feature.labels <- function(df,char_number_cap){
@@ -55,7 +59,7 @@ truncate.feature.labels <- function(df,char_number_cap){
   return(paste0(df$TYPE,"-",df$LABEL,"[",df$AA_start,"-",df$AA_end,"]"))
 }
 
-
+cat("Figure1\n")
 #Figure 1 - features; domains,regions, DNA_bind, MOTIF
 F1_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION","DNA_BIND","MOTIF"),]
 #F1_site_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("METAL","SITE","MOD_RES","CROSSLNK"),]
@@ -80,7 +84,7 @@ if(length(F1_feature_df[,1])>0){
 # plot.new()
 # legend("center", legend = F1_feature_labels, fill = F1_features$fill)
 
-
+cat("Figure2\n")
 
 #Figure 2 - all transcripts plotted to relative transcript position
 F2_feature_df <- GOI_exon_annotation
@@ -99,6 +103,8 @@ F2_feature_df <- GOI_exon_annotation
 all_mut_cases <- master_case_df[master_case_df$study %in% unique(GOI_cBP_mutations$study),]
 GOI_cBP_mutations$manual_tissue <- all_mut_cases$manual_tissue_annotation[match(paste0(GOI_cBP_mutations$study,GOI_cBP_mutations$altered_case_id),paste0(all_mut_cases$study,all_mut_cases$altered_case_id))]
 
+cat("Tissue table\n")
+
 #tissue type enrichment
 colnames(all_tissue_types_table) <- c("Primary Tissue","Total cases in database")
 all_tissue_types_table$`Total cases sequenced` <- sapply(all_tissue_types_table$`Primary Tissue`, function(x) sum(all_mut_cases$manual_tissue_annotation == x,na.rm = TRUE))
@@ -108,10 +114,11 @@ all_tissue_types_table$`Percent altered` <- 100*all_tissue_types_table$`Total al
 all_tissue_types_table$`Percent altered` <- round(all_tissue_types_table$`Percent altered`,2)
 all_tissue_types_table <- all_tissue_types_table[order(-all_tissue_types_table$`Percent altered`),]
 
+cat("Multiple var table\n")
 #table representing frequency of multiple GOI muts per sample
   multi_mut_table <- as.data.frame(table(GOI_cBP_mutations$case_ID_freq))[,2:1]
   colnames(multi_mut_table) = c("Number of samples","Number of mutations per sample")
-
+cat("map variants to nearest exon junction\n")
 #map variants to nearest exon junction
   if(GOI_STRAND == -1){ #this only matters for large deletions
     GOI_cBP_mutations$imaging_AA <- GOI_mapping_key[as.character(GOI_cBP_mutations$end_position),"nearest_junction_codon"]
@@ -123,7 +130,8 @@ all_tissue_types_table <- all_tissue_types_table[order(-all_tissue_types_table$`
   
   Unique_mutations_plot <- GOI_cBP_mutations[!duplicated(GOI_cBP_mutations$amino_acid_change),]
   mut_type_color_key <- data.frame(row.names = unique(Unique_mutations_plot$mutation_type), color = combined_qualitative_palette[1:length(unique(Unique_mutations_plot$mutation_type))])
-  
+
+cat("Figure3\n")    
 #Figure3 - all unique variants
   F3_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
   if(length(F3_feature_df[,1])>0){
@@ -144,10 +152,12 @@ all_tissue_types_table <- all_tissue_types_table[order(-all_tissue_types_table$`
   # par(mar = c(0,0,0,0))
   # plot.new()
   # legend("center", legend = F3_feature_labels, fill = F3_features$fill)  
-
+cat("Figure4\n")
 #top 30 variants
+  F4_plot_ceiling <- 50
+  if(length(Unique_mutations_plot[,1]) < 50) F4_plot_ceiling <- length(Unique_mutations_plot[,1]) #if less than 50 mutations just use max; will be redundant plot :/
   Top_unique_muts_plot <- Unique_mutations_plot[order(-Unique_mutations_plot$AA_change_freq),]
-  Top_unique_muts_plot <- Top_unique_muts_plot[1:50,]
+  Top_unique_muts_plot <- Top_unique_muts_plot[1:F4_plot_ceiling,]
   
   F4_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
   if(length(F4_feature_df[,1])>0){

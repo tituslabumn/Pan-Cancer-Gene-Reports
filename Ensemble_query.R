@@ -13,6 +13,7 @@ cat("#################### Fetching ensemble annotations for GOI ################
 cat("assigning canonical transcript per key used by cBP:","\n")
 GOI_TRANSCRIPT <- cBP_canonical_transcripts[GOI,"ensembl_transcript_id"]
 cat(GOI_TRANSCRIPT,"\n\n")
+if(is.na(GOI_TRANSCRIPT)) cat("\t!!!!! no canonicical transcript found, default to uniprot sequence; resolve with relative mapping below\n\n")
 
 save.image("troubleshooting_workspace.RData") #####################
 
