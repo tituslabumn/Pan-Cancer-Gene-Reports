@@ -100,4 +100,16 @@ if("rjson" %in% row.names(installed.packages())){
   cat("installation complete\n\n")
 }
 
+#for codon to AA symbol lookup in relative maping
+cat("Biostrings:\t")
+if("Biostrings" %in% row.names(installed.packages())){
+  cat("\talready installed\n")
+}else{
+  cat("installing...\n")
+  if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+  BiocManager::install("Biostrings")
+  cat("installation complete\n\n")
+}
+
 cat("############# All packages installed ##################\n\n\n") #unsure if failed installations would still progress???

@@ -148,6 +148,14 @@ cBP.mutation.query.2 <- function(gene,input_studies){
     print(unique(mut.df$mutation_type[refNAindex]))
     mut.df[refNAindex,"reference_allele"] <- "-"
   }
+  #same as above for some deletions where NA should be "-"
+  if(sum(is.na(mut.df$variant_allele)) > 0){
+    cat("fixing NA var alleles","\n")
+    varNAindex <- which(is.na(mut.df$variant_allele))
+    cat("\t","mut-types with var-allele NAs:","\n")
+    print(unique(mut.df$mutation_type[varNAindex]))
+    mut.df[varNAindex,"variant_allele"] <- "-"
+  }
   
   assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
@@ -281,6 +289,7 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   cat("\n")
   
   #assign out final df, write it to tab delim file and save the df name for referencing below
+  GOI_cBP_mutations <<- mut.df
   assign("GOI_mut_df_name",paste0(gene,"_cBP_mutations") , envir = .GlobalEnv)  #for accessing via get() later
   assign(paste0(gene,"_cBP_mutations"),mut.df, envir = .GlobalEnv)
   assign("GOI_fusion_df_name",paste0(gene,"_cBP_fusions") , envir = .GlobalEnv)  #for accessing via get() later

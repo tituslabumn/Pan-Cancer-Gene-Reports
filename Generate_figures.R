@@ -16,7 +16,6 @@ combined_qualitative_palette <- c(brewer.pal(9,"Set1"),brewer.pal(12,"Set3"),bre
 cat("parse in some data to non-gene-specific names\n")
 
 #parse some data frames to non-gene-specific names
-GOI_cBP_mutations <- get(paste0(GOI,"_cBP_mutations"))
 GOI_cBP_fusions <- get(paste0(GOI,"_cBP_fusions"))
 
 cat("declare function to resolve overlapping features\n")
@@ -41,6 +40,8 @@ sep_overlap_features <- function(df){
     return(layer_id)
   }
 }
+
+save.image("troubleshooting_workspace.RData") #####################
 
 cat("declare function to truncate labels\n")
 #declare function that accepts full or subseted feature data frame and returns list of labels
@@ -99,6 +100,8 @@ F2_feature_df <- GOI_exon_annotation
   #lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = FALSE, xaxis = F2_x_axis)
 
 
+save.image("troubleshooting_workspace.RData") #####################  
+  
 #get master case df with only studies that survived cBP mut query filtering
 all_mut_cases <- master_case_df[master_case_df$study %in% unique(GOI_cBP_mutations$study),]
 GOI_cBP_mutations$manual_tissue <- all_mut_cases$manual_tissue_annotation[match(paste0(GOI_cBP_mutations$study,GOI_cBP_mutations$altered_case_id),paste0(all_mut_cases$study,all_mut_cases$altered_case_id))]
@@ -177,5 +180,46 @@ cat("Figure4\n")
   }  
   
   
-cat("############### Figure data ready for export #################\n\n\n")
+  F5_variant_df <- ExAC_df[!(ExAC_df$major_consequence %in% c("intron_variant","non_coding_transcript_exon_variant")),]
+  F5_variant_df$image_AA <- GOI_mapping_key[as.character(F5_variant_df$pos),"nearest_junction_codon"]
+  exome_mut_type_color_key <- data.frame(row.names = unique(F5_variant_df$major_consequence), color = combined_qualitative_palette[1:length(unique(F5_variant_df$major_consequence))])
+  F5_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
+  F5_feature_labels <- paste0(F5_feature_df$TYPE,"-",F5_feature_df$LABEL,"[",F5_feature_df$AA_start,"-",F5_feature_df$AA_end,"]")
+  F5_features <- GRanges(seqnames = "chr", IRanges(start = F5_feature_df$AA_start, end = F5_feature_df$AA_end, names = NULL))
+  F5_features$height <- 0.01
+  F5_features$fill <- combined_qualitative_palette[1:length(F5_features)]
+  F5_features$featureLayerID <- sep_overlap_features(F5_feature_df)
+  F5_variants <- GRanges(seqnames = "chr", IRanges(start = as.numeric(F5_variant_df$image_AA), width = 1,names = NULL))
+  F5_variants$score <- as.numeric(F5_variant_df$allele_count)
+  F5_variants$color <- exome_mut_type_color_key[F5_variant_df$major_consequence,"color"]
+  F5_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+  #F5_yaxis <- round(seq(from = 1, to = Top_unique_muts_plot$AA_change_freq[1], length.out = 10),-1)
+  F5_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1)
+  #lolliplot(SNP.gr = F5_variants ,features = F5_features, ranges = F5_ranges, ylab = FALSE,cex = .5, jitter = "label")
+
+  
+  F6_variant_df <- ExAC_df[!(ExAC_df$major_consequence %in% c("intron_variant","non_coding_transcript_exon_variant")) & as.numeric(ExAC_df$allele_count) >= 1,]
+  F6_variant_df$image_AA <- GOI_mapping_key[as.character(F6_variant_df$pos),"nearest_junction_codon"]
+  F6_variant_df <- F6_variant_df[!(is.na(F6_variant_df$image_AA)),]
+  exome_mut_type_color_key <- data.frame(row.names = unique(F6_variant_df$major_consequence), color = combined_qualitative_palette[1:length(unique(F6_variant_df$major_consequence))])
+  F6_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
+  F6_feature_labels <- paste0(F6_feature_df$TYPE,"-",F6_feature_df$LABEL,"[",F6_feature_df$AA_start,"-",F6_feature_df$AA_end,"]")
+  F6_features <- GRanges(seqnames = "chr", IRanges(start = F6_feature_df$AA_start, end = F6_feature_df$AA_end, names = NULL))
+  F6_features$height <- 0.03
+  F6_features$fill <- combined_qualitative_palette[1:length(F6_features)]
+  F6_features$featureLayerID <- sep_overlap_features(F6_feature_df)
+  F6_variants <- GRanges(seqnames = "chr", IRanges(start = as.numeric(F6_variant_df$image_AA), width = 1,names = NULL))
+  F6_variants$score <- log2(as.numeric(F6_variant_df$allele_count))
+  F6_variants$color <- exome_mut_type_color_key[F6_variant_df$major_consequence,"color"]
+  F6_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+  #F6_yaxis <- round(seq(from = 1, to = Top_unique_muts_plot$AA_change_freq[1], length.out = 10),-1)
+  F6_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1)
+  # lolliplot(SNP.gr = F6_variants ,features = F6_features, ranges = F6_ranges,cex = .5, jitter = "label",ylab = "Log2(allele count)")
+  # 
+  # par(mar = c(0,0,0,0))
+  # plot.new()
+  # legend("center", legend = row.names(exome_mut_type_color_key), fill = exome_mut_type_color_key$color)
+  
+  
+  cat("############### Figure data ready for export #################\n\n\n")
 

@@ -1,9 +1,10 @@
 ################# Relative_position_mapping.R ########################
-#Obtain relative mapping for variatns
-    #Relative to main transcript exons/introns
-    #Relative to the union of all exons/transcripts
-    #Relative mapping to features
-    #Chromosome position to AA position (Main transcript)
+# Obtain relative mapping for variatns
+    # Relative to main transcript exons/introns
+    # Relative to the union of all exons/transcripts
+    # Relative mapping to features
+    # Chromosome position to AA position (Main transcript)
+    # Use map to fix "MUTATED" instances of $amino_acid_change rarely returned by some cBP queries
 
 
 cat("#####################################################################\n")
@@ -72,6 +73,9 @@ GOI_mapping_key <- data.frame(
 if(GOI_STRAND == -1) GOI_mapping_key$relative_transcript <- rev(GOI_mapping_key$relative_transcript)
 GOI_mapping_key$exon_intron <- character(length(GOI_mapping_key[,1]))
 
+#add col of position (redundant to row.names() but makes easily searchable in rstudio GUI)
+GOI_mapping_key$pos <- row.names(GOI_mapping_key)
+
 #map introns
   for (x in GOI_intron_map$rank) {
     GOI_mapping_key$exon_intron[ (rownames(GOI_mapping_key) >= GOI_intron_map$intron_chrom_start[x]) & (rownames(GOI_mapping_key) <= GOI_intron_map$intron_chrom_end[x]) ] <- paste0("Intron_",x)
@@ -124,7 +128,7 @@ GOI_mapping_key$exon_intron <- character(length(GOI_mapping_key[,1]))
 #map nearest_intron_exon_junction
   #this is for aligning splice region variants to the nearest codon for visualization
   #if equidistant default to upstream on positive strand
-  cat("mapping nearest junction for non-coding bases","\n")
+  cat("mapping nearest junction for non-coding bases","\n\n")
   #copy over relative_AA_position
   GOI_mapping_key$nearest_junction_codon <- GOI_mapping_key$relative_AA_position
   proximity_df <- data.frame(
@@ -168,7 +172,7 @@ GOI_mapping_key$exon_intron <- character(length(GOI_mapping_key[,1]))
     rm(x,intron_subset)
   
   
-  
+    cat("mapping relative transcript position (union of all transcripts without intronic space)","\n\n")
 #make key for relative transcript position (union of all transcripts without intronic space)
   Unique_GOI_ensembl_exons <- GOI_exon_annotation[!(duplicated(GOI_exon_annotation$ensembl_exon_id)),]
   #get union of positions for each range apppended
@@ -192,6 +196,74 @@ GOI_mapping_key$exon_intron <- character(length(GOI_mapping_key[,1]))
     GOI_exon_annotation$relative_union_start <- union_transcripts_relative_pos_key[as.character(GOI_exon_annotation$exon_chrom_start),"relative_union_transcript_position"]
     GOI_exon_annotation$relative_union_end <- union_transcripts_relative_pos_key[as.character(GOI_exon_annotation$exon_chrom_end),"relative_union_transcript_position"]
   }
+
+save.image("troubleshooting_workspace.RData") #####################  
+  
+cat("fixing cBP aa_change labeled as 'MUTATED'\n")
+cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
+# in some cases cBP returns AA_change as "MUTATED" manually fix annotations in these cases. 
+  if(sum(GOI_cBP_mutations$amino_acid_change == "MUTATED") > 0){
+    library(Biostrings) #for codon lookup
+    # if respective mutation_type is not "1" or NA append position and alt allele to the mutation_type, this will be enough to distinguish
+    GOI_cBP_mutations[GOI_cBP_mutations$amino_acid_change == "MUTATED","AA"] <- GOI_mapping_key[as.character(GOI_cBP_mutations[GOI_cBP_mutations$amino_acid_change == "MUTATED","start_position"]),"nearest_junction_codon"]
+    known_mutation_types <- c("Frame_Shift_Del","Missense_Mutation","In_Frame_Ins","Frame_Shift_Ins","Nonsense_Mutation","Splice_Site","Splice_Region","In_Frame_Del","Translation_Start_Site","Nonstop_Mutation","Frame_Shift","Targeted_Region")
+    cat("\tfixing instances of known mut_types\n")
+    known_type_index <- which((GOI_cBP_mutations$amino_acid_change == "MUTATED") & (GOI_cBP_mutations$mutation_type %in% known_mutation_types))
+    GOI_cBP_mutations[known_type_index,"amino_acid_change"] <- paste(GOI_cBP_mutations$mutation_type[known_type_index],GOI_cBP_mutations$start_position[known_type_index],GOI_cBP_mutations$variant_allele[known_type_index],sep = "_")
+    cat("\t\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
+    
+    cat("\tfixing other instances\n")
+    # if rescpective mutation_type is not a recognized type manually assign one, remove synonymous muts after
+    for(x in which(GOI_cBP_mutations$amino_acid_change == "MUTATED")){
+      #remove all non-coding variants for now
+      if(GOI_mapping_key[as.character(GOI_cBP_mutations$start_position[x]),"coding_segments_key"] != "Coding"){
+        GOI_cBP_mutations[x,"amino_acid_change"] <- "remove"
+      }else if(nchar(GOI_cBP_mutations$reference_allele[x]) == 1 & nchar(GOI_cBP_mutations$variant_allele[x]) == 1 & GOI_cBP_mutations$reference_allele[x] != "-" & GOI_cBP_mutations$variant_allele[x] != "-"){ #assume all others are single base modifications
+        ref_AA <- GOI_mapping_key[as.character(GOI_cBP_mutations$start_position[x]),"peptide"]
+        #get list of transcript bases in order of increasing genomic pos (correct order for + strand genes)
+        ref_codon <- GOI_mapping_key$transcript[GOI_mapping_key$relative_AA_position == GOI_mapping_key[as.character(GOI_cBP_mutations$start_position[x]),"relative_AA_position"]]
+        ref_codon_pos <- which(GOI_mapping_key$pos[GOI_mapping_key$relative_AA_position == GOI_mapping_key[as.character(GOI_cBP_mutations$start_position[x]),"relative_AA_position"]] == as.character(GOI_cBP_mutations$start_position[x]))
+        if(GOI_STRAND == -1){ #rev comp
+          var_codon <- ref_codon
+          var_codon[ref_codon_pos] <- as.character(complement(DNAString(GOI_cBP_mutations$variant_allele[x])))
+          var_codon <- as.character(complement(DNAString(paste(rev(var_codon), collapse = ""))))
+          var_AA <- GENETIC_CODE[[var_codon]]
+          ref_codon <- as.character(complement(DNAString(paste(rev(ref_codon), collapse = ""))))
+        }else{
+          var_codon <- ref_codon
+          var_codon[ref_codon_pos] <- GOI_cBP_mutations$variant_allele[x]
+          var_codon <- paste(var_codon, collapse = "")
+          var_AA <- GENETIC_CODE[[var_codon]]
+          ref_codon <- paste(ref_codon, collapse = "")
+        }
+        # remove if synonymous
+        if(var_AA == ref_AA){
+          GOI_cBP_mutations[x,"amino_acid_change"] <- "remove"
+        }else{
+          GOI_cBP_mutations[x,"amino_acid_change"] <- paste0(ref_AA,GOI_mapping_key[as.character(GOI_cBP_mutations$start_position[x]),"relative_AA_position"],var_AA)
+        }
+        #assign mut_type
+        if(var_AA == "*"){
+          GOI_cBP_mutations[x,"mutation_type"] <- "Nonsense_Mutation"
+        }else{
+          GOI_cBP_mutations[x,"mutation_type"] <- "Missense_Mutation" #label as such even if not correct; those cases are already flagged for removal
+        }
+      }
+    }
+    #remove rows flagged for removal
+    GOI_cBP_fusions <- GOI_cBP_mutations[GOI_cBP_mutations$amino_acid_change != "remove",]
+    cat("\t\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
+    #clean out temp variables
+    rm(x,known_type_index,ref_AA,var_AA,ref_codon_pos,ref_codon,var_codon)
+  }
+  
+  #update AA_change_freq
+  GOI_cBP_mutations$AA_change_freq <- sapply(GOI_cBP_mutations$amino_acid_change, function(x) sum(GOI_cBP_mutations$amino_acid_change == x))
+  
+  #update AA_freq, this time only count for coding changes (start or end position in cds)
+  coding_variant_index <- which((GOI_mapping_key[as.character(GOI_cBP_mutations$start_position),"coding_segments_key"] == "Coding") | (GOI_mapping_key[as.character(GOI_cBP_mutations$end_position),"coding_segments_key"] == "Coding"))
+  GOI_cBP_mutations[coding_variant_index,"AA_freq"] <- sapply(GOI_cBP_mutations[coding_variant_index,"AA"], function(x) sum(GOI_cBP_mutations[coding_variant_index,"AA"] == x, na.rm = TRUE))
+  
   
   
 cat("\n\n\n############################## Relative mapping complete ####################################\n\n\n")
