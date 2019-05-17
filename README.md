@@ -51,7 +51,7 @@ The first step is optional and should only be run if the user wishes to include 
 4. PCGR will create an output directory with sub directories for each GOI querried
     - When finished PCGR will output the PDF report into its respective output directory
 
-If initialization fails to execute to completion use the following instuctons to run PCGR with the latest initialized workspace provided in this repository
+If initialization fails to execute to completion use the following instuctons to run PCGR with the latest initialized workspace provided in this repository:
     
 ### Running additional queries without re-initializing
 
