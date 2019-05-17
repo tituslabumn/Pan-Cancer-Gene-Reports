@@ -1,13 +1,15 @@
-# Pan Cancer Gene Reports (PCGR) CHANGE CHANGE
+# Pan Cancer Gene Reports (PCGR)
 
 ## About 
-PCGR is an automated informatic pipeline designed by Taylor Harding at the University of Minnesota that creates a pan-cancer analytical report for a user-specified gene of interest (GOI).  
+PCGR is an automated informatic pipeline designed by Taylor Harding at the University of Minnesota that creates a pan-cancer analytical report for a user-specified gene of interest (GOI). PCGR is primarily written in the R statistical programming language.  
 
 PCGR sequesters GOI-specific data from cBioPortal (https://www.cbioportal.org/). These data include mutation, copy number, expression and clinical information from >200 studies representing >47,000 unique cases of cancer accross 32 broad tissue types. 
 
 PCGR obtains all natural variants for a GOI observed within the >60,000 exomes analized by the Exome Aggregation Consortium project (http://exac.broadinstitute.org/) 
 
 PCGR additionally obtains information from several database APIs (i.e. Ensembl, UniProtKB) that are used to structurally annotate GOI transcripts and peptides.
+
+See 'example_output.PDF' for an example report.  
 
 ## How to use PCGR
 PCGR is currently designed to be run in a Linux environment with the R statistical programming language installed. PCGR has not been tested on versions of R <3.6.0  
@@ -26,26 +28,38 @@ The first step is optional and should only be run if the user wishes to include 
 1. Open a bash terminal and clone the PCGR repository:
 
 ```{bash eval=FALSE}
-  git clone 
+  git clone https://github.com/tituslabumn/Pan-Cancer-Gene-Reports.git
 ```
 
-2. Install the updated version of seven from Github repository and move all the seven files to the Fiji.app root folder.
+2. To run an PCGR:
+    - Set your working directory to the cloned Pan-Cancer-Gene-Reports directory
+    - PCGR is executed by running the Single_gene_cBioPortal_query.sh bash script
+      - The first argument (y/n) specifies whether or not to create a new initialized workspace (study/case data)
+      - The second argument is the gene symbol for the GOI
+      
+```{bash eval=FALSE}
+  cd Pan-Cancer-Gene-Reports
+  ./Single_gene_cBioPortal_query.sh "y" "NRAS"
+```
 
-3. Move the tiff files from an experiment to a folder with the name of the file string beginning i.e. 95.1 - 95.25 into a folder 95 or so.
+3. If the 'cancer_type_manual_annotation_in.tab' file in the cloned repository is not up to date:
+    - PCGR will halt and export a cancer_type_manual_annotation_out.tab file for manual annotation
+    - Manually annotate each row with the diesired tissue type using the outdated cancer_type_manual_annotation_in.tab file as a templeate
+    - Save the updated file as 'cancer_type_manual_annotation_in.tab' in the same directory
+    - Re-run PCGR
+    
+4. PCGR will create an output directory with sub directories for each GOI querried
+    - When finished PCGR will output the PDF report into its respective output directory
 
-4.	From Fiji/Image J Select :
+If initialization fails to execute to completion use the following instuctons to run PCGR with the latest initialized workspace provided in this repository
+    
+### Running additional queries without re-initializing
 
-        a.  Plugins>Macros>Edit>seven_multi
-        b.  Run seven_multi file.
-        c.  Select the folder with tiff files which you want to analyze. 
+1. Run PCGR with an "n" passed to the first argument of the run script
 
-5.	Seven Runs through the folder and creates a ZIP mask for each image.
-
-6. The seven will ask you to Manually edit the image file incase the tiff image is not clear.
-
-7. Manually erase any erroneous cells by comparing with the original tiff file, if image is not clearly inverted.
-
-8. For each image in the experiment folder, seven will create a sliced folder ( for ex. sliced_1-1 or so). These folder will contained all the stats exported from an image which will be helpful in conducting analysis.
+```{bash eval=FALSE}
+  ./Single_gene_cBioPortal_query.sh "n" "NRAS"
+```
 
 
 
