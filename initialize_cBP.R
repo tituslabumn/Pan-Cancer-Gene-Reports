@@ -6,6 +6,9 @@ cat("\n#######################################################","\n")
 cat("############### Initialize cBP workspace ##############","\n")
 cat("#######################################################","\n\n")
 
+#check that required packages are installed and install if needed
+source("Install_required_packages.R")
+
 cat("Establish metadata data frame for final output","\n\n")
 initial_metadata <- data.frame(
   total_studies = 0,

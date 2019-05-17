@@ -9,7 +9,7 @@ PCGR obtains all natural variants for a GOI observed within the >60,000 exomes a
 
 PCGR additionally obtains information from several database APIs (i.e. Ensembl, UniProtKB) that are used to structurally annotate GOI transcripts and peptides.
 
-See 'example_output.PDF' for an example report.  
+See 'example_output.pdf' for an example report.  
 
 ## How to use PCGR
 PCGR is currently designed to be run in a Linux environment with the R statistical programming language installed. PCGR has not been tested on versions of R <3.6.0  
@@ -58,8 +58,9 @@ If initialization fails to execute to completion use the following instuctons to
 1. Run PCGR with an "n" passed to the first argument of the run script
 
 ```{bash eval=FALSE}
-  ./Single_gene_cBioPortal_query.sh "n" "NRAS"
+  ./Single_gene_cBioPortal_query.sh "n" "KRAS"
 ```
+
 
 
 
