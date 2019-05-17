@@ -16,7 +16,7 @@ cBioPortal is continually uloading new studies and the associated processed data
   1. Initial cBioPOrtal query that obtains metasata of all studies and cases to be used downstream. 
       - An initialized R workspace is created that can be used for later GOI queries.
       - Tissue type annotation must be manually specified by the user by editing the cancer_type_manual_annotation_in.tab file
-          -If this annotation file is not up to date a template output file will be created and the user will be prompted to update the tissue type annotation
+        - If this annotation file is not up to date a template output file will be created and the user will be prompted to update the tissue type annotation
   2. GOI query that sequesters GOI-specific data, performs analysis and generates a PDF report.  
 
 The first step is optional and should only be run if the user wishes to include new data uploaded to cBioPortal that is not included in the initialized workspace provided in this repository.  
