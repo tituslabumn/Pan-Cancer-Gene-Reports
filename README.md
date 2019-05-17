@@ -2,22 +2,32 @@
 
 ## About 
 PCGR is an automated informatic pipeline designed by Taylor Harding at the University of Minnesota that creates a pan-cancer analytical report for a user-specified gene of interest (GOI).  
+
 PCGR sequesters GOI-specific data from cBioPortal (https://www.cbioportal.org/). These data include mutation, copy number, expression and clinical information from >200 studies representing >47,000 unique cases of cancer accross 32 broad tissue types. 
+
 PCGR obtains all natural variants for a GOI observed within the >60,000 exomes analized by the Exome Aggregation Consortium project (http://exac.broadinstitute.org/) 
+
 PCGR additionally obtains information from several database APIs (i.e. Ensembl, UniProtKB) that are used to structurally annotate GOI transcripts and peptides.
 
 ## How to use PCGR
 PCGR is currently designed to be run in a Linux environment with the R statistical programming language installed. PCGR has not been tested on versions of R <3.6.0  
 
-### Running PCGR for the first time
 cBioPortal is continually uloading new studies and the associated processed data. For this reason, PCGR runs in two steps:  
-
-        a. Initial cBioPOrtal query that obtains metasata of all studies and cases to be used downstream. An initialized R workspace is created that can be used for later GOI queries.
-        b. GOI query that sequesters GOI-specific data, performs analysis and generates a PDF report.  
+  1. Initial cBioPOrtal query that obtains metasata of all studies and cases to be used downstream. 
+      - An initialized R workspace is created that can be used for later GOI queries.
+      - Tissue type annotation must be manually specified by the user by editing the cancer_type_manual_annotation_in.tab file
+          -If this annotation file is not up to date a template output file will be created and the user will be prompted to update the tissue type annotation
+  2. GOI query that sequesters GOI-specific data, performs analysis and generates a PDF report.  
 
 The first step is optional and should only be run if the user wishes to include new data uploaded to cBioPortal that is not included in the initialized workspace provided in this repository.  
 
-1. Seven utilizes Fiji/ImageJ application. If you already don't have the latest version, Please download it from [here](https://fiji.sc/).
+### Running PCGR for the first time
+
+1. Open a bash terminal and clone the PCGR repository:
+
+```{bash eval=FALSE}
+  git clone 
+```
 
 2. Install the updated version of seven from Github repository and move all the seven files to the Fiji.app root folder.
 
