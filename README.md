@@ -42,16 +42,16 @@ The first step is optional and should only be run if the user wishes to include 
   ./Single_gene_cBioPortal_query.sh "y" "NRAS"
 ```
 
-3. If the 'cancer_type_manual_annotation_in.tab' file in the cloned repository is not up to date:
+3. If the 'cancer_type_manual_annotation_in.tab' file in the cloned repository is not up to date with the current database:
     - PCGR will halt and export a cancer_type_manual_annotation_out.tab file for manual annotation
-    - Manually annotate each row with the diesired tissue type using the outdated cancer_type_manual_annotation_in.tab file as a templeate
+    - Manually annotate each NA populated row with the diesired tissue type under the final_tissue column. 
     - Save the updated file as 'cancer_type_manual_annotation_in.tab' in the same directory
     - Re-run PCGR
     
 4. PCGR will create an output directory with sub directories for each GOI querried
     - When finished PCGR will output the PDF report into its respective output directory
 
-If initialization fails to execute to completion use the following instuctons to run PCGR with the latest initialized workspace provided in this repository:
+If initialization fails to execute to completion use the following instuctons to run PCGR with the latest working initialized workspace provided in this repository:
     
 ### Running additional queries without re-initializing
 
