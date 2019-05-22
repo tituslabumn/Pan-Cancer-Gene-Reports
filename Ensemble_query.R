@@ -75,6 +75,16 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
   
+  #assign GOI ENSG from GRCh37 (must be used for ExAC querries)
+  GOI_ENSG_GRCh37 <<- getBM(
+    attributes = c(
+      "ensembl_gene_id"
+    ),
+    filters =  filter_type, 
+    values = value ,
+    mart = useMart(biomart="ENSEMBL_MART_ENSEMBL", host="grch37.ensembl.org", dataset="hsapiens_gene_ensembl")
+  )
+  
   #assign global data frames for both
   cat("\n\nassigning and writing","\n\n")
   assign(paste(value,"exon_annotation",sep = "_"),annotation_df_exon,envir = .GlobalEnv)

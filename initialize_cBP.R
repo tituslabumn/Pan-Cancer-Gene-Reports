@@ -247,8 +247,22 @@ cancer_types_key_web_API <- read.delim("http://www.cbioportal.org/webservice.do?
 
 save.image("troubleshooting_workspace.RData")   #####################
 
-cat("creating/writing manual annotation template tab delim file \n\n")
-#creatE manual annotation file to be manually annotated
+cat("reading in manual annotation file \n\n")
+if(!("cancer_type_manual_annotation_in.tab" %in% list.files())){
+  stop("'cancer_type_manual_annotation_in.tab' file not found:\n")
+}
+# read in manual tissue type annotations
+    # this is a tab delim file created via Manual_cancer_types_annotation.R
+    # a manual tissue type (32 total types) is assigned for each unique cancer_type/cancer_type_detailed pair from master_case_df
+master_case_manual_annotation_in <- read.delim("cancer_type_manual_annotation_in.tab", stringsAsFactors = FALSE)
+all.studies.old <- read.delim("past_manual_annotation_all_studies.tab")
+
+cat("\tchecking that this file is up to date... \n\n")
+if(length(master_case_manual_annotation_in[,1]) != length(unique(paste0(master_case_df$cancer_type,master_case_df$cancer_type_detailed)))) {
+  cat("new studies in database with no manual annotation:\n")
+  print(all.studies$cancer_study_id[which(!(all.studies$cancer_study_id %in% all.studies.old$cancer_study_id))])
+  cat("creating/writing manual annotation template tab delim file \n\n")
+    #creatE manual annotation file to be manually annotated
     #keep "study","cancer_type","cancer_type_detailed" cols
     master_case_manual_annotation_out <- master_case_df[,c("study","cancer_type","cancer_type_detailed")]
     #convert $study to prefix only for key matching with cancer_types_key_web_API
@@ -257,23 +271,18 @@ cat("creating/writing manual annotation template tab delim file \n\n")
     master_case_manual_annotation_out$prefix_key_match <- cancer_types_key_web_API$name[match(master_case_manual_annotation_out$prefix,cancer_types_key_web_API$type_of_cancer_id)]
     #filter out duplicate cancer_type/cancer_type_detailed pairs
     master_case_manual_annotation_out <- master_case_manual_annotation_out[!duplicated(paste0(master_case_manual_annotation_out$cancer_type,master_case_manual_annotation_out$cancer_type_detailed)),]
+    #make $cancer_type.cancer_type_detailed col for matching with old *_in file
+    master_case_manual_annotation_out$cancer_type.cancer_type_detailed <- paste0(master_case_manual_annotation_out$cancer_type,master_case_manual_annotation_out$cancer_type_detailed)
+    #match final_tissues based on *_in file
+    master_case_manual_annotation_out$final_tissue <- NA
+    master_case_manual_annotation_out$final_tissue <- master_case_manual_annotation_in$final_tissue[match(master_case_manual_annotation_out$cancer_type.cancer_type_detailed,master_case_manual_annotation_in$cancer_type.cancer_type_detailed)]
+    #order so NAs are on top
+    master_case_manual_annotation_out <- master_case_manual_annotation_out[order(master_case_manual_annotation_out$final_tissue,na.last = FALSE),]
     #write out
-    write.table(master_case_manual_annotation_out, file = "cancer_type_manual_annotation_out.tab",sep = "\t", quote = FALSE)    
-#read in manual tissue type annotations
-  # this is a tab delim file created via Manual_cancer_types_annotation.R
-  # a manual tissue type (32 total types) is assigned for each unique cancer_type/cancer_type_detailed pair from master_case_df
-
-cat("reading in manual annotation file \n\n")
-if(!("cancer_type_manual_annotation_in.tab" %in% list.files())){
-  stop("'cancer_type_manual_annotation_in.tab' file not found:\n\tmanually annotate 'cancer_type_manual_annotation_out.tab' file \n\tadd final_tissue column \n\tsace as 'cancer_type_manual_annotation_in.tab'\n\trun again\n\n\n")
-}
-master_case_manual_annotation_in <- read.delim("cancer_type_manual_annotation_in.tab")
-all.studies.old <- read.delim("past_manual_annotation_all_studies.tab")
-
-cat("\tchecking that this file is up to date... \n\n")
-if(length(master_case_manual_annotation_in[,1]) != length(master_case_manual_annotation_out[,1])) {
-  cat("new studies in database with no manual annotation:\n")
-  print(all.studies$cancer_study_id[which(!(all.studies$cancer_study_id %in% all.studies.old$cancer_study_id))])
+    write.table(master_case_manual_annotation_out, file = "cancer_type_manual_annotation_out.tab",sep = "\t", quote = FALSE, row.names = FALSE)
+    
+    save.image("troubleshooting_workspace.RData")   #####################
+    
   stop("manual annotation input and output files do not have equal number of rows:\n\tmanually annotate 'cancer_type_manual_annotation_out.tab' file \n\tadd final_tissue column \n\tsace as 'cancer_type_manual_annotation_in.tab'\n\trun again\n\n\n")
 }
 
