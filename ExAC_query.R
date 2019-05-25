@@ -8,8 +8,8 @@ cat("#####################################################################\n\n\n
 cat("retrieving ExAC variants from RESTful API; returns JSON page\n\n")
 
 library("rjson")
-#don't worry about warning about final line
-ExAC_json_data <- fromJSON(paste(readLines(paste0("http://exac.hms.harvard.edu/rest/gene/variants_in_gene/",GOI_ENSG_GRCh37)), collapse=""))
+#don't worry about warning about final line, specify rjson:: as jsonlite:: is used earlier
+ExAC_json_data <- rjson::fromJSON(paste(readLines(paste0("http://exac.hms.harvard.edu/rest/gene/variants_in_gene/",GOI_ENSG_GRCh37)), collapse=""))
 
 save.image("troubleshooting_workspace.RData") #####################
 cat("\t\tVariants:",length(ExAC_json_data),"\n\n")

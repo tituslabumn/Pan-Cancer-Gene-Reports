@@ -9,7 +9,18 @@ cat("##############################################################\n\n\n")
 #declare query function
 parse_uniprotKB_annotation <- function(gene = GOI){
   cat("############# retriving Uniprot/Swissprot ID from biomaRt ############","\n\n")
+  
   GOI_uniprot_id <<- as.character(getBM(attributes = "uniprotswissprot", filters = "hgnc_symbol", values = gene, mart = hs_ensembl))
+  # in rare cases biomaRt returns emty logical for uniprotID. This happens for MYH16 regardless of genome/mart version.
+  if(GOI_uniprot_id == "logical(0)"){
+    cat("\t########### no UniProtID returned by biomaRt ############\n\t\tAttempting to retrive from bioDBnet instead\n\tIDs mapped:\n")
+    # rjson:: returns error likely due to bug? use jsonlite:: to query bioDBnet
+    library(jsonlite)
+    bioDBnet_UniProtIds <- jsonlite::fromJSON(paste0("https://biodbnet-abcc.ncifcrf.gov/webServices/rest.php/biodbnetRestApi.json?method=db2db&format=row&input=genesymbol&inputValues=",GOI,"&outputs=UniProtAccession&taxonId=9606"))
+    print(bioDBnet_UniProtIds$`UniProt Accession`)
+    GOI_uniprot_id <<- bioDBnet_UniProtIds$`UniProt Accession`[1]
+  }
+  
   cat("\tUniProtKB ID:",GOI_uniprot_id,"\n\n")
   cat("Querying UniProtKB GOI page","\n\n")
   #retrieve features with some filetering
