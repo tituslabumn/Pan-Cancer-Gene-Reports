@@ -23,6 +23,16 @@ if("cgdsr" %in% row.names(installed.packages())){
   cat("installation complete\n\n")
 }
 
+#BiocManager: for installing some of the below packages
+cat("BiocManager:\t")
+if("rtracklayer" %in% row.names(installed.packages())){
+  cat("\talready installed\n")
+}else{
+  cat("installing...\n")
+  install.packages("BiocManager")
+  cat("installation complete\n\n")
+}
+
 #rtracklayer: for converting genomic cordinates to different genome versions
 cat("rtracklayer:\t")
 if("rtracklayer" %in% row.names(installed.packages())){
