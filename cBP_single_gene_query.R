@@ -29,7 +29,7 @@ if(is.na(bash_args[1])){
 }
 
 # #check that required packages are installed and install if needed
-# source("Install_required_packages.R")
+source("Install_required_packages.R")
 
 cat("loading CGDSR API","\n")
 library(cgdsr)
