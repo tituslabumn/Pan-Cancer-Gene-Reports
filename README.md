@@ -25,6 +25,10 @@ The first step is optional and should only be run if the user wishes to include 
 
 ### Running PCGR for the first time
 
+Ensure that you have the latest version of R installed on your system (tested on versions > 3.6.x) and that the .libPaths are set to a writable directory prior to running PCGR for the forst time. 
+
+PCGR will install 
+
 1. Open a bash terminal and clone the PCGR repository:
 
 ```{bash eval=FALSE}
