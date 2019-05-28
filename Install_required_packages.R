@@ -33,6 +33,8 @@ if("rtracklayer" %in% row.names(installed.packages())){
   cat("installation complete\n\n")
 }
 
+library(BiocManager)
+
 #rtracklayer: for converting genomic cordinates to different genome versions
 cat("rtracklayer:\t")
 if("rtracklayer" %in% row.names(installed.packages())){
