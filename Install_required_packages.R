@@ -25,7 +25,7 @@ if("cgdsr" %in% row.names(installed.packages())){
 
 #BiocManager: for installing some of the below packages
 cat("BiocManager:\t")
-if("rtracklayer" %in% row.names(installed.packages())){
+if("BiocManager" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
@@ -78,7 +78,7 @@ if("BSgenome.Hsapiens.NCBI.GRCh38" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   source("https://bioconductor.org/biocLite.R")
-  biocLite("BSgenome.Hsapiens.NCBI.GRCh38")
+  BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
   cat("installation complete\n\n")
 }
 
