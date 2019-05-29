@@ -20,7 +20,7 @@ if("RCurl" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   install.packages('RCurl', dependencies = TRUE)
-  cat("installation complete\n\n")
+  if ("RCurl" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 #XML (for web queries)
 cat("XML:\t")
@@ -29,7 +29,7 @@ if("XML" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   install.packages('XML', dependencies = TRUE)
-  cat("installation complete\n\n")
+  if ("XML" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #cgdsr: cBioPortal API
@@ -39,7 +39,7 @@ if("cgdsr" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   install.packages('cgdsr', dependencies = TRUE)
-  cat("installation complete\n\n")
+  if ("cgdsr" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #BiocManager: for installing some of the below packages
@@ -49,7 +49,7 @@ if("BiocManager" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   install.packages("BiocManager", dependencies = TRUE)
-  cat("installation complete\n\n")
+  if ("BiocManager" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 library(BiocManager)
 
@@ -60,7 +60,7 @@ if("rtracklayer" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   BiocManager::install("rtracklayer")
-  cat("installation complete\n\n")
+  if ("rtracklayer" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #biomaRt: ensembl database API
@@ -70,7 +70,7 @@ if("biomaRt" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   BiocManager::install("biomaRt")
-  cat("installation complete\n\n")
+  if ("biomaRt" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #trackViewer: lolliplot visualization package
@@ -80,7 +80,7 @@ if("trackViewer" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   BiocManager::install("trackViewer")
-  cat("installation complete\n\n")
+  if ("trackViewer" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #BSgenome.Hsapiens.NCBI.GRCh38: provides this creates Hsapiens object for getting seequences for GRCh38 genome coordinsates
@@ -90,7 +90,7 @@ if("BSgenome.Hsapiens.NCBI.GRCh38" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
-  cat("installation complete\n\n")
+  if ("BSgenome.Hsapiens.NCBI.GRCh38" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #markdown: required for pdf report generation
@@ -100,7 +100,7 @@ if("rmarkdown" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   install.packages("rmarkdown", dependencies = TRUE)
-  cat("installation complete\n\n")
+  if ("rmarkdown" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #knitr: required for pdf report generation
@@ -110,7 +110,7 @@ if("knitr" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   install.packages('knitr', dependencies = TRUE)
-  cat("installation complete\n\n")
+  if ("knitr" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #knitr: required for reading in ExAC restAPI pages from GOI queries
@@ -120,7 +120,7 @@ if("rjson" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   install.packages('rjson', dependencies = TRUE)
-  cat("installation complete\n\n")
+  if ("rjson" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 #for codon to AA symbol lookup in relative maping
@@ -130,7 +130,7 @@ if("Biostrings" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   BiocManager::install("Biostrings")
-  cat("installation complete\n\n")
+  if ("Biostrings" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
 cat("############# All packages installed ##################\n\n\n") #unsure if failed installations would still progress???
