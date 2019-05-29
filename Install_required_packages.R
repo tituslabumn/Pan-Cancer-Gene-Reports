@@ -19,7 +19,7 @@ if("RCurl" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  install.packages('RCurl')
+  install.packages('RCurl', dependencies = TRUE)
   cat("installation complete\n\n")
 }
 #XML (for web queries)
@@ -28,7 +28,7 @@ if("XML" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  install.packages('XML')
+  install.packages('XML', dependencies = TRUE)
   cat("installation complete\n\n")
 }
 
@@ -38,7 +38,7 @@ if("cgdsr" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  install.packages('cgdsr')
+  install.packages('cgdsr', dependencies = TRUE)
   cat("installation complete\n\n")
 }
 
@@ -48,10 +48,9 @@ if("BiocManager" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  install.packages("BiocManager")
+  install.packages("BiocManager", dependencies = TRUE)
   cat("installation complete\n\n")
 }
-
 library(BiocManager)
 
 #rtracklayer: for converting genomic cordinates to different genome versions
@@ -60,8 +59,6 @@ if("rtracklayer" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
   BiocManager::install("rtracklayer")
   cat("installation complete\n\n")
 }
@@ -72,8 +69,6 @@ if("biomaRt" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
   BiocManager::install("biomaRt")
   cat("installation complete\n\n")
 }
@@ -84,8 +79,6 @@ if("trackViewer" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
   BiocManager::install("trackViewer")
   cat("installation complete\n\n")
 }
@@ -96,7 +89,6 @@ if("BSgenome.Hsapiens.NCBI.GRCh38" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  source("https://bioconductor.org/biocLite.R")
   BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
   cat("installation complete\n\n")
 }
@@ -107,7 +99,7 @@ if("rmarkdown" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  install.packages("rmarkdown")
+  install.packages("rmarkdown", dependencies = TRUE)
   cat("installation complete\n\n")
 }
 
@@ -127,7 +119,7 @@ if("rjson" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  install.packages('rjson')
+  install.packages('rjson', dependencies = TRUE)
   cat("installation complete\n\n")
 }
 
@@ -137,8 +129,6 @@ if("Biostrings" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
   cat("installing...\n")
-  if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
   BiocManager::install("Biostrings")
   cat("installation complete\n\n")
 }
