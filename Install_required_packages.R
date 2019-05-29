@@ -13,6 +13,26 @@ cat("#####################################################################\n\n\n
 #   BSgenome.Hsapiens.NCBI.GRCh38
 #   knitr
 
+#XML (for web queries)
+cat("XML:\t")
+if("XML" %in% row.names(installed.packages())){
+  cat("\talready installed\n")
+}else{
+  cat("installing...\n")
+  install.packages('XML')
+  cat("installation complete\n\n")
+}
+
+#RCurl (for web queries)
+cat("RCurl:\t")
+if("RCurl" %in% row.names(installed.packages())){
+  cat("\talready installed\n")
+}else{
+  cat("installing...\n")
+  install.packages('RCurl')
+  cat("installation complete\n\n")
+}
+
 #cgdsr: cBioPortal API
 cat("cgdsr:\t")
 if("cgdsr" %in% row.names(installed.packages())){
