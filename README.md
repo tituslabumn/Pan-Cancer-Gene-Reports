@@ -28,13 +28,13 @@ The first step is optional and should only be run if the user wishes to include 
 PCGR has been developed to run on Debian-style linux distributions (i.e. 64-bit Ubuntu > 18.0). Functionality on Windows/OSX has not been fully tested.
 
 Ensure that you have the following installed/set on your system:
-* latest version of R (tested on versions > 3.6.x) 
-    - ensure that .libPaths are set to a writable directory prior to running PCGR if using R for the first time.
-    - May require installation of certain parser libraries: XML, Curl, openssl. 
-        - On Ubuntu platforms: use "sudo apt-get install" to install the following packages:
-            - libxml2-dev
-            - libcurl4-openssl-dev
-            - openssl-dev
+- latest version of R (tested on versions > 3.6.x) 
+- ensure that .libPaths are set to a writable directory prior to running PCGR if using R for the first time.
+- May require installation of certain parser libraries: XML, Curl, openssl. 
+  - On Ubuntu platforms: use "sudo apt-get install" to install the following packages:
+      - libxml2-dev
+      - libcurl4-openssl-dev
+      - openssl-dev
     
 PCGR will install required R package dependencies (this may take a significant amount of time upon first run). Major packages/dependancies include:
     - RCurl
@@ -64,7 +64,7 @@ PCGR will install required R package dependencies (this may take a significant a
       
 ```{bash eval=FALSE}
   cd Pan-Cancer-Gene-Reports
-  ./Single_gene_cBioPortal_query.sh "y" "NRAS"
+  sudo ./Single_gene_cBioPortal_query.sh "y" "NRAS"
 ```
 
 3. If the 'cancer_type_manual_annotation_in.tab' file in the cloned repository is not up to date with the current database:
