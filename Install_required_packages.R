@@ -31,6 +31,15 @@ if("XML" %in% row.names(installed.packages())){
   install.packages('XML', dependencies = TRUE)
   if ("XML" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
+#XML (for web queries)
+cat("xml2:\t")
+if("xml2" %in% row.names(installed.packages())){
+  cat("\talready installed\n")
+}else{
+  cat("installing...\n")
+  install.packages('xml2', dependencies = TRUE)
+  if ("xml2" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+}
 
 #cgdsr: cBioPortal API
 cat("cgdsr:\t")
