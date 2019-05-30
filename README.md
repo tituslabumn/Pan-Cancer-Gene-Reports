@@ -30,8 +30,8 @@ PCGR has been developed to run on Debian-style linux distributions (i.e. 64-bit 
 Ensure that you have the following installed/set on your system:
 * latest version of R (tested on versions > 3.6.x) 
 * ensure that .libPaths are set to a writable directory prior to running PCGR if using R for the first time.
-* May require installation of certain parser libraries: XML, Curl, openssl. Additionally that latex is installed for making output PDFs:
-  - On Ubuntu platforms: use "sudo apt-get install" to install the following libraries:
+* Requires installation of certain parser libraries (XML, Curl, openssl) and latex:
+  - On debian linux platforms: use "sudo apt-get install" to install the following libraries:
       - libxml2-dev
       - libcurl4-openssl-dev
       - openssl-dev
