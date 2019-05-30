@@ -31,7 +31,7 @@ Ensure that you have the following installed/set on your system:
 * latest version of R (tested on versions > 3.6.x) 
 * ensure that .libPaths are set to a writable directory prior to running PCGR if using R for the first time.
 * May require installation of certain parser libraries: XML, Curl, openssl. 
-  - On Ubuntu platforms: use "sudo apt-get install" to install the following packages:
+  - On Ubuntu platforms: use "sudo apt-get install" to install the following libraries:
       - libxml2-dev
       - libcurl4-openssl-dev
       - openssl-dev
