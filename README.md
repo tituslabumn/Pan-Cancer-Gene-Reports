@@ -50,6 +50,8 @@ PCGR will install required R package dependencies (this may take a significant a
 - rjson
 - Biostrings
 
+
+
 1. Open a bash terminal and clone the PCGR repository:
 
 ```{bash eval=FALSE}
