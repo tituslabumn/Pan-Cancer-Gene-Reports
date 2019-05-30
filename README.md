@@ -37,18 +37,18 @@ Ensure that you have the following installed/set on your system:
       - openssl-dev
     
 PCGR will install required R package dependencies (this may take a significant amount of time upon first run). Major packages/dependancies include:
-    - RCurl
-    - XML
-    - cgdsr
-    - BiocManager
-    - rtracklayer
-    - biomaRt
-    - trackviewer
-    - BSgenome.Hsapiens.NCBI.GRCh38
-    - rmarkdown
-    - knittr
-    - rjson
-    - Biostrings
+- RCurl
+- XML
+- cgdsr
+- BiocManager
+- rtracklayer
+- biomaRt
+- trackviewer
+- BSgenome.Hsapiens.NCBI.GRCh38
+- rmarkdown
+- knittr
+- rjson
+- Biostrings
 
 1. Open a bash terminal and clone the PCGR repository:
 
