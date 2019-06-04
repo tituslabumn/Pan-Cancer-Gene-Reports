@@ -23,7 +23,7 @@ cBioPortal is continually uloading new studies and the associated processed data
 
 The first step is optional and should only be run if the user wishes to include new data uploaded to cBioPortal that is not included in the initialized workspace provided in this repository.  
 
-### Running PCGR for the first time
+### Requirements
 
 PCGR has been developed to run on Debian-style linux distributions (i.e. 64-bit Ubuntu > 18.0). Functionality on Windows/OSX has not been fully tested.
 
@@ -52,7 +52,7 @@ PCGR will install required R package dependencies (this may take a significant a
 - rjson
 - Biostrings
 
-#### Running from bash terminal
+### Running PCGR for the first time
 
 1. Open a bash terminal and clone the PCGR repository:
 
