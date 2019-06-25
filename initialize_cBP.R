@@ -283,7 +283,7 @@ if(length(master_case_manual_annotation_in[,1]) != length(unique(paste0(master_c
     
     save.image("troubleshooting_workspace.RData")   #####################
     
-  stop("manual annotation input and output files do not have equal number of rows:\n\tmanually annotate 'cancer_type_manual_annotation_out.tab' file \n\tadd final_tissue column \n\tsace as 'cancer_type_manual_annotation_in.tab'\n\trun again\n\n\n")
+  stop("manual annotation input and output files do not have equal number of rows:\n\tmanually annotate 'cancer_type_manual_annotation_out.tab' file \n\tadd final_tissue column \n\tsave as 'cancer_type_manual_annotation_in.tab'\n\trun again\n\n\n")
 }
 
 #overwrite past_manual_annotation_all_studies.tab if manual annotation passes check
