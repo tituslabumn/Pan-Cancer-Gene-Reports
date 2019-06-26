@@ -37,6 +37,11 @@ cat("\tConverting coordinates from hg19 to hg38\n")
 #this returns coordinates aligned to GRCh37/hg19; change to hg38
 ExAC_df$pos <- unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = as.numeric(ExAC_df$pos), width = 1)),Chain_19to38)))
 
+cat("\tparsing out reference and variant allele from $variant_id\n")
+#parse ref and var allele from $variant_id ; format is [chr]-[pos]-[ref]-[var]
+ExAC_df$ref_allele <- sapply(ExAC_df$variant_id, function(x) unlist(strsplit(x,split = "-"))[3])
+ExAC_df$var_allele <- sapply(ExAC_df$variant_id, function(x) unlist(strsplit(x,split = "-"))[4])
+
 save.image("troubleshooting_workspace.RData") #####################
 
 cat("######## ExAC query complete #########\n\n\n")

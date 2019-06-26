@@ -265,5 +265,10 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
   GOI_cBP_mutations[coding_variant_index,"AA_freq"] <- sapply(GOI_cBP_mutations[coding_variant_index,"AA"], function(x) sum(GOI_cBP_mutations[coding_variant_index,"AA"] == x, na.rm = TRUE))
   
   
+  #map positions of ExaC variants ; note: some exac variants are outside map key (e.g. where they map to other transcript with larger UTR)
+  cat("relative mapping ExAC variants\n")
+  for (x in c("relative_transcript","exon_intron","coding_segments_key","relative_coding_sequence","relative_AA_position","peptide","nearest_junction_codon")) {
+    ExAC_df[,x] <- GOI_mapping_key[as.character(ExAC_df$pos),x]
+  }
   
 cat("\n\n\n############################## Relative mapping complete ####################################\n\n\n")

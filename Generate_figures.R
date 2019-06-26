@@ -195,7 +195,7 @@ cat("Figure4\n")
   # F5_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
   # #F5_yaxis <- round(seq(from = 1, to = Top_unique_muts_plot$AA_change_freq[1], length.out = 10),-1)
   # F5_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1)
-  # #lolliplot(SNP.gr = F5_variants ,features = F5_features, ranges = F5_ranges, ylab = FALSE,cex = .5, jitter = "label")
+  #lolliplot(SNP.gr = F5_variants ,features = F5_features, ranges = F5_ranges, ylab = FALSE,cex = .5, jitter = "label")
   # 
   # 
   # F6_variant_df <- ExAC_df[!(ExAC_df$major_consequence %in% c("intron_variant","non_coding_transcript_exon_variant")) & as.numeric(ExAC_df$allele_count) >= 1,]
