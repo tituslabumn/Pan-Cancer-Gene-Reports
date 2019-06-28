@@ -44,4 +44,14 @@ ExAC_df$var_allele <- sapply(ExAC_df$variant_id, function(x) unlist(strsplit(x,s
 
 save.image("troubleshooting_workspace.RData") #####################
 
+
+#change ins and del format to match cBP (ExAC includes ref allele at start; e.g. ATT/A rather than TT/-)
+cat("\tfixing ins and del format to match cBP variants")
+InsDelIndex_ExAC <- which((nchar(ExAC_df$ref_allele)>1) | (nchar(ExAC_df$var_allele)>1))
+ExAC_df[InsDelIndex_ExAC,"ref_allele"] <- sapply(ExAC_df$ref_allele[InsDelIndex_ExAC], function(x) substring(x,2))
+ExAC_df[ExAC_df$ref_allele == "","ref_allele"] <- "-"
+ExAC_df[InsDelIndex_ExAC,"var_allele"] <- sapply(ExAC_df$var_allele[InsDelIndex_ExAC], function(x) substring(x,2))
+ExAC_df[ExAC_df$var_allele == "","var_allele"] <- "-"
+save.image("troubleshooting_workspace.RData") #####################
+
 cat("######## ExAC query complete #########\n\n\n")
