@@ -271,4 +271,16 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
     ExAC_df[,x] <- GOI_mapping_key[as.character(ExAC_df$pos),x]
   }
   
+  # positions for single base changes are not different between the two (always correspond to the actual base pos)
+  # insertions and deletions are not different between + and - stranded genes 
+  #   ins: ExAC_pos = cBP_end; cBP_end = base before inserted sequence; cBP_start = pos of base after insertion (always end + 1)
+  #   del: ExAC_pos = cBP_start - 1; cBP start and end match start and end of deletion sequence; ExAC pos matches base before deleted section
+  # make new col in both datasets: $unified_pos
+  #   cBP ins = end_pos
+  #   ExAC in = dont change
+  #   cBP del = start_pos
+  #   ExAC del = pos + 1
+  cat("\tadding $unified_pos to both cBP and ExAC data frames for easy comparison of matching variants")
+  cat("\t\tcBP insertions")
+  
 cat("\n\n\n############################## Relative mapping complete ####################################\n\n\n")
