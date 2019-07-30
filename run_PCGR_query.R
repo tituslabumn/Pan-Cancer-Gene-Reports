@@ -1,67 +1,32 @@
 #!/usr/bin/env Rscript
 
-#######################################################
-################# Initialize PCGR #####################
-#######################################################
-
 cat("\n#######################################################","\n")
 cat("################# Initialize PCGR #####################","\n")
 cat("#######################################################","\n","\n")
 
-bash_args = commandArgs(trailingOnly=TRUE)
-#default to initializing if no arg supplied
-if(is.na(bash_args[1])){
-  initialize_cBP <- "y"
-  no_args <- TRUE
-  cat("\t","no first argument supplied.","\n\t","Initializing workspace by default","\n\n")
-} else {
-  initialize_cBP <- bash_args[1]
+
+#check that required packages are installed and install if needed
+source("check_required_packages.R")
+
+#load previously generated initialization workspace
+cat("Loading existing cBP workspace","\n")
+if ("initialized_workspace_cBP.RData" %in% list.files()){
+  cat("...","\t")
+  load("initialized_workspace_cBP.RData")
+  cat("load successful","\n")
+  cat("Objects in workspace: ","\n")
+  print(ls())
+}else{
+  stop("initialized_workspace_cBP.RData not found")
 }
-
-# #check that required packages are installed and install if needed
-source("Install_required_packages.R")
-
-cat("loading CGDSR API","\n")
-library(cgdsr)
-mycgds <- CGDS("http://www.cbioportal.org/") #connection object used for all cBP queries
-cat("\n")
-
-cat("loading rtracklayer package","\n")
-library(rtracklayer)
-cat("\n")
-
-#initialize or load cBP pre-query workspace
-    if(initialize_cBP == "y" | initialize_cBP == "Y"){
-      #run initialization R script to generate a workspace that can be loaded next time rather than re-querying database for each GOI
-      source("initialize_cBP.R")
-      cat("initialization complete ##########################################","\n")
-      cat("Objects in workspace: ","\n")
-      print(ls())
-      cat("##################################################################\n")
-    }else if (initialize_cBP == "n" | initialize_cBP == "N"){
-      #load previously generated initialization workspace
-      cat("Loading existing cBP workspace","\n")
-      if ("initialized_workspace_cBP.RData" %in% list.files()){
-        cat("...","\t")
-        bash_args_temp <- bash_args
-        load("initialized_workspace_cBP.RData")
-        bash_args <- bash_args_temp
-        cat("load successful","\n")
-        cat("Objects in workspace: ","\n")
-        print(ls())
-      }else{
-        stop("initialized_workspace_cBP.RData not found")
-      }
-    }else{
-      stop("wrong first argument (initialize cBP?)")
-    }
 cat("done","\n\n\n")
 # use getCancerStudies(mycgds) to check if there are new studies not included in old workspace
 
-if(is.na(bash_args[2])){
-  stop("\t","no gene of interest supplied as second argument")
+bash_args = commandArgs(trailingOnly=TRUE)
+if(is.na(bash_args[1])){
+  stop("\t","no gene of interest supplied as argument")
 } else {
-  GOI <- bash_args[2]
+  GOI <- bash_args[1]
   cat("GOI supplied: ",GOI,"\n")
 }
 #create output dir for final output, dont show warning if it already exists, will eventually overwrite by default

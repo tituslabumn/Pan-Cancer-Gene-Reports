@@ -1,8 +1,8 @@
-################# Install_required_packages.R ########################
-#checks for installed packages, installs if absent
+################# check_required_packages.R ########################
+#checks for installed packages, stops if absent
 
 cat("#####################################################################\n")
-cat("############# Checking for/installing required R packages ###########\n")
+cat("############# Checking for required R packages ######################\n")
 cat("#####################################################################\n\n\n")
 
 # packages
@@ -25,27 +25,21 @@ cat("RCurl:\t")
 if("RCurl" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages('RCurl', dependencies = TRUE)
-  if ("RCurl" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 #XML (for web queries)
 cat("XML:\t")
 if("XML" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages('XML', dependencies = TRUE)
-  if ("XML" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 #XML (for web queries)
 cat("xml2:\t")
 if("xml2" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages('xml2', dependencies = TRUE)
-  if ("xml2" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #cgdsr: cBioPortal API
@@ -53,9 +47,7 @@ cat("cgdsr:\t")
 if("cgdsr" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages('cgdsr', dependencies = TRUE)
-  if ("cgdsr" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #BiocManager: for installing some of the below packages
@@ -63,9 +55,7 @@ cat("BiocManager:\t")
 if("BiocManager" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages("BiocManager", dependencies = TRUE)
-  if ("BiocManager" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 library(BiocManager)
 
@@ -79,9 +69,7 @@ cat("rtracklayer:\t")
 if("rtracklayer" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  BiocManager::install("rtracklayer")
-  if ("rtracklayer" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #biomaRt: ensembl database API
@@ -89,9 +77,7 @@ cat("biomaRt:\t")
 if("biomaRt" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  BiocManager::install("biomaRt")
-  if ("biomaRt" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #trackViewer: lolliplot visualization package
@@ -99,9 +85,7 @@ cat("trackViewer:\t")
 if("trackViewer" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  BiocManager::install("trackViewer")
-  if ("trackViewer" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #BSgenome.Hsapiens.NCBI.GRCh38: provides this creates Hsapiens object for getting seequences for GRCh38 genome coordinsates
@@ -109,9 +93,7 @@ cat("BSgenome.Hsapiens.NCBI.GRCh38:\t")
 if("BSgenome.Hsapiens.NCBI.GRCh38" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
-  if ("BSgenome.Hsapiens.NCBI.GRCh38" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #markdown: required for pdf report generation
@@ -119,9 +101,7 @@ cat("rmarkdown:\t")
 if("rmarkdown" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages("rmarkdown", dependencies = TRUE)
-  if ("rmarkdown" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #knitr: required for pdf report generation
@@ -129,9 +109,7 @@ cat("knitr:\t")
 if("knitr" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages('knitr', dependencies = TRUE)
-  if ("knitr" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #knitr: required for reading in ExAC restAPI pages from GOI queries
@@ -139,9 +117,7 @@ cat("rjson:\t")
 if("rjson" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages('rjson', dependencies = TRUE)
-  if ("rjson" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #for codon to AA symbol lookup in relative maping
@@ -149,9 +125,7 @@ cat("Biostrings:\t")
 if("Biostrings" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  BiocManager::install("Biostrings")
-  if ("Biostrings" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 #for codon to AA symbol lookup in relative maping
@@ -159,10 +133,7 @@ cat("tinytex:\t")
 if("tinytex" %in% row.names(installed.packages())){
   cat("\talready installed\n")
 }else{
-  cat("installing...\n")
-  install.packages("tinytex")
-  tinytex::install_tinytex() # installs disribution on host
-  if ("Biostrings" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+  stop("\tPackage missing")
 }
 
 cat("############# All packages installed ##################\n\n\n") #unsure if failed installations would still progress???
