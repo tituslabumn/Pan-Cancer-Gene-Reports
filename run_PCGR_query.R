@@ -37,6 +37,16 @@ dir.create(output_directory,showWarnings = FALSE)
 ####################################################################################
 #query cBP mutations for GOI using custom function declared in initialized_workspace
 cat("mutation query initiated\n")
+
+cat("loading CGDSR API","\n")
+library(cgdsr)
+mycgds <- CGDS("http://www.cbioportal.org/") #connection object used for all cBP queries
+cat("\n")
+
+cat("loading rtracklayer package","\n")
+library(rtracklayer)
+cat("\n")
+
 source("cBP_mutations_query_func.R")
 cBP.mutation.query.2(GOI,all.mut.studies.filtered)
 cat("mutation query complete\n\n\n")
