@@ -12,7 +12,7 @@ PCGR additionally obtains information from several database APIs (i.e. Ensembl, 
 See 'example_output.pdf' for an example report.  
 
 ## How to use PCGR
-PCGR is currently designed to be run in a Linux environment with the R statistical programming language installed. PCGR has not been tested on versions of R <3.6.0  
+PCGR is currently designed to be run in a Debian Linux environment with the R statistical programming language installed. PCGR has not been tested on versions of R <3.6.0  
 
 cBioPortal is continually uloading new studies and the associated processed data. For this reason, PCGR runs in two steps:  
   1. Initial cBioPOrtal query that obtains metasata of all studies and cases to be used downstream. 
@@ -31,18 +31,18 @@ Ensure that you have the following installed/set on your system:
 * latest version of R (tested on versions > 3.6.x) 
 * ensure that .libPaths are set to a writable directory prior to running PCGR if using R for the first time.
 * Requires installation of certain parser libraries (XML, Curl, openssl) and latex:
-  - On debian linux platforms: use "sudo apt-get install" to install the following libraries:
+  - On debian linux platforms: use "apt-get install" to install the following libraries:
       - libxml2-dev
       - libcurl4-openssl-dev
-      - openssl-dev
-      - texlive-full
+      - libssl-dev
+      - pandoc
     
 PCGR will install required R package dependencies (this may take a significant amount of time upon first run). Major packages/dependancies include:
+- BiocManager (version='devel')
 - RCurl
 - XML
 - xml2
 - cgdsr
-- BiocManager
 - rtracklayer
 - biomaRt
 - trackviewer
@@ -51,6 +51,7 @@ PCGR will install required R package dependencies (this may take a significant a
 - knittr
 - rjson
 - Biostrings
+- tinytex
 
 ### Running PCGR for the first time
 
@@ -68,7 +69,7 @@ PCGR will install required R package dependencies (this may take a significant a
       
 ```{bash eval=FALSE}
   cd Pan-Cancer-Gene-Reports
-  sudo ./Single_gene_cBioPortal_query.sh "y" "NRAS"
+  ./Single_gene_cBioPortal_query.sh y NRAS
 ```
 
 3. If the 'cancer_type_manual_annotation_in.tab' file in the cloned repository is not up to date with the current database:
@@ -87,7 +88,7 @@ If initialization fails to execute to completion use the following instuctons to
 1. Run PCGR with an "n" passed to the first argument of the run script
 
 ```{bash eval=FALSE}
-  ./Single_gene_cBioPortal_query.sh "n" "KRAS"
+  ./Single_gene_cBioPortal_query.sh n KRAS
 ```
 
 

@@ -62,6 +62,11 @@ if("BiocManager" %in% row.names(installed.packages())){
 }
 library(BiocManager)
 
+BiocManager::install(version='devel')
+
+# The following initializes usage of Bioc devel
+BiocManager::install(version='devel')
+
 #rtracklayer: for converting genomic cordinates to different genome versions
 cat("rtracklayer:\t")
 if("rtracklayer" %in% row.names(installed.packages())){
@@ -139,6 +144,17 @@ if("Biostrings" %in% row.names(installed.packages())){
 }else{
   cat("installing...\n")
   BiocManager::install("Biostrings")
+  if ("Biostrings" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
+}
+
+#for codon to AA symbol lookup in relative maping
+cat("tinytex:\t")
+if("tinytex" %in% row.names(installed.packages())){
+  cat("\talready installed\n")
+}else{
+  cat("installing...\n")
+  install.packages("tinytex")
+  tinytex::install_tinytex() # installs disribution on host
   if ("Biostrings" %in% row.names(installed.packages())) cat("installation complete\n\n") else stop("instalation FAILED\n")
 }
 
