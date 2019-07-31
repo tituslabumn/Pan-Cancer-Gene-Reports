@@ -13,7 +13,7 @@ See 'example_output.pdf' for an example report (GOI = NRAS).
 
 PCGR is currently designed to be run in a Debian Linux environment with aditional requirments outlined below. PCGR has not been tested on versions of R <3.6.0  
 
-To clone this repositories source code:
+To clone this source code:
 
 ```{bash eval=FALSE}
   git clone https://github.com/tituslabumn/Pan-Cancer-Gene-Reports.git
@@ -47,6 +47,12 @@ To run a PCGR query in the bash shell of the container execute the run script wi
 ```
 
 After the query is complete the output PDF and final R workspace image will be saved to the output directory (output will only persist if directory is properly mounted).  
+
+To exit and delete the container:
+
+```{bash eval=FALSE}
+  exit
+```
 
 ###Updating the initialized workspace
 PCGR quries run using an R workspace image (provided in this repository) that contains the gene-agnostic data regarding cancer studies, samples, etc. from cBioPortals API. This prevents having to re-sequester and process this data upon each query. cBioPortal is, however, frequently updated. To re-build the initialized workspace image run the associated shell script from within the PCGR container:
