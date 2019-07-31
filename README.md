@@ -95,7 +95,7 @@ Major packages/dependancies include:
 - Biostrings
 - tinytex
 
-###Known issues
+### Known issues
 Occasionally one of the several web connections/APIs (e.g. UniProt) will fail to connect for unknown reasons. In these cases you may need to retry your query at another time.
 
 
