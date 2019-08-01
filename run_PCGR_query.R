@@ -57,7 +57,7 @@ cat("loading rtracklayer package","\n")
 library(rtracklayer)
 cat("\n")
 
-source("cBP_mutations_query_func.R")
+source("/PCGR/Pan-Cancer-Gene-Reports/cBP_mutations_query_func.R")
 cBP.mutation.query.2(GOI,all.mut.studies.filtered)
 cat("mutation query complete\n\n\n")
 ####################################################################################
@@ -67,36 +67,36 @@ library("biomaRt")
   hs_ensembl <- useMart("ensembl", dataset="hsapiens_gene_ensembl")
 
 cat("UniProtKB query initiated\n")
-source("UniProtKB_query.R")
+source("/PCGR/Pan-Cancer-Gene-Reports/UniProtKB_query.R")
 
 ####################################################################################
 cat("Ensembl query initiated\n")
 
 #keys for PFAM IDs
 # library("PFAM.db")
-source("Ensemble_query.R")
+source("/PCGR/Pan-Cancer-Gene-Reports/Ensemble_query.R")
 cat("Ensembl query complete\n\n\n")
 
 save.image("troubleshooting_workspace.RData") #####################
 
 #retrieve ExAC variant data for GOI
-source("ExAC_query.R")
+source("/PCGR/Pan-Cancer-Gene-Reports/ExAC_query.R")
 
 save.image("troubleshooting_workspace.RData") #####################
 
 #relative position mapping for visualization
 setwd(initial_directory)
-source("Relative_position_mapping.R")
+source("/PCGR/Pan-Cancer-Gene-Reports/Relative_position_mapping.R")
 
 save.image("troubleshooting_workspace.RData") #####################
 
 #analasis and figure data initialization
-source("Generate_figures.R")
+source("/PCGR/Pan-Cancer-Gene-Reports/Generate_figures.R")
 
 #Knit data to output PDF
 cat("############### Knitting report to PDF #################\n\n\n")
 Sys.setenv(RSTUDIO_PANDOC="/usr/lib/rstudio/bin/pandoc") #must specify if running in bash rather than Rstudio
-rmarkdown::render("output_markdown_format.Rmd",output_file = paste0(GOI," query output report (",Sys.Date(),").pdf"),output_dir = output_directory)
+rmarkdown::render("/PCGR/Pan-Cancer-Gene-Reports/output_markdown_format.Rmd",output_file = paste0(GOI," query output report (",Sys.Date(),").pdf"),output_dir = output_directory)
 
 #save final workspace
 cat("saving final workspace to GOI output folder\n\n\n")
