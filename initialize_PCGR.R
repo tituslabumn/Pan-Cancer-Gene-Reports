@@ -42,7 +42,7 @@ cat("Load 'rtacklayer' and check for chain to convert cBP data to GRCh38.p12","\
 # hg19ToHg38.over.chain.gz
 #place in this directory
 # chain_path <- system.file(package="liftOver", "extdata", "hg19ToHg38.over.chain")
-Chain_19to38 <- import.chain("hg19ToHg38.over.chain") # used in cBP mutation query function below
+Chain_19to38 <- import.chain("/PCGR/Pan-Cancer-Gene-Reports/hg19ToHg38.over.chain") # used in cBP mutation query function below
 cat("\n\n")
 
 cat("Fetching canonical transcript key used by cBioPortal","\n\n\n")
