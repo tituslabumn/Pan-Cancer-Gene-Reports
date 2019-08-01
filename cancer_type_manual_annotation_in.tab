@@ -1,82 +1,11 @@
 study	cancer_type	cancer_type_detailed	prefix	prefix_key_match	cancer_type.cancer_type_detailed	final_tissue
-aml_ohsu_2018	Leukemia	AML with Mutated NPM1	aml	Acute Myeloid Leukemia	LeukemiaAML with Mutated NPM1	Myeloid
-aml_ohsu_2018	Leukemia	AML, NOS	aml	Acute Myeloid Leukemia	LeukemiaAML, NOS	Myeloid
-aml_ohsu_2018	Leukemia	AML with Myelodysplasia-Related Changes	aml	Acute Myeloid Leukemia	LeukemiaAML with Myelodysplasia-Related Changes	Myeloid
-aml_ohsu_2018	Leukemia	AML with Recurrent Genetic Abnormalities	aml	Acute Myeloid Leukemia	LeukemiaAML with Recurrent Genetic Abnormalities	Myeloid
-aml_ohsu_2018	Leukemia	Therapy-Related Myeloid Neoplasms	aml	Acute Myeloid Leukemia	LeukemiaTherapy-Related Myeloid Neoplasms	Myeloid
-aml_ohsu_2018	Leukemia	AML with Biallelic Mutations of CEBPA	aml	Acute Myeloid Leukemia	LeukemiaAML with Biallelic Mutations of CEBPA	Myeloid
-aml_ohsu_2018	Myelodysplastic/Myeloproliferative Neoplasms	Atypical Chronic Myeloid Leukemia, BCR-ABL1-	aml	Acute Myeloid Leukemia	Myelodysplastic/Myeloproliferative NeoplasmsAtypical Chronic Myeloid Leukemia, BCR-ABL1-	Myeloid
-aml_ohsu_2018	Leukemia	AML with t(8;21)(q22;q22.1);RUNX1-RUNX1T1	aml	Acute Myeloid Leukemia	LeukemiaAML with t(8;21)(q22;q22.1);RUNX1-RUNX1T1	Myeloid
-aml_ohsu_2018	Myelodysplastic Syndromes	MDS, Unclassifiable	aml	Acute Myeloid Leukemia	Myelodysplastic SyndromesMDS, Unclassifiable	Myeloid
-aml_ohsu_2018	Leukemia	AML with inv(16)(p13.1q22) or t(16;16)(p13.1;q22);CBFB-MYH11	aml	Acute Myeloid Leukemia	LeukemiaAML with inv(16)(p13.1q22) or t(16;16)(p13.1;q22);CBFB-MYH11	Myeloid
-aml_ohsu_2018	Myeloproliferative Neoplasms	Myeloproliferative Neoplasms	aml	Acute Myeloid Leukemia	Myeloproliferative NeoplasmsMyeloproliferative Neoplasms	Myeloid
-aml_ohsu_2018	Leukemia	AML without Maturation	aml	Acute Myeloid Leukemia	LeukemiaAML without Maturation	Myeloid
-aml_ohsu_2018	Myeloproliferative Neoplasms	Primary Myelofibrosis	aml	Acute Myeloid Leukemia	Myeloproliferative NeoplasmsPrimary Myelofibrosis	Myeloid
-aml_ohsu_2018	Myelodysplastic Syndromes	MDS with Excess Blasts	aml	Acute Myeloid Leukemia	Myelodysplastic SyndromesMDS with Excess Blasts	Myeloid
-aml_ohsu_2018	Leukemia	Pure Erythroid Leukemia	aml	Acute Myeloid Leukemia	LeukemiaPure Erythroid Leukemia	Myeloid
-aml_ohsu_2018	Leukemia	AML with Minimal Differentiation	aml	Acute Myeloid Leukemia	LeukemiaAML with Minimal Differentiation	Myeloid
-aml_ohsu_2018	Leukemia	Acute Monoblastic/Monocytic Leukemia	aml	Acute Myeloid Leukemia	LeukemiaAcute Monoblastic/Monocytic Leukemia	Myeloid
-aml_ohsu_2018	Leukemia	APL with PML-RARA	aml	Acute Myeloid Leukemia	LeukemiaAPL with PML-RARA	Myeloid
-aml_ohsu_2018	Leukemia	Myeloid Leukemia Associated with Down Syndrome	aml	Acute Myeloid Leukemia	LeukemiaMyeloid Leukemia Associated with Down Syndrome	Myeloid
-aml_ohsu_2018	Leukemia	Myeloid Sarcoma	aml	Acute Myeloid Leukemia	LeukemiaMyeloid Sarcoma	Myeloid
-aml_ohsu_2018	Leukemia	AML with Maturation	aml	Acute Myeloid Leukemia	LeukemiaAML with Maturation	Myeloid
-aml_ohsu_2018	Leukemia	Acute Megakaryoblastic Leukemia	aml	Acute Myeloid Leukemia	LeukemiaAcute Megakaryoblastic Leukemia	Myeloid
-aml_ohsu_2018	Blastic Plasmacytoid Dendritic Cell Neoplasm	Blastic Plasmacytoid Dendritic Cell Neoplasm	aml	Acute Myeloid Leukemia	Blastic Plasmacytoid Dendritic Cell NeoplasmBlastic Plasmacytoid Dendritic Cell Neoplasm	Myeloid
-aml_ohsu_2018	Leukemia	AML with t(6;9)(p23;q34.1);DEK-NUP214	aml	Acute Myeloid Leukemia	LeukemiaAML with t(6;9)(p23;q34.1);DEK-NUP214	Myeloid
-aml_ohsu_2018	Mastocytosis	Mastocytosis	aml	Acute Myeloid Leukemia	MastocytosisMastocytosis	Myeloid
-aml_ohsu_2018	Myelodysplastic Syndromes	MDS with Multilineage Dysplasia	aml	Acute Myeloid Leukemia	Myelodysplastic SyndromesMDS with Multilineage Dysplasia	Myeloid
-aml_ohsu_2018	Myeloproliferative Neoplasms	Essential Thrombocythemia	aml	Acute Myeloid Leukemia	Myeloproliferative NeoplasmsEssential Thrombocythemia	Myeloid
-aml_ohsu_2018	Leukemia	Mixed Phenotype Acute Leukemia, T/Myeloid, NOS	aml	Acute Myeloid Leukemia	LeukemiaMixed Phenotype Acute Leukemia, T/Myeloid, NOS	Myeloid
-aml_ohsu_2018	Myelodysplastic Syndromes	MDS with Isolated Del(5q)	aml	Acute Myeloid Leukemia	Myelodysplastic SyndromesMDS with Isolated Del(5q)	Myeloid
-aml_ohsu_2018	Myelodysplastic/Myeloproliferative Neoplasms	MDS/MPN, Unclassifiable	aml	Acute Myeloid Leukemia	Myelodysplastic/Myeloproliferative NeoplasmsMDS/MPN, Unclassifiable	Myeloid
-bcc_unige_2016	Skin Cancer, Non-Melanoma	Skin Cancer, Non-Melanoma	bcc	Basal Cell Carcinoma	Skin Cancer, Non-MelanomaSkin Cancer, Non-Melanoma	Skin
-blca_plasmacytoid_mskcc_2016	Bladder Cancer	Plasmacytoid/Signet Ring Cell Bladder Carcinoma 	blca	Bladder Urothelial Carcinoma	Bladder CancerPlasmacytoid/Signet Ring Cell Bladder Carcinoma 	Lymphoid
-lcll_broad_2013	Mature B-Cell Neoplasms	Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma 	lcll	NA	Mature B-Cell NeoplasmsChronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma 	Lymphoid
-stes_tcga_pub	Esophagogastric Carcinoma	Esophageal Squamous Cell Carcinoma	stes	NA	Esophagogastric CarcinomaEsophageal Squamous Cell Carcinoma	Esophagus/Stomach
-stes_tcga_pub	Esophagogastric Carcinoma	Esophageal Adenocarcinoma	stes	NA	Esophagogastric CarcinomaEsophageal Adenocarcinoma	Esophagus/Stomach
-stes_tcga_pub	Stomach Adenocarcinoma	stes_tcga_pub	stes	NA	Stomach Adenocarcinomastes_tcga_pub	Esophagus/Stomach
-stes_tcga_pub	Esophagogastric Carcinoma	stes_tcga_pub	stes	NA	Esophagogastric Carcinomastes_tcga_pub	Esophagus/Stomach
-kirc_bgi	Renal Cell Carcinoma	Chromophobe Renal Cell Carcinoma 	kirc	NA	Renal Cell CarcinomaChromophobe Renal Cell Carcinoma 	Kidney
-metastatic_solid_tumors_mich_2017	metastatic_solid_tumors_mich_2017	metastatic_solid_tumors_mich_2017	metastatic	NA	metastatic_solid_tumors_mich_2017metastatic_solid_tumors_mich_2017	Other
-metastatic_solid_tumors_mich_2017	Ampullary Cancer	Pancreatobiliary Ampullary Carcinoma	metastatic	NA	Ampullary CancerPancreatobiliary Ampullary Carcinoma	Ampulla of Vater
-metastatic_solid_tumors_mich_2017	Prostate Cancer, NOS	Prostate	metastatic	NA	Prostate Cancer, NOSProstate	Prostate
-metastatic_solid_tumors_mich_2017	Head and Neck Cancer, NOS	Head and Neck	metastatic	NA	Head and Neck Cancer, NOSHead and Neck	Head and Neck
-metastatic_solid_tumors_mich_2017	Bowel Cancer, NOS	Bowel	metastatic	NA	Bowel Cancer, NOSBowel	Bowel
-metastatic_solid_tumors_mich_2017	Thymic Tumor	Thymic Neuroendocrine Tumor	metastatic	NA	Thymic TumorThymic Neuroendocrine Tumor	Thymus
-metastatic_solid_tumors_mich_2017	Non-Small Cell Lung Cancer	Clear Cell Carcinoma of the Lung	metastatic	NA	Non-Small Cell Lung CancerClear Cell Carcinoma of the Lung	Lung
-metastatic_solid_tumors_mich_2017	Lung Cancer, NOS	Lung	metastatic	NA	Lung Cancer, NOSLung	Lung
-metastatic_solid_tumors_mich_2017	Glioma	Ependymoma	metastatic	NA	GliomaEpendymoma	CNS/Brain
-metastatic_solid_tumors_mich_2017	Cervical Cancer	Cervical Neuroendocrine Tumor	metastatic	NA	Cervical CancerCervical Neuroendocrine Tumor	Cervix
-hnsc_mdanderson_2013	Head and Neck Cancer	Head and Neck Squamous Cell CarcinomaÊ	hnsc	Head and Neck Squamous Cell Carcinoma	Head and Neck CancerHead and Neck Squamous Cell CarcinomaÊ	Head and Neck
-pediatric_dkfz_2017	Ependymoma supratentorial	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Ependymoma supratentorial B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	High-grade glioma K27Mwt	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	High-grade glioma K27Mwt B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Wilms' tumors	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Wilms' tumors B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Atypial teratoid/rhabdoid tumor	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Atypial teratoid/rhabdoid tumor B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	T-cell acute lymphoblastic leukemia	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	T-cell acute lymphoblastic leukemia B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Ependymoma infratentorial	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Ependymoma infratentorial B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Burkitt's lymphoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Burkitt's lymphoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	B-cell acute lymphoblastic leukemia, non-hypodiploid	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	B-cell acute lymphoblastic leukemia, non-hypodiploid B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	High-grade glioma K27Mmut	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	High-grade glioma K27Mmut B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Medulloblastoma WNT	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Medulloblastoma WNT B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Medulloblastoma Group4	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Medulloblastoma Group4 B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Medulloblastoma Group3	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Medulloblastoma Group3 B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Pilocytic astrocytoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Pilocytic astrocytoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Embryonal tumor with multilayered rosettes	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Embryonal tumor with multilayered rosettes B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Neuroblastoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Neuroblastoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Osteosarcoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Osteosarcoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Medulloblastoma SHH	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Medulloblastoma SHH B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Hepatoblastoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Hepatoblastoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	B-cell acute lymphoblastic leukemia, hypodiploid	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	B-cell acute lymphoblastic leukemia, hypodiploid B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Acute myeloid leukemias	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Acute myeloid leukemias B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Ewing's sarcoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Ewing's sarcoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Rhabdomyosarcoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Rhabdomyosarcoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Adrenocortical carcinoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Adrenocortical carcinoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
-pediatric_dkfz_2017	Retinoblastoma	 B-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Retinoblastoma B-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+mnm_washu_2016	Blood Cancer, NOS	Myeloid Neoplasm	mnm	Myeloid Neoplasm	Blood Cancer, NOSMyeloid Neoplasm	Myeloid
 acc_tcga_pan_can_atlas_2018	Adrenocortical Carcinoma	Adrenocortical Carcinoma	acc	Adrenocortical Carcinoma	Adrenocortical CarcinomaAdrenocortical Carcinoma	Adrenal Gland
 msk_impact_2017	Adrenocortical Adenoma	Adrenocortical Adenoma	msk	NA	Adrenocortical AdenomaAdrenocortical Adenoma	Adrenal Gland
 mixed_pipseq_2017	Adrenal Tumor	Adrenocortical carcinoma	mixed	Mixed Cancer Types	Adrenal TumorAdrenocortical carcinoma	Adrenal Gland
 ampca_bcm_2016	Ampullary Cancer	Ampullary Carcinoma	ampca	Ampullary Carcinoma	Ampullary CancerAmpullary Carcinoma	Ampulla of Vater
 msk_impact_2017	Ampullary Carcinoma	Pancreatobiliary Ampullary Carcinoma	msk	NA	Ampullary CarcinomaPancreatobiliary Ampullary Carcinoma	Ampulla of Vater
+metastatic_solid_tumors_mich_2017	Ampullary Cancer	Pancreatobiliary Ampullary Carcinoma	metastatic	NA	Ampullary CancerPancreatobiliary Ampullary Carcinoma	Ampulla of Vater
 summit_2018	Ampullary Carcinoma	Ampullary Carcinoma	summit	NA	Ampullary CarcinomaAmpullary Carcinoma	Ampulla of Vater
 msk_impact_2017	Appendiceal Cancer	Appendiceal Adenocarcinoma	msk	NA	Appendiceal CancerAppendiceal Adenocarcinoma	Appendix
 msk_impact_2017	Appendiceal Cancer	Mucinous Adenocarcinoma of the Appendix	msk	NA	Appendiceal CancerMucinous Adenocarcinoma of the Appendix	Appendix
@@ -122,12 +51,12 @@ msk_impact_2017	Bone Cancer	Small Cell Osteosarcoma	msk	NA	Bone CancerSmall Cell
 msk_impact_2017	Bone Cancer	Myxoid Chondrosarcoma	msk	NA	Bone CancerMyxoid Chondrosarcoma	Bone
 msk_impact_2017	Bone Cancer	Osteoblastic Osteosarcoma	msk	NA	Bone CancerOsteoblastic Osteosarcoma	Bone
 mixed_pipseq_2017	Bone Cancer	Telangiectatic Osteosarcoma	mixed	Mixed Cancer Types	Bone CancerTelangiectatic Osteosarcoma	Bone
+coad_caseccc_2015	Colorectal Cancer	Colon Adenocarcinoma	coad	Colon Adenocarcinoma	Colorectal CancerColon Adenocarcinoma	Bowel
 coadread_dfci_2016	Colorectal Adenocarcinoma	Colorectal Adenocarcinoma	coadread	Colorectal Adenocarcinoma	Colorectal AdenocarcinomaColorectal Adenocarcinoma	Bowel
 coadread_genentech	Colorectal Cancer	Colorectal Adenocarcinoma	coadread	Colorectal Adenocarcinoma	Colorectal CancerColorectal Adenocarcinoma	Bowel
 coadread_tcga_pub	Colorectal Adenocarcinoma	Colon Adenocarcinoma	coadread	Colorectal Adenocarcinoma	Colorectal AdenocarcinomaColon Adenocarcinoma	Bowel
 coadread_tcga_pub	Colorectal Adenocarcinoma	Rectal Adenocarcinoma	coadread	Colorectal Adenocarcinoma	Colorectal AdenocarcinomaRectal Adenocarcinoma	Bowel
 coadread_tcga_pan_can_atlas_2018	Colorectal Adenocarcinoma	Mucinous Adenocarcinoma of the Colon and Rectum	coadread	Colorectal Adenocarcinoma	Colorectal AdenocarcinomaMucinous Adenocarcinoma of the Colon and Rectum	Bowel
-coadread_tcga	Colorectal Cancer	Colon Adenocarcinoma	coadread	Colorectal Adenocarcinoma	Colorectal CancerColon Adenocarcinoma	Bowel
 coadread_tcga	Colorectal Cancer	Rectal Adenocarcinoma	coadread	Colorectal Adenocarcinoma	Colorectal CancerRectal Adenocarcinoma	Bowel
 coadread_tcga	Colorectal Cancer	Mucinous Adenocarcinoma of the Colon and Rectum	coadread	Colorectal Adenocarcinoma	Colorectal CancerMucinous Adenocarcinoma of the Colon and Rectum	Bowel
 msk_impact_2017	Anal Cancer	Anal Squamous Cell Carcinoma	msk	NA	Anal CancerAnal Squamous Cell Carcinoma	Bowel
@@ -138,6 +67,7 @@ msk_impact_2017	Colorectal Cancer	Signet Ring Cell Adenocarcinoma of the Colon a
 msk_impact_2017	Gastrointestinal Neuroendocrine Tumor	Well-Differentiated Neuroendocrine Tumor of the Rectum	msk	NA	Gastrointestinal Neuroendocrine TumorWell-Differentiated Neuroendocrine Tumor of the Rectum	Bowel
 msk_impact_2017	Gastrointestinal Neuroendocrine Tumor	High-Grade Neuroendocrine Carcinoma of the Colon and Rectum	msk	NA	Gastrointestinal Neuroendocrine TumorHigh-Grade Neuroendocrine Carcinoma of the Colon and Rectum	Bowel
 msk_impact_2017	Colorectal Cancer	Medullary Carcinoma of the Colon	msk	NA	Colorectal CancerMedullary Carcinoma of the Colon	Bowel
+metastatic_solid_tumors_mich_2017	Bowel Cancer, NOS	Bowel	metastatic	NA	Bowel Cancer, NOSBowel	Bowel
 cellline_nci60	Colon	Colorectal Adenocarcinoma	cellline	NA	ColonColorectal Adenocarcinoma	Bowel
 acbc_mskcc_2015	Invasive Breast Carcinoma	Adenoid Cystic Breast Cancer	acbc	Adenoid Cystic Breast Cancer	Invasive Breast CarcinomaAdenoid Cystic Breast Cancer	Breast
 brca_metabric	Breast Cancer	Breast Invasive Ductal Carcinoma	brca	Invasive Breast Carcinoma	Breast CancerBreast Invasive Ductal Carcinoma	Breast
@@ -195,6 +125,7 @@ msk_impact_2017	Cervical Cancer	Mixed Cervical Carcinoma	msk	NA	Cervical CancerM
 msk_impact_2017	Cervical Cancer	Cervical Clear Cell Carcinoma	msk	NA	Cervical CancerCervical Clear Cell Carcinoma	Cervix
 msk_impact_2017	Cervical Cancer	Intestinal Type Mucinous Carcinoma	msk	NA	Cervical CancerIntestinal Type Mucinous Carcinoma	Cervix
 msk_impact_2017	Cervical Cancer	Mesonephric Carcinoma	msk	NA	Cervical CancerMesonephric Carcinoma	Cervix
+metastatic_solid_tumors_mich_2017	Cervical Cancer	Cervical Neuroendocrine Tumor	metastatic	NA	Cervical CancerCervical Neuroendocrine Tumor	Cervix
 summit_2018	Cervical Cancer	Cervical Adenocarcinoma	summit	NA	Cervical CancerCervical Adenocarcinoma	Cervix
 odg_msk_2017	Glioma	Anaplastic Oligoastrocytoma	odg	Oligodendroglioma	GliomaAnaplastic Oligoastrocytoma	CNS/Brain
 odg_msk_2017	Glioma	Anaplastic Oligodendroglioma	odg	Oligodendroglioma	GliomaAnaplastic Oligodendroglioma	CNS/Brain
@@ -243,6 +174,7 @@ msk_impact_2017	Miscellaneous Neuroepithelial Tumor	Extraventricular Neurocytoma
 msk_impact_2017	Sellar Tumor	Pituicytoma	msk	NA	Sellar TumorPituicytoma	CNS/Brain
 mbl_sickkids_2016	Embryonal Tumor	Desmoplastic/Nodular Medulloblastoma	mbl	Medulloblastoma	Embryonal TumorDesmoplastic/Nodular Medulloblastoma	CNS/Brain
 mbl_sickkids_2016	Embryonal Tumor	Large Cell/Anaplastic Medulloblastoma	mbl	Medulloblastoma	Embryonal TumorLarge Cell/Anaplastic Medulloblastoma	CNS/Brain
+metastatic_solid_tumors_mich_2017	Glioma	Ependymoma	metastatic	NA	GliomaEpendymoma	CNS/Brain
 cellline_nci60	CNS	CNS/Brain	cellline	NA	CNSCNS/Brain	CNS/Brain
 mixed_pipseq_2017	Ependymomal Tumor	Anaplastic ependymoma	mixed	Mixed Cancer Types	Ependymomal TumorAnaplastic ependymoma	CNS/Brain
 mixed_pipseq_2017	Choroid Plexus Tumor	Choroid Plexus Papilloma	mixed	Mixed Cancer Types	Choroid Plexus TumorChoroid Plexus Papilloma	CNS/Brain
@@ -262,6 +194,10 @@ tmb_mskcc_2018	Melanoma	Primary CNS Melanoma	tmb	NA	MelanomaPrimary CNS Melanoma
 esca_broad	Esophagogastric Cancer	Esophageal Adenocarcinoma	esca	Esophageal Adenocarcinoma	Esophagogastric CancerEsophageal Adenocarcinoma	Esophagus/Stomach
 esca_tcga_pan_can_atlas_2018	Esophagogastric Adenocarcinoma	Esophageal Adenocarcinoma	esca	Esophageal Adenocarcinoma	Esophagogastric AdenocarcinomaEsophageal Adenocarcinoma	Esophagus/Stomach
 esca_tcga_pan_can_atlas_2018	Esophageal Squamous Cell Carcinoma	Esophageal Squamous Cell Carcinoma	esca	Esophageal Adenocarcinoma	Esophageal Squamous Cell CarcinomaEsophageal Squamous Cell Carcinoma	Esophagus/Stomach
+stes_tcga_pub	Esophagogastric Carcinoma	Esophageal Squamous Cell Carcinoma	stes	NA	Esophagogastric CarcinomaEsophageal Squamous Cell Carcinoma	Esophagus/Stomach
+stes_tcga_pub	Esophagogastric Carcinoma	Esophageal Adenocarcinoma	stes	NA	Esophagogastric CarcinomaEsophageal Adenocarcinoma	Esophagus/Stomach
+stes_tcga_pub	Stomach Adenocarcinoma	stes_tcga_pub	stes	NA	Stomach Adenocarcinomastes_tcga_pub	Esophagus/Stomach
+stes_tcga_pub	Esophagogastric Carcinoma	stes_tcga_pub	stes	NA	Esophagogastric Carcinomastes_tcga_pub	Esophagus/Stomach
 esca_tcga	Esophagogastric Cancer	Esophageal Squamous Cell Carcinoma	esca	Esophageal Adenocarcinoma	Esophagogastric CancerEsophageal Squamous Cell Carcinoma	Esophagus/Stomach
 esca_tcga	Esophageal/Stomach Cancer, NOS	Esophagus/Stomach	esca	Esophageal Adenocarcinoma	Esophageal/Stomach Cancer, NOSEsophagus/Stomach	Esophagus/Stomach
 egc_tmucih_2015	Esophagogastric Adenocarcinoma	Esophagogastric Adenocarcinoma	egc	Esophagogastric Adenocarcinoma	Esophagogastric AdenocarcinomaEsophagogastric Adenocarcinoma	Esophagus/Stomach
@@ -330,12 +266,15 @@ msk_impact_2017	Head and Neck Cancer	Head and Neck Carcinoma, Other	msk	NA	Head 
 msk_impact_2017	Head and Neck Cancer	Hypopharynx Squamous Cell Carcinoma	msk	NA	Head and Neck CancerHypopharynx Squamous Cell Carcinoma	Head and Neck
 msk_impact_2017	Head and Neck Cancer	Clear Cell Odontogenic Carcinoma	msk	NA	Head and Neck CancerClear Cell Odontogenic Carcinoma	Head and Neck
 msk_impact_2017	Head and Neck Cancer	Odontogenic Carcinoma	msk	NA	Head and Neck CancerOdontogenic Carcinoma	Head and Neck
+metastatic_solid_tumors_mich_2017	Head and Neck Cancer, NOS	Head and Neck	metastatic	NA	Head and Neck Cancer, NOSHead and Neck	Head and Neck
+hnsc_mdanderson_2013	Head and Neck Cancer	Head and Neck Squamous Cell Carcinoma├è	hnsc	Head and Neck Squamous Cell Carcinoma	Head and Neck CancerHead and Neck Squamous Cell Carcinoma├è	Head and Neck
 mixed_pipseq_2017	Salivary Gland-Type Tumor of the Lung	Mucoepidermoid carcinoma of the lung	mixed	Mixed Cancer Types	Salivary Gland-Type Tumor of the LungMucoepidermoid carcinoma of the lung	Head and Neck
 hnc_mskcc_2016	Head and Neck Cancer	Cutaneous Squamous Cell Carcinoma	hnc	NA	Head and Neck CancerCutaneous Squamous Cell Carcinoma	Head and Neck
 hnc_mskcc_2016	Salivary Gland Cancer	Salivary Adenocarcinoma NOS	hnc	NA	Salivary Gland CancerSalivary Adenocarcinoma NOS	Head and Neck
+ccrcc_dfci_2019	Renal Cell Carcinoma	Renal Clear Cell Carcinoma	ccrcc	Renal Clear Cell Carcinoma	Renal Cell CarcinomaRenal Clear Cell Carcinoma	Kidney
 kich_tcga_pub	Renal Cell Carcinoma	Chromophobe Renal Cell Carcinoma	kich	NA	Renal Cell CarcinomaChromophobe Renal Cell Carcinoma	Kidney
 kich_tcga_pan_can_atlas_2018	Renal Non-Clear Cell Carcinoma	Chromophobe Renal Cell Carcinoma	kich	NA	Renal Non-Clear Cell CarcinomaChromophobe Renal Cell Carcinoma	Kidney
-ccrcc_irc_2014	Renal Cell Carcinoma	Renal Clear Cell Carcinoma	ccrcc	Renal Clear Cell Carcinoma	Renal Cell CarcinomaRenal Clear Cell Carcinoma	Kidney
+kirc_bgi	Renal Cell Carcinoma	Chromophobe Renal Cell Carcinoma┬á	kirc	NA	Renal Cell CarcinomaChromophobe Renal Cell Carcinoma┬á	Kidney
 kirc_tcga_pan_can_atlas_2018	Renal Clear Cell Carcinoma	Renal Clear Cell Carcinoma	kirc	NA	Renal Clear Cell CarcinomaRenal Clear Cell Carcinoma	Kidney
 kirp_tcga_pan_can_atlas_2018	Renal Non-Clear Cell Carcinoma	Papillary Renal Cell Carcinoma	kirp	NA	Renal Non-Clear Cell CarcinomaPapillary Renal Cell Carcinoma	Kidney
 kirp_tcga	Renal Cell Carcinoma	Papillary Renal Cell Carcinoma	kirp	NA	Renal Cell CarcinomaPapillary Renal Cell Carcinoma	Kidney
@@ -384,6 +323,8 @@ msk_impact_2017	Non-Small Cell Lung Cancer	Pleomorphic Carcinoma of the Lung	msk
 msk_impact_2017	Non-Small Cell Lung Cancer	Lymphoepithelioma-like Carcinoma of the Lung	msk	NA	Non-Small Cell Lung CancerLymphoepithelioma-like Carcinoma of the Lung	Lung
 msk_impact_2017	Non-Small Cell Lung Cancer	Ciliated Muconodular Papillary Tumor of the Lung	msk	NA	Non-Small Cell Lung CancerCiliated Muconodular Papillary Tumor of the Lung	Lung
 msk_impact_2017	Non-Small Cell Lung Cancer	Large Cell Lung Carcinoma	msk	NA	Non-Small Cell Lung CancerLarge Cell Lung Carcinoma	Lung
+metastatic_solid_tumors_mich_2017	Non-Small Cell Lung Cancer	Clear Cell Carcinoma of the Lung	metastatic	NA	Non-Small Cell Lung CancerClear Cell Carcinoma of the Lung	Lung
+metastatic_solid_tumors_mich_2017	Lung Cancer, NOS	Lung	metastatic	NA	Lung Cancer, NOSLung	Lung
 cellline_nci60	Non-Small Cell Lung	Non-Small Cell Lung Cancer	cellline	NA	Non-Small Cell LungNon-Small Cell Lung Cancer	Lung
 mixed_pipseq_2017	Lung Cancer	Pleuropulmonary blastoma	mixed	Mixed Cancer Types	Lung CancerPleuropulmonary blastoma	Lung
 lung_msk_pdx	Small Cell Lung Cancer	Combined Small Cell Lung Carcinoma	lung	Lung	Small Cell Lung CancerCombined Small Cell Lung Carcinoma	Lung
@@ -394,9 +335,9 @@ all_stjude_2015	Leukemia	T-Cell Acute Lymphoid Leukemia	all	NA	LeukemiaT-Cell Ac
 all_stjude_2015	Leukemia	Leukemia	all	NA	LeukemiaLeukemia	Lymphoid
 all_stjude_2015	Leukemia	Acute Undifferentiated Leukemia	all	NA	LeukemiaAcute Undifferentiated Leukemia	Lymphoid
 all_stjude_2016	Leukemia	Acute Lymphoid Leukemia	all	NA	LeukemiaAcute Lymphoid Leukemia	Lymphoid
-aml_ohsu_2018	Myelodysplastic/Myeloproliferative Neoplasms	Chronic Myelomonocytic Leukemia	aml	Acute Myeloid Leukemia	Myelodysplastic/Myeloproliferative NeoplasmsChronic Myelomonocytic Leukemia	Myeloid
-aml_ohsu_2018	Mature B-Cell Neoplasms	Plasma Cell Myeloma	aml	Acute Myeloid Leukemia	Mature B-Cell NeoplasmsPlasma Cell Myeloma	Myeloid
+blca_plasmacytoid_mskcc_2016	Bladder Cancer	Plasmacytoid/Signet Ring Cell Bladder Carcinoma┬á	blca	Bladder Urothelial Carcinoma	Bladder CancerPlasmacytoid/Signet Ring Cell Bladder Carcinoma┬á	Lymphoid
 brca_tcga_pan_can_atlas_2018	Invasive Breast Carcinoma	Metaplastic Breast Cancer	brca	Invasive Breast Carcinoma	Invasive Breast CarcinomaMetaplastic Breast Cancer	Lymphoid
+lcll_broad_2013	Mature B-Cell Neoplasms	Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma┬á	lcll	NA	Mature B-Cell NeoplasmsChronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma┬á	Lymphoid
 cll_iuopa_2015	Mature B-Cell Neoplasms	Chronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma	cll	NA	Mature B-Cell NeoplasmsChronic Lymphocytic Leukemia/Small Lymphocytic Lymphoma	Lymphoid
 cll_iuopa_2015	Mature B-Cell Neoplasms	Monoclonal B-Cell Lymphocytosis	cll	NA	Mature B-Cell NeoplasmsMonoclonal B-Cell Lymphocytosis	Lymphoid
 ctcl_columbia_2015	Mature T and NK Neoplasms	Primary Cutaneous CD8 Positive Aggressive Epidermotropic Cytotoxic T-Cell Lymphoma	ctcl	NA	Mature T and NK NeoplasmsPrimary Cutaneous CD8 Positive Aggressive Epidermotropic Cytotoxic T-Cell Lymphoma	Lymphoid
@@ -428,10 +369,66 @@ msk_impact_2017	T-Lymphoblastic Leukemia/Lymphoma	T-Lymphoblastic Leukemia/Lymph
 mbn_mdacc_2013	Mature B-Cell Neoplasms	Burkitt Lymphoma	mbn	Mature B-Cell Neoplasms	Mature B-Cell NeoplasmsBurkitt Lymphoma	Lymphoid
 mbn_mdacc_2013	Mature B-Cell Neoplasms	High-Grade B-Cell Lymphoma, with MYC and BCL2 and/or BCL6 Rearrangements	mbn	Mature B-Cell Neoplasms	Mature B-Cell NeoplasmsHigh-Grade B-Cell Lymphoma, with MYC and BCL2 and/or BCL6 Rearrangements	Lymphoid
 mbn_mdacc_2013	Mature B-Cell Neoplasms	High-Grade B-Cell Lymphoma, NOS	mbn	Mature B-Cell Neoplasms	Mature B-Cell NeoplasmsHigh-Grade B-Cell Lymphoma, NOS	Lymphoid
+pediatric_dkfz_2017	Ependymoma supratentorial	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Ependymoma supratentorial┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	High-grade glioma K27Mwt	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	High-grade glioma K27Mwt┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Wilms' tumors	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Wilms' tumors┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Atypial teratoid/rhabdoid tumor	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Atypial teratoid/rhabdoid tumor┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	T-cell acute lymphoblastic leukemia	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	T-cell acute lymphoblastic leukemia┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Ependymoma infratentorial	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Ependymoma infratentorial┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Burkitt's lymphoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Burkitt's lymphoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	B-cell acute lymphoblastic leukemia, non-hypodiploid	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	B-cell acute lymphoblastic leukemia, non-hypodiploid┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	High-grade glioma K27Mmut	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	High-grade glioma K27Mmut┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Medulloblastoma WNT	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Medulloblastoma WNT┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Medulloblastoma Group4	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Medulloblastoma Group4┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Medulloblastoma Group3	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Medulloblastoma Group3┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Pilocytic astrocytoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Pilocytic astrocytoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Embryonal tumor with multilayered rosettes	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Embryonal tumor with multilayered rosettes┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Neuroblastoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Neuroblastoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Osteosarcoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Osteosarcoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Medulloblastoma SHH	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Medulloblastoma SHH┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Hepatoblastoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Hepatoblastoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	B-cell acute lymphoblastic leukemia, hypodiploid	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	B-cell acute lymphoblastic leukemia, hypodiploid┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Acute myeloid leukemias	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Acute myeloid leukemias┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Ewing's sarcoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Ewing's sarcoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Rhabdomyosarcoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Rhabdomyosarcoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Adrenocortical carcinoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Adrenocortical carcinoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
+pediatric_dkfz_2017	Retinoblastoma	┬áB-Lymphoblastic Leukemia/Lymphoma	pediatric	NA	Retinoblastoma┬áB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
 mixed_pipseq_2017	Non-Hodgkin Lymphoma	Anaplastic Large Cell Lymphoma	mixed	Mixed Cancer Types	Non-Hodgkin LymphomaAnaplastic Large Cell Lymphoma	Lymphoid
 mixed_pipseq_2017	Lymphoid Neoplasm	B-Lymphoblastic Leukemia/Lymphoma	mixed	Mixed Cancer Types	Lymphoid NeoplasmB-Lymphoblastic Leukemia/Lymphoma	Lymphoid
 mixed_pipseq_2017	Leukemia	Chronic Myelogenous Leukemia	mixed	Mixed Cancer Types	LeukemiaChronic Myelogenous Leukemia	Lymphoid
 mixed_pipseq_2017	Hodgkin Lymphoma-like PTLD	Hodgkin Lymphoma-like PTLD	mixed	Mixed Cancer Types	Hodgkin Lymphoma-like PTLDHodgkin Lymphoma-like PTLD	Lymphoid
+aml_ohsu_2018	Leukemia	AML with Mutated NPM1	aml	Acute Myeloid Leukemia	LeukemiaAML with Mutated NPM1	Myeloid
+aml_ohsu_2018	Leukemia	AML, NOS	aml	Acute Myeloid Leukemia	LeukemiaAML, NOS	Myeloid
+aml_ohsu_2018	Leukemia	AML with Myelodysplasia-Related Changes	aml	Acute Myeloid Leukemia	LeukemiaAML with Myelodysplasia-Related Changes	Myeloid
+aml_ohsu_2018	Leukemia	AML with Recurrent Genetic Abnormalities	aml	Acute Myeloid Leukemia	LeukemiaAML with Recurrent Genetic Abnormalities	Myeloid
+aml_ohsu_2018	Leukemia	Therapy-Related Myeloid Neoplasms	aml	Acute Myeloid Leukemia	LeukemiaTherapy-Related Myeloid Neoplasms	Myeloid
+aml_ohsu_2018	Leukemia	AML with Biallelic Mutations of CEBPA	aml	Acute Myeloid Leukemia	LeukemiaAML with Biallelic Mutations of CEBPA	Myeloid
+aml_ohsu_2018	Myelodysplastic/Myeloproliferative Neoplasms	Atypical Chronic Myeloid Leukemia, BCR-ABL1-	aml	Acute Myeloid Leukemia	Myelodysplastic/Myeloproliferative NeoplasmsAtypical Chronic Myeloid Leukemia, BCR-ABL1-	Myeloid
+aml_ohsu_2018	Leukemia	AML with t(8;21)(q22;q22.1);RUNX1-RUNX1T1	aml	Acute Myeloid Leukemia	LeukemiaAML with t(8;21)(q22;q22.1);RUNX1-RUNX1T1	Myeloid
+aml_ohsu_2018	Myelodysplastic Syndromes	MDS, Unclassifiable	aml	Acute Myeloid Leukemia	Myelodysplastic SyndromesMDS, Unclassifiable	Myeloid
+aml_ohsu_2018	Leukemia	AML with inv(16)(p13.1q22) or t(16;16)(p13.1;q22);CBFB-MYH11	aml	Acute Myeloid Leukemia	LeukemiaAML with inv(16)(p13.1q22) or t(16;16)(p13.1;q22);CBFB-MYH11	Myeloid
+aml_ohsu_2018	Myeloproliferative Neoplasms	Myeloproliferative Neoplasms	aml	Acute Myeloid Leukemia	Myeloproliferative NeoplasmsMyeloproliferative Neoplasms	Myeloid
+aml_ohsu_2018	Myelodysplastic/Myeloproliferative Neoplasms	Chronic Myelomonocytic Leukemia	aml	Acute Myeloid Leukemia	Myelodysplastic/Myeloproliferative NeoplasmsChronic Myelomonocytic Leukemia	Myeloid
+aml_ohsu_2018	Leukemia	AML without Maturation	aml	Acute Myeloid Leukemia	LeukemiaAML without Maturation	Myeloid
+aml_ohsu_2018	Myeloproliferative Neoplasms	Primary Myelofibrosis	aml	Acute Myeloid Leukemia	Myeloproliferative NeoplasmsPrimary Myelofibrosis	Myeloid
+aml_ohsu_2018	Myelodysplastic Syndromes	MDS with Excess Blasts	aml	Acute Myeloid Leukemia	Myelodysplastic SyndromesMDS with Excess Blasts	Myeloid
+aml_ohsu_2018	Leukemia	Pure Erythroid Leukemia	aml	Acute Myeloid Leukemia	LeukemiaPure Erythroid Leukemia	Myeloid
+aml_ohsu_2018	Leukemia	AML with Minimal Differentiation	aml	Acute Myeloid Leukemia	LeukemiaAML with Minimal Differentiation	Myeloid
+aml_ohsu_2018	Leukemia	Acute Monoblastic/Monocytic Leukemia	aml	Acute Myeloid Leukemia	LeukemiaAcute Monoblastic/Monocytic Leukemia	Myeloid
+aml_ohsu_2018	Mature B-Cell Neoplasms	Plasma Cell Myeloma	aml	Acute Myeloid Leukemia	Mature B-Cell NeoplasmsPlasma Cell Myeloma	Myeloid
+aml_ohsu_2018	Leukemia	APL with PML-RARA	aml	Acute Myeloid Leukemia	LeukemiaAPL with PML-RARA	Myeloid
+aml_ohsu_2018	Leukemia	Myeloid Leukemia Associated with Down Syndrome	aml	Acute Myeloid Leukemia	LeukemiaMyeloid Leukemia Associated with Down Syndrome	Myeloid
+aml_ohsu_2018	Leukemia	Myeloid Sarcoma	aml	Acute Myeloid Leukemia	LeukemiaMyeloid Sarcoma	Myeloid
+aml_ohsu_2018	Leukemia	AML with Maturation	aml	Acute Myeloid Leukemia	LeukemiaAML with Maturation	Myeloid
+aml_ohsu_2018	Leukemia	Acute Megakaryoblastic Leukemia	aml	Acute Myeloid Leukemia	LeukemiaAcute Megakaryoblastic Leukemia	Myeloid
+aml_ohsu_2018	Blastic Plasmacytoid Dendritic Cell Neoplasm	Blastic Plasmacytoid Dendritic Cell Neoplasm	aml	Acute Myeloid Leukemia	Blastic Plasmacytoid Dendritic Cell NeoplasmBlastic Plasmacytoid Dendritic Cell Neoplasm	Myeloid
+aml_ohsu_2018	Leukemia	AML with t(6;9)(p23;q34.1);DEK-NUP214	aml	Acute Myeloid Leukemia	LeukemiaAML with t(6;9)(p23;q34.1);DEK-NUP214	Myeloid
+aml_ohsu_2018	Mastocytosis	Mastocytosis	aml	Acute Myeloid Leukemia	MastocytosisMastocytosis	Myeloid
+aml_ohsu_2018	Myelodysplastic Syndromes	MDS with Multilineage Dysplasia	aml	Acute Myeloid Leukemia	Myelodysplastic SyndromesMDS with Multilineage Dysplasia	Myeloid
+aml_ohsu_2018	Myeloproliferative Neoplasms	Essential Thrombocythemia	aml	Acute Myeloid Leukemia	Myeloproliferative NeoplasmsEssential Thrombocythemia	Myeloid
+aml_ohsu_2018	Leukemia	Mixed Phenotype Acute Leukemia, T/Myeloid, NOS	aml	Acute Myeloid Leukemia	LeukemiaMixed Phenotype Acute Leukemia, T/Myeloid, NOS	Myeloid
+aml_ohsu_2018	Myelodysplastic Syndromes	MDS with Isolated Del(5q)	aml	Acute Myeloid Leukemia	Myelodysplastic SyndromesMDS with Isolated Del(5q)	Myeloid
+aml_ohsu_2018	Myelodysplastic/Myeloproliferative Neoplasms	MDS/MPN, Unclassifiable	aml	Acute Myeloid Leukemia	Myelodysplastic/Myeloproliferative NeoplasmsMDS/MPN, Unclassifiable	Myeloid
 msk_impact_2017	Mastocytosis	Systemic Mastocytosis	msk	NA	MastocytosisSystemic Mastocytosis	Myeloid
 mds_tokyo_2011	Myelodysplastic Syndromes	Myelodysplastic Syndromes	mds	Myelodysplastic Syndromes	Myelodysplastic SyndromesMyelodysplastic Syndromes	Myeloid
 cellline_nci60	Myeloid Neoplasm	Myeloid Neoplasm	cellline	NA	Myeloid NeoplasmMyeloid Neoplasm	Myeloid
@@ -449,6 +446,7 @@ msk_impact_2017	Sex Cord Stromal Tumor	Steroid Cell Tumor, NOS	msk	NA	Sex Cord S
 msk_impact_2017	Cancer of Unknown Primary	Adenocarcinoma, NOS	msk	NA	Cancer of Unknown PrimaryAdenocarcinoma, NOS	Other
 msk_impact_2017	Histiocytosis	Langerhans Cell Histiocytosis	msk	NA	HistiocytosisLangerhans Cell Histiocytosis	Other
 msk_impact_2017	Sex Cord Stromal Tumor	Sertoli-Leydig Cell Tumor	msk	NA	Sex Cord Stromal TumorSertoli-Leydig Cell Tumor	Other
+metastatic_solid_tumors_mich_2017	metastatic_solid_tumors_mich_2017	metastatic_solid_tumors_mich_2017	metastatic	NA	metastatic_solid_tumors_mich_2017metastatic_solid_tumors_mich_2017	Other
 metastatic_solid_tumors_mich_2017	Cancer of Unknown Primary	Undifferentiated Malignant Neoplasm	metastatic	NA	Cancer of Unknown PrimaryUndifferentiated Malignant Neoplasm	Other
 cellline_nci60	cellline_nci60	cellline_nci60	cellline	NA	cellline_nci60cellline_nci60	Other
 summit_2018	summit_2018	summit_2018	summit	NA	summit_2018summit_2018	Other
@@ -511,9 +509,11 @@ msk_impact_2017	Prostate Cancer	Prostate Neuroendocrine Carcinoma	msk	NA	Prostat
 msk_impact_2017	Prostate Cancer	Prostate Small Cell Carcinoma	msk	NA	Prostate CancerProstate Small Cell Carcinoma	Prostate
 prad_su2c_2019	prad_su2c_2019	prad_su2c_2019	prad	Prostate Adenocarcinoma	prad_su2c_2019prad_su2c_2019	Prostate
 prad_su2c_2015	Prostate Adenocarcinoma	Prostate Adenocarcinoma	prad	Prostate Adenocarcinoma	Prostate AdenocarcinomaProstate Adenocarcinoma	Prostate
+metastatic_solid_tumors_mich_2017	Prostate Cancer, NOS	Prostate	metastatic	NA	Prostate Cancer, NOSProstate	Prostate
 cellline_nci60	Prostate	Prostate	cellline	NA	ProstateProstate	Prostate
 nepc_wcm_2016	Prostate Cancer	Castration-Resistant Prostate Cancer	nepc	NA	Prostate CancerCastration-Resistant Prostate Cancer	Prostate
 mel_tsam_liang_2017	Melanoma	Acral Melanoma	mel	Melanoma	MelanomaAcral Melanoma	Skin
+bcc_unige_2016	Skin Cancer, Non-Melanoma	Skin Cancer, Non-Melanoma	bcc	Basal Cell Carcinoma	Skin Cancer, Non-MelanomaSkin Cancer, Non-Melanoma	Skin
 brca_tcga	Skin Cancer, Non-Melanoma	Basal Cell Carcinoma	brca	Invasive Breast Carcinoma	Skin Cancer, Non-MelanomaBasal Cell Carcinoma	Skin
 cscc_dfarber_2015	Skin Cancer, Non-Melanoma	Cutaneous Squamous Cell Carcinoma	cscc	Cutaneous Squamous Cell Carcinoma	Skin Cancer, Non-MelanomaCutaneous Squamous Cell Carcinoma	Skin
 desm_broad_2015	Melanoma	Desmoplastic Melanoma	desm	Desmoplastic Melanoma	MelanomaDesmoplastic Melanoma	Skin
@@ -598,6 +598,7 @@ msk_impact_2017	Germ Cell Tumor	Teratoma	msk	NA	Germ Cell TumorTeratoma	Testis
 tgct_tcga_pan_can_atlas_2018	Seminoma	Seminoma	tgct	Tenosynovial Giant Cell Tumor Diffuse Type	SeminomaSeminoma	Testis
 msk_impact_2017	Thymic Tumor	Thymoma	msk	NA	Thymic TumorThymoma	Thymus
 msk_impact_2017	Thymic Tumor	Thymic Carcinoma	msk	NA	Thymic TumorThymic Carcinoma	Thymus
+metastatic_solid_tumors_mich_2017	Thymic Tumor	Thymic Neuroendocrine Tumor	metastatic	NA	Thymic TumorThymic Neuroendocrine Tumor	Thymus
 tet_nci_2014	Thymic Tumor	Thymic Epithelial Tumor	tet	Thymic Epithelial Tumor	Thymic TumorThymic Epithelial Tumor	Thymus
 thym_tcga_pan_can_atlas_2018	Thymic Epithelial Tumor	Thymoma	thym	Thymoma	Thymic Epithelial TumorThymoma	Thymus
 msk_impact_2017	Thyroid Cancer	Papillary Thyroid Cancer	msk	NA	Thyroid CancerPapillary Thyroid Cancer	Thyroid
