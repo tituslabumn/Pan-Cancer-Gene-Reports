@@ -263,7 +263,7 @@ master_case_df$webAPI_cancer_type <-  cancer_types_key_web_API$name[match(sapply
 save.image("troubleshooting_workspace.RData")   #####################
 
 cat("reading in manual annotation file \n\n")
-if(!("cancer_type_manual_annotation_in.tab" %in% list.files())){
+if(!("cancer_type_manual_annotation_in.tab" %in% list.files(path = "/PCGR/Pan-Cancer-Gene-Reports/"))){
   stop("'cancer_type_manual_annotation_in.tab' file not found:\n")
 }
 # read in manual tissue type annotations
