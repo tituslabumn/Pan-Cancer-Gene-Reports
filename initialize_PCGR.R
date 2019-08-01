@@ -5,10 +5,13 @@ cat("\n#######################################################","\n")
 cat("################# Initialize PCGR #####################","\n")
 cat("#######################################################","\n","\n")
 
-# #check that required packages are installed and install if needed
+# check that required packages are installed and install if needed
 source("Install_required_packages.R")
 
-#run initialization R script to generate a workspace that can be loaded next time rather than re-querying database for each GOI
+initial_directory <- getwd()
+# set wd to /OUTPUT so that troubleshooting workspace images will be saved there
+#   occasionally temorarily change below as needed
+setwd("/OUTPUT/")
 
 #Initialize cBP workspace
 cat("\n############### Initialize cBP workspace ##############","\n")
@@ -266,8 +269,18 @@ if(!("cancer_type_manual_annotation_in.tab" %in% list.files())){
 # read in manual tissue type annotations
 # this is a tab delim file created via Manual_cancer_types_annotation.R
 # a manual tissue type (32 total types) is assigned for each unique cancer_type/cancer_type_detailed pair from master_case_df
+# if running for the first time in the container move annotation files to output directory so they will persist
+if(sum(c("cancer_type_manual_annotation_in.tab","past_manual_annotation_all_studies.tab") %in% list.files())<2){
+  setwd(initial_directory)
+  file.copy("cancer_type_manual_annotation_in.tab","/OUTPUT/")
+  file.copy("past_manual_annotation_all_studies.tab","/OUTPUT/")
+  setwd("/OUTPUT/")
+}
 master_case_manual_annotation_in <- read.delim("cancer_type_manual_annotation_in.tab", stringsAsFactors = FALSE)
 all.studies.old <- read.delim("past_manual_annotation_all_studies.tab")
+
+
+
 
 cat("\tchecking that this file is up to date... \n\n")
 if(length(master_case_manual_annotation_in[,1]) != length(unique(paste0(master_case_df$cancer_type,master_case_df$cancer_type_detailed)))) {

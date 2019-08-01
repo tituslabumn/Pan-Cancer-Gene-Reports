@@ -54,14 +54,15 @@ To exit and delete the container:
   exit
 ```
 
-###Updating the initialized workspace
+### Updating the initialized workspace
 PCGR quries run using an R workspace image (provided in this repository) that contains the gene-agnostic data regarding cancer studies, samples, etc. from cBioPortals API. This prevents having to re-sequester and process this data upon each query. cBioPortal is, however, frequently updated. To re-build the initialized workspace image run the associated shell script from within the PCGR container:
 
 ```{bash eval=FALSE}
   ./initialize_PCGR.sh
 ```
 
-This command will need to be run twice. The first run will produce a   
+This command will need to be run twice. The first run will produce a
+manual annotation input and output files do not have equal number of rows:\n\tmanually annotate 'cancer_type_manual_annotation_out.tab' file \n\tadd final_tissue column \n\tsave as 'cancer_type_manual_annotation_in.tab'\n\trun again\n\n\n
 
 ### Requirements
 If running PCGR in your own environment without using the provided PCGR Docker container ensure that you have installed these requirements.

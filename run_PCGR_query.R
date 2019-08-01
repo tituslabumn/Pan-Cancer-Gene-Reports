@@ -31,7 +31,7 @@ if(is.na(bash_args[1])){
 }
 #create output dir for final output, dont show warning if it already exists, will eventually overwrite by default
 initial_directory <- getwd()
-output_directory <- paste0("./output/",GOI)
+output_directory <- paste0("/OUTPUT/",GOI)
 dir.create(output_directory,showWarnings = FALSE)
 
 ####################################################################################
