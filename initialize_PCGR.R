@@ -386,7 +386,7 @@ cat("number of studies (filtered) with mutation data available:",length(all.mut.
 
 save.image("troubleshooting_workspace.RData") #####################
 
-#save final initialized workspace
+#save final initialized workspace in output folder
 save.image("initialized_workspace_cBP.RData")
 
 cat("initialization complete ##########################################","\n")

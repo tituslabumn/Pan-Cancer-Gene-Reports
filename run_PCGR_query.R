@@ -8,14 +8,25 @@ cat("#######################################################","\n","\n")
 #check that required packages are installed and install if needed
 source("check_required_packages.R")
 
-#load previously generated initialization workspace
+initial_directory <- getwd()
+
+#load previously generated initialization workspace, if in output directory load from there preferentially
 cat("Loading existing cBP workspace","\n")
+setwd("/OUTPUT/")
 if ("initialized_workspace_cBP.RData" %in% list.files()){
   cat("...","\t")
   load("initialized_workspace_cBP.RData")
   cat("load successful","\n")
   cat("Objects in workspace: ","\n")
   print(ls())
+}else if ("initialized_workspace_cBP.RData" %in% list.files(path = initial_directory)){
+  setwd(initial_directory)
+  cat("...","\t")
+  load("initialized_workspace_cBP.RData")
+  cat("load successful","\n")
+  cat("Objects in workspace: ","\n")
+  print(ls())
+  setwd("/OUTPUT/")
 }else{
   stop("initialized_workspace_cBP.RData not found")
 }
@@ -30,7 +41,6 @@ if(is.na(bash_args[1])){
   cat("GOI supplied: ",GOI,"\n")
 }
 #create output dir for final output, dont show warning if it already exists, will eventually overwrite by default
-initial_directory <- getwd()
 output_directory <- paste0("/OUTPUT/",GOI)
 dir.create(output_directory,showWarnings = FALSE)
 

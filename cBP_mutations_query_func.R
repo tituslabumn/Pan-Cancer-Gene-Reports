@@ -321,7 +321,7 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   print(head(AAC_freq[order(-AAC_freq$Freq) ,],20))
   cat("\n")
   
-  #assign out final df, write it to tab delim file and save the df name for referencing below
+  #assign out final df and save the df name for referencing below
   GOI_cBP_mutations <<- mut.df
   assign("GOI_mut_df_name",paste0(gene,"_cBP_mutations") , envir = .GlobalEnv)  #for accessing via get() later
   assign(paste0(gene,"_cBP_mutations"),mut.df, envir = .GlobalEnv)
