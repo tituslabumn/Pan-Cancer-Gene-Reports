@@ -6,4 +6,4 @@
 echo "Started at: $(date +"%T")"
 Rscript run_PCGR_query.R $1
 echo "Finished at: $(date +"%T")"
-
+cat STARTUP.txt
