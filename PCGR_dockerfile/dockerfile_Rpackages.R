@@ -1,0 +1,18 @@
+#packages installed on top of docker r-base image
+install.packages("BiocManager")
+BiocManager::install(version='devel', ask = FALSE)
+install.packages('RCurl', dependencies = TRUE)
+install.packages('XML', dependencies = TRUE)
+install.packages('xml2', dependencies = TRUE)
+install.packages('cgdsr', dependencies = TRUE)
+BiocManager::install("rtracklayer")
+BiocManager::install("biomaRt")
+BiocManager::install("trackViewer")
+BiocManager::install("BSgenome.Hsapiens.NCBI.GRCh38")
+install.packages("rmarkdown", dependencies = TRUE)
+install.packages('knitr', dependencies = TRUE)
+install.packages('rjson', dependencies = TRUE)
+BiocManager::install("Biostrings")
+install.packages("tinytex")
+tinytex::install_tinytex() # installs disribution on host
+install.packages("RSelenium")
