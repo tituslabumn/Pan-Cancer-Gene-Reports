@@ -22,7 +22,7 @@ To clone this source code:
 ## How to use PCGR
 Due to the large number of specific software requirements it is HIGHLY RECCOMENDED that the user run PCGR from within a the PCGR Docker container that has been built to provide an environment that has all the required packages pre-installed. 
 
-Ensure that you have Docker installed on your system and pull the PCGR image from DockerHub (>2GB):
+Ensure that you have Docker installed on your system and pull the PCGR image from DockerHub (>3GB):
 
 ```{bash eval=FALSE}
   docker pull tsharding/pcgr_v1.0
