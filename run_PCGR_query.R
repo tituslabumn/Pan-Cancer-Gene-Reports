@@ -28,10 +28,20 @@ if ("initialized_workspace_cBP.RData" %in% list.files()){
   print(ls())
   setwd("/OUTPUT/")
 }else{
-  stop("initialized_workspace_cBP.RData not found")
+  stop("ERROR: initialized_workspace_cBP.RData not found")
 }
 cat("done","\n\n\n")
 # use getCancerStudies(mycgds) to check if there are new studies not included in old workspace
+
+# chech that selenium stand alone server contianer is running with shared volume
+cat("Checking for shared volume from running selenium stand-alone chrome container","\n")
+if("seluser" %in% list.files(path = "/home/")){
+  cat("\tlink confirmed :]\n\n") #assumes selenium container was not stopped after pcgr container was brought up
+}else{
+  stop("\tERROR: cant fined shared volume from selenium container")
+  # if occures make sure to run:
+  # docker run --name pcgr_selenium_chrome --rm -d -p 4444:4444 -v /home/seluser/Downloads selenium/standalone-chrome
+}
 
 bash_args = commandArgs(trailingOnly=TRUE)
 if(is.na(bash_args[1])){
