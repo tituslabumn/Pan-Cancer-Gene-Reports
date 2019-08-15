@@ -34,9 +34,16 @@ URL_gnomAD <- paste0("https://gnomad.broadinstitute.org/gene/",GOI_ENSG,"?datase
 # )
 
 remDr <- remoteDriver(remoteServerAddr = "selenium_chrome" ,port = 4444L, browser = "chrome", )#extraCapabilities = eCaps)
-webElem_dl_button <- remDr$findElement(using = "xpath","//*[@id='root']/div/div/div[2]/div/div[5]/section/div[2]/button")
-webElem_dl_button <- remDr$findElement(using = "xpath","/html/body/div[1]/div/div/div[2]/div/div[5]/section/div[2]/button")
+remDr$open(silent = TRUE)
+# navigate to GOI gnomAD page
+remDr$navigate(URL_gnomAD)
 Sys.sleep(3)
+      # remDr$getTitle()
+      # remDr$screenshot(display = TRUE)
+# find download button (xpath found by exploring element in chromium)
+webElem_dl_button <- remDr$findElement(using = "xpath","//*[@id='root']/div/div/div[2]/div/div[5]/section/div[2]/button")
+Sys.sleep(3)
+# click download button
 webElem_dl_button$sendKeysToElement(list(key = "down_arrow"))
 # remDr$screenshot(display = TRUE)
 Sys.sleep(3)
