@@ -37,7 +37,8 @@ remDr <- remoteDriver(remoteServerAddr = "selenium_chrome" ,port = 4444L, browse
 cat("\tOpening connection via remote driver\n")
 remDr$open(silent = TRUE)
 # navigate to GOI gnomAD page
-cat("\tNavigating to gnomAD browser GOI page(non-cancer)\n")
+cat("\tNavigating to gnomAD browser GOI page(non-cancer):\n")
+cat("\t\t",URL_gnomAD,"\n")
 remDr$navigate(URL_gnomAD)
 Sys.sleep(3)
       # remDr$getTitle()
