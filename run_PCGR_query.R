@@ -90,7 +90,7 @@ cat("Ensembl query complete\n\n\n")
 save.image("troubleshooting_workspace.RData") #####################
 
 #retrieve ExAC variant data for GOI
-source("/PCGR/Pan-Cancer-Gene-Reports/ExAC_query.R")
+source("/PCGR/Pan-Cancer-Gene-Reports/gnomAD_query.R")
 
 save.image("troubleshooting_workspace.RData") #####################
 
