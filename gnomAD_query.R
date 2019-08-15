@@ -23,15 +23,15 @@ library("RSelenium")
 URL_gnomAD <- paste0("https://gnomad.broadinstitute.org/gene/",GOI_ENSG,"?dataset=gnomad_r2_1_non_cancer")
 # https://gnomad.broadinstitute.org/gene/ENSG00000145555?dataset=gnomad_r2_1_non_cancer
 
-eCaps <- list(
-  chromeOptions =
-    list(prefs = list(
-      "profile.default_content_settings.popups" = 0L,
-      "download.prompt_for_download" = FALSE#,
-      #"download.default_directory" = "/OUTPUT"
-    )
-    )
-)
+# eCaps <- list(
+#   chromeOptions =
+#     list(prefs = list(
+#       "profile.default_content_settings.popups" = 0L,
+#       "download.prompt_for_download" = FALSE,
+#       "download.default_directory" = "~/Downloads"
+#     )
+#     )
+# )
 
 # selenium is the service name of other container on user defined network per docker-compose file
 remDr <- remoteDriver(remoteServerAddr = "selenium" ,port = 4444L, browser = "chrome", extraCapabilities = eCaps) 
@@ -52,11 +52,10 @@ Sys.sleep(3)
 # click download button
 cat("\tMouse over download button\n")
 webElem_dl_button$sendKeysToElement(list(key = "down_arrow"))
-# remDr$screenshot(display = TRUE)
 Sys.sleep(3)
 cat("\tClick download button\n")
-# webElem_dl_button$clickElement()
+webElem_dl_button$clickElement()
 cat("\tClose driver connection\n")
 remDr$close()
 
-print(list.files(path = "/selenium-file/"))
+  print(list.files(path = "/selenium-file/"))
