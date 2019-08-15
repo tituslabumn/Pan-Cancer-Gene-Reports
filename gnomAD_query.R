@@ -33,6 +33,8 @@ eCaps <- list(
     )
 )
 
+save.image("troubleshooting_workspace.RData") #####################
+
 # selenium is the service name of other container on user defined network per docker-compose file
 remDr <- remoteDriver(remoteServerAddr = "selenium" ,port = 4444L, browser = "chrome", extraCapabilities = eCaps) 
 cat("\tOpening connection via remote driver\n")
@@ -59,4 +61,22 @@ cat("\tClose driver connection\n")
 Sys.sleep(3)
 remDr$close()
 
-print(list.files(path = "/selenium-file/"))
+#check if downloads dir was created and contains one file only
+if("Downloads" %in% list.files(path = "/selenium-file/") & length(list.files(path = "/selenium-file/Downloads/")) == 1){
+  cat("File retrieved:")
+  print(list.files(path = "/selenium-file/Downloads/"))
+  gnomeAD_filename <- list.files(path = "/selenium-file/Downloads/")[1]
+}else{
+  stop("gnomAD file not retrived successfully")
+}
+
+save.image("troubleshooting_workspace.RData") #####################
+
+cat("parsing in file\n")
+GOI_gnomAD_df <- read.csv(paste0("/selenium-file/Downloads/",gnomeAD_filename), stringsAsFactors = FALSE)
+
+save.image("troubleshooting_workspace.RData") #####################
+
+cat("removing file dir\n")
+unlink("/selenium-file/Downloads/", recursive = TRUE)
+print(str(GOI_gnomAD_df))

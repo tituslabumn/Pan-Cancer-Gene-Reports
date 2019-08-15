@@ -10,4 +10,4 @@ fi
 docker-compose run --rm  -v $1:/OUTPUT main bash
 
 #stop and remove selenium server container
-docker-compose rm -f -s
+docker-compose down -v
