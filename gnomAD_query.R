@@ -4,13 +4,13 @@ cat("#####################################################################\n")
 cat("############# Retrieving all gnomAD variants for GOI ################\n")
 cat("#####################################################################\n\n\n")
 
-cat("Cheching for linked pcgr_selenium_chrome docker container...\n\n")
-
-if("selenium-file" %in% list.files(path = "/")){
-  cat("\tlink confirmed :]\n\n") #assumes selenium container was not stopped after pcgr container was brought up
-}else{
-  stop("\tCan't fined shared volume from selenium container")
-}
+# cat("Cheching for linked pcgr_selenium_chrome docker container...\n\n")
+# 
+# if("selenium-file" %in% list.files(path = "/")){
+#   cat("\tlink confirmed :]\n\n") #assumes selenium container was not stopped after pcgr container was brought up
+# }else{
+#   stop("\tCan't fined shared volume from selenium container")
+# }
 
 cat("Retriving gnomAD non-cancer variant file via RSelenium web scraper\n\n")
 
