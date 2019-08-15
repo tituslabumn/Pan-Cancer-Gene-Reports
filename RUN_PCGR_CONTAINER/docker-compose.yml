@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  selenium:
+    image: selenium/standalone-chrome
+    container_name: "pcgr-selenium-chrome"
+    ports:
+      - "4444:4444"
+    volumes:
+      - selenium-volume:/home/seluser/Downloads
+    networks:
+      - pcgr_network
+  main:
+    image: tsharding/pcgr_v1.0
+    container_name: "pcgr-rbase-main"
+    depends_on:
+      - selenium
+    volumes:
+      - selenium-volume:/selenium-file
+    networks: 
+      - pcgr_network
+
+volumes:
+  selenium-volume:
+
+networks:
+  pcgr_network:
+

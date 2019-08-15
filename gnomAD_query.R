@@ -6,10 +6,10 @@ cat("#####################################################################\n\n\n
 
 cat("Cheching for linked pcgr_selenium_chrome docker container...\n\n")
 
-if("seluser" %in% list.files(path = "/home/")){
+if("selenium-file" %in% list.files(path = "/")){
   cat("\tlink confirmed :]\n\n") #assumes selenium container was not stopped after pcgr container was brought up
 }else{
-  stop("\tERROR: cant fined shared volume from selenium container")
+  stop("\tCan't fined shared volume from selenium container")
 }
 
 cat("Retriving gnomAD non-cancer variant file via RSelenium web scraper\n\n")
