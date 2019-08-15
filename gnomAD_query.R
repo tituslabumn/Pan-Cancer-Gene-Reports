@@ -34,7 +34,7 @@ URL_gnomAD <- paste0("https://gnomad.broadinstitute.org/gene/",GOI_ENSG,"?datase
 # )
 
 # selenium is the service name of other container on user defined network per docker-compose file
-remDr <- remoteDriver(remoteServerAddr = "selenium" ,port = 4444L, browser = "chrome", extraCapabilities = eCaps) 
+remDr <- remoteDriver(remoteServerAddr = "selenium" ,port = 4444L, browser = "chrome")#, extraCapabilities = eCaps) 
 cat("\tOpening connection via remote driver\n")
 remDr$open(silent = TRUE)
 # navigate to GOI gnomAD page
