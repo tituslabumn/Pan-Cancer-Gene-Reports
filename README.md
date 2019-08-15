@@ -108,7 +108,7 @@ Major packages/dependancies include:
 - RSelenium
 
 ### Known issues
-Occasionally one of the several web connections/APIs (e.g. UniProt) will fail to connect for unknown reasons (ssl error). In these cases you may need to retry your query at another time.
+  Occasionally one of the several web connections/APIs (e.g. UniProt) will fail to connect for unknown reasons ('SSL connect error'). In these cases you may need to retry your query at another time.
 
 
 

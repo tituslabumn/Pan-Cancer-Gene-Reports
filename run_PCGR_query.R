@@ -77,7 +77,7 @@ library("biomaRt")
   hs_ensembl <- useMart("ensembl", dataset="hsapiens_gene_ensembl")
 
 cat("UniProtKB query initiated\n")
-source("/PCGR/Pan-Cancer-Gene-Reports/UniProtKB_query.R")
+#source("/PCGR/Pan-Cancer-Gene-Reports/UniProtKB_query.R")
 
 ####################################################################################
 cat("Ensembl query initiated\n")
