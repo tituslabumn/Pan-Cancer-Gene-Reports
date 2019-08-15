@@ -56,6 +56,7 @@ webElem_dl_button$sendKeysToElement(list(key = "down_arrow"))
 Sys.sleep(3)
 cat("\tClick download button\n")
 webElem_dl_button$clickElement()
+remDr$screenshot(display = TRUE)
 cat("\tClose driver connection\n")
 remDr$close()
 
