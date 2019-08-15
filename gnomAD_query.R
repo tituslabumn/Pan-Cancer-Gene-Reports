@@ -27,7 +27,7 @@ eCaps <- list(
   chromeOptions =
     list(prefs = list(
       "profile.default_content_settings.popups" = 0L,
-      "download.prompt_for_download" = FALSE,
+      "download.prompt_for_download" = FALSE#,
       #"download.default_directory" = "/OUTPUT"
     )
     )
