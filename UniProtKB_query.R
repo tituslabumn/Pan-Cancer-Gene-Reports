@@ -29,7 +29,8 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   #   read.df <- read.delim(paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt"),stringsAsFactors = FALSE) 
   UniProt_URL <- paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt") #returns data frame with one col of lines
   library(RCurl)
-  Uniprot_txt_parsed <<- read.delim(textConnection(getURL(UniProt_URL)),stringsAsFactors = FALSE)
+  read.df <- read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
+  Uniprot_txt_parsed <<- read.df
 
   #colnames of this parsed txt file contains AA length <- extract for future use
   GOI_UNIPROT_AA_LENGTH <<- as.numeric(rev(unlist(strsplit(colnames(read.df),split = "\\.+")))[2])
