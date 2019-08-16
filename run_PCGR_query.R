@@ -100,6 +100,11 @@ source("/PCGR/Pan-Cancer-Gene-Reports/Relative_position_mapping.R")
 
 save.image("troubleshooting_workspace.RData") #####################
 
+# determine overlap between cBioPortal data and gnomeAD data
+source("/PCGR/Pan-Cancer-Gene-Reports/map_cBP_gnomAD_overlap.R")
+
+save.image("troubleshooting_workspace.RData") #####################
+
 #analasis and figure data initialization
 source("/PCGR/Pan-Cancer-Gene-Reports/Generate_figures.R")
 
