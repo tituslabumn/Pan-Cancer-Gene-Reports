@@ -31,8 +31,8 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   library(RCurl)
   attempt<-1
   while(attempt < 10){
-    tryCatch({
-      read.df <- read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
+    read.df <- tryCatch({
+      read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
       },error={
       cat("\tAttempt",attempt,"failed. Attemting ",10-attempt," more times.\n")
       attempt<-attempt+1
