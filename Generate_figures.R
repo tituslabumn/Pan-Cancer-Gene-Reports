@@ -129,7 +129,32 @@ cat("map variants to nearest exon junction\n")
   GOI_cBP_mutations <- GOI_cBP_mutations[!is.na(GOI_cBP_mutations$imaging_AA),]
   
   Unique_mutations_plot <- GOI_cBP_mutations[!duplicated(GOI_cBP_mutations$amino_acid_change),]
-  mut_type_color_key <- data.frame(row.names = unique(Unique_mutations_plot$mutation_type), color = combined_qualitative_palette[1:length(unique(Unique_mutations_plot$mutation_type))])
+  mut_type_color_key <- data.frame(
+    row.names = c(
+      "missense_variant",
+      "inframe_insertion",
+      "inframe_deletion",
+      "stop_gained",
+      "frameshift_insertion",
+      "frameshift_deletion",
+      "splice_site_variant",
+      "splice_region_variant",
+      "start_lost",
+      "stop_lost"
+    ),
+    color = c(
+      "#999999", # grey - missense_variant
+      "##8DD3C7", # teal - inframe_insertion
+      "#F781BF", # pink - inframe_deletion
+      "#E41A1C", #red - stop_gained
+      "#FF7F00", #orange - frameshift_insertion
+      "#FFFF33", # yellow - frameshift_deletion
+      "#377EB8", #light blue - splice_site_variant
+      "#984EA3", #purple - splice_region_variant
+      "#4DAF4A", #green - start_lost
+      "#A65628" # brown - stop_lost
+    )
+  )
 
 cat("Figure3\n")    
 #Figure3 - all unique variants

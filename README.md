@@ -5,7 +5,7 @@ PCGR is an automated informatic pipeline written by Taylor Harding at the Univer
 
 PCGR sequesters GOI-specific data from cBioPortal (https://www.cbioportal.org/). These data include mutation, copy number, expression and clinical information from >200 studies representing >47,000 unique cases of cancer accross 32 broad tissue types. 
 
-PCGR obtains all natural variants (excluding those associated with cancer cases; n= 134,187 individuals) for the supplied GOI contained within the genomes and exomes collected by the gnomAD project (https://gnomad.broadinstitute.org/). 
+PCGR obtains all natural variants (excluding those associated with cancer cases) (n= 134,187 individuals) for the supplied GOI contained within the genomes and exomes collected by the gnomAD project (https://gnomad.broadinstitute.org/). 
 
 PCGR additionally obtains information from several database APIs (i.e. Ensembl, UniProtKB) that are used to structurally annotate GOI transcripts and peptides.
 
