@@ -167,7 +167,7 @@ cat("Figure3\n")
     F3_features$featureLayerID <- sep_overlap_features(F3_feature_df)
     F3_variants <- GRanges(seqnames = "chr", IRanges(start = Unique_mutations_plot$imaging_AA, width = 1,names = NULL))
     F3_variants$score <- Unique_mutations_plot$AA_change_freq
-    F3_variants$color <- mut_type_color_key[Unique_mutations_plot$mutation_type,"color"]
+    F3_variants$color <- mut_type_color_key[Unique_mutations_plot$unified_annotation,"color"]
     F3_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
     F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
     
