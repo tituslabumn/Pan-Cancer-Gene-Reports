@@ -32,7 +32,8 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   attempt<-1
   while(attempt < 10){
     read.df <- tryCatch({
-      read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
+      1+1
+      #read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
       },error=function(cond){
       cat("\tAttempt",attempt,"failed. Attemting ",10-attempt," more times.\n")
       attempt<<-attempt+1
@@ -41,6 +42,7 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   }
   rm(attempt)
   Uniprot_txt_parsed <<- read.df
+  cat(read.df)
 
   #colnames of this parsed txt file contains AA length <- extract for future use
   GOI_UNIPROT_AA_LENGTH <<- as.numeric(rev(unlist(strsplit(colnames(read.df),split = "\\.+")))[2])
