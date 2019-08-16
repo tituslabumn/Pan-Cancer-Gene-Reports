@@ -329,7 +329,6 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
     start_pos <- GOI_cBP_mutations[x,"start_position"]
     end_pos <- GOI_cBP_mutations[x,"end_position"]
     flag <- ""
-    cat(x," ")
     # flag used to assign fs type below
     if(ref == "-" | nchar(ref) < nchar(var)){ #insertion
       GOI_cBP_mutations[x,"unified_pos"] <- end_pos #no change
@@ -340,7 +339,7 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
     } else if(nchar(ref) == 1 & nchar(var) == 1 & ref != var){ #missense
       GOI_cBP_mutations[x,"unified_pos"] <- end_pos
     } else if(nchar(ref) == nchar(var)){ #ins/del???
-      cat(paste0("\t\tIns/Del??? - pos: ",pos," ref: ",ref," var: ",var,"\n"))
+      cat(paste0("\t\tIns/Del??? - pos: ",start_pos," ref: ",ref," var: ",var,"\n"))
       GOI_cBP_mutations[x,"unified_pos"] <- start_pos #choose start pos arbitrarily
     } else {
       cat(paste0("\t\tEdge case? - pos: ",start_pos," ref: ",ref," var: ",var,"\n"))
