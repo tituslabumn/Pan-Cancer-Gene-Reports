@@ -123,11 +123,8 @@ cat("Multiple var table\n")
   colnames(multi_mut_table) = c("Number of samples","Number of mutations per sample")
 cat("map variants to nearest exon junction\n")
 #map variants to nearest exon junction
-  if(GOI_STRAND == -1){ #this only matters for large deletions
-    GOI_cBP_mutations$imaging_AA <- GOI_mapping_key[as.character(GOI_cBP_mutations$end_position),"nearest_junction_codon"]
-  }else{
-    GOI_cBP_mutations$imaging_AA <- GOI_mapping_key[as.character(GOI_cBP_mutations$start_position),"nearest_junction_codon"]
-  }
+  GOI_cBP_mutations$imaging_AA <- GOI_mapping_key[as.character(GOI_cBP_mutations$unified_pos),"nearest_junction_codon"]
+  
   #remove rare out of range cases
   GOI_cBP_mutations <- GOI_cBP_mutations[!is.na(GOI_cBP_mutations$imaging_AA),]
   

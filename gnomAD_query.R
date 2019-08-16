@@ -80,3 +80,38 @@ save.image("troubleshooting_workspace.RData") #####################
 cat("removing file dir\n")
 unlink("/selenium-file/Downloads/", recursive = TRUE)
 print(str(GOI_gnomAD_df))
+
+# this may already be filtered
+cat("\tFiltering out variants that lack 'PASS' annotation\n")
+GOI_gnomAD_df_filtered <- GOI_gnomAD_df[GOI_gnomAD_df$Filters...exomes == "PASS" | GOI_gnomAD_df$Filters...genomes == "PASS",]
+cat("\t\tFiltered variants:",length(GOI_gnomAD_df_filtered[,1]),"\n\n")
+
+# remove synonymous variants
+cat("\tFiltering out 'synonymous' variants")
+GOI_gnomAD_df_filtered <- GOI_gnomAD_df_filtered[GOI_gnomAD_df_filtered$Annotation != "synonymous_variant",]
+cat("\t\tFiltered variants:",length(GOI_gnomAD_df_filtered[,1]),"\n\n")
+
+# remove intron variants
+cat("\tFiltering out 'intron' variants (splice region kept)")
+GOI_gnomAD_df_filtered <- GOI_gnomAD_df_filtered[GOI_gnomAD_df_filtered$Annotation != "intron_variant",]
+cat("\t\tFiltered variants:",length(GOI_gnomAD_df_filtered[,1]),"\n\n")
+
+save.image("troubleshooting_workspace.RData") #####################
+
+cat("\tConverting coordinates from hg19 to hg38\n")
+# this returns coordinates aligned to GRCh37/hg19; change to hg38
+GOI_gnomAD_df_filtered$Position <- unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = as.numeric(GOI_gnomAD_df_filtered$Position), width = 1)),Chain_19to38)))
+
+save.image("troubleshooting_workspace.RData") #####################
+
+#change ins and del format to match cBP (ExAC includes ref allele at start; e.g. ATT/A rather than TT/-)
+cat("\tfixing ins and del format to match cBP variants")
+InsDelIndex_gnomAD <- which((nchar(GOI_gnomAD_df_filtered$Reference)>1) | (nchar(GOI_gnomAD_df_filtered$Alternate)>1))
+GOI_gnomAD_df_filtered[InsDelIndex_gnomAD,"Reference"] <- sapply(GOI_gnomAD_df_filtered$Reference[InsDelIndex_gnomAD], function(x) substring(x,2))
+GOI_gnomAD_df_filtered[GOI_gnomAD_df_filtered$Reference == "","Reference"] <- "-"
+GOI_gnomAD_df_filtered[InsDelIndex_gnomAD,"Alternate"] <- sapply(GOI_gnomAD_df_filtered$Alternate[InsDelIndex_gnomAD], function(x) substring(x,2))
+GOI_gnomAD_df_filtered[GOI_gnomAD_df_filtered$Alternate == "","Alternate"] <- "-"
+
+save.image("troubleshooting_workspace.RData") #####################
+
+

@@ -265,22 +265,138 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
   GOI_cBP_mutations[coding_variant_index,"AA_freq"] <- sapply(GOI_cBP_mutations[coding_variant_index,"AA"], function(x) sum(GOI_cBP_mutations[coding_variant_index,"AA"] == x, na.rm = TRUE))
   
   
-  #map positions of ExaC variants ; note: some exac variants are outside map key (e.g. where they map to other transcript with larger UTR)
-  cat("relative mapping ExAC variants\n")
-  for (x in c("relative_transcript","exon_intron","coding_segments_key","relative_coding_sequence","relative_AA_position","peptide","nearest_junction_codon")) {
-    ExAC_df[,x] <- GOI_mapping_key[as.character(ExAC_df$pos),x]
-  }
+  save.image("troubleshooting_workspace.RData") #####################  
   
   # positions for single base changes are not different between the two (always correspond to the actual base pos)
   # insertions and deletions are not different between + and - stranded genes 
-  #   ins: ExAC_pos = cBP_end; cBP_end = base before inserted sequence; cBP_start = pos of base after insertion (always end + 1)
-  #   del: ExAC_pos = cBP_start - 1; cBP start and end match start and end of deletion sequence; ExAC pos matches base before deleted section
+  #   ins: gnomAD_pos = cBP_end; cBP_end = base before inserted sequence; cBP_start = pos of base after insertion (always end + 1)
+  #   del: gnomAD_pos = cBP_start - 1; cBP start and end match start and end of deletion sequence; gnomAD pos matches base before deleted section
   # make new col in both datasets: $unified_pos
   #   cBP ins = end_pos
-  #   ExAC in = dont change
+  #   gnomAD ins = dont change
   #   cBP del = start_pos
-  #   ExAC del = pos + 1
-  cat("\tadding $unified_pos to both cBP and ExAC data frames for easy comparison of matching variants")
-  cat("\t\tcBP insertions")
+  #   gnomAD del = pos + 1
+  #   assume it is possible for ambiguous edge cases where ref and var are both greater than 1 in length and possibly also equal in length 
+  cat("Adding $unified_pos and $unified_annotation to both cBP and gnomAD data frames for easy comparison of matching variants\n")
+  
+  cat("\tgnomAD:\n")
+  GOI_gnomAD_df_filtered$unified_pos <- 0
+  GOI_gnomAD_df_filtered$unified_annotation <- GOI_gnomAD_df_filtered$Annotation
+  #loop thru each var and add unified_pos and unified_annotation
+  for(x in 1:length(GOI_gnomAD_df_filtered$unified_pos)){
+    ref <- GOI_gnomAD_df_filtered[x,"Reference"]
+    var <- GOI_gnomAD_df_filtered[x,"Alternate"]
+    pos <- GOI_gnomAD_df_filtered[x,"Position"]
+    flag <- ""
+    # flag used to assign fs type below
+    if(ref == "-" | nchar(ref) < nchar(var)){ #insertion
+      GOI_gnomAD_df_filtered[x,"unified_pos"] <- pos #no change
+      flag <- "ins"
+    } else if(var == "-" | nchar(ref) > nchar(var)){ #deletion
+      GOI_gnomAD_df_filtered[x,"unified_pos"] <- pos + 1
+      flag <- "del"
+    } else if(nchar(ref) == 1 & nchar(var) == 1 & ref != var){ #missense
+      GOI_gnomAD_df_filtered[x,"unified_pos"] <- pos #no change
+    } else if(nchar(ref) == nchar(var)){ #ins/del???
+      cat(paste0("\t\tIns/Del??? - pos: ",pos," ref: ",ref," var: ",var,"\n"))
+      GOI_gnomAD_df_filtered[x,"unified_pos"] <- pos #no change
+    } else {
+      cat(paste0("\t\tEdge case? - pos: ",pos," ref: ",ref," var: ",var,"\n"))
+      GOI_gnomAD_df_filtered[x,"unified_pos"] <- pos #no change
+      flag <- "other"
+    }
+    
+    if(GOI_gnomAD_df_filtered[x,"Annotation"] == "frameshift_variant" & flag == "ins"){
+      GOI_gnomAD_df_filtered[x,"unified_annotation"] <- "frameshift_insertion"
+    } else if(GOI_gnomAD_df_filtered[x,"Annotation"] == "frameshift_variant" & flag == "del"){
+      GOI_gnomAD_df_filtered[x,"unified_annotation"] <- "frameshift_deletion"
+    } else if(GOI_gnomAD_df_filtered[x,"Annotation"] == "splice_acceptor_variant" | GOI_gnomAD_df_filtered[x,"Annotation"] == "splice_donor_variant"){
+      GOI_gnomAD_df_filtered[x,"unified_annotation"] <- "splice_site_variant"
+    } 
+    
+  }
+  rm(x,var,ref,flag,pos)
+  
+  save.image("troubleshooting_workspace.RData") #####################  
+  
+  cat("\tcBP:\n")
+  GOI_cBP_mutations$unified_pos <- 0
+  GOI_cBP_mutations$unified_annotation <- ""
+  #loop thru each var and add unified_pos and unified_annotation
+  for(x in 1:length(GOI_cBP_mutations$unified_pos)){
+    ref <- GOI_cBP_mutations[x,"reference_allele"]
+    var <- GOI_cBP_mutations[x,"variant_allele"]
+    start_pos <- GOI_cBP_mutations[x,"start_position"]
+    end_pos <- GOI_cBP_mutations[x,"end_position"]
+    flag <- ""
+    # flag used to assign fs type below
+    if(ref == "-" | nchar(ref) < nchar(var)){ #insertion
+      GOI_cBP_mutations[x,"unified_pos"] <- end_pos #no change
+      flag <- "ins"
+    } else if(var == "-" | nchar(ref) > nchar(var)){ #deletion
+      GOI_cBP_mutations[x,"unified_pos"] <- start_pos
+      flag <- "del"
+    } else if(nchar(ref) == 1 & nchar(var) == 1 & ref != var){ #missense
+      GOI_cBP_mutations[x,"unified_pos"] <- end_pos
+    } else if(nchar(ref) == nchar(var)){ #ins/del???
+      cat(paste0("\t\tIns/Del??? - pos: ",pos," ref: ",ref," var: ",var,"\n"))
+      GOI_cBP_mutations[x,"unified_pos"] <- start_pos #choose start pos arbitrarily
+    } else {
+      cat(paste0("\t\tEdge case? - pos: ",start_pos," ref: ",ref," var: ",var,"\n"))
+      GOI_cBP_mutations[x,"unified_pos"] <- start_pos #choose start pos arbitrarily
+      flag <- "other"
+    }
+    
+    if(GOI_cBP_mutations[x,"mutation_type"] == "Frame_Shift_Ins"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "frameshift_insertion"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Frame_Shift_Del"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "frameshift_deletion"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Missense_Mutation"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "missense_variant"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "In_Frame_Ins"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "inframe_insertion"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Nonsense_Mutation"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "stop_gained"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Splice_Site"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "splice_site_variant"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Splice_Region"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "splice_region_variant"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "In_Frame_Del"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "inframe_deletion"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Translation_Start_Site"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "start_lost"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Nonstop_Mutation"){
+      GOI_cBP_mutations[x,"unified_annotation"] <- "stop_lost"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Targeted_Region"){ # found in TP53 I don't know what this is, has ref and var == "-"
+      cat("\t\tFound 'Targeted_Region' type; flagging for removal\n")
+      GOI_cBP_mutations[x,"unified_annotation"] <- "remove"
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Frame_Shift"){ # found in TP53, called from incorrect annotation of long ref and long var, is actually single base ins
+      cat("\t\tFound 'Frame_Shift' type (not ins or del?) ; flagging for removal\n")
+      GOI_cBP_mutations[x,"unified_annotation"] <- "remove"
+    } else {
+      cat(paste0("\t\tEdge case? - pos: ",start_pos," ref: ",ref," var: ",var,"\n", "annotation: ", GOI_cBP_mutations[x,"mutation_type"]))
+      GOI_cBP_mutations[x,"unified_annotation"] <- "remove"
+    }
+    
+  }
+  rm(x,var,ref,flag,start_pos,end_pos)
+  #remove rows flagged for removal
+  cat("\tRemoving ",sum(GOI_cBP_mutations$unified_annotation == "remove")," rows flagged for removal\n\n")
+  GOI_cBP_mutations <- GOI_cBP_mutations[GOI_cBP_mutations$unified_annotation != "remove",]
+  
+  save.image("troubleshooting_workspace.RData") #####################  
+  
+  #map positions of gnomAD variants ; note: some gnomAD variants are outside map key (e.g. where they map to other transcript with larger UTR)
+  cat("relative mapping gnomAD variants based on unified position\n\n")
+  for (x in c("relative_transcript","exon_intron","coding_segments_key","relative_coding_sequence","relative_AA_position","peptide","nearest_junction_codon")) {
+    GOI_gnomAD_df_filtered[,x] <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),x]
+  }
+  #map positions of gnomAD variants ; note: some gnomAD variants are outside map key (e.g. where they map to other transcript with larger UTR)
+  cat("relative mapping cBP variants based on unified position\n\n")
+  for (x in c("relative_transcript","exon_intron","coding_segments_key","relative_coding_sequence","relative_AA_position","peptide","nearest_junction_codon")) {
+    GOI_cBP_mutations[,x] <- GOI_mapping_key[as.character(GOI_cBP_mutations$unified_pos),x]
+  }
+  
+  save.image("troubleshooting_workspace.RData") #####################  
   
 cat("\n\n\n############################## Relative mapping complete ####################################\n\n\n")
