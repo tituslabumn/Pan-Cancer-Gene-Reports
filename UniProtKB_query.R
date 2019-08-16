@@ -26,21 +26,25 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   # retrieve features with some filetering
   
   # old method produced SSL connect errors; use RCurl::getURL
+  # still an issue, seems to just require persistant attempts?
   #   read.df <- read.delim(paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt"),stringsAsFactors = FALSE) 
+  #   read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
   UniProt_URL <- paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt") #returns data frame with one col of lines
   library(RCurl)
   attempt<-1
-  while(attempt < 10){
+  success <- FALSE
+  while(attempt < 10 & success == FALSE){
     read.df <- tryCatch({
-      1+1
-      #read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
+      success <- TRUE
+      read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
       },error=function(cond){
       cat("\tAttempt",attempt,"failed. Attemting ",10-attempt," more times.\n")
+      success <<- FALSE
       attempt<<-attempt+1
       Sys.sleep(15)
     })
   }
-  rm(attempt)
+  rm(attempt,success)
   Uniprot_txt_parsed <<- read.df
   cat(read.df)
 
