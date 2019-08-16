@@ -1,5 +1,25 @@
 # Pan-Cancer Gene Reports (PCGR) v1.0
 
+
+  |---------------------------------------------------------------------------------|
+  |------------------------- PAN-CANCER GENE REPORTS -------------------------------|
+  |---------------------------------------------------------------------------------|
+  |                                                                                 |
+  |__/\\\\\\\\\\\\\__________/\\\\\\\\\_____/\\\\\\\\\\\\____/\\\\\\\\\_____        |
+  | _\/\\\/////////\\\_____/\\\////////____/\\\//////////___/\\\///////\\\___       |
+  |  _\/\\\_______\/\\\___/\\\/____________/\\\_____________\/\\\_____\/\\\___      |
+  |   _\/\\\\\\\\\\\\\/___/\\\_____________\/\\\____/\\\\\\\_\/\\\\\\\\\\\/____     |
+  |    _\/\\\/////////____\/\\\_____________\/\\\___\/////\\\_\/\\\//////\\\____    |
+  |     _\/\\\_____________\//\\\____________\/\\\_______\/\\\_\/\\\____\//\\\___   |
+  |      _\/\\\______________\///\\\__________\/\\\_______\/\\\_\/\\\_____\//\\\__  |
+  |       _\/\\\________________\////\\\\\\\\\_\//\\\\\\\\\\\\/__\/\\\______\//\\\_ |
+  |        _\///____________________\/////////___\////////////____\///________\///__|
+  |                                                                                 |
+  |---------------------------------------------------------------------------------|
+  |---------------------------- by TAYLOR S HARDING --------------------------------|
+  |------------------- Developed at the University of Minnesota --------------------|
+  |---------------------------------------------------------------------------------|
+
 ## About 
 PCGR is an automated informatic pipeline written by Taylor Harding at the University of Minnesota that creates a pan-cancer analytical report for a user-specified gene of interest (GOI). PCGR is primarily written in the R statistical programming language.  
 
@@ -108,7 +128,7 @@ Major packages/dependancies include:
 - RSelenium
 
 ### Known issues
-  Occasionally one of the several web connections/APIs (e.g. UniProt) will fail to connect for unknown reasons ('SSL connect error'). In these cases you may need to retry your query at another time.
+Occasionally the uniprot REST UniProt API will fail to connect for unknown reasons (SSL error). PCGR makes up to 20 attempts (usually requires less than 5-10) to access the database before halting execution which requires re-querrying at another time. 
 
 
 

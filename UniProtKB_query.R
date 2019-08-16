@@ -31,6 +31,7 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   #   read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
   UniProt_URL <- paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt") #returns data frame with one col of lines
   library(RCurl)
+  # attempt to access url, if fail try up to 19 more times every 15s
   attempt<-1
   success <- FALSE
   while(attempt < 20 & success == FALSE){
