@@ -29,7 +29,17 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   #   read.df <- read.delim(paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt"),stringsAsFactors = FALSE) 
   UniProt_URL <- paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt") #returns data frame with one col of lines
   library(RCurl)
-  read.df <- read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
+  attempt<-1
+  while(attempt < 10){
+    tryCatch({
+      read.df <- read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
+      },error={
+      cat("\tAttempt",attempt,"failed. Attemting ",10-attempt," more times.\n")
+      attempt<-attempt+1
+      Sys.sleep(15)
+    })
+  }
+  rm(attempt)
   Uniprot_txt_parsed <<- read.df
 
   #colnames of this parsed txt file contains AA length <- extract for future use

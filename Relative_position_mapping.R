@@ -349,7 +349,7 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
     
     if(GOI_cBP_mutations[x,"mutation_type"] == "Frame_Shift_Ins"){
       GOI_cBP_mutations[x,"unified_annotation"] <- "frameshift_insertion"
-    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Frame_Shift_Del"){
+    } else if(GOI_cBP_mutations[x,"mutation_type"] == "Frame_Shift_Del" | GOI_cBP_mutations[x,"mutation_type"] == "frame_shift_del"){ # edge case of lower case annotation found in TP53
       GOI_cBP_mutations[x,"unified_annotation"] <- "frameshift_deletion"
     } else if(GOI_cBP_mutations[x,"mutation_type"] == "Missense_Mutation"){
       GOI_cBP_mutations[x,"unified_annotation"] <- "missense_variant"
@@ -375,7 +375,7 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
       GOI_cBP_mutations[x,"unified_annotation"] <- "remove"
     } else {
       ann <- GOI_cBP_mutations[x,"mutation_type"]
-      cat(paste0("\t\tEdge case? - pos: ",start_pos," ref: ",ref," var: ",var,"\n", "annotation: ", ann))
+      cat(paste0("\t\tEdge case? - pos: ",start_pos," ref: ",ref," var: ",var,"\n", "annotation: ", ann,"\n"))
       GOI_cBP_mutations[x,"unified_annotation"] <- "remove"
     }
     
