@@ -22,10 +22,15 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   }
   
   cat("\tUniProtKB ID:",GOI_uniprot_id,"\n\n")
-  cat("Querying UniProtKB GOI page","\n\n")
-  #retrieve features with some filetering
-  read.df <- read.delim(paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt"),stringsAsFactors = FALSE) #returns data frame with one col of lines
-  Uniprot_txt_parsed <<- read.df
+  cat("Querying UniProtKB GOI page via RCurl","\n\n")
+  # retrieve features with some filetering
+  
+  # old method produced SSL connect errors; use RCurl::getURL
+  #   read.df <- read.delim(paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt"),stringsAsFactors = FALSE) 
+  UniProt_URL <- paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt") #returns data frame with one col of lines
+  library(RCurl)
+  Uniprot_txt_parsed <<- read.delim(textConnection(getURL(UniProt_URL)),stringsAsFactors = FALSE)
+
   #colnames of this parsed txt file contains AA length <- extract for future use
   GOI_UNIPROT_AA_LENGTH <<- as.numeric(rev(unlist(strsplit(colnames(read.df),split = "\\.+")))[2])
   cat("\tAA length parsed:",GOI_UNIPROT_AA_LENGTH,"\n\n")
