@@ -153,7 +153,12 @@ cat("map variants to nearest exon junction\n")
       "#984EA3", #purple - splice_region_variant
       "#4DAF4A", #green - start_lost
       "#A65628" # brown - stop_lost
-    )
+    ),
+    stringsAsFactors = FALSE
+  )
+  legend <- list(
+    labels = row.names(mut_type_color_key),
+    fill = mut_type_color_key$color
   )
 
 cat("Figure3\n")    
@@ -171,7 +176,6 @@ cat("Figure3\n")
     F3_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
     F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
     
-    #lolliplot(SNP.gr = F3_variants ,features = F3_features, ranges = F3_ranges, ylab = FALSE, xaxis = F3_x_axis,cex = 1, jitter = "label")
   }  
   #seperately plot a legend
   # par(mar = c(0,0,0,0))
