@@ -105,7 +105,7 @@ GOI_gnomAD_df_filtered$Position <- unlist(start(liftOver(GRanges(paste0('chr',GO
 save.image("troubleshooting_workspace.RData") #####################
 
 #change ins and del format to match cBP (ExAC includes ref allele at start; e.g. ATT/A rather than TT/-)
-cat("\tfixing ins and del format to match cBP variants")
+cat("\tfixing ins and del format to match cBP variants\n\n")
 InsDelIndex_gnomAD <- which((nchar(GOI_gnomAD_df_filtered$Reference)>1) | (nchar(GOI_gnomAD_df_filtered$Alternate)>1))
 GOI_gnomAD_df_filtered[InsDelIndex_gnomAD,"Reference"] <- sapply(GOI_gnomAD_df_filtered$Reference[InsDelIndex_gnomAD], function(x) substring(x,2))
 GOI_gnomAD_df_filtered[GOI_gnomAD_df_filtered$Reference == "","Reference"] <- "-"

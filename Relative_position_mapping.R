@@ -374,12 +374,13 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
       cat("\t\tFound 'Frame_Shift' type (not ins or del?) ; flagging for removal\n")
       GOI_cBP_mutations[x,"unified_annotation"] <- "remove"
     } else {
-      cat(paste0("\t\tEdge case? - pos: ",start_pos," ref: ",ref," var: ",var,"\n", "annotation: ", GOI_cBP_mutations[x,"mutation_type"]))
+      ann <- GOI_cBP_mutations[x,"mutation_type"]
+      cat(paste0("\t\tEdge case? - pos: ",start_pos," ref: ",ref," var: ",var,"\n", "annotation: ", ann))
       GOI_cBP_mutations[x,"unified_annotation"] <- "remove"
     }
     
   }
-  rm(x,var,ref,flag,start_pos,end_pos)
+  rm(x,var,ref,flag,start_pos,end_pos,ann)
   #remove rows flagged for removal
   cat("\tRemoving ",sum(GOI_cBP_mutations$unified_annotation == "remove")," rows flagged for removal\n\n")
   GOI_cBP_mutations <- GOI_cBP_mutations[GOI_cBP_mutations$unified_annotation != "remove",]
