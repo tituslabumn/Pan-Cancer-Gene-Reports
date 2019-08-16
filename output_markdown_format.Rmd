@@ -1,6 +1,6 @@
 ---
 output: pdf_document
-title: "cBioPortal query report: **`r GOI`**"
+title: "PCGR query report: **`r GOI`**"
 date: "`r Sys.Date()`"
 ---
 
@@ -37,7 +37,7 @@ if(length(F1_feature_df[,1])>0){
 }
 ```
 
-###Color legend
+### Color legend
 
 ```{r echo=FALSE}
 par(mar = c(0,0,0,0))
@@ -47,7 +47,7 @@ legend("center", legend = F1_feature_labels, fill = F1_features$fill,cex = 0.8)
 
 \pagebreak
 
-#All features (minus variants and sequence conflicts)
+# All features (minus variants and sequence conflicts)
 
 ```{r echo=FALSE}
 kable(GOI_protein_feature_annotation, row.names = FALSE)
@@ -86,7 +86,7 @@ kable(all_tissue_types_table, row.names = FALSE, align = 'l',caption = "Tissue t
 
 \pagebreak
 
-#Gene fusions returned:
+# Gene fusions returned:
 
 ```{r echo=FALSE}
 kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")], row.names = FALSE)
@@ -94,13 +94,13 @@ kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")], r
 
 \pagebreak
 
-#All variants returned
+# All variants returned
 
 ```{r echo=FALSE, fig.asp=1}
 lolliplot(SNP.gr = F3_variants ,features = F3_features, ranges = F3_ranges, ylab = FALSE, xaxis = F3_x_axis,cex = 1, jitter = "label")
 ```
 
-##Top 50 variants
+## Top 50 variants
 ```{r echo=FALSE, fig.asp=1}
 #lolliplot(SNP.gr = F4_variants ,features = F4_features, ranges = F4_ranges, ylab = FALSE, xaxis = F4_x_axis,yaxis = F4_yaxis,cex = 1, jitter = "label")
 ```
@@ -115,13 +115,4 @@ par(mar = c(0,0,0,0))
 par(mar = c(0,0,0,0))
   plot.new()
   legend("center", legend = F3_feature_labels, fill = F3_features$fill)
-```
-
-
-\pagebreak
-
-#R session info:
-
-```{r echo=FALSE}
-sessionInfo()
 ```

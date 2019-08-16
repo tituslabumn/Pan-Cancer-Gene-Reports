@@ -33,7 +33,7 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   library(RCurl)
   attempt<-1
   success <- FALSE
-  while(attempt < 10 & success == FALSE){
+  while(attempt < 20 & success == FALSE){
     read.df <- tryCatch({
       success <- TRUE
       read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
