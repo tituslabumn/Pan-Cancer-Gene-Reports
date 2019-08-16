@@ -38,7 +38,7 @@ parse_uniprotKB_annotation <- function(gene = GOI){
       success <- TRUE
       read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
       },error=function(cond){
-      cat("\tAttempt",attempt,"failed. Attemting ",10-attempt," more times.\n")
+      cat("\tAttempt",attempt,"failed. Attemting ",20-attempt," more times.\n")
       success <<- FALSE
       attempt<<-attempt+1
       Sys.sleep(15)

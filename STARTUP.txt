@@ -15,23 +15,23 @@
   |                                                                                 |
   |---------------------------------------------------------------------------------|
   |---------------------------- by TAYLOR S HARDING --------------------------------|
+  |------------------- Developed at the University of Minnesota --------------------|
   |---------------------------------------------------------------------------------|
 
-For source code and more detailed instructions visit github repository:
-https://github.com/tsharding/Pan-Cancer-Gene-Reports
+      For source code and more detailed instructions visit github repository:
+                https://github.com/tsharding/Pan-Cancer-Gene-Reports
 
-
----------------------------------- INSTRUCTIONS -------------------------------------
+----------------------------------- INSTRUCTIONS -------------------------------------
 
 To query a gene of interest execute the run shell script with gene symbol as argument: 
 # ./run_PCGR_query.sh <GOI gene symbol>
-	Output PDF and workspace will be placed in /OUTPUT
-	Make sure to specify '-v <your_host_dirctory_for_output>:/OUTPUT'
-	to access output files
+	example # ./run_PCGR_query.sh TP53
+	Output PDF and workspace will be placed in this container at /OUTPUT
 
 
-To re-initialize PCGR (update studies from cBioPortal, requires manual annotation step): 
+[OPTIONAL] To re-initialize PCGR (see readme for manual annotation step instructions): 
 # ./initialize_PCGR.sh
+
 
 To exit PCGR container
 # exit
