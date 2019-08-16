@@ -46,7 +46,7 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   }
   rm(attempt,success)
   Uniprot_txt_parsed <<- read.df
-  cat(read.df)
+  cat("Succesffully retrieved\n\n")
 
   #colnames of this parsed txt file contains AA length <- extract for future use
   GOI_UNIPROT_AA_LENGTH <<- as.numeric(rev(unlist(strsplit(colnames(read.df),split = "\\.+")))[2])
