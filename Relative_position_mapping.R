@@ -329,6 +329,7 @@ cat("\tinstances:",sum(GOI_cBP_mutations$amino_acid_change == "MUTATED"),"\n\n")
     start_pos <- GOI_cBP_mutations[x,"start_position"]
     end_pos <- GOI_cBP_mutations[x,"end_position"]
     flag <- ""
+    cat(x," ")
     # flag used to assign fs type below
     if(ref == "-" | nchar(ref) < nchar(var)){ #insertion
       GOI_cBP_mutations[x,"unified_pos"] <- end_pos #no change
