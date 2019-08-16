@@ -144,7 +144,7 @@ cat("map variants to nearest exon junction\n")
     ),
     color = c(
       "#999999", # grey - missense_variant
-      "##8DD3C7", # teal - inframe_insertion
+      "#8DD3C7", # teal - inframe_insertion
       "#F781BF", # pink - inframe_deletion
       "#E41A1C", #red - stop_gained
       "#FF7F00", #orange - frameshift_insertion
