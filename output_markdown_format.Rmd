@@ -96,8 +96,19 @@ kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")], r
 
 # All variants returned
 
-```{r echo=FALSE, fig.asp=1}
+```{r echo=FALSE, fig.asp=0.5, fig.height=10, fig.width=10}
 lolliplot(SNP.gr = F3_variants ,features = F3_features, ranges = F3_ranges, ylab = FALSE, xaxis = F3_x_axis,cex = 0.75, jitter = "label", legend =  legend)
+```
+
+```{r echo=FALSE, fig.asp=1, fig.width=10, fig.align='center', out.width='\\textwidth'}
+lolliplot(SNP.gr = list(C=Ftest_gnomAD,B=GRanges(),A=Ftest_variants),
+          features = list(z=Ftest_features,y=Ftest_features_2,x=Ftest_features),
+          ranges = Ftest_ranges,
+          ylab = c("gnomAD variants [log2(allele count)]","UniProt \nFeatures","cBP cancer variants [# of instances]"),
+          xaxis = Ftest_x_axis,
+          cex = 0.75,
+          jitter = "label",
+          legend = legend)
 ```
 
 ```{r echo=FALSE}

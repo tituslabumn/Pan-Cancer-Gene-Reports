@@ -96,6 +96,11 @@ cat("\tFiltering out 'intron' variants (splice region kept)")
 GOI_gnomAD_df_filtered <- GOI_gnomAD_df_filtered[GOI_gnomAD_df_filtered$Annotation != "intron_variant",]
 cat("\t\tFiltered variants:",length(GOI_gnomAD_df_filtered[,1]),"\n\n")
 
+# remove cases where Allele.Count = 0  ; not sure why these are returned at all ??
+cat("\tFiltering out variants with Allele.Count of 0")
+GOI_gnomAD_df_filtered <- GOI_gnomAD_df_filtered[GOI_gnomAD_df_filtered$Allele.Count != 0,]
+cat("\t\tFiltered variants:",length(GOI_gnomAD_df_filtered[,1]),"\n\n")
+
 save.image("troubleshooting_workspace.RData") #####################
 
 cat("\tConverting coordinates from hg19 to hg38\n")
