@@ -108,7 +108,17 @@ Major packages/dependancies include:
 - RSelenium
 
 ### Known issues
-Occasionally the uniprot REST UniProt API will fail to connect for unknown reasons (SSL error). PCGR makes up to 20 attempts (usually requires less than 5-10) to access the database before halting execution which requires re-querrying at another time. 
+Occasionally the uniprot REST UniProt API will fail to connect for unknown reasons (SSL error). PCGR makes up to 20 attempts (usually requires less than 5-10) to access the database before halting execution which requires re-querrying at another time.
+
+PCGR docker-compose .yml construction may fail on Windoews docker tools due to volume mounting error. For now this may require manually starting the containers as below:
+
+```{bash eval=FALSE}
+  # to start PCGR
+  docker run --name pcgr_selenium_chrome --rm -d -p 4444:4444 -v /home/seluser/Downloads selenium/standalone-chrome
+  docker run -ti --rm --volumes-from pcgr_selenium_chrome -v [/path/to/your/output/directory]:/OUTPUT --link=pcgr_selenium_chrome tsharding/pcgr_v1.0
+  # when finished
+  docker stop pcgr_selenium_chrome
+```
 
 
 
