@@ -66,7 +66,7 @@ F1_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$T
 #F1_site_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("METAL","SITE","MOD_RES","CROSSLNK"),]
 if(length(F1_feature_df[,1])>0){
   F1_feature_labels <- truncate.feature.labels(F1_feature_df,20)
-  F1_features <- GRanges(seqnames = "chr", IRanges(start = F1_feature_df$AA_start, end = F1_feature_df$AA_end, names = NULL))
+  F1_features <- GRanges(seqnames = "chr", IRanges(start = F1_feature_df$AA_start, end = F1_feature_df$AA_end, names = F1_feature_labels))
   F1_features$height <- 0.04
   F1_features$fill <- combined_qualitative_palette[1:length(F1_features)]
   F1_features$featureLayerID <- sep_overlap_features(F1_feature_df)

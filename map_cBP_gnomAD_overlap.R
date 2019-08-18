@@ -1,6 +1,6 @@
 ########### map_cBP_gnomAD_overlap.R ################
 
-cat("##################### label overlap between cBioPortal data and gnomAD variants #########################")
+cat("##################### label overlap between cBioPortal data and gnomAD variants #########################\n\n")
 
 GOI_cBP_mutations$unified_label <- sapply(1:length(GOI_cBP_mutations[,1]), function(x) paste(GOI_cBP_mutations[x,c("unified_pos","reference_allele","variant_allele")],collapse = "@"))
 GOI_gnomAD_df_filtered$unified_label <- sapply(1:length(GOI_gnomAD_df_filtered[,1]), function(x) paste(GOI_gnomAD_df_filtered[x,c("unified_pos","Reference","Alternate")],collapse = "@"))
