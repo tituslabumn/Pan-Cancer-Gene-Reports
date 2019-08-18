@@ -2,7 +2,7 @@ FROM rocker/r-base:latest
 
 RUN mkdir PCGR
 
-COPY startup.sh STARTUP.txt dockerfile_Rpackages.R /
+COPY startup.sh dockerfile_Rpackages.R /
 
 RUN apt-get update && apt-get install -y \
 nano \
