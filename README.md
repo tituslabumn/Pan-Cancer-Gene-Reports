@@ -9,7 +9,7 @@ PCGR obtains all natural variants (excluding those associated with cancer cases)
 
 PCGR additionally obtains information from several database APIs (i.e. Ensembl, UniProtKB) that are used to structurally annotate GOI transcripts and peptides.
 
-See 'example_output.pdf' for an example report (GOI = NRAS).  
+See 'Example Output - TP53.hmtl' for an example report.  
 
 PCGR source code is currently designed to be run in a Debian Linux environment with aditional requirments outlined below. PCGR has not been tested on versions of R <3.6.0  
 
