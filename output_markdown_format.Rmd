@@ -29,7 +29,7 @@ Transcript end position: **`r GOI_exon_annotation_main_transcript$transcript_end
 
 # Protein features: Domains, Regions, Motifs and Modifications
 
-```{r echo=FALSE,fig.align='center', out.width='\\textwidth'}
+```{r echo=FALSE}
 
 lolliplot(SNP.gr = F1_variants,
           features = F1_features,
@@ -97,7 +97,7 @@ kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")], r
 
 # All variants returned
 
-```{r echo=FALSE, fig.asp=0.35, fig.width=10, out.width='\\textwidth'}
+```{r echo=FALSE, fig.asp=0.5, fig.width=10, out.width='\\textwidth'}
 lolliplot(SNP.gr = F3_variants ,
           features = F3_features, 
           ranges = F3_ranges, 
