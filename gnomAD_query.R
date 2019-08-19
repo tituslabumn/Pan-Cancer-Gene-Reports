@@ -34,7 +34,7 @@ remDr$open(silent = TRUE)
 
 
 # if there are multiple ENSG ids returned by ensembl for this gene (e.g. MYH11), try each untill success (if fail will not be able to find button)
-if(length(GOI_ENSG) > 1) cat("Multiple ENSG ids, trying each untill data retrived\n")
+if(length(GOI_ENSG) > 1) cat("Multiple ENSG ids, trying each untill data retrived\n\n")
 success <- FALSE
 x <- 1
 while (success == FALSE) {
@@ -62,7 +62,7 @@ while (success == FALSE) {
     if(x == length(GOI_ENSG)){
       stop("None of the ids worked: Fatal\n\n")
     }
-    cat("\tENSG failed, trying next\n")
+    cat("\tENSG failed, trying next\n\n\n")
     x <<- x + 1
   })
 }
