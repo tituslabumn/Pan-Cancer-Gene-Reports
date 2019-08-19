@@ -185,33 +185,38 @@ cat("Figure3\n")
 cat("Figure4\n")
 
 
-GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
-GOI_gnomAD_df_filtered$imaging_score <- log2(GOI_gnomAD_df_filtered$Allele.Count)
+# GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
+# GOI_gnomAD_df_filtered$imaging_score <- log2(GOI_gnomAD_df_filtered$Allele.Count)
+# 
+# Ftest_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
+# 
+# if(length(Ftest_feature_df[,1])>0){
+#   Ftest_feature_labels <- truncate.feature.labels(Ftest_feature_df,20)
+#   Ftest_features <- GRanges(seqnames = "chr", IRanges(start = Ftest_feature_df$AA_start, end = Ftest_feature_df$AA_end, names = NULL))
+#   Ftest_features$height <- 0.04
+#   Ftest_features$fill <- combined_qualitative_palette[1:length(Ftest_features)]
+#   Ftest_features$featureLayerID <- sep_overlap_features(Ftest_feature_df)
+#   Ftest_features_2 <- Ftest_features
+#   Ftest_features_2$height <- 0.04
+#   
+#   Ftest_gnomAD <- GRanges(seqnames = "chr", IRanges(start = GOI_gnomAD_df_filtered$imaging_AA, width = 1,names = NULL))
+#   Ftest_gnomAD$score <- GOI_gnomAD_df_filtered$imaging_score
+#   Ftest_gnomAD$color <- mut_type_color_key[GOI_gnomAD_df_filtered$unified_annotation,"color"]
+#   #Ftest_gnomAD$SNPsideID <- "bottom"
+#   
+#   Ftest_variants <- GRanges(seqnames = "chr", IRanges(start = Unique_mutations_plot$imaging_AA, width = 1,names = NULL))
+#   Ftest_variants$score <- Unique_mutations_plot$AA_change_freq
+#   Ftest_variants$color <- mut_type_color_key[Unique_mutations_plot$unified_annotation,"color"]
+#   
+#   Ftest_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+#   Ftest_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
+#   
+# }  
 
-Ftest_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
 
-if(length(Ftest_feature_df[,1])>0){
-  Ftest_feature_labels <- truncate.feature.labels(Ftest_feature_df,20)
-  Ftest_features <- GRanges(seqnames = "chr", IRanges(start = Ftest_feature_df$AA_start, end = Ftest_feature_df$AA_end, names = NULL))
-  Ftest_features$height <- 0.04
-  Ftest_features$fill <- combined_qualitative_palette[1:length(Ftest_features)]
-  Ftest_features$featureLayerID <- sep_overlap_features(Ftest_feature_df)
-  Ftest_features_2 <- Ftest_features
-  Ftest_features_2$height <- 0.04
-  
-  Ftest_gnomAD <- GRanges(seqnames = "chr", IRanges(start = GOI_gnomAD_df_filtered$imaging_AA, width = 1,names = NULL))
-  Ftest_gnomAD$score <- GOI_gnomAD_df_filtered$imaging_score
-  Ftest_gnomAD$color <- mut_type_color_key[GOI_gnomAD_df_filtered$unified_annotation,"color"]
-  #Ftest_gnomAD$SNPsideID <- "bottom"
-  
-  Ftest_variants <- GRanges(seqnames = "chr", IRanges(start = Unique_mutations_plot$imaging_AA, width = 1,names = NULL))
-  Ftest_variants$score <- Unique_mutations_plot$AA_change_freq
-  Ftest_variants$color <- mut_type_color_key[Unique_mutations_plot$unified_annotation,"color"]
-  
-  Ftest_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
-  Ftest_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
-  
-}  
+
+
+
 # lolliplot(SNP.gr = list(C=Ftest_gnomAD,B=GRanges(),A=Ftest_variants),
 #           features = list(z=Ftest_features,y=Ftest_features_2,x=Ftest_features),
 #           ranges = Ftest_ranges,
