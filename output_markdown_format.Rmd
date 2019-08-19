@@ -1,7 +1,7 @@
 ---
 output: html_document
 title: "PCGR query report: **`r GOI`**"
-date: "`r Sys.Date()`"
+date: "`r Sys.time()`"
 ---
 
 ```{r setup, include=FALSE}
@@ -25,8 +25,6 @@ Coding sequence length: **`r GOI_exon_annotation_main_transcript$cds_length[1]`*
 Transcript start position: **`r GOI_exon_annotation_main_transcript$transcript_start[1]`**  
 Transcript end position: **`r GOI_exon_annotation_main_transcript$transcript_end[1]`**  
 
-\pagebreak
-
 # Protein features: Domains, Regions, Motifs and Modifications
 
 ```{r echo=FALSE}
@@ -40,21 +38,12 @@ lolliplot(SNP.gr = F1_variants,
 ```
 
 
-```{r echo=FALSE}
-#par(mar = c(0,0,0,0))
-#plot.new()
-#legend("center", legend = F1_feature_labels, fill = F1_features$fill,cex = 0.8)
-```
-
-\pagebreak
-
 # All features (minus variants and sequence conflicts)
 
 ```{r echo=FALSE}
 kable(GOI_protein_feature_annotation, row.names = FALSE)
 ```
 
-\pagebreak
 
 # Ensembl Transcripts
 
@@ -63,8 +52,6 @@ All transcripts are ploted to their relative genomic positions with all shared i
 lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = FALSE, xaxis = F2_x_axis)
 ```
 
-
-\pagebreak
 
 # Query metadata
 
@@ -85,15 +72,12 @@ kable(multi_mut_table, row.names = FALSE, align = 'l',caption = "Cases with mult
 kable(all_tissue_types_table, row.names = FALSE, align = 'l',caption = "Tissue types in all cases") #fix duplicates
 ```
 
-\pagebreak
-
 # Gene fusions returned:
 
 ```{r echo=FALSE}
 kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")], row.names = FALSE)
 ```
 
-\pagebreak
 
 # All variants returned
 
