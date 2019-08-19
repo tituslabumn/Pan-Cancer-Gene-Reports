@@ -14,21 +14,13 @@ if("selenium-file" %in% list.files(path = "/")){
 
 cat("Retriving gnomAD non-cancer variant file via RSelenium web scraper\n\n")
 
-  # docker run --name pcgr_selenium_chrome --rm -d -p 4444:4444 -v /home/seluser/Downloads selenium/standalone-chrome
-# docker run -ti --rm --volumes-from pcgr_selenium_chrome -v ~/PCGR_OUTPUT:/OUTPUT --link=pcgr_selenium_chrome tsharding/pcgr_v1.0
-# docker stop pcgr_selenium_chrome
-
 library("RSelenium")
-
-URL_gnomAD <- paste0("https://gnomad.broadinstitute.org/gene/",GOI_ENSG,"?dataset=gnomad_r2_1_non_cancer")
-# https://gnomad.broadinstitute.org/gene/ENSG00000145555?dataset=gnomad_r2_1_non_cancer
-
+# set chrome preferences ('extraCapabilities')
 eCaps <- list(
   chromeOptions =
     list(prefs = list(
       "profile.default_content_settings.popups" = 0L,
-      "download.prompt_for_download" = FALSE#,
-      #"download.default_directory" = "/home/seluser/Downloads"
+      "download.prompt_for_download" = FALSE
     )
     )
 )
@@ -39,27 +31,47 @@ save.image("troubleshooting_workspace.RData") #####################
 remDr <- remoteDriver(remoteServerAddr = "selenium" ,port = 4444L, browser = "chrome", extraCapabilities = eCaps) 
 cat("\tOpening connection via remote driver\n")
 remDr$open(silent = TRUE)
-# navigate to GOI gnomAD page
-cat("\tNavigating to gnomAD browser GOI page(non-cancer):\n")
-cat("\t\t",URL_gnomAD,"\n")
-remDr$navigate(URL_gnomAD)
-Sys.sleep(3) #wait for page to load
-cat("\t\tPage title:\n")
-print(remDr$getTitle())
-      # remDr$screenshot(display = TRUE)
-#   find download button (xpath found by exploring element in chromium)
-cat("\tFinding download button\n")
-webElem_dl_button <- remDr$findElement(using = "xpath","//*[@id='root']/div/div/div[2]/div/div[5]/section/div[2]/button")
-# click download button
-Sys.sleep(3)
-cat("\tMouse over download button\n")
-webElem_dl_button$sendKeysToElement(list(key = "down_arrow"))
-cat("\tClick download button\n")
-Sys.sleep(3)
-webElem_dl_button$clickElement()
+
+
+# if there are multiple ENSG ids returned by ensembl for this gene (e.g. MYH11), try each untill success (if fail will not be able to find button)
+if(length(GOI_ENSG) > 1) cat("Multiple ENSG ids, trying each untill data retrived\n")
+success <- FALSE
+x <- 1
+while (success == FALSE) {
+  tryCatch({
+    URL_gnomAD <- paste0("https://gnomad.broadinstitute.org/gene/",GOI_ENSG[x],"?dataset=gnomad_r2_1_non_cancer")
+    # navigate to GOI gnomAD page; can troubleshoot by opening localhost:4444 in web browser and opening selenium console and take screenshots
+    cat("\tNavigating to gnomAD browser GOI page(non-cancer):\n")
+    cat("\t\t",URL_gnomAD,"\n")
+    remDr$navigate(URL_gnomAD)
+    Sys.sleep(3) #wait for page to load
+    cat("\t\tPage title:\n")
+    print(remDr$getTitle())
+    # find download button (xpath found by exploring element in chromium)
+    cat("\tFinding download button\n")
+    webElem_dl_button <- remDr$findElement(using = "xpath","//*[@id='root']/div/div/div[2]/div/div[5]/section/div[2]/button")
+    Sys.sleep(3)
+    cat("\tMouse over download button\n")
+    webElem_dl_button$sendKeysToElement(list(key = "down_arrow"))
+    cat("\tClick download button\n")
+    Sys.sleep(3)
+    webElem_dl_button$clickElement()
+    success <- TRUE
+  },error=function(err){
+    print(err) # if other typs of errors occur regardless of ENSG id they will still be printed
+    if(x == length(GOI_ENSG)){
+      stop("None of the ids worked: Fatal\n\n")
+    }
+    cat("\tENSG failed, trying next\n")
+    x <<- x + 1
+  })
+}
+rm(success,x)
+
 cat("\tClose driver connection\n")
 Sys.sleep(3)
 remDr$close()
+
 
 #check if downloads dir was created and contains one file only
 if("Downloads" %in% list.files(path = "/selenium-file/") & length(list.files(path = "/selenium-file/Downloads/")) == 1){
