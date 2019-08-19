@@ -95,7 +95,6 @@ source("/PCGR/Pan-Cancer-Gene-Reports/gnomAD_query.R")
 save.image("troubleshooting_workspace.RData") #####################
 
 #relative position mapping for visualization
-setwd(initial_directory)
 source("/PCGR/Pan-Cancer-Gene-Reports/Relative_position_mapping.R")
 
 save.image("troubleshooting_workspace.RData") #####################

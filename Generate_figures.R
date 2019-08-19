@@ -213,10 +213,6 @@ cat("Figure4\n")
 #   
 # }  
 
-
-
-
-
 # lolliplot(SNP.gr = list(C=Ftest_gnomAD,B=GRanges(),A=Ftest_variants),
 #           features = list(z=Ftest_features,y=Ftest_features_2,x=Ftest_features),
 #           ranges = Ftest_ranges,

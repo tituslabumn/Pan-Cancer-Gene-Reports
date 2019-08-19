@@ -109,17 +109,6 @@ grid.text(paste0("All ",GOI," cBioPortal variants (n = ",length(F3_variants$scor
           gp=gpar(cex=1.5, fontface="bold"))
 ```
 
-```{r echo=FALSE, fig.asp=1, fig.width=10, fig.align='center', out.width='\\textwidth',out.height='\\textheight'}
-lolliplot(SNP.gr = list(C=Ftest_gnomAD,B=GRanges(),A=Ftest_variants),
-          features = list(z=Ftest_features,y=Ftest_features_2,x=Ftest_features),
-          ranges = Ftest_ranges,
-          ylab = c("gnomAD variants [log2(allele count)]","UniProt \nFeatures","cBP cancer variants [# of instances]"),
-          xaxis = Ftest_x_axis,
-          cex = 0.75,
-          jitter = "label",
-          legend = legend)
-
-```
 
 ```{r echo=FALSE}
 par(mar = c(0,0,0,0))
