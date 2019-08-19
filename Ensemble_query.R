@@ -78,7 +78,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   if(length(unlist(GOI_ENSG)) > 1){
     cat("\n\n\t#### WARNING! More than one ENSG id returned ################\n")
     print(GOI_ENSG)
-    GOI_ENSG <- unlist(GOI_ENSG) # make compatible for gnomAD query iteration
+    GOI_ENSG <<- unlist(GOI_ENSG) # make compatible for gnomAD query iteration
   }
   
   #assign GOI ENSG from GRCh37 (must be used for ExAC querries)
