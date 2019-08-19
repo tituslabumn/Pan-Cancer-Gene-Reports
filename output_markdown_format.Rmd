@@ -1,7 +1,7 @@
 ---
 output: html_document
 title: "PCGR output: **`r GOI`**"
-date: "`r date()`"
+date: "`r paste(date(),Sys.timezone())`"
 ---
 
 ```{r setup, include=FALSE}
