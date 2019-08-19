@@ -1,7 +1,7 @@
 ---
 output: html_document
-title: "PCGR query report: **`r GOI`**"
-date: "`r Sys.time()`"
+title: "PCGR output: **`r GOI`**"
+date: "`r date()`"
 ---
 
 ```{r setup, include=FALSE}
@@ -91,17 +91,4 @@ lolliplot(SNP.gr = F3_variants ,
           legend =  legend)
 grid.text(paste0("All ",GOI," cBioPortal variants (n = ",length(F3_variants$score),")"), x=.5, y=0.9, just="top", 
           gp=gpar(cex=1.5, fontface="bold"))
-```
-
-
-```{r echo=FALSE}
-par(mar = c(0,0,0,0))
-  plot.new()
-  legend("center", legend = rownames(mut_type_color_key), fill = mut_type_color_key$color)
-```
-
-```{r echo=FALSE}
-par(mar = c(0,0,0,0))
-  plot.new()
-  legend("center", legend = F3_feature_labels, fill = F3_features$fill)
 ```
