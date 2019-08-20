@@ -36,7 +36,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   )
   # convert data frame to character
   GOI_CHR <<- as.character(unlist(GOI_CHR))
-  cat("\t",GOI_CHR,"\n\n")
+  print(GOI_CHR)
   
   #exon info
   cat("\nretrieving exon annotations","\n")
