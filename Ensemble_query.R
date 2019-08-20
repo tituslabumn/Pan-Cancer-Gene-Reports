@@ -42,6 +42,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   cat("\nretrieving exon annotations","\n")
   annotation_df_exon <- getBM(
     attributes = c(
+      "ensembl_gene_id",
       "ensembl_transcript_id",
       "ensembl_exon_id",
       "rank",
