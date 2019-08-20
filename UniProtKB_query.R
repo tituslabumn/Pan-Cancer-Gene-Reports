@@ -10,7 +10,7 @@ cat("##############################################################\n\n\n")
 parse_uniprotKB_annotation <- function(gene = GOI){
   cat("############# retriving Uniprot/Swissprot ID from biomaRt ############","\n\n")
   
-  GOI_uniprot_id <<- as.character(getBM(attributes = "uniprotswissprot", filters = "hgnc_symbol", values = gene, mart = hs_ensembl))
+  GOI_uniprot_id <<- as.character(getBM(attributes = "uniprotswissprot", filters = "ensembl_gene_id", values = GOI_ENSG, mart = hs_ensembl))
   # in rare cases biomaRt returns emty logical for uniprotID. This happens for MYH16 regardless of genome/mart version.
   if(GOI_uniprot_id == "logical(0)"){
     cat("\t########### no UniProtID returned by biomaRt ############\n\t\tAttempting to retrive from bioDBnet instead\n\tIDs mapped:\n")

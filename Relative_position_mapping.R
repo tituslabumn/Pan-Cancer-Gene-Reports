@@ -128,7 +128,7 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
 #map nearest_intron_exon_junction
   #this is for aligning splice region variants to the nearest codon for visualization
   #if equidistant default to upstream on positive strand
-  cat("mapping nearest junction for non-coding bases","\n\n")
+  cat("mapping nearest codon or exon/intron junction for non-coding bases","\n\n")
   #copy over relative_AA_position
   GOI_mapping_key$nearest_junction_codon <- GOI_mapping_key$relative_AA_position
   proximity_df <- data.frame(
@@ -145,7 +145,7 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
       proximity_df$junction_number[x] <- junction_num
       junction_num <- junction_num + 1
       proximity_df$AA_position[x] <- GOI_mapping_key$relative_AA_position[x+1]
-    }else if(!cds_index[x] & cds_index[x-1]){ #if next index is tansition to coding 
+    }else if(!cds_index[x] & cds_index[x-1]){ #if next index is tansition from coding 
       proximity_df$junction[x] <- TRUE
       proximity_df$junction_number[x] <- junction_num
       proximity_df$AA_position[x] <- GOI_mapping_key$relative_AA_position[x-1]
@@ -153,12 +153,21 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
   }
   rm(x,junction_num)
   proximity_df <- proximity_df[proximity_df$junction,]
-  #assign nearest AA numbers
-    #first UTR
-    GOI_mapping_key$nearest_junction_codon[(1:proximity_df$index[1])] <- proximity_df$AA_position[1]
-    #last UTR
-    GOI_mapping_key$nearest_junction_codon[(proximity_df$index[length(proximity_df[,1])]:length(GOI_mapping_key[,1]))] <- proximity_df$AA_position[length(proximity_df[,1])]
-    #introns
+  # assign nearest AA numbers
+  # IMPORTANT NOTE - it seems not all ENST's include UTRs. Some start with the coding sequence
+    # first UTR
+    if(GOI_mapping_key$coding_segments_key[1] != "Coding"){
+      GOI_mapping_key$nearest_junction_codon[(1:proximity_df$index[1])] <- proximity_df$AA_position[1]
+    }else{
+      cat("\t WARNING transcript sequence retrieved does not include a UTR at the transcript start position")
+    }
+    # last UTR
+    if(rev(GOI_mapping_key$coding_segments_key)[1] != "Coding"){
+      GOI_mapping_key$nearest_junction_codon[(proximity_df$index[length(proximity_df[,1])]:length(GOI_mapping_key[,1]))] <- proximity_df$AA_position[length(proximity_df[,1])]
+    }else{
+      cat("\t WARNING transcript sequence retrieved does not include a UTR at the transcript end position")
+    }
+    # introns
     for(x in 2:(max(proximity_df$junction_number)-1)){
       # cat(x,"\n")
       intron_subset <- proximity_df[proximity_df$junction_number == x,]
