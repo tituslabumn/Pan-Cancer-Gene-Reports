@@ -60,8 +60,9 @@ library("biomaRt")
   #set homo sapian mart for GOI annotations
   hs_ensembl <- useMart("ensembl", dataset="hsapiens_gene_ensembl")
 
-cat("UniProtKB query initiated\n")
-source("/PCGR/Pan-Cancer-Gene-Reports/UniProtKB_query.R")
+  cat("Ensembl query initiated\n")
+  source("/PCGR/Pan-Cancer-Gene-Reports/Ensemble_query.R")
+  cat("Ensembl query complete\n\n\n")
 
 ####################################################################################
 #query cBP mutations for GOI using custom function declared in initialized_workspace
@@ -80,12 +81,8 @@ source("/PCGR/Pan-Cancer-Gene-Reports/cBP_query.R")
 cat("mutation query complete\n\n\n")
 
 ####################################################################################
-cat("Ensembl query initiated\n")
-
-#keys for PFAM IDs
-# library("PFAM.db")
-source("/PCGR/Pan-Cancer-Gene-Reports/Ensemble_query.R")
-cat("Ensembl query complete\n\n\n")
+cat("UniProtKB query initiated\n")
+source("/PCGR/Pan-Cancer-Gene-Reports/UniProtKB_query.R")
 
 save.image("troubleshooting_workspace.RData") #####################
 
@@ -94,16 +91,19 @@ source("/PCGR/Pan-Cancer-Gene-Reports/gnomAD_query.R")
 
 save.image("troubleshooting_workspace.RData") #####################
 
+####################################################################################
 #relative position mapping for visualization
 source("/PCGR/Pan-Cancer-Gene-Reports/Relative_position_mapping.R")
 
 save.image("troubleshooting_workspace.RData") #####################
 
+####################################################################################
 # determine overlap between cBioPortal data and gnomeAD data
 source("/PCGR/Pan-Cancer-Gene-Reports/map_cBP_gnomAD_overlap.R")
 
 save.image("troubleshooting_workspace.RData") #####################
 
+####################################################################################
 #analasis and figure data initialization
 source("/PCGR/Pan-Cancer-Gene-Reports/Generate_figures.R")
 
