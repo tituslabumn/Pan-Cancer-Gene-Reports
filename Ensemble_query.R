@@ -35,8 +35,8 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
   # convert data frame to character
-  GOI_CHR <<- as.character(GOI_CHR)[1]
-  print(GOI_CHR)
+  GOI_CHR <<- as.character(unlist(GOI_CHR))
+  cat("\t",GOI_CHR,"\n\n")
   
   #exon info
   cat("\nretrieving exon annotations","\n")
@@ -63,7 +63,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   )
   #filter for selected transcript; save as seperate df
   annotation_df_exon_main_transcript <- annotation_df_exon[annotation_df_exon$ensembl_transcript_id == GOI_TRANSCRIPT,]
-  print(annotation_df_exon[,c("ensembl_transcript_id","cds_length")])
+  print(annotation_df_exon[!duplicated(annotation_df_exon$ensembl_transcript_id),c("ensembl_transcript_id","cds_length")])
   
   #get peptide sequences for all transcripts
   cat("\nretrieving peptide sequences","\n")
