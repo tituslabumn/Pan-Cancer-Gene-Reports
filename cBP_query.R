@@ -1,9 +1,5 @@
-################# cBP_mutations_query_func.R ########################
-#Declare cBP.mutation.query()
+################# cBP_query.R ########################
 
-cat("declaring mutation query function...","\n\n")
-#main function for accessing mutation data
-cBP.mutation.query.2 <- function(gene,input_studies){
   cat("##############################################################\n")
   cat("############### Running cBP mutation query ###################\n")
   cat("##############################################################\n\n\n")
@@ -35,21 +31,19 @@ cBP.mutation.query.2 <- function(gene,input_studies){
     stringsAsFactors = FALSE
   )
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   cat("query mutations and clinical data from each mutation-data-containing study:","\n")
   #get mut data for all relavent studies and append all hits to the df
-  for (x in input_studies) {
+  for (x in all.mut.studies.filtered) {
     cat("\t",x,"...","\t")
-    mut.study <- getMutationData(mycgds,paste(x,"all",sep = "_"),paste(x,"mutations",sep = "_"),gene)
+    mut.study <- getMutationData(mycgds,paste(x,"all",sep = "_"),paste(x,"mutations",sep = "_"),GOI)
     cat(length(mut.study[,1]),"\t")
     mut.df <- rbind(mut.df,mut.study)
     cat("OK","\n")
   }
   
-  assign("pre_filter_diagotstic_df",mut.df, envir = .GlobalEnv)
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
+  assign("pre_filter_diagotstic_df",mut.df)
   save.image("troubleshooting_workspace.RData") #####################
   
   #make fusion.df and remove fusions from mut.df
@@ -61,6 +55,8 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   
   CHR <- mut.df$chr[1]
   cat("\n\n\nGOI is on chromosome #:",CHR,"\n")
+  
+  save.image("troubleshooting_workspace.RData") #####################
   
   #convert cordinates
   cat("\n","converting chr locations from hg19/GRCh37 to GRCh38.p12 via  rtracklayer/liftOver","\n")
@@ -102,7 +98,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   }
   )
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #filtering
@@ -112,7 +107,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   cat("adding $unique_id","\n")
   mut.df$unique_id <- paste(mut.df$case_id,mut.df$amino_acid_change, sep = "@@")
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #df will have duplicate studies
@@ -129,7 +123,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
     mut.df <- mut.df[-as.numeric(row.names(dup.cases[duplicated(dup.cases$unique_id),])),]
     cat("\n","total alterations so far:",length(mut.df[,1]),"\n")
   }
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #'sclc_cancercell_gardner_2017' appears to have normal and relapse samples for each patient leading to false 140% of cases annoatation
@@ -157,7 +150,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   }
   cat("\n","total alterations so far:",length(mut.df[,1]),"\n")
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #some bases in ref and alt column are "TRUE" rather than "T"
@@ -170,7 +162,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   print(length(mut.df[,1]))
   
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #some ref alleles can be marked as NA - these appear to be for insertions where NA should be "-"
@@ -190,7 +181,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
     mut.df[varNAindex,"variant_allele"] <- "-"
   }
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #convert insertion chr cordinates to ensembl-style (start = end + 1)   
@@ -198,7 +188,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   mut.df[mut.df$reference_allele == "-" & !is.na(mut.df$reference_allele),"start_position"] <- mut.df[mut.df$reference_allele == "-"& !is.na(mut.df$reference_allele),"start_position"] + 1
   mut.df[mut.df$reference_allele == "-" & !is.na(mut.df$reference_allele),"end_position"] <- mut.df[mut.df$reference_allele == "-" & !is.na(mut.df$reference_allele),"end_position"] - 1
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #remove never-used cols
@@ -212,7 +201,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   cat("adding $AA_change_freq","\n")
   mut.df$AA_change_freq <- sapply(mut.df$amino_acid_change, function(x) sum(mut.df$amino_acid_change == x))
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #add $AA
@@ -220,7 +208,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   #add $AA_freq
   mut.df$AA_freq <- sapply(mut.df$AA, function(x) sum(mut.df$AA == x,na.rm = TRUE))
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #add $altered_case_id
@@ -230,7 +217,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   cat("unique case_ids:",length(unique(mut.df$case_id)),"\n")
   cat("unique altered_case_ids:",length(unique(mut.df$altered_case_id)),"\n")
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #add $altered_unique_case_id
@@ -243,7 +229,6 @@ cBP.mutation.query.2 <- function(gene,input_studies){
     cat("new alterations total:",length(mut.df[,1]),"\n\n")
   }
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #add $case_ID_freq
@@ -251,23 +236,20 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   mut.df$case_ID_freq <- sapply(mut.df$altered_case_id, function(x) sum(mut.df$altered_case_id == x))
   #add cancer_type
   cat("adding $cancer_type","\n")
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   mut.df$cancer_type <- sapply(1:length(mut.df[,1]), function(x) master_case_df$cancer_type[master_case_df$study == mut.df$study[x] & master_case_df$altered_case_id == mut.df$altered_case_id[x]])
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #create mut.study.seqtotals
   cat("creating mut.study.seqtotals","\n")
   mut.study.seqtotals <- data.frame(
-    study = input_studies,
-    n_sequenced = as.numeric(sapply(input_studies, function(x) master_case_list_df$n_cases[master_case_list_df$case_list_id == paste0(x,"_sequenced")])),
-    n_altered = sapply(input_studies, function(x) length(unique(mut.df$altered_case_id[mut.df$study == x]))),
+    study = all.mut.studies.filtered,
+    n_sequenced = as.numeric(sapply(all.mut.studies.filtered, function(x) master_case_list_df$n_cases[master_case_list_df$case_list_id == paste0(x,"_sequenced")])),
+    n_altered = sapply(all.mut.studies.filtered, function(x) length(unique(mut.df$altered_case_id[mut.df$study == x]))),
     stringsAsFactors = FALSE
   )
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   mut.study.seqtotals$percent_altered <- (mut.study.seqtotals$n_altered / mut.study.seqtotals$n_sequenced )*100
@@ -279,16 +261,14 @@ cBP.mutation.query.2 <- function(gene,input_studies){
     stringsAsFactors = FALSE 
   )
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
-  cancer.type.totals$n_studies <- sapply(cancer.type.totals$cancer_type, function(x) length(unique(master_case_df$study[master_case_df$study %in% input_studies & master_case_df$cancer_type == x])))
-  cancer.type.totals$n_cases <- sapply(cancer.type.totals$cancer_type, function(x) sum((master_case_df$study %in% input_studies) & (master_case_df$cancer_type == x),na.rm = TRUE))
+  cancer.type.totals$n_studies <- sapply(cancer.type.totals$cancer_type, function(x) length(unique(master_case_df$study[master_case_df$study %in% all.mut.studies.filtered & master_case_df$cancer_type == x])))
+  cancer.type.totals$n_cases <- sapply(cancer.type.totals$cancer_type, function(x) sum((master_case_df$study %in% all.mut.studies.filtered) & (master_case_df$cancer_type == x),na.rm = TRUE))
   cancer.type.totals$n_altered <- sapply(cancer.type.totals$cancer_type, function(x) length(unique(mut.df$altered_case_id[mut.df$cancer_type == x])))
   cancer.type.totals$percent_altered <- (cancer.type.totals$n_altered / cancer.type.totals$n_cases )*100
   cancer.type.totals <- cancer.type.totals[order(-cancer.type.totals$percent_altered),]
   
-  assign("troubleshooting_mut.df",mut.df, envir = .GlobalEnv)
   save.image("troubleshooting_workspace.RData") #####################
   
   #print out metadata info
@@ -323,11 +303,10 @@ cBP.mutation.query.2 <- function(gene,input_studies){
   
   #assign out final df and save the df name for referencing below
   GOI_cBP_mutations <<- mut.df
-  assign("GOI_mut_df_name",paste0(gene,"_cBP_mutations") , envir = .GlobalEnv)  #for accessing via get() later
-  assign(paste0(gene,"_cBP_mutations"),mut.df, envir = .GlobalEnv)
-  assign("GOI_fusion_df_name",paste0(gene,"_cBP_fusions") , envir = .GlobalEnv)  #for accessing via get() later
-  assign(paste0(gene,"_cBP_fusions"),fusion.df, envir = .GlobalEnv)
-  assign(paste0(gene,"_cBP_study_mut_totals"),mut.study.seqtotals, envir = .GlobalEnv) # won't reference later, dont need name holder
-  assign("GOI_CHR",CHR, envir = .GlobalEnv)
-  assign(paste0(gene,"_cBP_tissue_totals"),cancer.type.totals, envir = .GlobalEnv) # won't reference later, dont need name holder
-}
+  assign("GOI_mut_df_name",paste0(GOI,"_cBP_mutations"))  #for accessing via get() later
+  assign(paste0(GOI,"_cBP_mutations"),mut.df)
+  assign("GOI_fusion_df_name",paste0(GOI,"_cBP_fusions"))  #for accessing via get() later
+  assign(paste0(GOI,"_cBP_fusions"),fusion.df)
+  assign(paste0(GOI,"_cBP_study_mut_totals"),mut.study.seqtotals) # won't reference later, dont need name holder
+  assign("GOI_CHR",CHR)
+  assign(paste0(GOI,"_cBP_tissue_totals"),cancer.type.totals) # won't reference later, dont need name holder

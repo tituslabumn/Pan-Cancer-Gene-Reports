@@ -67,8 +67,7 @@ cat("loading rtracklayer package","\n")
 library(rtracklayer)
 cat("\n")
 
-source("/PCGR/Pan-Cancer-Gene-Reports/cBP_mutations_query_func.R")
-cBP.mutation.query.2(GOI,all.mut.studies.filtered)
+source("/PCGR/Pan-Cancer-Gene-Reports/cBP_query.R")
 cat("mutation query complete\n\n\n")
 ####################################################################################
 #ensemble gene/transcript/protein database annotation API
