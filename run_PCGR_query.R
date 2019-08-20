@@ -55,6 +55,15 @@ output_directory <- paste0("/OUTPUT/",GOI)
 dir.create(output_directory,showWarnings = FALSE)
 
 ####################################################################################
+#ensemble gene/transcript/protein database annotation API
+library("biomaRt")
+  #set homo sapian mart for GOI annotations
+  hs_ensembl <- useMart("ensembl", dataset="hsapiens_gene_ensembl")
+
+cat("UniProtKB query initiated\n")
+source("/PCGR/Pan-Cancer-Gene-Reports/UniProtKB_query.R")
+
+####################################################################################
 #query cBP mutations for GOI using custom function declared in initialized_workspace
 cat("mutation query initiated\n")
 
@@ -69,14 +78,6 @@ cat("\n")
 
 source("/PCGR/Pan-Cancer-Gene-Reports/cBP_query.R")
 cat("mutation query complete\n\n\n")
-####################################################################################
-#ensemble gene/transcript/protein database annotation API
-library("biomaRt")
-  #set homo sapian mart for GOI annotations
-  hs_ensembl <- useMart("ensembl", dataset="hsapiens_gene_ensembl")
-
-cat("UniProtKB query initiated\n")
-source("/PCGR/Pan-Cancer-Gene-Reports/UniProtKB_query.R")
 
 ####################################################################################
 cat("Ensembl query initiated\n")

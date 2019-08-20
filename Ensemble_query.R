@@ -23,6 +23,19 @@ save.image("troubleshooting_workspace.RData") #####################
 BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   cat("Calling BM_GOI_annotoation()")
 
+  #get accurate CHR (cBP returns 23 for X)
+  cat("\nretrieving chromosome name","\n")
+  GOI_CHR <- getBM(
+    attributes = c(
+      "chromosome_name"
+    ),
+    filters =  filter_type, 
+    values = value,
+    mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
+  )
+  # convert data frame to character
+  GOI_CHR <- as.character(GOI_CHR)
+  
   #exon info
   cat("\nretrieving exon annotations","\n")
   annotation_df_exon <- getBM(

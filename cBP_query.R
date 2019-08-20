@@ -53,8 +53,8 @@
   mut.df <- mut.df[mut.df$start_position != -1,]
   cat("\n","total alterations so far:",length(mut.df[,1]),"\n")
   
-  CHR <- mut.df$chr[1]
-  cat("\n\n\nGOI is on chromosome #:",CHR,"\n")
+  
+  cat("\n\n\nGOI is on chromosome #:",GOI_CHR,"\n")
   
   save.image("troubleshooting_workspace.RData") #####################
   
@@ -65,35 +65,35 @@
   #in case variant positions return empty converted value (found errors in end positions in DACH1); set those values to 0 and remove after
   
   mut.df <- tryCatch({
-    mut.df$start_position <- unlist(start(liftOver(GRanges(paste0('chr',CHR), IRanges(start = mut.df$start_position, width = 1)),Chain_19to38)))
+    mut.df$start_position <- unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = mut.df$start_position, width = 1)),Chain_19to38)))
     mut.df #return if no errors
     },
     error=function(err){
       cat("\terror in  start position:\n")
       print(err)
-      not_empty_index <- sapply(sapply(mut.df$start_position, function(x) unlist(start(liftOver(GRanges(paste0('chr',CHR), IRanges(start = x, width = 1)),Chain_19to38)))),length)
+      not_empty_index <- sapply(sapply(mut.df$start_position, function(x) unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = x, width = 1)),Chain_19to38)))),length)
       cat("\tempty conversion positions:", sum(!(not_empty_index)),"\n")
       #remove problematic variants
       mut.df <- mut.df[as.logical(not_empty_index),]
       #re-try
-      mut.df$start_position <- unlist(start(liftOver(GRanges(paste0('chr',CHR), IRanges(start = mut.df$start_position, width = 1)),Chain_19to38)))
+      mut.df$start_position <- unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = mut.df$start_position, width = 1)),Chain_19to38)))
       return(mut.df)
     }
   )
   
   mut.df <- tryCatch({
-    mut.df$end_position <- unlist(start(liftOver(GRanges(paste0('chr',CHR), IRanges(start = mut.df$end_position, width = 1)),Chain_19to38)))
+    mut.df$end_position <- unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = mut.df$end_position, width = 1)),Chain_19to38)))
     mut.df #return if no errors
   },
   error=function(err){
     cat("\terror in  end position:\n")
     print(err)
-    not_empty_index <- sapply(sapply(mut.df$end_position, function(x) unlist(start(liftOver(GRanges(paste0('chr',CHR), IRanges(start = x, width = 1)),Chain_19to38)))),length)
+    not_empty_index <- sapply(sapply(mut.df$end_position, function(x) unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = x, width = 1)),Chain_19to38)))),length)
     cat("\tempty conversion positions:", sum(!(not_empty_index)),"\n")
     #remove problematic variants
     mut.df <- mut.df[as.logical(not_empty_index),]
     #re-try
-    mut.df$end_position <- unlist(start(liftOver(GRanges(paste0('chr',CHR), IRanges(start = mut.df$end_position, width = 1)),Chain_19to38)))
+    mut.df$end_position <- unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = mut.df$end_position, width = 1)),Chain_19to38)))
     return(mut.df)
   }
   )
@@ -308,5 +308,4 @@
   assign("GOI_fusion_df_name",paste0(GOI,"_cBP_fusions"))  #for accessing via get() later
   assign(paste0(GOI,"_cBP_fusions"),fusion.df)
   assign(paste0(GOI,"_cBP_study_mut_totals"),mut.study.seqtotals) # won't reference later, dont need name holder
-  assign("GOI_CHR",CHR)
   assign(paste0(GOI,"_cBP_tissue_totals"),cancer.type.totals) # won't reference later, dont need name holder
