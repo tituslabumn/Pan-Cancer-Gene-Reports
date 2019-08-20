@@ -24,14 +24,32 @@ save.image("troubleshooting_workspace.RData") #####################
 BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   cat("Calling BM_GOI_annotoation()")
 
+  cat("\nretrieving ENSG id","\n")
+  #assign GOI ENSG id
+  GOI_ENSG <<- getBM(
+    attributes = c(
+      "ensembl_gene_id"
+    ),
+    filters =  "ensembl_transcript_id", 
+    values = GOI_TRANSCRIPT,
+    mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
+  )
+  print(GOI_ENSG)
+  # some genes (e.g. MYH11) return two ENSG ids. 
+  if(length(unlist(GOI_ENSG)) > 1){
+    cat("\n\n\t#### WARNING! More than one ENSG id returned ################\n")
+    GOI_ENSG <<- unlist(GOI_ENSG) # make compatible for gnomAD query iteration
+    #there may no longer be an issue now that ENSG is being colected with ENST filter
+  }
+  
   #get accurate CHR (cBP returns 23 for X)
   cat("\nretrieving chromosome name","\n")
   GOI_CHR <- getBM(
     attributes = c(
       "chromosome_name"
     ),
-    filters =  filter_type, 
-    values = value,
+    filters =  "ensembl_gene_id", 
+    values = GOI_ENSG,
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
   # convert data frame to character
@@ -58,8 +76,8 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
       "transcript_length",
       "strand"
     ),
-    filters =  filter_type, 
-    values = value ,
+    filters =  "ensembl_gene_id", 
+    values = GOI_ENSG,
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
   #filter for selected transcript; save as seperate df
@@ -73,8 +91,8 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
       "ensembl_transcript_id",
       "peptide"
     ),
-    filters =  filter_type, 
-    values = value ,
+    filters =  "ensembl_gene_id", 
+    values = GOI_ENSG,
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
   #add peptide length col
@@ -84,30 +102,14 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
                                              })
   print(peptide_sequences[peptide_sequences$ensembl_transcript_id == GOI_TRANSCRIPT,"peptide"])
   
-  cat("\nretrieving ENSG id","\n")
-  #assign GOI ENSG id
-  GOI_ENSG <<- getBM(
-    attributes = c(
-      "ensembl_gene_id"
-    ),
-    filters =  filter_type, 
-    values = value ,
-    mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
-  )
-  print(GOI_ENSG)
-  # some genes (e.g. MYH11) return two ENSG ids. 
-  if(length(unlist(GOI_ENSG)) > 1){
-    cat("\n\n\t#### WARNING! More than one ENSG id returned ################\n")
-    GOI_ENSG <<- unlist(GOI_ENSG) # make compatible for gnomAD query iteration
-  }
   
   #assign GOI ENSG from GRCh37 (must be used for ExAC querries)
   GOI_ENSG_GRCh37 <<- getBM(
     attributes = c(
       "ensembl_gene_id"
     ),
-    filters =  filter_type, 
-    values = value ,
+    filters =  "ensembl_transcript_id", 
+    values = GOI_TRANSCRIPT ,
     mart = useMart(biomart="ENSEMBL_MART_ENSEMBL", host="grch37.ensembl.org", dataset="hsapiens_gene_ensembl")
   )
   
