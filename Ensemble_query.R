@@ -9,6 +9,7 @@ cat("#######################################################","\n","\n")
 ################################################################################
 cat("#################### Fetching ensemble annotations for GOI #########################\n")
 
+cat("GOI: ",GOI,"\n")
 
 cat("assigning canonical transcript per key used by cBP:","\n")
 GOI_TRANSCRIPT <- cBP_canonical_transcripts[GOI,"ensembl_transcript_id"]
@@ -34,7 +35,8 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
   # convert data frame to character
-  GOI_CHR <- as.character(GOI_CHR)
+  GOI_CHR <<- as.character(GOI_CHR)
+  Cat("\t",GOI_CHR,"\n\n")
   
   #exon info
   cat("\nretrieving exon annotations","\n")
@@ -61,6 +63,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   )
   #filter for selected transcript; save as seperate df
   annotation_df_exon_main_transcript <- annotation_df_exon[annotation_df_exon$ensembl_transcript_id == GOI_TRANSCRIPT,]
+  print(annotation_df_exon[,c("ensembl_transcript_id","cds_length")])
   
   #get peptide sequences for all transcripts
   cat("\nretrieving peptide sequences","\n")
@@ -78,6 +81,9 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
                                              function(x){
                                                if(x == "Sequence unavailable") return(0) else return(nchar(x))
                                              })
+  print(peptide_sequences[peptide_sequences$ensembl_transcript_id == GOI_TRANSCRIPT,"peptide"])
+  
+  cat("\nretrieving ENSG id","\n")
   #assign GOI ENSG id
   GOI_ENSG <<- getBM(
     attributes = c(
@@ -87,10 +93,10 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     values = value ,
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
+  print(GOI_ENSG)
   # some genes (e.g. MYH11) return two ENSG ids. 
   if(length(unlist(GOI_ENSG)) > 1){
     cat("\n\n\t#### WARNING! More than one ENSG id returned ################\n")
-    print(GOI_ENSG)
     GOI_ENSG <<- unlist(GOI_ENSG) # make compatible for gnomAD query iteration
   }
   
