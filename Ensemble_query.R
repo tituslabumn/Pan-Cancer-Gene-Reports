@@ -35,7 +35,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
   # convert data frame to character
-  GOI_CHR <<- as.character(GOI_CHR)
+  GOI_CHR <<- as.character(GOI_CHR)[1]
   cat("\t",GOI_CHR,"\n\n")
   
   #exon info
