@@ -74,7 +74,9 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
       "transcript_start",
       "transcript_end",
       "transcript_length",
-      "strand"
+      "strand",
+      "",
+      
     ),
     filters =  "ensembl_gene_id", 
     values = GOI_ENSG,
@@ -83,6 +85,27 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   #filter for selected transcript; save as seperate df
   annotation_df_exon_main_transcript <- annotation_df_exon[annotation_df_exon$ensembl_transcript_id == GOI_TRANSCRIPT,]
   print(annotation_df_exon[!duplicated(annotation_df_exon$ensembl_transcript_id),c("ensembl_transcript_id","cds_length")])
+  
+  # retrive support information for returned transcripts
+  #   TSL
+  #   GENCODE BASIC
+  #   APPRIS
+  GOI_transcript_support <- getBM(
+    attributes = c(
+      "ensembl_gene_id",
+      "ensembl_transcript_id",
+      "transcript_tsl",
+      "transcript_gencode_basic",
+      "transcript_appris"
+    ),
+    filters =  "ensembl_gene_id", 
+    values = GOI_ENSG,
+    mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
+  )
+  # sort based on level of support, GOI_TRANSCRIPT always first even if not highest support level (often the case)
+  GOI_transcript_support <- GOI_transcript_support[order(GOI_transcript_support$transcript_tsl),]
+  GOI_transcript_support <- GOI_transcript_support[rev(order(GOI_transcript_support$transcript_gencode_basic)),]
+  GOI_transcript_support <- GOI_transcript_support[rev(order(GOI_transcript_support$transcript_appris)),]
   
   #get peptide sequences for all transcripts
   cat("\nretrieving peptide sequences","\n")

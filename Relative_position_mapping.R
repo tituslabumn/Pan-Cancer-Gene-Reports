@@ -159,13 +159,13 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
     if(GOI_mapping_key$coding_segments_key[1] != "Coding"){
       GOI_mapping_key$nearest_junction_codon[(1:proximity_df$index[1])] <- proximity_df$AA_position[1]
     }else{
-      cat("\t WARNING transcript sequence retrieved does not include a UTR at the transcript start position")
+      cat("\t WARNING transcript sequence retrieved does not include a UTR at the transcript start position\n\n")
     }
     # last UTR
     if(rev(GOI_mapping_key$coding_segments_key)[1] != "Coding"){
       GOI_mapping_key$nearest_junction_codon[(proximity_df$index[length(proximity_df[,1])]:length(GOI_mapping_key[,1]))] <- proximity_df$AA_position[length(proximity_df[,1])]
     }else{
-      cat("\t WARNING transcript sequence retrieved does not include a UTR at the transcript end position")
+      cat("\t WARNING transcript sequence retrieved does not include a UTR at the transcript end position\n\n")
     }
     # introns
     for(x in 2:(max(proximity_df$junction_number)-1)){
