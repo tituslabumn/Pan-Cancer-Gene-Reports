@@ -52,6 +52,9 @@ All transcripts are ploted to their relative genomic positions with all shared i
 a<-lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = "Filteres ensembl transcript exons", xaxis = F2_x_axis,yaxis = FALSE)
 ```
 
+```{r echo=FALSE}
+kable(GOI_transcript_support[,2:6], row.names = FALSE)
+```
 
 # Query metadata
 

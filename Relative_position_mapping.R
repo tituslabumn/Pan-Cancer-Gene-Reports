@@ -223,7 +223,7 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
                                                                })
   # sort based on support df sorting from ensemble query sorting
   transcript_sort_df <- data.frame(row.names = GOI_transcript_support$ensembl_transcript_id,
-                                   sort = 1:length(GOI_transcript_support[,1]),
+                                   sort = length(GOI_transcript_support[,1]):1,
                                    stringsAsFactors = FALSE)
   GOI_transcript_exons_filtered$sort <- transcript_sort_df[GOI_transcript_exons_filtered$ensembl_transcript_id,"sort"]
   GOI_transcript_exons_filtered <- GOI_transcript_exons_filtered[order(GOI_transcript_exons_filtered$rank),]
