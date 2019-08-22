@@ -102,6 +102,8 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     values = GOI_ENSG,
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
+  # remove cases that are tslNA
+  GOI_transcript_support <- GOI_transcript_support[!grepl("NA",GOI_transcript_support$transcript_tsl),]
   # sort based on level of support, GOI_TRANSCRIPT always first even if not highest support level (often the case)
   GOI_transcript_support$sort <- 0
   # 'main cBP transcript' set to 1000
