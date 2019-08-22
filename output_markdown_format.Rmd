@@ -18,6 +18,7 @@ Number of unique Ensembl transcripts: **`r length(unique(GOI_exon_annotation$ens
 Number of unique Ensembl exons for all transcripts: **`r length(unique(GOI_exon_annotation$ensembl_exon_id))`**  
 
 ## Primary representative transcript:
+Ensembl gene ID **`r GOI_ENSG`**
 Ensembl transcript ID **`r GOI_TRANSCRIPT`**  
 Number of exons: **`r length(unique(GOI_exon_annotation_main_transcript$ensembl_exon_id))`**  
 Transcript length: **`r GOI_exon_annotation_main_transcript$transcript_length[1]`**  
@@ -38,10 +39,8 @@ lolliplot(SNP.gr = F1_variants,
 ```
 
 
-# All features (minus variants and sequence conflicts)
-
 ```{r echo=FALSE}
-kable(GOI_protein_feature_annotation, row.names = FALSE)
+kable(GOI_protein_feature_annotation, row.names = FALSE, caption = "All features (minus variants and sequence conflicts)")
 ```
 
 
@@ -55,10 +54,10 @@ a<-lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = "Filteres ense
 'Main' transcript: **`r GOI_TRANSCRIPT`**
 
 ```{r echo=FALSE}
-kable(GOI_transcript_support[,2:5], row.names = FALSE,caption = "Filtered transcripts returned by ensemble with support annotations")
+kable(GOI_transcript_support[,2:5], row.names = FALSE, caption = "Filtered transcripts returned by ensemble with support annotations")
 ```
 
-# Query metadata
+# cBioPortal Query Metadata
 
 Total number of studies returned by cBioPortal: **`r length(all.studies[,1])`**  
 Total number of unique case IDs returned by cBioPortal: **`r (length(unique(master_case_df$case_id)))`**  
