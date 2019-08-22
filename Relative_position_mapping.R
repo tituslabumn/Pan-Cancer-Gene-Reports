@@ -183,7 +183,9 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
   
     cat("mapping relative transcript position (union of all transcripts without intronic space)","\n\n")
 #make key for relative transcript position (union of all transcripts (filtered in ensembl query script) without intronic space)
-  Unique_GOI_ensembl_exons <- GOI_exon_annotation[!(duplicated(GOI_exon_annotation[GOI_exon_annotation$ensembl_transcript_id %in% GOI_transcript_support$ensembl_transcript_id,"ensembl_exon_id"])),]
+  GOI_transcript_exons_filtered <- GOI_exon_annotation[GOI_exon_annotation$ensembl_transcript_id %in% GOI_transcript_support$ensembl_transcript_id,]
+    
+  Unique_GOI_ensembl_exons <- GOI_transcript_exons_filtered[!(duplicated(GOI_transcript_exons_filtered[GOI_transcript_exons_filtered$ensembl_transcript_id %in% GOI_transcript_support$ensembl_transcript_id,"ensembl_exon_id"])),]
   #get union of all positions within ranges of exons
   union_ranges <- numeric()
   for(x in 1:length(Unique_GOI_ensembl_exons[,1])){
@@ -204,7 +206,6 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
     union_transcripts_relative_pos_key$relative_union_transcript_position <- rev(union_transcripts_relative_pos_key$relative_union_transcript_position)
   }
   
-  GOI_transcript_exons_filtered <- GOI_exon_annotation[GOI_exon_annotation$ensembl_transcript_id %in% GOI_transcript_support$ensembl_transcript_id,]
   # add relative start and end for each transcript
   GOI_transcript_exons_filtered$relative_union_start <- sapply(1:length(GOI_transcript_exons_filtered[,1]),
                                                                function(x) {
