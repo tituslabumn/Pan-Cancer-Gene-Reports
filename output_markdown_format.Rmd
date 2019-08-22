@@ -47,13 +47,15 @@ kable(GOI_protein_feature_annotation, row.names = FALSE)
 
 # Ensembl Transcripts
 
-All transcripts are ploted to their relative genomic positions with all shared intronic regions removed. Transcription start sites are always on the left regardless of strand. **'Main' representative transcript used for variant alignment is in red**  
+All transcripts are ploted to their relative genomic positions with all shared intronic regions removed. Transcription start sites are always on the left regardless of coding strand. **'Main' representative transcript used for variant alignment is in red**  
 ```{r echo=FALSE,fig.asp=1}
 a<-lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = "Filteres ensembl transcript exons", xaxis = F2_x_axis,yaxis = FALSE)
 ```
 
+'Main' transcript: **`r GOI_TRANSCRIPT`**
+
 ```{r echo=FALSE}
-kable(GOI_transcript_support[,2:6], row.names = FALSE)
+kable(GOI_transcript_support[,2:5], row.names = FALSE,caption = "Filtered transcripts returned by ensemble with support annotations")
 ```
 
 # Query metadata
