@@ -27,7 +27,7 @@ Transcript end position: **`r GOI_exon_annotation_main_transcript$transcript_end
 
 # Protein features: Domains, Regions, Motifs and Modifications
 
-```{r echo=FALSE, strip.white=TRUE}
+```{r echo=FALSE}
 
 lolliplot(SNP.gr = F1_variants,
           features = F1_features,
@@ -48,7 +48,7 @@ kable(GOI_protein_feature_annotation, row.names = FALSE)
 # Ensembl Transcripts
 
 All transcripts are ploted to their relative genomic positions with all shared intronic regions removed. Transcription start sites are always on the left regardless of strand. **'Main' representative transcript used for variant alignment is in red**  
-```{r echo=FALSE,fig.asp=1,fig.pos=}
+```{r echo=FALSE,fig.asp=1}
 a<-lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = "Filteres ensembl transcript exons", xaxis = F2_x_axis,yaxis = FALSE)
 ```
 
