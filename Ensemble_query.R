@@ -74,9 +74,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
       "transcript_start",
       "transcript_end",
       "transcript_length",
-      "strand",
-      "",
-      
+      "strand"
     ),
     filters =  "ensembl_gene_id", 
     values = GOI_ENSG,
