@@ -182,9 +182,9 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
   
   
     cat("mapping relative transcript position (union of all transcripts without intronic space)","\n\n")
-#make key for relative transcript position (union of all transcripts without intronic space)
-  Unique_GOI_ensembl_exons <- GOI_exon_annotation[!(duplicated(GOI_exon_annotation$ensembl_exon_id)),]
-  #get union of positions for each range apppended
+#make key for relative transcript position (union of all transcripts (filtered in ensembl query script) without intronic space)
+  Unique_GOI_ensembl_exons <- GOI_exon_annotation[!(duplicated(GOI_exon_annotation[GOI_exon_annotation$ensembl_transcript_id %in% GOI_transcript_support$ensembl_transcript_id,"ensembl_exon_id"])),]
+  #get union of all positions within ranges of exons
   union_ranges <- numeric()
   for(x in 1:length(Unique_GOI_ensembl_exons[,1])){
     exon_range <- Unique_GOI_ensembl_exons[x,"exon_chrom_start"]:Unique_GOI_ensembl_exons[x,"exon_chrom_end"]
@@ -192,20 +192,42 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
   }
   rm(x,exon_range)
   union_ranges <- union_ranges[order(union_ranges)]
+  
+  # make df of relative position based on union of ranges (genomic positions as row.names names)
   union_transcripts_relative_pos_key <- data.frame(
     row.names = union_ranges,
     relative_union_transcript_position = 1:length(union_ranges),
     stringsAsFactors = FALSE
   )
+  # revers relative pos if on neg strand
   if(GOI_STRAND == -1){
     union_transcripts_relative_pos_key$relative_union_transcript_position <- rev(union_transcripts_relative_pos_key$relative_union_transcript_position)
-    GOI_exon_annotation$relative_union_start <- union_transcripts_relative_pos_key[as.character(GOI_exon_annotation$exon_chrom_end),"relative_union_transcript_position"]
-    GOI_exon_annotation$relative_union_end <- union_transcripts_relative_pos_key[as.character(GOI_exon_annotation$exon_chrom_start),"relative_union_transcript_position"]
-  }else{
-    GOI_exon_annotation$relative_union_start <- union_transcripts_relative_pos_key[as.character(GOI_exon_annotation$exon_chrom_start),"relative_union_transcript_position"]
-    GOI_exon_annotation$relative_union_end <- union_transcripts_relative_pos_key[as.character(GOI_exon_annotation$exon_chrom_end),"relative_union_transcript_position"]
   }
-
+  
+  GOI_transcript_exons_filtered <- GOI_exon_annotation[GOI_exon_annotation$ensembl_transcript_id %in% GOI_transcript_support$ensembl_transcript_id,]
+  # add relative start and end for each transcript
+  GOI_transcript_exons_filtered$relative_union_start <- sapply(1:length(GOI_transcript_exons_filtered[,1]),
+                                                               function(x) {
+                                                                 min(
+                                                                   union_transcripts_relative_pos_key[as.character(GOI_transcript_exons_filtered[x,"exon_chrom_start"]),"relative_union_transcript_position"],
+                                                                   union_transcripts_relative_pos_key[as.character(GOI_transcript_exons_filtered[x,"exon_chrom_end"]),"relative_union_transcript_position"]
+                                                                 )
+                                                               })
+  GOI_transcript_exons_filtered$relative_union_end <- sapply(1:length(GOI_transcript_exons_filtered[,1]),
+                                                               function(x) {
+                                                                 max(
+                                                                   union_transcripts_relative_pos_key[as.character(GOI_transcript_exons_filtered[x,"exon_chrom_start"]),"relative_union_transcript_position"],
+                                                                   union_transcripts_relative_pos_key[as.character(GOI_transcript_exons_filtered[x,"exon_chrom_end"]),"relative_union_transcript_position"]
+                                                                 )
+                                                               })
+  # sort based on support df sorting from ensemble query sorting
+  transcript_sort_df <- data.frame(row.names = GOI_transcript_support$ensembl_transcript_id,
+                                   sort = 1:length(GOI_transcript_support[,1]),
+                                   stringsAsFactors = FALSE)
+  GOI_transcript_exons_filtered$sort <- transcript_sort_df[GOI_transcript_exons_filtered$ensembl_transcript_id,"sort"]
+  GOI_transcript_exons_filtered <- GOI_transcript_exons_filtered[order(GOI_transcript_exons_filtered$rank),]
+  GOI_transcript_exons_filtered <- GOI_transcript_exons_filtered[order(GOI_transcript_exons_filtered$sort),]
+  
 save.image("troubleshooting_workspace.RData") #####################  
   
 cat("fixing cBP aa_change labeled as 'MUTATED'\n")

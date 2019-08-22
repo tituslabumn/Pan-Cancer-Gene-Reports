@@ -86,7 +86,9 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   annotation_df_exon_main_transcript <- annotation_df_exon[annotation_df_exon$ensembl_transcript_id == GOI_TRANSCRIPT,]
   print(annotation_df_exon[!duplicated(annotation_df_exon$ensembl_transcript_id),c("ensembl_transcript_id","cds_length")])
   
+  cat("\nretrieving transcript support annotations and sorting/filtering","\n")
   # retrive support information for returned transcripts
+  #   https://useast.ensembl.org/info/genome/genebuild/transcript_quality_tags.html
   #   TSL
   #   GENCODE BASIC
   #   APPRIS
@@ -103,9 +105,24 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
   # sort based on level of support, GOI_TRANSCRIPT always first even if not highest support level (often the case)
-  GOI_transcript_support <- GOI_transcript_support[order(GOI_transcript_support$transcript_tsl),]
-  GOI_transcript_support <- GOI_transcript_support[rev(order(GOI_transcript_support$transcript_gencode_basic)),]
-  GOI_transcript_support <- GOI_transcript_support[rev(order(GOI_transcript_support$transcript_appris)),]
+  GOI_transcript_support$sort <- 0
+  # 'main cBP transcript' set to 1000
+  GOI_transcript_support[GOI_transcript_support$ensembl_transcript_id == GOI_TRANSCRIPT,"sort"] <- 1000
+  # (6 - tsl rating) * 10 (0 if missing)
+  GOI_transcript_support$sort <- GOI_transcript_support$sort + 10*(6-as.numeric(gsub("tsl","",GOI_transcript_support$transcript_tsl)))
+  # add 60 for GENCODE BASIC
+  GOI_transcript_support$sort <- GOI_transcript_support$sort + 60 * !(GOI_transcript_support$transcript_gencode_basic == "")
+  # principal APRIS add 500
+  GOI_transcript_support$sort <- GOI_transcript_support$sort + 500 * grepl("principal",GOI_transcript_support$transcript_tsl)
+  # alternative APPris add 100
+  GOI_transcript_support$sort <- GOI_transcript_support$sort + 100 * grepl("alternative",GOI_transcript_support$transcript_tsl)
+  # sort
+  GOI_transcript_support <- GOI_transcript_support[rev(order(GOI_transcript_support$sort)),]
+  # remove values under 40 (non appris/basic with tsl3 and greater)
+  cat("\tFiltering out ",sum(GOI_transcript_support$sort <50),"transcripts with low support\n\n")
+  GOI_transcript_support <<- GOI_transcript_support[GOI_transcript_support$sort >=50 ,]
+  cat("GOI_TRANSCRIPT ('canonical transcript' used by cBP): ",GOI_TRANSCRIPT,"\n\n")
+  print(GOI_transcript_support[,2:5])
   
   #get peptide sequences for all transcripts
   cat("\nretrieving peptide sequences","\n")

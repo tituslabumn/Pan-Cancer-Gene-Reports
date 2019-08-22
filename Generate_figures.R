@@ -88,12 +88,12 @@ if(length(F1_feature_df[,1])>0){
 cat("Figure2\n")
 
 #Figure 2 - all transcripts plotted to relative transcript position
-F2_feature_df <- GOI_exon_annotation
+F2_feature_df <- GOI_transcript_exons_filtered
   F2_features <- GRanges(seqnames = "chr", IRanges(start = F2_feature_df$relative_union_start, end = F2_feature_df$relative_union_end, names = NULL))
-  F2_features$height <- 0.02
+  F2_features$height <- 0.04
   F2_features$fill <- "grey"
   F2_features$fill[F2_feature_df$ensembl_transcript_id == GOI_TRANSCRIPT] <- "red"
-  F2_features$featureLayerID <- F2_feature_df$ensembl_transcript_id
+  F2_features$featureLayerID <- F2_feature_df$sort
   F2_variants <- GRanges()
   F2_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
   F2_x_axis <- round(seq(from = 1, to = max(c(F2_feature_df$relative_union_start,F2_feature_df$relative_union_end)), length.out = 10),-1) #even split by 5 rounded to nearest 10
