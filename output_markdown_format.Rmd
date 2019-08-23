@@ -18,13 +18,32 @@ Number of unique Ensembl transcripts: **`r length(unique(GOI_exon_annotation$ens
 Number of unique Ensembl exons for all transcripts: **`r length(unique(GOI_exon_annotation$ensembl_exon_id))`**  
 
 ## Primary representative transcript:
-Ensembl gene ID **`r GOI_ENSG`**
+Ensembl gene ID **`r GOI_ENSG`** 
 Ensembl transcript ID **`r GOI_TRANSCRIPT`**  
 Number of exons: **`r length(unique(GOI_exon_annotation_main_transcript$ensembl_exon_id))`**  
 Transcript length: **`r GOI_exon_annotation_main_transcript$transcript_length[1]`**  
 Coding sequence length: **`r GOI_exon_annotation_main_transcript$cds_length[1]`**  
 Transcript start position: **`r GOI_exon_annotation_main_transcript$transcript_start[1]`**  
 Transcript end position: **`r GOI_exon_annotation_main_transcript$transcript_end[1]`**  
+
+# cBioPortal Query Metadata
+
+Total number of studies returned by cBioPortal: **`r length(all.studies[,1])`**  
+Total number of unique case IDs returned by cBioPortal: **`r (length(unique(master_case_df$case_id)))`**  
+
+Total number of studies with mutation/variant data available:  **`r length(all.mut.studies.filtered)`**  
+Total number of cases queried for **`r GOI`** variants: **`r sum(!duplicated(all_mut_cases$altered_case_id))`**  
+Total number of studies with **`r GOI`** variants: **`r length(unique(all_mut_cases$study))`**  
+Total number of unique cases represented in filtered mutation data: **`r length(unique(GOI_cBP_mutations$altered_case_id))`**  
+Total number of unique variants for **`r GOI`** returned:  **`r length(unique(GOI_cBP_mutations$amino_acid_change))`**  
+
+```{r echo=FALSE}
+kable(multi_mut_table, row.names = FALSE, align = 'l',caption = "Cases with multiple variants")
+```
+
+```{r echo=FALSE}
+kable(all_tissue_types_table, row.names = FALSE, align = 'l',caption = "Tissue types in all cases") #fix duplicates
+```
 
 # Protein features: Domains, Regions, Motifs and Modifications
 
@@ -57,35 +76,9 @@ a<-lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = "Filteres ense
 kable(GOI_transcript_support[,2:5], row.names = FALSE, caption = "Filtered transcripts returned by ensemble with support annotations")
 ```
 
-# cBioPortal Query Metadata
+# All cBioPortal variants returned
 
-Total number of studies returned by cBioPortal: **`r length(all.studies[,1])`**  
-Total number of unique case IDs returned by cBioPortal: **`r (length(unique(master_case_df$case_id)))`**  
-
-Total number of studies with mutation/variant data available:  **`r length(all.mut.studies.filtered)`**  
-Total number of cases queried for **`r GOI`** variants: **`r sum(!duplicated(all_mut_cases$altered_case_id))`**  
-Total number of studies with **`r GOI`** variants: **`r length(unique(all_mut_cases$study))`**  
-Total number of unique cases represented in filtered mutation data: **`r length(unique(GOI_cBP_mutations$altered_case_id))`**  
-Total number of unique variants for **`r GOI`** returned:  **`r length(unique(GOI_cBP_mutations$amino_acid_change))`**  
-
-```{r echo=FALSE}
-kable(multi_mut_table, row.names = FALSE, align = 'l',caption = "Cases with multiple variants")
-```
-
-```{r echo=FALSE}
-kable(all_tissue_types_table, row.names = FALSE, align = 'l',caption = "Tissue types in all cases") #fix duplicates
-```
-
-# Gene fusions returned:
-
-```{r echo=FALSE}
-kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")], row.names = FALSE)
-```
-
-
-# All variants returned
-
-```{r echo=FALSE, fig.asp=0.5, fig.width=10, out.width='\\textwidth'}
+```{r echo=FALSE, fig.asp=1, out.width='\\textwidth'}
 lolliplot(SNP.gr = F3_variants ,
           features = F3_features, 
           ranges = F3_ranges, 
@@ -95,4 +88,27 @@ lolliplot(SNP.gr = F3_variants ,
           legend =  legend)
 grid.text(paste0("All ",GOI," cBioPortal variants (n = ",length(F3_variants$score),")"), x=.5, y=0.9, just="top", 
           gp=gpar(cex=1.5, fontface="bold"))
+```
+
+# All gnomAD variants returned
+
+```{r echo=FALSE, fig.asp=1, out.width='\\textwidth'}
+lolliplot(SNP.gr = F3_variants ,
+          features = F3_features, 
+          ranges = F3_ranges, 
+          xaxis = F3_x_axis,cex = 0.75,
+          ylab = "# of occurances in cBP data",
+          jitter = "label",
+          legend =  legend)
+grid.text(paste0("All ",GOI," cBioPortal variants (n = ",length(F3_variants$score),")"), x=.5, y=0.9, just="top", 
+          gp=gpar(cex=1.5, fontface="bold"))
+```
+
+
+
+
+# Gene fusions returned:
+
+```{r echo=FALSE}
+kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")], row.names = FALSE)
 ```
