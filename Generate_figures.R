@@ -223,6 +223,7 @@ F5_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1
 save.image("troubleshooting_workspace.RData") #####################  
 
 # overlapping variants table
+# add select gnomAD data cols
 overlap_summary_table <- gnomAD_imageing_overlap_df[,c("unified_label",
                                                        "Position",
                                                        "rsID",
@@ -235,7 +236,12 @@ overlap_summary_table <- gnomAD_imageing_overlap_df[,c("unified_label",
                                                        "Allele.Frequency"
                                                        )
                                                     ]
+# sort by allele freq
 overlap_summary_table <- overlap_summary_table[rev(order(overlap_summary_table$Allele.Frequency)),]
+# add cBP occurances
 overlap_summary_table$Occurances.In.cBioPortal.Data <- sapply(overlap_summary_table$unified_label, function(x) sum(x == GOI_cBP_mutations$unified_label))
+overlap_summary_table <- overlap_summary_table[,-1]
+
+
   cat("############### Figure data ready for export #################\n\n\n")
 
