@@ -18,7 +18,7 @@ Number of unique Ensembl transcripts: **`r length(unique(GOI_exon_annotation$ens
 Number of unique Ensembl exons for all transcripts: **`r length(unique(GOI_exon_annotation$ensembl_exon_id))`**  
 
 ## Primary representative transcript:
-Ensembl gene ID **`r GOI_ENSG`** 
+Ensembl gene ID **`r GOI_ENSG`**  
 Ensembl transcript ID **`r GOI_TRANSCRIPT`**  
 Number of exons: **`r length(unique(GOI_exon_annotation_main_transcript$ensembl_exon_id))`**  
 Transcript length: **`r GOI_exon_annotation_main_transcript$transcript_length[1]`**  
@@ -142,7 +142,7 @@ grid.text(paste0("All variants overlapping between cBioPortal and gnomAD"),
 ```
 
 ```{r echo=FALSE}
-kable(overlap_summary_table, row.names = FALSE, caption = "All variants shared between cBP and gnomAD")
+kable(overlap_summary_table, row.names = FALSE, caption = "All variants shared between cBP and gnomAD", align = "l")
 ```
 
 # Gene fusions returned:

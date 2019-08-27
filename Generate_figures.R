@@ -239,7 +239,7 @@ overlap_summary_table <- gnomAD_imageing_overlap_df[,c("unified_label",
 # sort by allele freq
 overlap_summary_table <- overlap_summary_table[rev(order(overlap_summary_table$Allele.Frequency)),]
 # add cBP occurances
-overlap_summary_table$Occurances.In.cBioPortal.Data <- sapply(overlap_summary_table$unified_label, function(x) sum(x == GOI_cBP_mutations$unified_label))
+overlap_summary_table$cBioPortal.Occurances <- sapply(overlap_summary_table$unified_label, function(x) sum(x == GOI_cBP_mutations$unified_label))
 overlap_summary_table <- overlap_summary_table[,-1]
 
 
