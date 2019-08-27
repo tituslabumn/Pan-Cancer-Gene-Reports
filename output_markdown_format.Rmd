@@ -67,7 +67,17 @@ kable(GOI_protein_feature_annotation, row.names = FALSE, caption = "All features
 
 All transcripts are ploted to their relative genomic positions with all shared intronic regions removed. Transcription start sites are always on the left regardless of coding strand. **'Main' representative transcript used for variant alignment is in red**  
 ```{r echo=FALSE,fig.asp=1}
-a<-lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = "Filteres ensembl transcript exons", xaxis = F2_x_axis,yaxis = FALSE)
+a<-lolliplot(SNP.gr = F2_variants,
+             features = F2_features,
+             ylab = "Filteres ensembl transcript exons",
+             xaxis = F2_x_axis,
+             yaxis = FALSE)
+grid.text("Filtered Ensembl Transcripts (Union of Exonic sequence)",
+          x=.5,
+          y=0.9,
+          just="top", 
+          gp=gpar(cex=1.5, fontface="bold")
+          )
 ```
 
 'Main' transcript: **`r GOI_TRANSCRIPT`**
@@ -76,36 +86,60 @@ a<-lolliplot(SNP.gr = F2_variants ,features = F2_features, ylab = "Filteres ense
 kable(GOI_transcript_support[,2:5], row.names = FALSE, caption = "Filtered transcripts returned by ensemble with support annotations")
 ```
 
-# All cBioPortal variants returned
+# All variants returned
 
 ```{r echo=FALSE, fig.asp=1, out.width='\\textwidth'}
 lolliplot(SNP.gr = F3_variants ,
           features = F3_features, 
           ranges = F3_ranges, 
-          xaxis = F3_x_axis,cex = 0.75,
-          ylab = "# of occurances in cBP data",
+          xaxis = F3_x_axis,
+          cex = 0.75,
+          ylab = "# of occurances in cBP data\n",
           jitter = "label",
           legend =  legend)
-grid.text(paste0("All ",GOI," cBioPortal variants (n = ",length(F3_variants$score),")"), x=.5, y=0.9, just="top", 
-          gp=gpar(cex=1.5, fontface="bold"))
+grid.text(paste0("All ",GOI," cBioPortal variants (n = ",length(F3_variants$score),")"),
+          x=.5,
+          y=0.9,
+          just="top", 
+          gp=gpar(cex=1.5, fontface="bold")
+          )
 ```
 
 # All gnomAD variants returned
 
 ```{r echo=FALSE, fig.asp=1, out.width='\\textwidth'}
-lolliplot(SNP.gr = F3_variants ,
-          features = F3_features, 
-          ranges = F3_ranges, 
-          xaxis = F3_x_axis,cex = 0.75,
-          ylab = "# of occurances in cBP data",
+lolliplot(SNP.gr = F4_gnomAD,
+          features = F4_features, 
+          ranges = F4_ranges, 
+          xaxis = F4_x_axis,
+          cex = 0.75,
+          ylab = paste0("log2(total allele count) [max = ",max_gnomAD_allele_count,"]\n"),
           jitter = "label",
           legend =  legend)
-grid.text(paste0("All ",GOI," cBioPortal variants (n = ",length(F3_variants$score),")"), x=.5, y=0.9, just="top", 
-          gp=gpar(cex=1.5, fontface="bold"))
+grid.text(paste0("All ",GOI," gnomAD variants (n = ",length(F4_gnomAD$score),")"),
+          x=.5,
+          y=0.9,
+          just="top", 
+          gp=gpar(cex=1.5, fontface="bold")
+          )
 ```
 
-
-
+```{r echo=FALSE, fig.asp=1}
+lolliplot(SNP.gr = list(A1 = F5_gnomAD_overlap, A2 = F5_cBP_overlap),
+          features = list(No_name_features,F5_features),
+          ranges = F5_ranges, 
+          xaxis = F5_x_axis,
+          cex = 0.75,
+          ylab = c("ylab2","ylab1"),
+          jitter = "label",
+          legend =  legend)
+grid.text(paste0("Overlap"),
+          x=.5,
+          y=0.9,
+          just="top", 
+          gp=gpar(cex=1.5, fontface="bold")
+          )
+```
 
 # Gene fusions returned:
 

@@ -167,7 +167,7 @@ cat("Figure3\n")
   F3_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
   if(length(F3_feature_df[,1])>0){
     F3_feature_labels <- truncate.feature.labels(F3_feature_df,20)
-    F3_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = NULL))
+    F3_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = F3_feature_labels))
     F3_features$height <- 0.01
     F3_features$fill <- combined_qualitative_palette[1:length(F3_features)]
     F3_features$featureLayerID <- sep_overlap_features(F3_feature_df)
@@ -178,115 +178,40 @@ cat("Figure3\n")
     F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
     
   }  
-  #seperately plot a legend
-  # par(mar = c(0,0,0,0))
-  # plot.new()
-  # legend("center", legend = F3_feature_labels, fill = F3_features$fill)  
-cat("Figure4\n")
-
-
-# GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
-# GOI_gnomAD_df_filtered$imaging_score <- log2(GOI_gnomAD_df_filtered$Allele.Count)
-# 
-# Ftest_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
-# 
-# if(length(Ftest_feature_df[,1])>0){
-#   Ftest_feature_labels <- truncate.feature.labels(Ftest_feature_df,20)
-#   Ftest_features <- GRanges(seqnames = "chr", IRanges(start = Ftest_feature_df$AA_start, end = Ftest_feature_df$AA_end, names = NULL))
-#   Ftest_features$height <- 0.04
-#   Ftest_features$fill <- combined_qualitative_palette[1:length(Ftest_features)]
-#   Ftest_features$featureLayerID <- sep_overlap_features(Ftest_feature_df)
-#   Ftest_features_2 <- Ftest_features
-#   Ftest_features_2$height <- 0.04
-#   
-#   Ftest_gnomAD <- GRanges(seqnames = "chr", IRanges(start = GOI_gnomAD_df_filtered$imaging_AA, width = 1,names = NULL))
-#   Ftest_gnomAD$score <- GOI_gnomAD_df_filtered$imaging_score
-#   Ftest_gnomAD$color <- mut_type_color_key[GOI_gnomAD_df_filtered$unified_annotation,"color"]
-#   #Ftest_gnomAD$SNPsideID <- "bottom"
-#   
-#   Ftest_variants <- GRanges(seqnames = "chr", IRanges(start = Unique_mutations_plot$imaging_AA, width = 1,names = NULL))
-#   Ftest_variants$score <- Unique_mutations_plot$AA_change_freq
-#   Ftest_variants$color <- mut_type_color_key[Unique_mutations_plot$unified_annotation,"color"]
-#   
-#   Ftest_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
-#   Ftest_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
-#   
-# }  
-
-# lolliplot(SNP.gr = list(C=Ftest_gnomAD,B=GRanges(),A=Ftest_variants),
-#           features = list(z=Ftest_features,y=Ftest_features_2,x=Ftest_features),
-#           ranges = Ftest_ranges,
-#           ylab = c("gnomAD variants [log2(allele count)]","UniProt \nFeatures","cBP cancer variants [# of instances]"),
-#           xaxis = Ftest_x_axis,
-#           cex = 0.75,
-#           jitter = "label",
-#           legend = legend)
-
-
-#top 30 variants
-  # F4_plot_ceiling <- 50
-  # if(length(Unique_mutations_plot[,1]) < 50) F4_plot_ceiling <- length(Unique_mutations_plot[,1]) #if less than 50 mutations just use max; will be redundant plot :/
-  # Top_unique_muts_plot <- Unique_mutations_plot[order(-Unique_mutations_plot$AA_change_freq),]
-  # Top_unique_muts_plot <- Top_unique_muts_plot[1:F4_plot_ceiling,]
-  # 
-  # F4_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
-  # if(length(F4_feature_df[,1])>0){
-  #   F4_feature_labels <- paste0(F4_feature_df$TYPE,"-",F4_feature_df$LABEL,"[",F4_feature_df$AA_start,"-",F4_feature_df$AA_end,"]")
-  #   F4_features <- GRanges(seqnames = "chr", IRanges(start = F4_feature_df$AA_start, end = F4_feature_df$AA_end, names = NULL))
-  #   F4_features$height <- 0.01
-  #   F4_features$fill <- combined_qualitative_palette[1:length(F4_features)]
-  #   F4_features$featureLayerID <- sep_overlap_features(F4_feature_df)
-  #   F4_variants <- GRanges(seqnames = "chr", IRanges(start = Top_unique_muts_plot$imaging_AA, width = 1,names = NULL))
-  #   F4_variants$score <- Top_unique_muts_plot$AA_change_freq
-  #   F4_variants$color <- mut_type_color_key[Top_unique_muts_plot$mutation_type,"color"]
-  #   F4_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
-  #   F4_yaxis <- round(seq(from = 1, to = Top_unique_muts_plot$AA_change_freq[1], length.out = 10),-1)
-  #   F4_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
-  #   
-  #   #lolliplot(SNP.gr = F4_variants ,features = F4_features, ranges = F4_ranges, ylab = FALSE, xaxis = F4_x_axis,yaxis = F4_yaxis,cex = 1, jitter = "label")
-  # }  
-  # 
-  # 
-  # F5_variant_df <- ExAC_df[!(ExAC_df$major_consequence %in% c("intron_variant","non_coding_transcript_exon_variant")),]
-  # F5_variant_df$image_AA <- GOI_mapping_key[as.character(F5_variant_df$pos),"nearest_junction_codon"]
-  # exome_mut_type_color_key <- data.frame(row.names = unique(F5_variant_df$major_consequence), color = combined_qualitative_palette[1:length(unique(F5_variant_df$major_consequence))])
-  # F5_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
-  # F5_feature_labels <- paste0(F5_feature_df$TYPE,"-",F5_feature_df$LABEL,"[",F5_feature_df$AA_start,"-",F5_feature_df$AA_end,"]")
-  # F5_features <- GRanges(seqnames = "chr", IRanges(start = F5_feature_df$AA_start, end = F5_feature_df$AA_end, names = NULL))
-  # F5_features$height <- 0.01
-  # F5_features$fill <- combined_qualitative_palette[1:length(F5_features)]
-  # F5_features$featureLayerID <- sep_overlap_features(F5_feature_df)
-  # F5_variants <- GRanges(seqnames = "chr", IRanges(start = as.numeric(F5_variant_df$image_AA), width = 1,names = NULL))
-  # F5_variants$score <- as.numeric(F5_variant_df$allele_count)
-  # F5_variants$color <- exome_mut_type_color_key[F5_variant_df$major_consequence,"color"]
-  # F5_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
-  # #F5_yaxis <- round(seq(from = 1, to = Top_unique_muts_plot$AA_change_freq[1], length.out = 10),-1)
-  # F5_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1)
-  # lolliplot(SNP.gr = F5_variants ,features = F5_features, ranges = F5_ranges, ylab = FALSE,cex = .5, jitter = "label")
-  # 
-  # 
-  # F6_variant_df <- ExAC_df[!(ExAC_df$major_consequence %in% c("intron_variant","non_coding_transcript_exon_variant")) & as.numeric(ExAC_df$allele_count) >= 1,]
-  # F6_variant_df$image_AA <- GOI_mapping_key[as.character(F6_variant_df$pos),"nearest_junction_codon"]
-  # F6_variant_df <- F6_variant_df[!(is.na(F6_variant_df$image_AA)),]
-  # exome_mut_type_color_key <- data.frame(row.names = unique(F6_variant_df$major_consequence), color = combined_qualitative_palette[1:length(unique(F6_variant_df$major_consequence))])
-  # F6_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
-  # F6_feature_labels <- paste0(F6_feature_df$TYPE,"-",F6_feature_df$LABEL,"[",F6_feature_df$AA_start,"-",F6_feature_df$AA_end,"]")
-  # F6_features <- GRanges(seqnames = "chr", IRanges(start = F6_feature_df$AA_start, end = F6_feature_df$AA_end, names = NULL))
-  # F6_features$height <- 0.03
-  # F6_features$fill <- combined_qualitative_palette[1:length(F6_features)]
-  # F6_features$featureLayerID <- sep_overlap_features(F6_feature_df)
-  # F6_variants <- GRanges(seqnames = "chr", IRanges(start = as.numeric(F6_variant_df$image_AA), width = 1,names = NULL))
-  # F6_variants$score <- log2(as.numeric(F6_variant_df$allele_count))
-  # F6_variants$color <- exome_mut_type_color_key[F6_variant_df$major_consequence,"color"]
-  # F6_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
-  # #F6_yaxis <- round(seq(from = 1, to = Top_unique_muts_plot$AA_change_freq[1], length.out = 10),-1)
-  # F6_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1)
-  # # lolliplot(SNP.gr = F6_variants ,features = F6_features, ranges = F6_ranges,cex = .5, jitter = "label",ylab = "Log2(allele count)")
-  # # 
-  # # par(mar = c(0,0,0,0))
-  # # plot.new()
-  # # legend("center", legend = row.names(exome_mut_type_color_key), fill = exome_mut_type_color_key$color)
-  # 
   
+  
+cat("Figure4\n")
+GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
+GOI_gnomAD_df_filtered$imaging_score <- log2(GOI_gnomAD_df_filtered$Allele.Count)
+gnomAD_imaging_df <- GOI_gnomAD_df_filtered[!is.na(GOI_gnomAD_df_filtered$exon_intron),]
+max_gnomAD_allele_count <- max(gnomAD_imaging_df[,"Allele.Count"], na.rm = TRUE)
+F4_features <- F3_features
+F4_gnomAD <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imaging_df[,"imaging_AA"], width = 1,names = NULL))
+F4_gnomAD$score <- gnomAD_imaging_df$imaging_score
+F4_gnomAD$color <- mut_type_color_key[gnomAD_imaging_df$unified_annotation,"color"]
+F4_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+F4_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
+
+cat("Figure5\n")
+
+F5_features_blank <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = FALSE))
+F5_features_blank$height <- 0.01
+F5_features_blank$fill <- combined_qualitative_palette[1:length(F3_features)]
+
+unique_cBP_overlap_df <- Unique_mutations_plot[Unique_mutations_plot$cBPgnomAD_overlap,]
+F5_cBP_overlap <- GRanges(seqnames = "chr", IRanges(start = unique_cBP_overlap_df$imaging_AA, width = 1,names = NULL))
+F5_cBP_overlap$score <- unique_cBP_overlap_df$AA_change_freq
+F5_cBP_overlap$color <- mut_type_color_key[unique_cBP_overlap_df$unified_annotation,"color"]
+
+gnomAD_imageing_overlap_df <- gnomAD_imaging_df[gnomAD_imaging_df$cBPgnomAD_overlap,]
+F5_gnomAD_overlap <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imageing_overlap_df[,"imaging_AA"], width = 1,names = NULL))
+F5_gnomAD_overlap$score <- gnomAD_imageing_overlap_df$imaging_score
+F5_gnomAD_overlap$color <- mut_type_color_key[gnomAD_imageing_overlap_df$unified_annotation,"color"]
+
+F5_features <- F3_features
+
+F5_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+F5_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
+
   cat("############### Figure data ready for export #################\n\n\n")
 
