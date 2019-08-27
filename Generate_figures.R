@@ -163,12 +163,12 @@ cat("map variants to nearest exon junction\n")
   )
 
 cat("Figure3\n")    
-#Figure3 - all unique variants
+# Figure3 - all unique variants
   F3_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
   if(length(F3_feature_df[,1])>0){
     F3_feature_labels <- truncate.feature.labels(F3_feature_df,20)
     F3_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = F3_feature_labels))
-    F3_features$height <- 0.01
+    F3_features$height <- 0.02
     F3_features$fill <- combined_qualitative_palette[1:length(F3_features)]
     F3_features$featureLayerID <- sep_overlap_features(F3_feature_df)
     F3_variants <- GRanges(seqnames = "chr", IRanges(start = Unique_mutations_plot$imaging_AA, width = 1,names = NULL))
@@ -179,7 +179,18 @@ cat("Figure3\n")
     
   }  
   
-  
+# make feature object with unnamed features to plot without label legend
+No_name_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = NULL))
+No_name_features$height <- 0.02
+No_name_features$fill <- combined_qualitative_palette[1:length(No_name_features)]
+No_name_features$featureLayerID <- sep_overlap_features(F3_feature_df)
+
+Feature_legend <- F3_features
+Feature_legend$height <- 0
+Feature_legend$featureLayerID <- 1
+
+save.image("troubleshooting_workspace.RData") #####################  
+    
 cat("Figure4\n")
 GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
 GOI_gnomAD_df_filtered$imaging_score <- log2(GOI_gnomAD_df_filtered$Allele.Count)
@@ -193,10 +204,6 @@ F4_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LE
 F4_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
 cat("Figure5\n")
-
-F5_features_blank <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = FALSE))
-F5_features_blank$height <- 0.01
-F5_features_blank$fill <- combined_qualitative_palette[1:length(F3_features)]
 
 unique_cBP_overlap_df <- Unique_mutations_plot[Unique_mutations_plot$cBPgnomAD_overlap,]
 F5_cBP_overlap <- GRanges(seqnames = "chr", IRanges(start = unique_cBP_overlap_df$imaging_AA, width = 1,names = NULL))
@@ -213,5 +220,22 @@ F5_features <- F3_features
 F5_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
 F5_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
+save.image("troubleshooting_workspace.RData") #####################  
+
+# overlapping variants table
+overlap_summary_table <- gnomAD_imageing_overlap_df[,c("unified_label",
+                                                       "Position",
+                                                       "rsID",
+                                                       "Reference",
+                                                       "Alternate",
+                                                       "Consequence",
+                                                       "unified_annotation",
+                                                       "Allele.Count",
+                                                       "Homozygote.Count",
+                                                       "Allele.Frequency"
+                                                       )
+                                                    ]
+overlap_summary_table <- overlap_summary_table[rev(order(overlap_summary_table$Allele.Frequency)),]
+overlap_summary_table$Occurances.In.cBioPortal.Data <- sapply(overlap_summary_table$unified_label, function(x) sum(x == GOI_cBP_mutations$unified_label))
   cat("############### Figure data ready for export #################\n\n\n")
 
