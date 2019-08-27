@@ -10,6 +10,7 @@ library("trackViewer")
 library(markdown)
 library(knitr)
 library(RColorBrewer)
+library(magick)
 #make combined qualitative color palette for max of 21 distinct features repeaded once (total = 42)
 combined_qualitative_palette <- c(brewer.pal(9,"Set1"),brewer.pal(12,"Set3"),brewer.pal(9,"Set1"),brewer.pal(12,"Set3"))
 
@@ -162,32 +163,47 @@ cat("map variants to nearest exon junction\n")
     fill = mut_type_color_key$color
   )
 
+
+  
 cat("Figure3\n")    
 # Figure3 - all unique variants
-  F3_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
+
+
   if(length(F3_feature_df[,1])>0){
+    F3_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
     F3_feature_labels <- truncate.feature.labels(F3_feature_df,20)
     F3_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = F3_feature_labels))
-    F3_features$height <- 0.02
+    F3_features$height <- 0.01
     F3_features$fill <- combined_qualitative_palette[1:length(F3_features)]
     F3_features$featureLayerID <- sep_overlap_features(F3_feature_df)
+    
+    # make feature object with unnamed features to plot without label legend
+    No_name_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = NULL))
+    No_name_features$height <- 0.03
+    No_name_features$fill <- combined_qualitative_palette[1:length(No_name_features)]
+    No_name_features$featureLayerID <- sep_overlap_features(F3_feature_df)
+    # make feature object that will only display legend
+    Feature_legend <- F3_features
+    Feature_legend$height <- 0
+    Feature_legend$featureLayerID <- 1
+    
+    #seperate into data frames by annotation type
+    # F3_missense
+    # F3_frameshift
+    # F3_InsDel
+    
+    
     F3_variants <- GRanges(seqnames = "chr", IRanges(start = Unique_mutations_plot$imaging_AA, width = 1,names = NULL))
     F3_variants$score <- Unique_mutations_plot$AA_change_freq
     F3_variants$color <- mut_type_color_key[Unique_mutations_plot$unified_annotation,"color"]
     F3_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
     F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
     
-  }  
+  }else{
+    stop("Feature data frame is empty")
+  }
   
-# make feature object with unnamed features to plot without label legend
-No_name_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = NULL))
-No_name_features$height <- 0.02
-No_name_features$fill <- combined_qualitative_palette[1:length(No_name_features)]
-No_name_features$featureLayerID <- sep_overlap_features(F3_feature_df)
 
-Feature_legend <- F3_features
-Feature_legend$height <- 0
-Feature_legend$featureLayerID <- 1
 
 save.image("troubleshooting_workspace.RData") #####################  
     
@@ -215,8 +231,6 @@ F5_gnomAD_overlap <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imageing_o
 F5_gnomAD_overlap$score <- gnomAD_imageing_overlap_df$imaging_score
 F5_gnomAD_overlap$color <- mut_type_color_key[gnomAD_imageing_overlap_df$unified_annotation,"color"]
 
-F5_features <- F3_features
-
 F5_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
 F5_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
@@ -241,6 +255,7 @@ overlap_summary_table <- overlap_summary_table[rev(order(overlap_summary_table$A
 # add cBP occurances
 overlap_summary_table$cBioPortal.Occurances <- sapply(overlap_summary_table$unified_label, function(x) sum(x == GOI_cBP_mutations$unified_label))
 overlap_summary_table <- overlap_summary_table[,-1]
+
 
 
   cat("############### Figure data ready for export #################\n\n\n")
