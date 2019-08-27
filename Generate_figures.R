@@ -168,8 +168,6 @@ cat("map variants to nearest exon junction\n")
 cat("Figure3\n")    
 # Figure3 - all unique variants
 
-
-  if(length(F3_feature_df[,1])>0){
     F3_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
     F3_feature_labels <- truncate.feature.labels(F3_feature_df,20)
     F3_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = F3_feature_labels))
@@ -199,11 +197,6 @@ cat("Figure3\n")
     F3_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
     F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
     
-  }else{
-    stop("Feature data frame is empty")
-  }
-  
-
 
 save.image("troubleshooting_workspace.RData") #####################  
     

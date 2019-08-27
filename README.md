@@ -86,6 +86,7 @@ Ensure that you have the following installed/set on your system:
       - libssl-dev
       - pandoc
       - default-jdk
+      - libmagick++-dev
       - git
       - Docker
     
@@ -106,6 +107,7 @@ Major packages/dependancies include:
 - Biostrings
 - tinytex
 - RSelenium
+- magick
 
 ### Known issues
 Occasionally the uniprot REST UniProt API will fail to connect for unknown reasons (SSL error). PCGR makes up to 20 attempts (usually requires less than 5-10) to access the database before halting execution which requires re-querrying at another time.

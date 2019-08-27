@@ -16,3 +16,4 @@ BiocManager::install("Biostrings")
 install.packages("tinytex")
 tinytex::install_tinytex() # installs disribution on host
 install.packages("RSelenium")
+install.packages("magick")

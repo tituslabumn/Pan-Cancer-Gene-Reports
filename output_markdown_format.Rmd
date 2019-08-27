@@ -4,10 +4,6 @@ title: "PCGR output: **`r GOI`**"
 date: "`r paste(date(),Sys.timezone())`"
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 #  `r GOI` metadata 
 Gene symbol: **`r GOI`**  
 UniProtKB ID: **`r GOI_uniprot_id`**  
@@ -47,14 +43,14 @@ kable(all_tissue_types_table, row.names = FALSE, align = 'l',caption = "Tissue t
 
 # Protein features: Domains, Regions, Motifs and Modifications
 
-```{r echo=FALSE,fig.height=6, fig.width=10,out.width='\\textwidth',strip.white=TRUE}
-F1_magick_img <- image_graph(width = 1500, height = 1000,res = 150, clip = FALSE)
+```{r echo=FALSE, fig.height=6, fig.width=10, message=FALSE, warning=FALSE, out.width='\\textwidth', strip.white=TRUE}
+F1_magick_img <- image_graph(width = 1500, height = 1000,res = 150, clip = FALSE) #Graphics device that produces a Magick image
 lolliplot(SNP.gr = F1_variants,
           features = F1_features,
           ranges = F1_ranges,
           ylab = FALSE,
           xaxis = F1_x_axis)
-dev.off()
+invisible(dev.off()) # shuts down graphics device
 plot(image_trim(F1_magick_img))
 ```
 
@@ -67,14 +63,15 @@ kable(GOI_protein_feature_annotation, row.names = FALSE, caption = "All features
 # Filtered Ensembl Transcripts (Union of Exonic sequence)
 
 All transcripts are ploted to their relative genomic positions with all shared intronic regions removed. Transcription start sites are always on the left regardless of coding strand. **'Main' representative transcript used for variant alignment is in red**  
-```{r echo=FALSE,fig.height=6,fig.width=15,out.width='\\textwidth',strip.white=TRUE}
-F2_magick_img <- image_graph(width = 2200, height = 1000,res = 150, clip = FALSE)
+```{r echo=FALSE,fig.height=6,fig.width=14,out.width='\\textwidth',strip.white=TRUE}
+F2_magick_img <- image_graph(width = 2400, height = 1200,res = 150, clip = FALSE)
 lolliplot(SNP.gr = F2_variants,
              features = F2_features,
-             ylab = "Filteres ensembl transcript exons",
+             ylab.gp = gpar(cex=1.25,fontface="bold"),
+             ylab = "Filtered transcripts [Union of exonic sequence]\n\n",
              xaxis = F2_x_axis,
              yaxis = FALSE)
-dev.off()
+invisible(dev.off())
 plot(image_trim(F2_magick_img))
 ```
 
@@ -84,23 +81,23 @@ plot(image_trim(F2_magick_img))
 kable(GOI_transcript_support[,2:5], row.names = FALSE, caption = "Filtered transcripts returned by ensemble with support annotations")
 ```
 
-# All variants returned
+# All cBioPortal variants returned (n = **`r length(F3_variants$score)`**)
 
-```{r echo=FALSE, fig.asp=1, fig.width=15,out.width='\\textwidth'}
+```{r echo=FALSE,out.width='\\textwidth',strip.white=TRUE}
+F3_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
 lolliplot(SNP.gr = F3_variants ,
           features = F3_features, 
           ranges = F3_ranges, 
           xaxis = F3_x_axis,
-          cex = 0.75,
-          ylab = "\t\t# of occurances in cBP data\n",
+          yaxis.gp = gpar(cex = 1.5),
+          xaxis.gp = gpar(cex = 1.5),
+          cex = 1,
+          ylab.gp = gpar(cex=1.25),
+          ylab = "Variants\n# of occurances in cBP data",
           jitter = "label",
           legend =  legend)
-grid.text(paste0("All ",GOI," cBioPortal variants (n = ",length(F3_variants$score),")"),
-          x=0.5,
-          y=0.8,
-          just="top", 
-          gp=gpar(cex=1.5, fontface="bold")
-          )
+invisible(dev.off())
+plot(image_crop(F3_magick_img,"3000x1000+0+2000"))
 ```
 
 # All gnomAD variants returned

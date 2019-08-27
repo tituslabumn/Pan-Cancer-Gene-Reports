@@ -11,7 +11,8 @@ libcurl4-openssl-dev \
 libssl-dev \
 pandoc \
 default-jdk \
-git 
+git \
+libmagick++-dev
 
 RUN Rscript dockerfile_Rpackages.R
 
