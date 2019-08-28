@@ -160,7 +160,8 @@ cat("map variants to nearest exon junction\n")
   
   legend <- list(
     labels = row.names(mut_type_color_key),
-    fill = mut_type_color_key$color
+    fill = mut_type_color_key$color,
+    cex = 1.25
   )
 
 
@@ -195,7 +196,7 @@ cat("Figure3\n")
     F3_variants$score <- Unique_mutations_plot$AA_change_freq
     F3_variants$color <- mut_type_color_key[Unique_mutations_plot$unified_annotation,"color"]
     F3_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
-    F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
+    F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 10 rounded to nearest 10
     
 
 save.image("troubleshooting_workspace.RData") #####################  
