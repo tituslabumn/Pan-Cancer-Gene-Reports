@@ -303,7 +303,7 @@ F9_gnomAD$color <- mut_type_color_key[gnomAD_imaging_df$unified_annotation,"colo
 F9_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH+1))
 F9_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
-cat("Figure5\n")
+cat("Figure10\n")
 
 unique_cBP_overlap_df <- Unique_mutations_plot[Unique_mutations_plot$cBPgnomAD_overlap,]
 F10_cBP_overlap <- GRanges(seqnames = "chr", IRanges(start = unique_cBP_overlap_df$imaging_AA, width = 1,names = NULL))
