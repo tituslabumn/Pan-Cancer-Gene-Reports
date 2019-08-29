@@ -386,7 +386,7 @@ grid.text(paste0("log2(allele count) within cBP data [max count = ",max_gnomAD_a
 # Gene fusions returned:
 
 ```{r echo=FALSE}
-if(length(GOI_cBP_fusions[,1])>0)
+if(length(GOI_cBP_fusions[,1])>0){
   kable(GOI_cBP_fusions[,c("case_id","amino_acid_change","genetic_profile_id")],
         col.names = c("case_id","fusion",'genetic_profile_id'),
         row.names = FALSE
