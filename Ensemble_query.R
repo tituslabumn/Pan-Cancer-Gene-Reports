@@ -109,7 +109,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   # 'main cBP transcript' set to 1000
   GOI_transcript_support[GOI_transcript_support$ensembl_transcript_id == GOI_TRANSCRIPT,"sort"] <- 1000
   # (6 - tsl rating) * 10 (0 if missing)
-  GOI_transcript_support$sort <- GOI_transcript_support$sort + 10*(6-as.numeric(gsub("tsl","",GOI_transcript_support$transcript_tsl)))
+  GOI_transcript_support$sort <- GOI_transcript_support$sort + 10*(6-as.numeric(substr(gsub("tsl","",GOI_transcript_support$transcript_tsl),1,1)))
   # add 60 for GENCODE BASIC
   GOI_transcript_support$sort <- GOI_transcript_support$sort + 60 * !(GOI_transcript_support$transcript_gencode_basic == "")
   # principal APRIS add 500
