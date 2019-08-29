@@ -1,5 +1,7 @@
 ---
-output: html_document
+output: 
+  html_document:
+    fig_crop: no
 title: "PCGR output: **`r GOI`**"
 date: "`r paste(date(),Sys.timezone())`"
 ---
@@ -114,7 +116,7 @@ grid.text(paste0("Variant count within cBP data"),
 
 ### cBioPortal Missense mutations (n = **`r length(F4_variants$score)`**)
 
-```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='5.0in'}
+```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
 if(length(F4_variants$score)>0){
   F4_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
   lolliplot(SNP.gr = F4_variants ,

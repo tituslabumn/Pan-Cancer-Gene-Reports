@@ -77,7 +77,7 @@ if(length(F1_feature_df[,1])>0){
   #F1_variants$label.col <- "black"
   F1_variants <- GRanges()
   
-  F1_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+  F1_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH+1)) # +1 for stop
   F1_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
   
   #lolliplot(SNP.gr = F1_variants ,features = F1_features, ranges = F1_ranges, ylab = FALSE, xaxis = F1_x_axis)
@@ -197,7 +197,7 @@ cat("Figure3\n")
     F3_variants$score <- Unique_mutations_plot$AA_change_freq
     F3_variants$color <- mut_type_color_key[Unique_mutations_plot$unified_annotation,"color"]
     F3_variants$type <- Unique_mutations_plot$unified_annotation # for filtering later
-    F3_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+    F3_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH+1))
     F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 10 rounded to nearest 10
     
 
@@ -300,23 +300,23 @@ F9_features <- F3_features
 F9_gnomAD <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imaging_df[,"imaging_AA"], width = 1,names = NULL))
 F9_gnomAD$score <- gnomAD_imaging_df$imaging_score
 F9_gnomAD$color <- mut_type_color_key[gnomAD_imaging_df$unified_annotation,"color"]
-F9_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+F9_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH+1))
 F9_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
 cat("Figure5\n")
 
 unique_cBP_overlap_df <- Unique_mutations_plot[Unique_mutations_plot$cBPgnomAD_overlap,]
-F5_cBP_overlap <- GRanges(seqnames = "chr", IRanges(start = unique_cBP_overlap_df$imaging_AA, width = 1,names = NULL))
-F5_cBP_overlap$score <- unique_cBP_overlap_df$AA_change_freq
-F5_cBP_overlap$color <- mut_type_color_key[unique_cBP_overlap_df$unified_annotation,"color"]
+F10_cBP_overlap <- GRanges(seqnames = "chr", IRanges(start = unique_cBP_overlap_df$imaging_AA, width = 1,names = NULL))
+F10_cBP_overlap$score <- unique_cBP_overlap_df$AA_change_freq
+F10_cBP_overlap$color <- mut_type_color_key[unique_cBP_overlap_df$unified_annotation,"color"]
 
 gnomAD_imageing_overlap_df <- gnomAD_imaging_df[gnomAD_imaging_df$cBPgnomAD_overlap,]
-F5_gnomAD_overlap <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imageing_overlap_df[,"imaging_AA"], width = 1,names = NULL))
-F5_gnomAD_overlap$score <- gnomAD_imageing_overlap_df$imaging_score
-F5_gnomAD_overlap$color <- mut_type_color_key[gnomAD_imageing_overlap_df$unified_annotation,"color"]
+F10_gnomAD_overlap <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imageing_overlap_df[,"imaging_AA"], width = 1,names = NULL))
+F10_gnomAD_overlap$score <- gnomAD_imageing_overlap_df$imaging_score
+F10_gnomAD_overlap$color <- mut_type_color_key[gnomAD_imageing_overlap_df$unified_annotation,"color"]
 
-F5_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
-F5_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
+F10_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH+1))
+F10_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
 save.image("troubleshooting_workspace.RData") #####################  
 
