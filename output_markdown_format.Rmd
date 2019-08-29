@@ -112,9 +112,9 @@ grid.text(paste0("Variant count within cBP data"),
           )
 ```
 
-## cBioPortal Missense mutations (n = **`r length(F4_variants$score)`**)
+### cBioPortal Missense mutations (n = **`r length(F4_variants$score)`**)
 
-```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='5.0in'}
 if(length(F4_variants$score)>0){
   F4_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
   lolliplot(SNP.gr = F4_variants ,
@@ -145,7 +145,7 @@ if(length(F4_variants$score)>0){
 } else cat("\tNone returned by query\n\n")
 ```
 
-## cBioPortal Frameshifts, stops gained/lost and start lost (n = **`r length(F5_variants$score)`**)
+### cBioPortal Frameshifts, stops gained/lost and start lost (n = **`r length(F5_variants$score)`**)
 
 ```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
 if(length(F5_variants$score)>0){
@@ -178,7 +178,7 @@ if(length(F5_variants$score)>0){
 } else cat("\tNone returned by query\n\n")
 ```
 
-## cBioPortal Insertions/Deletions  (n = **`r length(F6_variants$score)`**)
+### cBioPortal Insertions/Deletions  (n = **`r length(F6_variants$score)`**)
 
 ```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
 if(length(F6_variants$score)>0){
@@ -211,7 +211,7 @@ if(length(F6_variants$score)>0){
 } else cat("\tNone returned by query\n\n")
 ```
 
-## cBioPortal Splice regions and splice sites (n = **`r length(F7_variants$score)`**)
+### cBioPortal Splice regions and splice sites (n = **`r length(F7_variants$score)`**)
 
 ```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
 if(length(F7_variants$score)>0){
