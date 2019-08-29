@@ -64,12 +64,13 @@ truncate.feature.labels <- function(df,char_number_cap){
 cat("Figure1\n")
 #Figure 1 - features; domains,regions, DNA_bind, MOTIF
 F1_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION","DNA_BIND","MOTIF"),]
+F1_feature_df$fill <- combined_qualitative_palette[1:length(F1_feature_df[,1])]
 #F1_site_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("METAL","SITE","MOD_RES","CROSSLNK"),]
 if(length(F1_feature_df[,1])>0){
   F1_feature_labels <- truncate.feature.labels(F1_feature_df,20)
   F1_features <- GRanges(seqnames = "chr", IRanges(start = F1_feature_df$AA_start, end = F1_feature_df$AA_end, names = F1_feature_labels))
   F1_features$height <- 0.06
-  F1_features$fill <- combined_qualitative_palette[1:length(F1_features)]
+  F1_features$fill <- F1_feature_df$fill
   F1_features$featureLayerID <- sep_overlap_features(F1_feature_df)
   
   #F1_variants <- GRanges(seqnames = "chr", IRanges(start = F1_site_df$AA_start, width = 1), label = as.character(1:length(F1_site_df[,1])))
@@ -152,7 +153,7 @@ cat("map variants to nearest exon junction\n")
       "#FFFF33", # yellow - frameshift_deletion
       "#377EB8", #light blue - splice_site_variant
       "#984EA3", #purple - splice_region_variant
-      "#4DAF4A", #green - start_lost
+      "#4DAF8A", #green - start_lost
       "#A65628" # brown - stop_lost
     ),
     stringsAsFactors = FALSE
@@ -161,7 +162,7 @@ cat("map variants to nearest exon junction\n")
   legend <- list(
     labels = row.names(mut_type_color_key),
     fill = mut_type_color_key$color,
-    cex = 1.25
+    cex = 1.5
   )
 
 
@@ -169,17 +170,17 @@ cat("map variants to nearest exon junction\n")
 cat("Figure3\n")    
 # Figure3 - all unique variants
 
-    F3_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION"),]
+    F3_feature_df <- F1_feature_df[F1_feature_df$TYPE %in% c("DOMAIN","REGION"),]
     F3_feature_labels <- truncate.feature.labels(F3_feature_df,20)
     F3_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = F3_feature_labels))
     F3_features$height <- 0.01
-    F3_features$fill <- combined_qualitative_palette[1:length(F3_features)]
+    F3_features$fill <- F3_feature_df$fill
     F3_features$featureLayerID <- sep_overlap_features(F3_feature_df)
     
     # make feature object with unnamed features to plot without label legend
     No_name_features <- GRanges(seqnames = "chr", IRanges(start = F3_feature_df$AA_start, end = F3_feature_df$AA_end, names = NULL))
     No_name_features$height <- 0.03
-    No_name_features$fill <- combined_qualitative_palette[1:length(No_name_features)]
+    No_name_features$fill <- F3_feature_df$fill
     No_name_features$featureLayerID <- sep_overlap_features(F3_feature_df)
     # make feature object that will only display legend
     Feature_legend <- F3_features
@@ -195,6 +196,7 @@ cat("Figure3\n")
     F3_variants <- GRanges(seqnames = "chr", IRanges(start = Unique_mutations_plot$imaging_AA, width = 1,names = NULL))
     F3_variants$score <- Unique_mutations_plot$AA_change_freq
     F3_variants$color <- mut_type_color_key[Unique_mutations_plot$unified_annotation,"color"]
+    F3_variants$type <- Unique_mutations_plot$unified_annotation # for filtering later
     F3_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
     F3_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 10 rounded to nearest 10
     
@@ -202,16 +204,74 @@ cat("Figure3\n")
 save.image("troubleshooting_workspace.RData") #####################  
     
 cat("Figure4\n")
+F4_types <- c("missense_variant")
+F4_variants <- F3_variants[F3_variants$type %in% F4_types]
+cat("Figure5\n")
+F5_types <- c("frameshift_insertion","frameshift_deletion","stop_gained","stop_lost","start_lost")
+F5_variants <- F3_variants[F3_variants$type %in% F5_types]
+cat("Figure6\n")
+F6_types <- c("inframe_insertion","inframe_deletion")
+F6_variants <- F3_variants[F3_variants$type %in% F6_types]
+cat("Figure7\n")
+F7_types <- c("splice_site_variant","splice_region_variant")
+F7_variants <- F3_variants[F3_variants$type %in% F7_types]
+# F7_variants will be concatenated with F3 variants to add exons to top
+F7_exons <- GOI_transcript_exons_filtered[GOI_transcript_exons_filtered$ensembl_transcript_id == GOI_TRANSCRIPT,c("rank","exon_chrom_start","exon_chrom_end")]
+
+# make strand agnostic labels
+F7_exons$start <- sapply(1:length(F7_exons[,1]),
+                         function(x) {
+                           min(GOI_mapping_key[as.character(F7_exons[x,"exon_chrom_start"]),"nearest_junction_codon"],
+                           GOI_mapping_key[as.character(F7_exons[x,"exon_chrom_end"]),"nearest_junction_codon"]
+                           )
+                           }
+                         )
+F7_exons$end <- sapply(1:length(F7_exons[,1]),
+                         function(x) {
+                           max(GOI_mapping_key[as.character(F7_exons[x,"exon_chrom_start"]),"nearest_junction_codon"],
+                               GOI_mapping_key[as.character(F7_exons[x,"exon_chrom_end"]),"nearest_junction_codon"]
+                           )
+                         }
+)
+F7_features <- GRanges(seqnames = "chr", IRanges(start = F7_exons$start,
+                                                 end = F7_exons$end,
+                                                 names = NULL,
+                                                 )
+                       )
+F7_features$height <- 0.01
+F7_features$fill <- rep(c("green","red"),100)[1:length(F7_exons[,1])]#colorRampPalette(c("white", "black"))( length(F7_exons[,1]) )
+F7_features$featureLayerID <- 7
+colnames(F7_exons)<- c("Exon","Genomic Start","Genomic End","Nearest Peptide Start","Nearest Peptide End")
+cat("Figure8\n")
+# F8 will be identical to F2 except with variants displayed
+F8_exons <- F7_exons # note altered colnames
+F8_df <- Unique_mutations_plot[Unique_mutations_plot$unified_annotation %in% F7_types,]
+# find nearest relative position from union of exonic sequence
+exonic_relative_positions <- as.numeric(rownames(union_transcripts_relative_pos_key))
+# for each unified_pos what is the minimal abs(list_of_exonic_pos's - unified_pos)
+F8_df$nearest_exonic_pos <- sapply(1:length(F8_df[,1]),
+                                   function(x){
+                                     union_transcripts_relative_pos_key[which.min(abs(exonic_relative_positions - F8_df$unified_pos[x])),"relative_union_transcript_position"]
+                                   }
+                                   )
+F8_variants <- GRanges(seqnames = "chr", IRanges(start = F8_df$nearest_exonic_pos, width = 1,names = NULL))
+F8_variants$score <- F8_df$AA_change_freq
+F8_variants$color <- mut_type_color_key[F8_df$unified_annotation,"color"]
+#use same features except for main transcript adopt same alternating green/red color scheme
+F8_features <- F2_features
+F8_features$fill[F8_features$fill == "red"] <- rep(c("green","red"),100)[1:length(F7_exons[,1])]
+
+cat("Figure9\n")
 GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
 GOI_gnomAD_df_filtered$imaging_score <- log2(GOI_gnomAD_df_filtered$Allele.Count)
 gnomAD_imaging_df <- GOI_gnomAD_df_filtered[!is.na(GOI_gnomAD_df_filtered$exon_intron),]
 max_gnomAD_allele_count <- max(gnomAD_imaging_df[,"Allele.Count"], na.rm = TRUE)
-F4_features <- F3_features
-F4_gnomAD <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imaging_df[,"imaging_AA"], width = 1,names = NULL))
-F4_gnomAD$score <- gnomAD_imaging_df$imaging_score
-F4_gnomAD$color <- mut_type_color_key[gnomAD_imaging_df$unified_annotation,"color"]
-F4_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
-F4_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
+F9_features <- F3_features
+F9_gnomAD <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imaging_df[,"imaging_AA"], width = 1,names = NULL))
+F9_gnomAD$score <- gnomAD_imaging_df$imaging_score
+F9_gnomAD$color <- mut_type_color_key[gnomAD_imaging_df$unified_annotation,"color"]
+F9_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH))
+F9_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
 cat("Figure5\n")
 

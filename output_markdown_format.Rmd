@@ -43,7 +43,7 @@ kable(all_tissue_types_table, row.names = FALSE, align = 'l',caption = "Tissue t
 
 # Protein features: Domains, Regions, Motifs and Modifications
 
-```{r echo=FALSE, fig.height=6, fig.width=10, message=FALSE, warning=FALSE, out.width='\\textwidth', strip.white=TRUE}
+```{r echo=FALSE, fig.height=5, fig.width=10, message=FALSE, warning=FALSE, out.width='\\textwidth', strip.white=TRUE}
 F1_magick_img <- image_graph(width = 1500, height = 1000,res = 150, clip = FALSE) #Graphics device that produces a Magick image
 lolliplot(SNP.gr = F1_variants,
           features = F1_features,
@@ -51,6 +51,7 @@ lolliplot(SNP.gr = F1_variants,
           ylab = FALSE,
           xaxis = F1_x_axis)
 invisible(dev.off()) # shuts down graphics device
+par(mar=c(0,0,0,0)) # (bottom,left,top,right)
 plot(image_trim(F1_magick_img))
 ```
 
@@ -63,8 +64,8 @@ kable(GOI_protein_feature_annotation, row.names = FALSE, caption = "All features
 # Filtered Ensembl Transcripts (Union of Exonic sequence)
 
 All transcripts are ploted to their relative genomic positions with all shared intronic regions removed. Transcription start sites are always on the left regardless of coding strand. **'Main' representative transcript used for variant alignment is in red**  
-```{r echo=FALSE,fig.height=6,fig.width=14,out.width='\\textwidth',strip.white=TRUE}
-F2_magick_img <- image_graph(width = 2400, height = 1200,res = 150, clip = FALSE)
+```{r echo=FALSE,fig.width=12,out.width='\\textwidth',strip.white=TRUE}
+F2_magick_img <- image_graph(width = 2000, height = 2000,res = 150, clip = FALSE)
 lolliplot(SNP.gr = F2_variants,
              features = F2_features,
              ylab.gp = gpar(cex=1.25,fontface="bold"),
@@ -72,6 +73,7 @@ lolliplot(SNP.gr = F2_variants,
              xaxis = F2_x_axis,
              yaxis = FALSE)
 invisible(dev.off())
+par(mar=c(0,0,0,0)) # (bottom,left,top,right)
 plot(image_trim(F2_magick_img))
 ```
 
@@ -92,36 +94,213 @@ lolliplot(SNP.gr = F3_variants ,
           yaxis.gp = gpar(cex = 1.5),
           xaxis.gp = gpar(cex = 1.5),
           cex = 1,
-          ylab.gp = gpar(cex=1.25),
-          ylab = "Variants\n# of occurances in cBP data\n\n",
+          ylab = FALSE,
           jitter = "label",
           legend =  legend)
 invisible(dev.off())
-par(mar=c(0,0,0,0))
-plot(image_trim(image_crop(F3_magick_img,"3000x1000+0+2000")))
+par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+plot(image_trim(F3_magick_img))
+# yaxis label
+grid.text(paste0("Variant count within cBP data"),
+          x=0.01,
+          y=0.6,
+          just="top",
+          rot=90,
+          gp=gpar(cex=.75, fontface="bold")
+          )
+```
+## cBioPortal Missense mutations (n = **`r length(F7_variants$score)`**)
+```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+if(length(F4_variants$score)>0){
+  F4_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F4_variants ,
+            features = F3_features, 
+            ranges = F3_ranges, 
+            xaxis = F3_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend = list(labels = legend$labels[legend$labels %in% F4_types],
+                          fill = legend$fill[legend$labels %in% F4_types],
+                          cex = 1.5
+                          )
+  )
+  invisible(dev.off())
+  par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F4_magick_img))
+  # yaxis label
+  grid.text(paste0("Variant count within cBP data"),
+            x=0.01,
+            y=0.6,
+            just="top",
+            rot=90,
+            gp=gpar(cex=.75, fontface="bold")
+            )
+} else cat("\tNone returned by query\n\n")
+```
+## cBioPortal Frameshifts, stops gained/lost and start lost (n = **`r length(F5_variants$score)`**)
+```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+if(length(F5_variants$score)>0){
+  F5_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F5_variants ,
+            features = F3_features, 
+            ranges = F3_ranges, 
+            xaxis = F3_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend = list(labels = legend$labels[legend$labels %in% F5_types],
+                          fill = legend$fill[legend$labels %in% F5_types],
+                          cex = 1.5
+                          )
+  )
+  invisible(dev.off())
+  par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F5_magick_img))
+  # yaxis label
+  grid.text(paste0("Variant count within cBP data"),
+            x=0.01,
+            y=0.6,
+            just="top",
+            rot=90,
+            gp=gpar(cex=.75, fontface="bold")
+            )
+} else cat("\tNone returned by query\n\n")
+```
+## cBioPortal Insertions/Deletions  (n = **`r length(F6_variants$score)`**)
+```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+if(length(F6_variants$score)>0){
+  F6_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F6_variants ,
+            features = F3_features, 
+            ranges = F3_ranges, 
+            xaxis = F3_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend = list(labels = legend$labels[legend$labels %in% F6_types],
+                          fill = legend$fill[legend$labels %in% F6_types],
+                          cex = 1.5
+                          )
+  )
+  invisible(dev.off())
+  par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F6_magick_img))
+  # yaxis label
+  grid.text(paste0("Variant count within cBP data"),
+            x=0.01,
+            y=0.6,
+            just="top",
+            rot=90,
+            gp=gpar(cex=.75, fontface="bold")
+            )
+} else cat("\tNone returned by query\n\n")
+```
+## cBioPortal Splice regions and splice sites (acceptors/donors) (n = **`r length(F7_variants$score)`**)
+```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+if(length(F7_variants$score)>0){
+  F7_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F7_variants ,
+            features = c(F7_features,F3_features), 
+            ranges = F3_ranges, 
+            xaxis = F3_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend = list(labels = legend$labels[legend$labels %in% F7_types],
+                          fill = legend$fill[legend$labels %in% F7_types],
+                          cex = 1.5
+                          )
+  )
+  invisible(dev.off())
+  par(mar=c(0,1.5,1.5,0)) # (bottom,left,top,right)
+  plot(image_trim(F7_magick_img))
+  # yaxis label
+  grid.text(paste0("Variant count within cBP data"),
+            x=0.01,
+            y=0.6,
+            just="top",
+            rot=90,
+            gp=gpar(cex=.75, fontface="bold")
+            )
+  grid.text(paste0("[ Main transcript exons in grey and red as top feature row ]"),
+            x=0.05,
+            y=0.95,
+            just="left",
+            gp=gpar(cex=1, fontface="bold")
+            )
+} else cat("\tNone returned by query\n\n")
+```
+```{r echo=FALSE}
+kable(F7_exons, row.names = FALSE, caption = "Main transcript exons key", align = "l")
 ```
 
-# All gnomAD variants returned
+```{r echo=FALSE,fig.width=12,fig.height=14,out.width='\\textwidth',strip.white=TRUE}
+if(length(F7_variants$score)>0){
+  F8_magick_img <- image_graph(width = 2000, height = 2000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F8_variants,
+               features = F8_features,
+               ylab.gp = gpar(cex=1.25,fontface="bold"),
+               ylab = "Filtered transcripts [Union of exonic sequence]",
+               xaxis = F2_x_axis,
+               yaxis.gp = gpar(cex = 1.5),
+               xaxis.gp = gpar(cex = 1.5),
+               cex = 1,
+               jitter = "label",
+               legend = list(labels = legend$labels[legend$labels %in% F7_types],
+                            fill = legend$fill[legend$labels %in% F7_types],
+                            cex = 1.5
+                            )
+               )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F8_magick_img))
+} else cat("\tNone returned by query\n\n")
+```
 
-```{r echo=FALSE, fig.width=15, fig.asp=1,out.width='\\textwidth'}
-lolliplot(SNP.gr = F4_gnomAD,
-          features = F4_features, 
-          ranges = F4_ranges, 
-          xaxis = F4_x_axis,
-          cex = 0.75,
-          ylab = paste0("\t\t\tlog2(total allele count) [max = ",max_gnomAD_allele_count,"]\n"),
+
+# All gnomAD variants returned (n = **`r length(F9_gnomAD$score)`**)
+
+```{r echo=FALSE, fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+F9_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+lolliplot(SNP.gr = F9_gnomAD,
+          features = F9_features, 
+          ranges = F9_ranges, 
+          xaxis = F9_x_axis,
+          yaxis.gp = gpar(cex = 1.5),
+          xaxis.gp = gpar(cex = 1.5),
+          cex = 1,
+          ylab = FALSE,
           jitter = "label",
           legend =  legend)
-grid.text(paste0("All ",GOI," gnomAD variants (n = ",length(F4_gnomAD$score),")"),
-          x=0.5,
+invisible(dev.off())
+par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+plot(image_trim(F9_magick_img))
+# yaxis label
+grid.text(paste0("log2(allele count) within cBP data [max count = ",max_gnomAD_allele_count,"]"),
+          x=0.01,
           y=0.6,
-          just="top", 
-          gp=gpar(cex=1.5, fontface="bold")
+          just="top",
+          rot=90,
+          gp=gpar(cex=.75, fontface="bold")
           )
-capture <- grid.cap()
-
 ```
 
+## gnomAD Missense mutations (n = **`r length(F7_variants$score)`**)
+
+## gnomAD Frameshifts and stops gained/lost (n = **`r length(F5_variants$score)`**)
+
+## gnomAD Insertions/Deletions  (n = **`r length(F6_variants$score)`**)
+
+## gnomAD Splice regions and splice sites (acceptors/donors) (n = **`r length(F7_variants$score)`**)
 ```{r echo=FALSE, fig.asp=1, fig.width=10,out.width='\\textwidth'}
 lolliplot(SNP.gr = list(A1 = GRanges(),A2 = F5_gnomAD_overlap, A3 = F5_cBP_overlap),
           features = list(A3 = Feature_legend, A4 = No_name_features, A5 = No_name_features),
