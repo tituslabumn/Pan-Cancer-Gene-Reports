@@ -308,7 +308,7 @@ grid.text(paste0("log2(allele count) within cBP data [max count = ",max_gnomAD_a
 
 ## gnomAD Missense mutations (n = **`r length(F7_variants$score)`**)
 
-## gnomAD Frameshifts and stops gained/lost (n = **`r length(F10_variants$score)`**)
+## gnomAD Frameshifts and stops gained/lost (n = **`r length(F7_variants$score)`**)
 
 ## gnomAD Insertions/Deletions  (n = **`r length(F6_variants$score)`**)
 
