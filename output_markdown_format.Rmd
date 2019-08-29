@@ -80,8 +80,7 @@ plot(image_trim(F2_magick_img))
 ```
 
 'Main' transcript: **`r GOI_TRANSCRIPT`**  
-Transcript support descriptions:  
-[Link](https://useast.ensembl.org/info/genome/genebuild/transcript_quality_tags.html)  
+[Link to transcript support descriptions](https://useast.ensembl.org/info/genome/genebuild/transcript_quality_tags.html)  
 
 ```{r echo=FALSE}
 kable(GOI_transcript_support[,2:5], row.names = FALSE, caption = "Filtered transcripts returned by ensemble with support annotations")
@@ -89,7 +88,7 @@ kable(GOI_transcript_support[,2:5], row.names = FALSE, caption = "Filtered trans
 
 # All cBioPortal variants returned (n = **`r length(F3_variants$score)`**)
 
-```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+```{r echo=FALSE,fig.width=14,fig.height=4.5,fig.fullwidth = TRUE}
 F3_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
 lolliplot(SNP.gr = F3_variants ,
           features = F3_features, 
