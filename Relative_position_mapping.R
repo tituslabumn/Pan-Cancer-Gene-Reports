@@ -55,6 +55,8 @@ for (x in GOI_intron_map$rank) {
 }
 rm(x,adjacent_exons)
 
+save.image("troubleshooting_workspace.RData") #####################
+
 #retrive and align transcrit sequence with BSgenome
 #THIS IS SEQUENCE FOR POSITIVE STRAND (regardless of GOI coding strand)
 library(BSgenome.Hsapiens.NCBI.GRCh38)
@@ -124,7 +126,9 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
   GOI_main_peptide_sequence <- GOI_peptide_sequence[GOI_peptide_sequence$ensembl_transcript_id == GOI_TRANSCRIPT,"peptide"]
   if(GOI_STRAND == 1) GOI_mapping_key$peptide[cds_index] <- rep(unlist(strsplit(GOI_main_peptide_sequence,"")), each = 3)
   if(GOI_STRAND == -1) GOI_mapping_key$peptide[cds_index] <- rev(rep(unlist(strsplit(GOI_main_peptide_sequence,"")), each = 3))
-  
+
+  save.image("troubleshooting_workspace.RData") #####################  
+    
 #map nearest_intron_exon_junction
   #this is for aligning splice region variants to the nearest codon for visualization
   #if equidistant default to upstream on positive strand
@@ -180,7 +184,8 @@ GOI_mapping_key$pos <- row.names(GOI_mapping_key)
     }
     rm(x,intron_subset)
   
-  
+    save.image("troubleshooting_workspace.RData") #####################
+    
     cat("mapping relative transcript position (union of all transcripts without intronic space)","\n\n")
 #make key for relative transcript position (union of all transcripts (filtered in ensembl query script) without intronic space)
   GOI_transcript_exons_filtered <- GOI_exon_annotation[GOI_exon_annotation$ensembl_transcript_id %in% GOI_transcript_support$ensembl_transcript_id,]
