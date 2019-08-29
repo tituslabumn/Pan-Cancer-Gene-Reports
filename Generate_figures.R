@@ -205,6 +205,36 @@ save.image("troubleshooting_workspace.RData") #####################
     
 cat("Figure4\n")
 F4_types <- c("missense_variant")
+# break down further into different classes of missense mutation based on nature of AA change (e.g. charge change)
+F4_df <- Unique_mutations_plot[Unique_mutations_plot$unified_annotation == "missense_variant",]
+# all cBP $amino_acid_change annotations appear to follow [AA]###[AA] format
+# however delins follows [AA]###_[AA]###delins[AAAA] format
+# add ref_AA and var_AA cols and a flag for delins
+F4_df$ref_AA <- ""
+F4_df$var_AA <- ""
+F4_df$delins <- FALSE
+for (x in 1:length(F4_df[,1])) {
+  AA_change <- F4_df[x,"amino_acid_change"]
+  if(grepl("delins",AA_change)){
+    F4_df[x,"delins"] <- TRUE
+    ref <- unlist(strsplit(AA_change, split = "delins"))[1]
+    ref <- paste(
+      substr(
+        unlist(strsplit(ref, split = "_")
+        ),1,1),
+      collapse = ""
+    )
+    var <- unlist(strsplit(AA_change, split = "delins"))[2]
+  } else {
+    ref <- substr(AA_change,1,1)
+    var <- substr(AA_change,nchar(AA_change),nchar(AA_change))
+  }
+  F4_df[x,"ref_AA"] <- ref
+  F4_df[x,"var_AA"] <- var
+}
+rm(x,var,ref)
+# assign AA_change_class
+
 F4_variants <- F3_variants[F3_variants$type %in% F4_types]
 cat("Figure5\n")
 F5_types <- c("frameshift_insertion","frameshift_deletion","stop_gained","stop_lost","start_lost")
