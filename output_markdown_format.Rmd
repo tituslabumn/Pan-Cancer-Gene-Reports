@@ -6,6 +6,12 @@ title: "PCGR output: **`r GOI`**"
 date: "`r paste(date(),Sys.timezone())`"
 ---
 
+<style>
+    body .main-container {
+        max-width: 1200px;
+    }
+</style>
+
 #  `r GOI` metadata 
 Gene symbol: **`r GOI`**  
 UniProtKB ID: **`r GOI_uniprot_id`**  
@@ -89,28 +95,39 @@ kable(GOI_transcript_support[,2:5], row.names = FALSE, caption = "Filtered trans
 # All cBioPortal variants returned (n = **`r length(F3_variants$score)`**)
 
 ```{r echo=FALSE,fig.width=14,fig.height=4.5,fig.fullwidth = TRUE}
-F3_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
-lolliplot(SNP.gr = F3_variants ,
-          features = F3_features, 
-          ranges = F3_ranges, 
-          xaxis = F3_x_axis,
-          yaxis.gp = gpar(cex = 1.5),
-          xaxis.gp = gpar(cex = 1.5),
-          cex = 1,
-          ylab = FALSE,
-          jitter = "label",
-          legend =  legend)
-invisible(dev.off())
-par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
-plot(image_trim(F3_magick_img))
-# yaxis label
-grid.text(paste0("Variant count within cBP data"),
-          x=0.01,
-          y=0.6,
-          just="top",
-          rot=90,
-          gp=gpar(cex=.75, fontface="bold")
-          )
+if(length(F3_variants$score)>0){
+  F3_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F3_variants ,
+            features = F3_features, 
+            ranges = F3_ranges, 
+            xaxis = F3_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend = legend
+  )
+  invisible(dev.off())
+  F3_magick_img2 <- image_graph(width = image_info(image_trim(F3_magick_img))$width,
+                                height = image_info(image_trim(F3_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
+  par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F3_magick_img))
+  # yaxis label
+  grid.text(paste0("Variant count within cBP data"),
+            x=0.001,
+            y=0.6,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1.5, fontface="bold")
+            )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F3_magick_img2)
+} else cat("\tNone returned by query\n\n")
 ```
 
 ### cBioPortal Missense mutations (n = **`r length(F4_variants$score)`**)
@@ -133,16 +150,24 @@ if(length(F4_variants$score)>0){
                           )
   )
   invisible(dev.off())
+  F4_magick_img2 <- image_graph(width = image_info(image_trim(F4_magick_img))$width,
+                                height = image_info(image_trim(F4_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
   par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
   plot(image_trim(F4_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.01,
+            x=0.001,
             y=0.6,
             just="top",
             rot=90,
-            gp=gpar(cex=.75, fontface="bold")
+            gp=gpar(cex=1.5, fontface="bold")
             )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F4_magick_img2)
 } else cat("\tNone returned by query\n\n")
 ```
 
@@ -166,16 +191,24 @@ if(length(F5_variants$score)>0){
                           )
   )
   invisible(dev.off())
+  F5_magick_img2 <- image_graph(width = image_info(image_trim(F5_magick_img))$width,
+                                height = image_info(image_trim(F5_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
   par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
   plot(image_trim(F5_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.01,
+            x=0.001,
             y=0.6,
             just="top",
             rot=90,
-            gp=gpar(cex=.75, fontface="bold")
+            gp=gpar(cex=1.5, fontface="bold")
             )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F5_magick_img2)
 } else cat("\tNone returned by query\n\n")
 ```
 
@@ -199,16 +232,24 @@ if(length(F6_variants$score)>0){
                           )
   )
   invisible(dev.off())
+  F6_magick_img2 <- image_graph(width = image_info(image_trim(F6_magick_img))$width,
+                                height = image_info(image_trim(F6_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
   par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
   plot(image_trim(F6_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.01,
+            x=0.001,
             y=0.6,
             just="top",
             rot=90,
-            gp=gpar(cex=.75, fontface="bold")
+            gp=gpar(cex=1.5, fontface="bold")
             )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F6_magick_img2)
 } else cat("\tNone returned by query\n\n")
 ```
 
@@ -232,23 +273,32 @@ if(length(F7_variants$score)>0){
                           )
   )
   invisible(dev.off())
-  par(mar=c(0,1.5,1.5,0)) # (bottom,left,top,right)
+  F7_magick_img2 <- image_graph(width = image_info(image_trim(F7_magick_img))$width,
+                                height = image_info(image_trim(F7_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
+  par(mar=c(0,0.5,1,0)) # (bottom,left,top,right)
   plot(image_trim(F7_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.01,
+            x=0.001,
             y=0.6,
             just="top",
             rot=90,
-            gp=gpar(cex=.75, fontface="bold")
+            gp=gpar(cex=1.5, fontface="bold")
             )
-  grid.text(paste0("[ Main transcript exons in grey and red as top feature row ]"),
-            x=0.05,
+  grid.text(paste0("[ Main transcript exons in green and red as top feature row ]"),
+            x=0.02,
             y=0.95,
             just="left",
-            gp=gpar(cex=1, fontface="bold")
+            gp=gpar(cex=1.5, fontface="bold")
             )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F7_magick_img2)
 } else cat("\tNone returned by query\n\n")
+
 ```
 ```{r echo=FALSE}
 kable(F7_exons, row.names = FALSE, caption = "Main transcript exons key", align = "l")
@@ -313,24 +363,24 @@ grid.text(paste0("log2(allele count) within cBP data [max count = ",max_gnomAD_a
 
 ## gnomAD Splice regions and splice sites (acceptors/donors) (n = **`r length(F7_variants$score)`**)
 ```{r echo=FALSE, fig.asp=1, fig.width=10,out.width='\\textwidth'}
-lolliplot(SNP.gr = list(A1 = GRanges(),A2 = F10_gnomAD_overlap, A3 = F10_cBP_overlap),
-          features = list(A3 = Feature_legend, A4 = No_name_features, A5 = No_name_features),
-          ranges = F10_ranges, 
-          xaxis = FALSE,#,F10_x_axis,F10_x_axis)
-          cex = 0.75,
-          ylab = c("","\tcBP [# of occurances]\n",paste0("\t\tgnomAD [log2(allele count) ; max = ",max_gnomAD_allele_count,"]\n")),
-          jitter = "label",
-          legend =  legend)
-grid.text(paste0("All variants overlapping between cBioPortal and gnomAD"),
-          x=.5,
-          y=0.9,
-          just="top", 
-          gp=gpar(cex=1.5, fontface="bold")
-          )
+# lolliplot(SNP.gr = list(A1 = GRanges(),A2 = F10_gnomAD_overlap, A3 = F10_cBP_overlap),
+#           features = list(A3 = Feature_legend, A4 = No_name_features, A5 = No_name_features),
+#           ranges = F10_ranges, 
+#           xaxis = FALSE,#,F10_x_axis,F10_x_axis)
+#           cex = 0.75,
+#           ylab = c("","\tcBP [# of occurances]\n",paste0("\t\tgnomAD [log2(allele count) ; max = ",max_gnomAD_allele_count,"]\n")),
+#           jitter = "label",
+#           legend =  legend)
+# grid.text(paste0("All variants overlapping between cBioPortal and gnomAD"),
+#           x=.5,
+#           y=0.9,
+#           just="top", 
+#           gp=gpar(cex=1.5, fontface="bold")
+#           )
 ```
 
 ```{r echo=FALSE}
-kable(overlap_summary_table, row.names = FALSE, caption = "All variants shared between cBP and gnomAD", align = "l")
+#kable(overlap_summary_table, row.names = FALSE, caption = "All variants shared between cBP and gnomAD", align = "l")
 ```
 
 # Gene fusions returned:
