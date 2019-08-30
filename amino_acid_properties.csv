@@ -1,9 +1,9 @@
 Amino Acid,Code,Hydropathy,Charge,Aromatic,Hydroxylic,Sulfur-Containing,Aliphatic,Amidic,Category,Color
 Aspartate,D,hydrophilic,-,FALSE,FALSE,FALSE,FALSE,FALSE,Negative/Acidic,#E41A1C
 Glutamate,E,hydrophilic,-,FALSE,FALSE,FALSE,FALSE,FALSE,Negative/Acidic,#E41A1C
-Arginine,R,hydrophilic,+,FALSE,FALSE,FALSE,FALSE,FALSE,Positive/Basic,#FFFF33
-Lysine,K,hydrophilic,+,FALSE,FALSE,FALSE,FALSE,FALSE,Positive/Basic,#FFFF33
-Histidine,H,moderate,+,FALSE,FALSE,FALSE,FALSE,FALSE,Positive/Basic,#FFFF33
+Arginine,R,hydrophilic,+,FALSE,FALSE,FALSE,FALSE,FALSE,Positive/Basic,#FF7F00
+Lysine,K,hydrophilic,+,FALSE,FALSE,FALSE,FALSE,FALSE,Positive/Basic,#FF7F00
+Histidine,H,moderate,+,FALSE,FALSE,FALSE,FALSE,FALSE,Positive/Basic,#FF7F00
 Asparagine,N,hydrophilic,N,FALSE,FALSE,FALSE,FALSE,TRUE,Amidic,#984EA3
 Glutamine,Q,hydrophilic,N,FALSE,FALSE,FALSE,FALSE,TRUE,Amidic,#984EA3
 Serine,S,hydrophilic,N,FALSE,TRUE,FALSE,FALSE,FALSE,Hydroxylic,#4DAF8A

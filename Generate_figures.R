@@ -235,7 +235,66 @@ for (x in 1:length(F4_df[,1])) {
 rm(x,var,ref)
 # assign AA_change_class (from https://www.thermofisher.com/us/en/home/life-science/protein-biology/protein-biology-learning-center/protein-biology-resource-library/pierce-protein-methods/amino-acid-physical-properties.html)
 # amino_acid_properties data.frame loaded during initialization from supplied .csv
-
+# add color and shape cols to F4_df
+F4_df$color <- ""
+F4_df$shape <- "circle"
+for(x in 1:length(F4_df[,1])){
+  #if has multiple changed AAs
+  if(F4_df[x,"delins"]){
+    F4_df[x,"color"] <- "#FFFF33" #yellow
+    ref <- F4_df[x,"ref_AA"]
+    var <- F4_df[x,"var_AA"]
+    ref_list <- unlist(strsplit(ref,split = ""))
+    var_list <- unlist(strsplit(var,split = ""))
+    charge_loss <- FALSE
+    charge_gain <- FALSE
+    charge_rev <- FALSE
+    for(y in 1:nchar(ref)){
+      ref <- ref_list[y]
+      var <- var_list[y]
+      ref_category <- amino_acid_properties[amino_acid_properties$Code == ref,"Category"]
+      var_category <- amino_acid_properties[amino_acid_properties$Code == var,"Category"]
+      # loss of charge
+      if( (ref_category == "Negative/Acidic" | ref_category == "Positive/Basic") & (var_category != "Negative/Acidic" & var_category != "Positive/Basic") ){
+        charge_loss <- TRUE
+      }
+      # gain of charge
+      if( (ref_category != "Negative/Acidic" & ref_category != "Positive/Basic") & (var_category == "Negative/Acidic" | var_category == "Positive/Basic") ){
+        charge_gain <- TRUE
+      }
+      # charge reversal
+      if( (ref_category == "Negative/Acidic" & var_category == "Positive/Basic") | (var_category == "Negative/Acidic" & ref_category == "Positive/Basic") ){
+        charge_rev <- TRUE
+      }
+    }
+    if(sum(c(charge_loss,charge_gain,charge_rev))>1){
+      F4_df[x,"shape"] <- "square"
+    } else if(sum(c(charge_loss,charge_gain,charge_rev))==1){
+      F4_df[x,"shape"] <- c("triangle_point_down", "triangle_point_up","diamond")[which(c(charge_loss,charge_gain,charge_rev))]
+    }
+  }else{
+    # if single AA substitution
+    ref <- F4_df[x,"ref_AA"]
+    var <- F4_df[x,"var_AA"]
+    ref_category <- amino_acid_properties[amino_acid_properties$Code == ref,"Category"]
+    var_category <- amino_acid_properties[amino_acid_properties$Code == var,"Category"]
+    
+    F4_df[x,"color"] <- amino_acid_properties[amino_acid_properties$Code == ref,"Color"]
+    # loss of charge
+    if( (ref_category == "Negative/Acidic" | ref_category == "Positive/Basic") & (var_category != "Negative/Acidic" & var_category != "Positive/Basic") ){
+      F4_df[x,"shape"] <- "triangle_point_down"
+    }
+    # gain of charge
+    if( (ref_category != "Negative/Acidic" & ref_category != "Positive/Basic") & (var_category == "Negative/Acidic" | var_category == "Positive/Basic") ){
+      F4_df[x,"shape"] <- "triangle_point_up"
+    }
+    # charge reversal
+    if( (ref_category == "Negative/Acidic" & var_category == "Positive/Basic") | (var_category == "Negative/Acidic" & ref_category == "Positive/Basic") ){
+      F4_df[x,"shape"] <- "triangle_point_down"
+    }
+  }
+}
+rm(x,y,ref,var,ref_category,var_category,ref_list,var_list)
 # assign legend for missense mutation plots
 amino_acid_legend <- list(
   labels = c("Negative/Acidic",
@@ -245,28 +304,34 @@ amino_acid_legend <- list(
              "Sulfur-containing",
              "Aliphatic",
              "Aromatic",
-             "Multi-peptide/category"
+             "Multi-amino-acid/-category"
   ),
   fill = c("#E41A1C",
-           "#FFFF33",
+           "#FF7F00",
            "#984EA3",
            "#4DAF8A",
-           "#A65628",
-           "#999999",
            "#8DD3C7",
-           "#FFFFFF"
+           "#999999",
+           "#377EB8",
+           "#FFFF33"
   ),
   cex = 1.5
 )
+F4_variants <- GRanges(seqnames = "chr", IRanges(start = F4_df$imaging_AA, width = 1,names = NULL))
+F4_variants$score <- F4_df$AA_change_freq
+F4_variants$color <- F4_df$color
+F4_variants$shape <- F4_df$shape
 
-
-F4_variants <- F3_variants[F3_variants$type %in% F4_types]
 cat("Figure5\n")
 F5_types <- c("frameshift_insertion","frameshift_deletion","stop_gained","stop_lost","start_lost")
 F5_variants <- F3_variants[F3_variants$type %in% F5_types]
+
+
 cat("Figure6\n")
 F6_types <- c("inframe_insertion","inframe_deletion")
 F6_variants <- F3_variants[F3_variants$type %in% F6_types]
+
+
 cat("Figure7\n")
 F7_types <- c("splice_site_variant","splice_region_variant")
 F7_variants <- F3_variants[F3_variants$type %in% F7_types]
