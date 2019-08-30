@@ -130,7 +130,7 @@ if(length(F3_variants$score)>0){
 } else cat("\tNone returned by query\n\n")
 ```
 
-### cBioPortal Missense mutations (n = **`r length(F4_variants$score)`**)
+### cBioPortal Missense mutations (n = **`r length(F4_variants$score)`**) [colors categorize reference AA]
 
 ```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
 if(length(F4_variants$score)>0){
@@ -152,7 +152,7 @@ if(length(F4_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,3,4,0)) # (bottom,left,top,right)
+  par(mar=c(0,3,0,0)) # (bottom,left,top,right)
   plot(image_trim(F4_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
