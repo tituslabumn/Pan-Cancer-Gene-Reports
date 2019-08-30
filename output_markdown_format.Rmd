@@ -114,15 +114,15 @@ if(length(F3_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,2,0,0)) # (bottom,left,top,right)
   plot(image_trim(F3_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.001,
+            x=0.01,
             y=0.6,
             just="top",
             rot=90,
-            gp=gpar(cex=1.5, fontface="bold")
+            gp=gpar(cex=1, fontface="bold")
             )
   invisible(dev.off())
   par(mar=c(0,0,0,0))
@@ -144,10 +144,7 @@ if(length(F4_variants$score)>0){
             cex = 1,
             ylab = FALSE,
             jitter = "label",
-            legend = list(labels = legend$labels[legend$labels %in% F4_types],
-                          fill = legend$fill[legend$labels %in% F4_types],
-                          cex = 1.5
-                          )
+            legend = amino_acid_legend
   )
   invisible(dev.off())
   F4_magick_img2 <- image_graph(width = image_info(image_trim(F4_magick_img))$width,
@@ -155,16 +152,24 @@ if(length(F4_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,2,0,0)) # (bottom,left,top,right)
   plot(image_trim(F4_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.001,
-            y=0.6,
+            x=0.01,
+            y=0.5,
             just="top",
             rot=90,
-            gp=gpar(cex=1.5, fontface="bold")
+            gp=gpar(cex=1, fontface="bold")
             )
+  #add custom legend for shapes
+  legend(100,675,
+         c("Gain of charge","Loss of charge","charge reversed","multi-category"),
+         pch = c(2,6,5,0), # "triangle point up","triangle point down","diamond","square"
+         cex = 1.5,
+         bty = "n",
+         ncol = 2
+         )
   invisible(dev.off())
   par(mar=c(0,0,0,0))
   plot(F4_magick_img2)
@@ -196,15 +201,15 @@ if(length(F5_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,2,0,0)) # (bottom,left,top,right)
   plot(image_trim(F5_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.001,
-            y=0.6,
+            x=0.01,
+            y=0.5,
             just="top",
             rot=90,
-            gp=gpar(cex=1.5, fontface="bold")
+            gp=gpar(cex=1, fontface="bold")
             )
   invisible(dev.off())
   par(mar=c(0,0,0,0))
@@ -237,15 +242,15 @@ if(length(F6_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,2,0,0)) # (bottom,left,top,right)
   plot(image_trim(F6_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.001,
-            y=0.6,
+            x=0.01,
+            y=0.5,
             just="top",
             rot=90,
-            gp=gpar(cex=1.5, fontface="bold")
+            gp=gpar(cex=1, fontface="bold")
             )
   invisible(dev.off())
   par(mar=c(0,0,0,0))
@@ -278,21 +283,21 @@ if(length(F7_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,0.5,1,0)) # (bottom,left,top,right)
+  par(mar=c(0,2,1,0)) # (bottom,left,top,right)
   plot(image_trim(F7_magick_img))
   # yaxis label
   grid.text(paste0("Variant count within cBP data"),
-            x=0.001,
-            y=0.6,
+            x=0.01,
+            y=0.5,
             just="top",
             rot=90,
-            gp=gpar(cex=1.5, fontface="bold")
+            gp=gpar(cex=1, fontface="bold")
             )
   grid.text(paste0("[ Main transcript exons in green and red as top feature row ]"),
-            x=0.02,
+            x=0.04,
             y=0.95,
             just="left",
-            gp=gpar(cex=1.5, fontface="bold")
+            gp=gpar(cex=1.25, fontface="bold")
             )
   invisible(dev.off())
   par(mar=c(0,0,0,0))

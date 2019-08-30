@@ -384,6 +384,10 @@ all.mut.studies <- master_genetic_profile_df$cancer_study_name[master_genetic_pr
 all.mut.studies.filtered <- all.mut.studies[all.mut.studies %in% filtered_studies]
 cat("number of studies (filtered) with mutation data available:",length(all.mut.studies.filtered),"\n\n\n")
 
+# load in amino acid properties - used in generate-figures script
+cat("Load in amino_acid_properties.csv\n\n\n")
+amino_acid_properties <- read.csv("/PCGR/Pan-Cancer-Gene-Reports/amino_acid_properties.csv",header = TRUE,stringsAsFactors = FALSE)
+
 save.image("troubleshooting_workspace.RData") #####################
 
 #save final initialized workspace in output folder

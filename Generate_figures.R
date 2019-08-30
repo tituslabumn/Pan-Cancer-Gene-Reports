@@ -233,7 +233,32 @@ for (x in 1:length(F4_df[,1])) {
   F4_df[x,"var_AA"] <- var
 }
 rm(x,var,ref)
-# assign AA_change_class
+# assign AA_change_class (from https://www.thermofisher.com/us/en/home/life-science/protein-biology/protein-biology-learning-center/protein-biology-resource-library/pierce-protein-methods/amino-acid-physical-properties.html)
+# amino_acid_properties data.frame loaded during initialization from supplied .csv
+
+# assign legend for missense mutation plots
+amino_acid_legend <- list(
+  labels = c("Negative/Acidic",
+             "Positive/Basic",
+             "Amidic",
+             "Hydroxylic",
+             "Sulfur-containing",
+             "Aliphatic",
+             "Aromatic",
+             "Multi-peptide/category"
+  ),
+  fill = c("#E41A1C",
+           "#FFFF33",
+           "#984EA3",
+           "#4DAF8A",
+           "#A65628",
+           "#999999",
+           "#8DD3C7",
+           "#FFFFFF"
+  ),
+  cex = 1.5
+)
+
 
 F4_variants <- F3_variants[F3_variants$type %in% F4_types]
 cat("Figure5\n")
