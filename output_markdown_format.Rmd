@@ -310,6 +310,8 @@ if(length(F7_variants$score)>0){
 kable(F7_exons, row.names = FALSE, caption = "Main transcript exons key", align = "l")
 ```
 
+## gnomAD Splice regions and splice sites (n = **`r length(F7_variants$score)`**) in context of all transcripts [union of exonic sequence]
+
 ```{r echo=FALSE,fig.width=12,fig.height=12,out.width='\\textwidth',strip.white=TRUE}
 if(length(F7_variants$score)>0){
   F8_magick_img <- image_graph(width = 2000, height = 2000,res = 150, clip = FALSE)
@@ -569,6 +571,8 @@ if(length(F13_gnomAD$score)>0){
 
 ```
 
+## gnomAD Splice regions and splice sites (n = **`r length(F13_gnomAD$score)`**) in context of all transcripts [union of exonic sequence]
+
 ```{r echo=FALSE,fig.width=12,fig.height=12,out.width='\\textwidth',strip.white=TRUE}
 if(length(F13_gnomAD$score)>0){
   F14_magick_img <- image_graph(width = 2000, height = 2000,res = 150, clip = FALSE)
@@ -613,25 +617,89 @@ if(length(F13_gnomAD$score)>0){
 } else cat("\tNone returned by query\n\n")
 ```
 
-```{r echo=FALSE, fig.asp=1, fig.width=10,out.width='\\textwidth'}
-# lolliplot(SNP.gr = list(A1 = GRanges(),A2 = F10_gnomAD_overlap, A3 = F10_cBP_overlap),
-#           features = list(A3 = Feature_legend, A4 = No_name_features, A5 = No_name_features),
-#           ranges = F10_ranges, 
-#           xaxis = FALSE,#,F10_x_axis,F10_x_axis)
-#           cex = 0.75,
-#           ylab = c("","\tcBP [# of occurances]\n",paste0("\t\tgnomAD [log2(allele count) ; max = ",max_gnomAD_allele_count,"]\n")),
-#           jitter = "label",
-#           legend =  legend)
-# grid.text(paste0("All variants overlapping between cBioPortal and gnomAD"),
-#           x=.5,
-#           y=0.9,
-#           just="top", 
-#           gp=gpar(cex=1.5, fontface="bold")
-#           )
+# Overlapping Variants between cBioPortal and gnomAD (n = **`r length(unique_cBP_overlap_df[,1])`**)
+
+```{r echo=FALSE, fig.height=8, fig.width=14,out.width='\\textwidth'}
+if(length(unique_cBP_overlap_df[,1]) > 1){
+  #legend
+  F15_magick_img_legend <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  plot.new()
+  legend("center",
+         c("Does not meet filter threshold (gnomAD Allele Freq < 0.0001)","Meets filter threshold (gnomAD Allele Freq >= 0.0001)"),
+         pch = c(1,0), # "triangle point up","triangle point down","diamond","square"
+         cex = 1,
+         #bty = "n",
+         ncol = 2,
+         inset = -0.1
+         )
+  invisible(dev.off())
+  # top: cBP overlap
+  F15_magick_img_top <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F15_cBP_overlap,
+            features = F15_features,
+            ranges = F3_ranges,
+            xaxis = FALSE,
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend =  FALSE)
+  invisible(dev.off())
+  F15_magick_img_top2 <- image_graph(width = image_info(image_trim(F15_magick_img_top))$width,
+                                  height = image_info(image_trim(F15_magick_img_top))$height,
+                                  res = 150,
+                                  clip = FALSE
+                                  )
+  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F15_magick_img_top))
+  # yaxis label
+  grid.text(paste0("cBioPortal: Variant count"),
+              x=0.001,
+              y=0.5,
+              just="top",
+              rot=90,
+              gp=gpar(cex=1, fontface="bold")
+              )
+  invisible(dev.off())
+  
+  # bottom: gnomAD overlap
+  F15_magick_img_bottom <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F15_gnomAD_overlap,
+            features = F15_features,
+            ranges = F3_ranges,
+            xaxis = FALSE,
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend =  FALSE)
+  invisible(dev.off())
+  F15_magick_img_bottom2 <- image_graph(width = image_info(image_trim(F15_magick_img_bottom))$width,
+                                  height = image_info(image_trim(F15_magick_img_bottom))$height,
+                                  res = 150,
+                                  clip = FALSE
+                                  )
+  par(mar=c(0,3.5,0,0)) # (bottom,left,bottom,right)
+  plot(image_trim(F15_magick_img_bottom))
+  # yaxis label
+    grid.text(paste0("gnomAD: log2(allele count)\n[max count = ",F15_max_gnomAD_allele_count,"]"),
+              x=0.001,
+              y=0.5,
+              just="top",
+              rot=90,
+              gp=gpar(cex=1, fontface="bold")
+              )
+  invisible(dev.off())
+  
+  par(mfrow=c(3,1))
+  par(mar=c(0,0,0,0))
+  plot(image_trim(F15_magick_img_legend))
+  plot(F15_magick_img_top2)
+  plot(F15_magick_img_bottom2)
+  
+} else cat("\tNo overlapping variants\n\n")
 ```
 
 ```{r echo=FALSE}
-#kable(overlap_summary_table, row.names = FALSE, caption = "All variants shared between cBP and gnomAD", align = "l")
+kable(overlap_summary_table, row.names = FALSE, caption = "All variants shared between cBP and gnomAD", align = "l")
 ```
 
 # Gene fusions returned:

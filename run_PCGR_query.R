@@ -108,7 +108,7 @@ save.image("troubleshooting_workspace.RData") #####################
 source("/PCGR/Pan-Cancer-Gene-Reports/Generate_figures.R")
 
 #Knit data to output PDF
-cat("############### Knitting report to PDF #################\n\n\n")
+cat("############### Knitting report to HTML file #################\n\n\n")
 Sys.setenv(RSTUDIO_PANDOC="/usr/lib/rstudio/bin/pandoc") #must specify if running in bash rather than Rstudio
 rmarkdown::render("/PCGR/Pan-Cancer-Gene-Reports/output_markdown_format.Rmd",output_file = paste0(GOI," query output report (",Sys.Date(),").html"),output_dir = output_directory)
 

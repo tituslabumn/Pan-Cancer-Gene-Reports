@@ -476,18 +476,33 @@ F14_features <- F8_features
 
 
 cat("Figure15\n")
+flat_features <- No_name_features
+flat_features$height <- 0
+flat_features$featureLayerID <- 1
+
+F15_features <- No_name_features
+F15_features$height <- 0.01
+
+F15_shape_key <- data.frame(row.names = c(TRUE,FALSE),
+                            shape = c("square","circle"),
+                            stringsAsFactors = FALSE)
+
 unique_cBP_overlap_df <- Unique_mutations_plot[Unique_mutations_plot$cBPgnomAD_overlap,]
-F10_cBP_overlap <- GRanges(seqnames = "chr", IRanges(start = unique_cBP_overlap_df$imaging_AA, width = 1,names = NULL))
-F10_cBP_overlap$score <- unique_cBP_overlap_df$AA_change_freq
-F10_cBP_overlap$color <- mut_type_color_key[unique_cBP_overlap_df$unified_annotation,"color"]
+F15_cBP_overlap <- GRanges(seqnames = "chr", IRanges(start = unique_cBP_overlap_df$imaging_AA, width = 1,names = NULL))
+F15_cBP_overlap$score <- unique_cBP_overlap_df$AA_change_freq
+F15_cBP_overlap$color <- mut_type_color_key[unique_cBP_overlap_df$unified_annotation,"color"]
+F15_cBP_overlap$shape <- F15_shape_key[as.character(unique_cBP_overlap_df$overlap_filter_threshold),]
 
 gnomAD_imageing_overlap_df <- gnomAD_imaging_df[gnomAD_imaging_df$cBPgnomAD_overlap,]
-F10_gnomAD_overlap <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imageing_overlap_df[,"imaging_AA"], width = 1,names = NULL))
-F10_gnomAD_overlap$score <- gnomAD_imageing_overlap_df$imaging_score
-F10_gnomAD_overlap$color <- mut_type_color_key[gnomAD_imageing_overlap_df$unified_annotation,"color"]
+F15_gnomAD_overlap <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imageing_overlap_df[,"imaging_AA"], width = 1,names = NULL))
+F15_gnomAD_overlap$score <- gnomAD_imageing_overlap_df$imaging_score
+F15_gnomAD_overlap$color <- mut_type_color_key[gnomAD_imageing_overlap_df$unified_annotation,"color"]
+F15_gnomAD_overlap$SNPsideID <- "bottom"
+F15_gnomAD_overlap$shape <- F15_shape_key[as.character(gnomAD_imageing_overlap_df$overlap_filter_threshold),]
+F15_max_gnomAD_allele_count <- 2^max(F15_gnomAD_overlap$score, na.rm = TRUE)
 
-F10_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH+1))
-F10_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
+F15_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH+1))
+F15_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
 save.image("troubleshooting_workspace.RData") #####################  
 
@@ -502,7 +517,8 @@ overlap_summary_table <- gnomAD_imageing_overlap_df[,c("unified_label",
                                                        "unified_annotation",
                                                        "Allele.Count",
                                                        "Homozygote.Count",
-                                                       "Allele.Frequency"
+                                                       "Allele.Frequency",
+                                                       "overlap_filter_threshold"
                                                        )
                                                     ]
 # sort by allele freq
