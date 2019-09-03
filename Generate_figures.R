@@ -335,7 +335,7 @@ F6_variants <- F3_variants[F3_variants$type %in% F6_types]
 cat("Figure7\n")
 F7_types <- c("splice_site_variant","splice_region_variant")
 F7_variants <- F3_variants[F3_variants$type %in% F7_types]
-# F7_variants will be concatenated with F3 variants to add exons to top
+# F7_features will be concatenated with F3 features to add exons to top
 F7_exons <- GOI_transcript_exons_filtered[GOI_transcript_exons_filtered$ensembl_transcript_id == GOI_TRANSCRIPT,c("rank","exon_chrom_start","exon_chrom_end")]
 
 # make strand agnostic labels
@@ -384,17 +384,98 @@ F8_features$fill[F8_features$fill == "red"] <- rep(c("green","red"),100)[1:lengt
 cat("Figure9\n")
 GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
 GOI_gnomAD_df_filtered$imaging_score <- log2(GOI_gnomAD_df_filtered$Allele.Count)
+# filter
 gnomAD_imaging_df <- GOI_gnomAD_df_filtered[!is.na(GOI_gnomAD_df_filtered$exon_intron),]
+gnomAD_leftover_df <-gnomAD_imaging_df[!(gnomAD_imaging_df$unified_annotation %in% legend$labels),]
+gnomAD_imaging_df <- gnomAD_imaging_df[(gnomAD_imaging_df$unified_annotation %in% legend$labels),]
+
 max_gnomAD_allele_count <- max(gnomAD_imaging_df[,"Allele.Count"], na.rm = TRUE)
 F9_features <- F3_features
 F9_gnomAD <- GRanges(seqnames = "chr", IRanges(start = gnomAD_imaging_df[,"imaging_AA"], width = 1,names = NULL))
 F9_gnomAD$score <- gnomAD_imaging_df$imaging_score
 F9_gnomAD$color <- mut_type_color_key[gnomAD_imaging_df$unified_annotation,"color"]
+F9_gnomAD$type <- gnomAD_imaging_df$unified_annotation
 F9_ranges <- GRanges(seqnames = "chr", IRanges(start = 1,end = GOI_UNIPROT_AA_LENGTH+1))
 F9_x_axis <- round(seq(from = 1, to = GOI_UNIPROT_AA_LENGTH, length.out = 10),-1) #even split by 5 rounded to nearest 10
 
-cat("Figure10\n")
 
+cat("Figure10\n") # missense gnomAD
+F10_df <- gnomAD_imaging_df[gnomAD_imaging_df$unified_annotation == "missense_variant",]
+# at the moment assume no variants are recorded in gnomAD under missense_variant that correspond to delins's of equal size (e.g. ref:AG var:CC)
+#  I have been unable to find any examples so far
+F10_df$ref_AA <- sapply(F10_df$Protein.Consequence, function(x){
+  substr(gsub("p\\.","",x),1,3)
+})
+F10_df$var_AA <- sapply(F10_df$Protein.Consequence, function(x){
+  substr(gsub("p\\.","",x),nchar(gsub("p\\.","",x))-2,nchar(gsub("p\\.","",x)))
+})
+# assign AA_change_class (from https://www.thermofisher.com/us/en/home/life-science/protein-biology/protein-biology-learning-center/protein-biology-resource-library/pierce-protein-methods/amino-acid-physical-properties.html)
+# amino_acid_properties data.frame loaded during initialization from supplied .csv
+# add color and shape cols to F10_df
+F10_df$color <- ""
+F10_df$shape <- "circle"
+for(x in 1:length(F10_df[,1])){
+    # if single AA substitution
+    ref <- F10_df[x,"ref_AA"]
+    var <- F10_df[x,"var_AA"]
+    ref_category <- amino_acid_properties[amino_acid_properties$Three_letter == ref,"Category"]
+    var_category <- amino_acid_properties[amino_acid_properties$Three_letter == var,"Category"]
+    
+    F10_df[x,"color"] <- amino_acid_properties[amino_acid_properties$Three_letter == ref,"Color"]
+    # loss of charge
+    if( (ref_category == "Negative/Acidic" | ref_category == "Positive/Basic") & (var_category != "Negative/Acidic" & var_category != "Positive/Basic") ){
+      F10_df[x,"shape"] <- "triangle_point_down"
+    }
+    # gain of charge
+    if( (ref_category != "Negative/Acidic" & ref_category != "Positive/Basic") & (var_category == "Negative/Acidic" | var_category == "Positive/Basic") ){
+      F10_df[x,"shape"] <- "triangle_point_up"
+    }
+    # charge reversal
+    if( (ref_category == "Negative/Acidic" & var_category == "Positive/Basic") | (var_category == "Negative/Acidic" & ref_category == "Positive/Basic") ){
+      F10_df[x,"shape"] <- "triangle_point_down"
+    }
+}
+rm(x,ref,var,ref_category,var_category)
+F10_gnomAD <- GRanges(seqnames = "chr", IRanges(start = F10_df[,"imaging_AA"], width = 1,names = NULL))
+F10_gnomAD$score <- F10_df$imaging_score
+F10_gnomAD$color <- F10_df$color
+F10_gnomAD$shape <- F10_df$shape
+F10_max_gnomAD_allele_count <- 2^max(F10_gnomAD$score, na.rm = TRUE)
+
+
+cat("Figure11\n")
+F11_types <- c("frameshift_insertion","frameshift_deletion","stop_gained","stop_lost","start_lost")
+F11_gnomAD <- F9_gnomAD[F9_gnomAD$type %in% F11_types]
+F11_max_gnomAD_allele_count <- 2^max(F11_gnomAD$score, na.rm = TRUE)
+
+cat("Figure12\n")
+F12_types <- c("inframe_insertion","inframe_deletion")
+F12_gnomAD <- F9_gnomAD[F9_gnomAD$type %in% F12_types]
+F12_max_gnomAD_allele_count <- 2^max(F12_gnomAD$score, na.rm = TRUE)
+
+cat("Figure13\n")
+F13_types <- c("splice_site_variant","splice_region_variant")
+F13_gnomAD <- F9_gnomAD[F9_gnomAD$type %in% F13_types]
+F13_max_gnomAD_allele_count <- 2^max(F13_gnomAD$score, na.rm = TRUE)
+# use F7_exons and F7_features
+
+cat("Figure14\n")
+F14_df <- gnomAD_imaging_df[gnomAD_imaging_df$unified_annotation %in% F13_types,]
+# exonic_relative_positions generated above
+# for each unified_pos what is the minimal abs(list_of_exonic_pos's - unified_pos)
+F14_df$nearest_exonic_pos <- sapply(1:length(F14_df[,1]),
+                                   function(x){
+                                     union_transcripts_relative_pos_key[which.min(abs(exonic_relative_positions - F14_df$unified_pos[x])),"relative_union_transcript_position"]
+                                   }
+)
+F14_variants <- GRanges(seqnames = "chr", IRanges(start = F14_df$nearest_exonic_pos, width = 1,names = NULL))
+F14_variants$score <- F14_df$imaging_score
+F14_variants$color <- mut_type_color_key[F14_df$unified_annotation,"color"]
+#use same features except for main transcript adopt same alternating green/red color scheme
+F14_features <- F8_features
+
+
+cat("Figure15\n")
 unique_cBP_overlap_df <- Unique_mutations_plot[Unique_mutations_plot$cBPgnomAD_overlap,]
 F10_cBP_overlap <- GRanges(seqnames = "chr", IRanges(start = unique_cBP_overlap_df$imaging_AA, width = 1,names = NULL))
 F10_cBP_overlap$score <- unique_cBP_overlap_df$AA_change_freq

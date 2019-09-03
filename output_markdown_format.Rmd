@@ -117,7 +117,7 @@ if(length(F3_variants$score)>0){
   par(mar=c(0,3,0,0)) # (bottom,left,top,right)
   plot(image_trim(F3_magick_img))
   # yaxis label
-  grid.text(paste0("Variant count within cBP data"),
+  grid.text(paste0("Variant count"),
             x=0.01,
             y=0.6,
             just="top",
@@ -155,7 +155,7 @@ if(length(F4_variants$score)>0){
   par(mar=c(0,3,0,0)) # (bottom,left,top,right)
   plot(image_trim(F4_magick_img))
   # yaxis label
-  grid.text(paste0("Variant count within cBP data"),
+  grid.text(paste0("Variant count"),
             x=0.01,
             y=0.5,
             just="top",
@@ -169,7 +169,7 @@ if(length(F4_variants$score)>0){
          cex = 1.5,
          bty = "n",
          ncol = 5,
-         inset = 0.05
+         inset = 0.08
          )
   invisible(dev.off())
   par(mar=c(0,0,0,0))
@@ -205,7 +205,7 @@ if(length(F5_variants$score)>0){
   par(mar=c(0,3,0,0)) # (bottom,left,top,right)
   plot(image_trim(F5_magick_img))
   # yaxis label
-  grid.text(paste0("Variant count within cBP data"),
+  grid.text(paste0("Variant count"),
             x=0.01,
             y=0.5,
             just="top",
@@ -246,7 +246,7 @@ if(length(F6_variants$score)>0){
   par(mar=c(0,3,0,0)) # (bottom,left,top,right)
   plot(image_trim(F6_magick_img))
   # yaxis label
-  grid.text(paste0("Variant count within cBP data"),
+  grid.text(paste0("Variant count"),
             x=0.01,
             y=0.5,
             just="top",
@@ -287,7 +287,7 @@ if(length(F7_variants$score)>0){
   par(mar=c(0,3,1,0)) # (bottom,left,top,right)
   plot(image_trim(F7_magick_img))
   # yaxis label
-  grid.text(paste0("Variant count within cBP data"),
+  grid.text(paste0("Variant count"),
             x=0.01,
             y=0.5,
             just="top",
@@ -328,8 +328,30 @@ if(length(F7_variants$score)>0){
                             )
                )
   invisible(dev.off())
-  par(mar=c(0,0,0,0)) # (bottom,left,top,right)
+  F8_magick_img2 <- image_graph(width = image_info(image_trim(F8_magick_img))$width,
+                                height = image_info(image_trim(F8_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
+  par(mar=c(0,1.5,1,0)) # (bottom,left,top,right)
   plot(image_trim(F8_magick_img))
+  # yaxis label
+  grid.text(paste0("Variant count"),
+            x=0.001,
+            y=0.5,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1.5, fontface="bold")
+            )
+  grid.text(paste0("[ Main transcript exons in green\nand red as top feature row ]"),
+            x=0.04,
+            y=0.90,
+            just="left",
+            gp=gpar(cex=1, fontface="bold")
+            )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F8_magick_img2)
 } else cat("\tNone returned by query\n\n")
 ```
 
@@ -337,37 +359,260 @@ if(length(F7_variants$score)>0){
 # All gnomAD variants returned (n = **`r length(F9_gnomAD$score)`**)
 
 ```{r echo=FALSE, fig.width=14,fig.height=4.5,out.width='\\textwidth'}
-F9_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
-lolliplot(SNP.gr = F9_gnomAD,
-          features = F9_features, 
-          ranges = F9_ranges, 
-          xaxis = F9_x_axis,
-          yaxis.gp = gpar(cex = 1.5),
-          xaxis.gp = gpar(cex = 1.5),
-          cex = 1,
-          ylab = FALSE,
-          jitter = "label",
-          legend =  legend)
-invisible(dev.off())
-par(mar=c(0,1.5,0,0)) # (bottom,left,top,right)
-plot(image_trim(F9_magick_img))
-# yaxis label
-grid.text(paste0("log2(allele count) within cBP data [max count = ",max_gnomAD_allele_count,"]"),
-          x=0.01,
-          y=0.6,
-          just="top",
-          rot=90,
-          gp=gpar(cex=.75, fontface="bold")
-          )
+if(length(F9_gnomAD$score)>0){
+  F9_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F9_gnomAD,
+            features = F9_features, 
+            ranges = F9_ranges, 
+            xaxis = F9_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend =  legend)
+  invisible(dev.off())
+  F9_magick_img2 <- image_graph(width = image_info(image_trim(F9_magick_img))$width,
+                                height = image_info(image_trim(F9_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+  )
+  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F9_magick_img))
+  # yaxis label
+  grid.text(paste0("log2(allele count)\n[max count = ",max_gnomAD_allele_count,"]"),
+            x=0.001,
+            y=0.5,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1.5, fontface="bold")
+            )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F9_magick_img2)
+} else cat("\tNone returned by query\n\n")
 ```
 
-## gnomAD Missense mutations (n = **`r length(F7_variants$score)`**)
+## gnomAD Missense mutations (n = **`r length(F10_variants$score)`**) [colors categorize reference AA]
 
-## gnomAD Frameshifts and stops gained/lost (n = **`r length(F7_variants$score)`**)
+```{r echo=FALSE, fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+if(length(F10_gnomAD$score)>0){
+  F10_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F10_gnomAD,
+            features = F9_features, 
+            ranges = F9_ranges, 
+            xaxis = F9_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend =  amino_acid_legend)
+  invisible(dev.off())
+  F10_magick_img2 <- image_graph(width = image_info(image_trim(F10_magick_img))$width,
+                                height = image_info(image_trim(F10_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+  )
+  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F10_magick_img))
+  # yaxis label
+  grid.text(paste0("log2(allele count)\n[max count = ",F10_max_gnomAD_allele_count,"]"),
+            x=0.001,
+            y=0.5,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1.5, fontface="bold")
+            )
+  #add custom legend for shapes
+  legend("top",
+         c("Gain of charge","Loss of charge","Charge reversed","Multi-category","No charge change"),
+         pch = c(2,6,5,0,1), # "triangle point up","triangle point down","diamond","square"
+         cex = 1.5,
+         bty = "n",
+         ncol = 5,
+         inset = 0.08
+         )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F10_magick_img2)
+} else cat("\tNone returned by query\n\n")
+```
 
-## gnomAD Insertions/Deletions  (n = **`r length(F6_variants$score)`**)
+## gnomAD Frameshifts and stops gained/lost (n = **`r length(F11_variants$score)`**)
 
-## gnomAD Splice regions and splice sites (acceptors/donors) (n = **`r length(F7_variants$score)`**)
+```{r echo=FALSE, fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+if(length(F11_gnomAD$score)>0){
+  F11_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F11_gnomAD,
+            features = F9_features, 
+            ranges = F9_ranges, 
+            xaxis = F9_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend =  list(labels = legend$labels[legend$labels %in% F11_types],
+                          fill = legend$fill[legend$labels %in% F11_types],
+                          cex = 1.5
+                          )
+            )
+  invisible(dev.off())
+  F11_magick_img2 <- image_graph(width = image_info(image_trim(F11_magick_img))$width,
+                                height = image_info(image_trim(F11_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+  )
+  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F11_magick_img))
+  # yaxis label
+  grid.text(paste0("log2(allele count)\n[max count = ",F11_max_gnomAD_allele_count,"]"),
+            x=0.001,
+            y=0.5,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1.5, fontface="bold")
+            )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F11_magick_img2)
+} else cat("\tNone returned by query\n\n")
+```
+
+## gnomAD Insertions/Deletions  (n = **`r length(F12_variants$score)`**)
+
+```{r echo=FALSE, fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+if(length(F12_gnomAD$score)>0){
+  F12_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F12_gnomAD,
+            features = F9_features, 
+            ranges = F9_ranges, 
+            xaxis = F9_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend =  list(labels = legend$labels[legend$labels %in% F12_types],
+                          fill = legend$fill[legend$labels %in% F12_types],
+                          cex = 1.5
+                          )
+            )
+  invisible(dev.off())
+  F12_magick_img2 <- image_graph(width = image_info(image_trim(F12_magick_img))$width,
+                                height = image_info(image_trim(F12_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+  )
+  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F12_magick_img))
+  # yaxis label
+  grid.text(paste0("log2(allele count)\n[max count = ",F12_max_gnomAD_allele_count,"]"),
+            x=0.001,
+            y=0.5,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1.5, fontface="bold")
+            )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F12_magick_img2)
+} else cat("\tNone returned by query\n\n")
+```
+
+## gnomAD Splice regions and splice sites (n = **`r length(F13_gnomAD$score)`**)
+
+```{r echo=FALSE,fig.width=14,fig.height=4.5,out.width='\\textwidth'}
+if(length(F13_gnomAD$score)>0){
+  F13_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F13_gnomAD ,
+            features = c(F7_features,F9_features), 
+            ranges = F9_ranges, 
+            xaxis = F9_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend = list(labels = legend$labels[legend$labels %in% F13_types],
+                          fill = legend$fill[legend$labels %in% F13_types],
+                          cex = 1.5
+                          )
+  )
+  invisible(dev.off())
+  F13_magick_img2 <- image_graph(width = image_info(image_trim(F13_magick_img))$width,
+                                height = image_info(image_trim(F13_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
+  par(mar=c(0,3.5,1,0)) # (bottom,left,top,right)
+  plot(image_trim(F13_magick_img))
+  # yaxis label
+  grid.text(paste0("log2(allele count)\n[max count = ",F13_max_gnomAD_allele_count,"]"),
+            x=0.001,
+            y=0.5,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1.5, fontface="bold")
+            )
+  grid.text(paste0("[ Main transcript exons in green and red as top feature row ]"),
+            x=0.04,
+            y=0.95,
+            just="left",
+            gp=gpar(cex=1.25, fontface="bold")
+            )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F13_magick_img2)
+} else cat("\tNone returned by query\n\n")
+
+```
+
+```{r echo=FALSE,fig.width=12,fig.height=12,out.width='\\textwidth',strip.white=TRUE}
+if(length(F13_gnomAD$score)>0){
+  F14_magick_img <- image_graph(width = 2000, height = 2000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F14_variants,
+               features = F14_features,
+               ylab = FALSE,
+               xaxis = F2_x_axis,
+               yaxis.gp = gpar(cex = 1.5),
+               xaxis.gp = gpar(cex = 1.5),
+               cex = 1,
+               jitter = "label",
+               legend = list(labels = legend$labels[legend$labels %in% F13_types],
+                            fill = legend$fill[legend$labels %in% F13_types],
+                            cex = 1.5
+                            )
+               )
+  invisible(dev.off())
+  F14_magick_img2 <- image_graph(width = image_info(image_trim(F14_magick_img))$width,
+                                height = image_info(image_trim(F14_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
+  par(mar=c(0,3.5,1,0)) # (bottom,left,top,right)
+  plot(image_trim(F14_magick_img))
+  # yaxis label
+  grid.text(paste0("log2(allele count)\n[max count = ",F13_max_gnomAD_allele_count,"]"),
+            x=0.001,
+            y=0.5,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1.5, fontface="bold")
+            )
+  grid.text(paste0("[ Main transcript exons in green\nand red as top feature row ]"),
+            x=0.04,
+            y=0.90,
+            just="left",
+            gp=gpar(cex=1, fontface="bold")
+            )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F14_magick_img2)
+} else cat("\tNone returned by query\n\n")
+```
+
 ```{r echo=FALSE, fig.asp=1, fig.width=10,out.width='\\textwidth'}
 # lolliplot(SNP.gr = list(A1 = GRanges(),A2 = F10_gnomAD_overlap, A3 = F10_cBP_overlap),
 #           features = list(A3 = Feature_legend, A4 = No_name_features, A5 = No_name_features),
