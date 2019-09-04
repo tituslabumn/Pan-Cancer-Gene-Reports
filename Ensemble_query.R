@@ -25,7 +25,8 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   cat("Calling BM_GOI_annotoation()")
 
   cat("\nretrieving ENSG id","\n")
-  #assign GOI ENSG id
+  # assign GOI ENSG id
+  # try with ENST id as value first to avoid multiple ids returned
   GOI_ENSG <<- getBM(
     attributes = c(
       "ensembl_gene_id"
@@ -34,6 +35,17 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     values = GOI_TRANSCRIPT,
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
+  if(length(unlist(GOI_ENSG)) == 0){
+    cat("\n\n\tcould not access ENSG id via ENST id, trying gene symbol\n")
+    GOI_ENSG <<- getBM(
+      attributes = c(
+        "ensembl_gene_id"
+      ),
+      filters =  filter_type, 
+      values = value,
+      mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
+    )
+  }
   print(GOI_ENSG)
   # some genes (e.g. MYH11) return two ENSG ids. 
   if(length(unlist(GOI_ENSG)) > 1){
