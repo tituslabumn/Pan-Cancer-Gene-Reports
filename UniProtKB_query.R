@@ -38,7 +38,9 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   while(attempt < 20 & success == FALSE){
     read.df <- tryCatch({
       success <- TRUE
-      read.delim(textConnection(getURL(UniProt_URL, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
+      system(paste0("wget ",UniProt_URL," -O uniprot_temp.txt"))
+      read.delim("uniprot_temp.txt",stringsAsFactors = FALSE)
+      #read.delim(textConnection(getURL(UniProt_URL, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
       #read.delim(url(UniProt_URL),stringsAsFactors = FALSE)
       },error=function(cond){
       print(cond)
@@ -50,6 +52,7 @@ parse_uniprotKB_annotation <- function(gene = GOI){
     })
   }
   rm(attempt,success)
+  system("rm uniprot_temp.txt")
   Uniprot_txt_parsed <<- read.df
   cat("Succesffully retrieved\n\n")
 
