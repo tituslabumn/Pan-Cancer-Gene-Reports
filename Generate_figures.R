@@ -527,7 +527,45 @@ overlap_summary_table <- overlap_summary_table[rev(order(overlap_summary_table$A
 overlap_summary_table$cBioPortal.Occurances <- sapply(overlap_summary_table$unified_label, function(x) sum(x == GOI_cBP_mutations$unified_label))
 overlap_summary_table <- overlap_summary_table[,-1]
 
+# filter out cBP variants that meet threshold and add binom.test
+cBP_gnomADfiltered_df <- Unique_mutations_plot[!Unique_mutations_plot$overlap_filter_threshold,]
+cBP_gnomADfiltered_df$EBT_pval <- sapply(cBP_gnomADfiltered_df$AA_change_freq,
+                                         function(x){
+                                           binom.test(x,sum(cBP_gnomADfiltered_df$AA_change_freq),1/length(cBP_gnomADfiltered_df[,1]))$p.value
+                                         })
+cBP_gnomADfiltered_df$significant <- cBP_gnomADfiltered_df$EBT_pval <= 0.01 
+
+F16_shape_key <- data.frame(row.names = c(TRUE,FALSE),
+                            shape = c("diamond","circle"),
+                            stringsAsFactors = FALSE)
+
+F16_variants <- GRanges(seqnames = "chr", IRanges(start = cBP_gnomADfiltered_df$imaging_AA, width = 1,names = NULL))
+F16_variants$score <- cBP_gnomADfiltered_df$AA_change_freq
+F16_variants$color <- mut_type_color_key[cBP_gnomADfiltered_df$unified_annotation,"color"]
+F16_variants$shape <- F16_shape_key[as.character(cBP_gnomADfiltered_df$significant),]
+F16_variants$alpha <- 0.1
+F16_variants$alpha[cBP_gnomADfiltered_df$significant] <- 1
+
+hits_table <- cBP_gnomADfiltered_df[order(cBP_gnomADfiltered_df$EBT_pval),c("relative_AA_position",
+                                                                            "unified_annotation",
+                                                                            "AA_change_freq",
+                                                                            "EBT_pval",
+                                                                            "relative_coding_sequence",
+                                                                            "unified_pos",
+                                                                            "amino_acid_change",
+                                                                            "reference_allele",
+                                                                            "variant_allele"
+                                                                            )]
+colnames(hits_table)<- c("AA position",
+                         "Variant type",
+                         "Variant count",
+                         "Binomial test p-val",
+                         "Coding sequence pos",
+                         "Genomic pos",
+                         "Variant consequence",
+                         "Reference allele",
+                         "Variant allele")
 
 
-  cat("############### Figure data ready for export #################\n\n\n")
+cat("############### Figure data ready for export #################\n\n\n")
 

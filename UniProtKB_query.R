@@ -43,6 +43,7 @@ parse_uniprotKB_annotation <- function(gene = GOI){
       cat("\tAttempt",attempt,"failed. Attemting ",20-attempt," more times.\n")
       success <<- FALSE
       attempt<<-attempt+1
+      if(attempt == 20) stop("Unable to connect with UniProt; try again later :[")
       Sys.sleep(15)
     })
   }

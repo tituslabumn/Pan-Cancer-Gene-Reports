@@ -16,3 +16,4 @@ GOI_gnomAD_df_filtered$overlap_filter_threshold <- FALSE
 GOI_gnomAD_df_filtered[GOI_gnomAD_df_filtered$cBPgnomAD_overlap & GOI_gnomAD_df_filtered$Allele.Frequency >= 0.0001 ,"overlap_filter_threshold"] <- TRUE
 GOI_cBP_mutations$overlap_filter_threshold <- FALSE
 GOI_cBP_mutations[GOI_cBP_mutations$cBPgnomAD_overlap & GOI_cBP_mutations$unified_label %in% GOI_gnomAD_df_filtered$unified_label[GOI_gnomAD_df_filtered$overlap_filter_threshold],"overlap_filter_threshold"] <- TRUE
+

@@ -702,6 +702,61 @@ if(length(unique_cBP_overlap_df[,1]) > 1){
 kable(overlap_summary_table, row.names = FALSE, caption = "All variants shared between cBP and gnomAD", align = "l")
 ```
 
+# Cancer-specific hits after filtering against gnomAD natural variants
+
+Significance is assesed via an exact binomial test:  
+After filtering against natural variation, the number of trials equals the total number of variants observed, the probability of success equals 1/(number of unique variants) and trials equals the total number of variants.  
+P-value <= 0.01 is considered significant
+This test makes many assumtions (ignores sequence, codon, mutation burdon and structural contexts) and should only be considered as a crude measure of identifying the most significant peaks.  
+
+```{r echo=FALSE,fig.width=14,fig.height=4.5,fig.fullwidth = TRUE}
+if(length(F3_variants$score)>0){
+  F16_magick_img <- image_graph(width = 3000, height = 3000,res = 150, clip = FALSE)
+  lolliplot(SNP.gr = F16_variants ,
+            features = F3_features, 
+            ranges = F3_ranges, 
+            xaxis = F3_x_axis,
+            yaxis.gp = gpar(cex = 1.5),
+            xaxis.gp = gpar(cex = 1.5),
+            cex = 1,
+            ylab = FALSE,
+            jitter = "label",
+            legend = legend
+  )
+  invisible(dev.off())
+  F16_magick_img2 <- image_graph(width = image_info(image_trim(F16_magick_img))$width,
+                                height = image_info(image_trim(F16_magick_img))$height,
+                                res = 150,
+                                clip = FALSE
+                                )
+  par(mar=c(0,3,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F16_magick_img))
+  # yaxis label
+  grid.text(paste0("Variant count"),
+            x=0.01,
+            y=0.6,
+            just="top",
+            rot=90,
+            gp=gpar(cex=1, fontface="bold")
+            )
+  invisible(dev.off())
+  par(mar=c(0,0,0,0))
+  plot(F16_magick_img2)
+} else cat("\tNone returned by query\n\n")
+```
+
+## All variants p-value <= 0.05 (significance threshold set @ 0.01)
+
+```{r echo=FALSE}
+if(length(hits_table$`Binomial test p-val` <= 0.01) >1){
+  kable(hits_table[hits_table$`Binomial test p-val` <= 0.05,],
+        row.names = FALSE
+        )
+}else{
+  cat("\tNone returned by query\n\n")
+}
+```
+
 # Gene fusions returned:
 
 ```{r echo=FALSE}
