@@ -14,7 +14,11 @@ cat("GOI: ",GOI,"\n")
 cat("assigning canonical transcript per key used by cBP:","\n")
 GOI_TRANSCRIPT <- cBP_canonical_transcripts[GOI,"ensembl_transcript_id"]
 cat(GOI_TRANSCRIPT,"\n\n")
-if(is.na(GOI_TRANSCRIPT)) cat("\t!!!!! no canonicical transcript found, default to uniprot sequence; resolve with relative mapping below\n\n")
+transcript_test <- TRUE
+if(is.na(GOI_TRANSCRIPT)){
+  cat("\t!!!!! no canonicical transcript found, default to uniprot sequence; resolve with relative mapping below\n\n")
+  transcript_test <- FALSE
+}
 
 save.image("troubleshooting_workspace.RData") #####################
 
@@ -92,9 +96,7 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
     values = GOI_ENSG,
     mart = useMart("ensembl", dataset="hsapiens_gene_ensembl")
   )
-  #filter for selected transcript; save as seperate df
-  annotation_df_exon_main_transcript <- annotation_df_exon[annotation_df_exon$ensembl_transcript_id == GOI_TRANSCRIPT,]
-  print(annotation_df_exon[!duplicated(annotation_df_exon$ensembl_transcript_id),c("ensembl_transcript_id","cds_length")])
+  
   
   cat("\nretrieving transcript support annotations and sorting/filtering","\n")
   # retrive support information for returned transcripts
@@ -119,7 +121,9 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   # sort based on level of support, GOI_TRANSCRIPT always first even if not highest support level (often the case)
   GOI_transcript_support$sort <- 0
   # 'main cBP transcript' set to 1000
-  GOI_transcript_support[GOI_transcript_support$ensembl_transcript_id == GOI_TRANSCRIPT,"sort"] <- 1000
+  if(transcript_test){
+    GOI_transcript_support[GOI_transcript_support$ensembl_transcript_id == GOI_TRANSCRIPT,"sort"] <- 1000
+  }
   # (6 - tsl rating) * 10 (0 if missing)
   # if no tsl returned substr returns '' ; convert to 6 with gsub
   GOI_transcript_support$sort <- GOI_transcript_support$sort + 10*(6-as.numeric(gsub("^$","6",substr(gsub("tsl","",GOI_transcript_support$transcript_tsl),1,1))))
@@ -134,8 +138,16 @@ BM_GOI_annotation <- function(filter_type = "hgnc_symbol", value = GOI) {
   # remove values under 40 (non appris/basic with tsl3 and greater)
   cat("\tFiltering out ",sum(GOI_transcript_support$sort <50),"transcripts with low support\n\n")
   GOI_transcript_support <<- GOI_transcript_support[GOI_transcript_support$sort >=50 ,]
+  if(!transcript_test){
+    cat("\n\n\t######## assigning new ENST id based on transcript support ############\n\n")
+    GOI_TRANSCRIPT <<- GOI_transcript_support[1,"ensembl_transcript_id"]
+  }
   cat("GOI_TRANSCRIPT ('canonical transcript' used by cBP): ",GOI_TRANSCRIPT,"\n\n")
   print(GOI_transcript_support[,2:5])
+  
+  #filter exon df for selected transcript; save as seperate df
+  annotation_df_exon_main_transcript <- annotation_df_exon[annotation_df_exon$ensembl_transcript_id == GOI_TRANSCRIPT,]
+  print(annotation_df_exon[!duplicated(annotation_df_exon$ensembl_transcript_id),c("ensembl_transcript_id","cds_length")])
   
   #get peptide sequences for all transcripts
   cat("\nretrieving peptide sequences","\n")
