@@ -39,7 +39,7 @@ parse_uniprotKB_annotation <- function(gene = GOI){
     read.df <- tryCatch({
       success <- TRUE
       #read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
-      read.delim(UniProt_URL,stringsAsFactors = FALSE)
+      read.delim(url(UniProt_URL),stringsAsFactors = FALSE)
       },error=function(cond){
       print(cond)
       cat("\tAttempt",attempt,"failed. Attemting ",20-attempt," more times.\n")
