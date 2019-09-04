@@ -26,7 +26,7 @@ cat("Check that UniProt coding sequence is the same length as main transcript se
 peptide_transcript_check <-GOI_UNIPROT_AA_LENGTH == (GOI_exon_annotation_main_transcript$cds_length[1]/3-1)
 cat("\t",peptide_transcript_check,"\n\n\n")
 #if fail stop
-if(is.na(peptide_transcript_check)){
+if(is.na(peptide_transcript_check) | peptide_transcript_check == FALSE){
   cat("No canonical cBP transcript; default to UniProt/n/n")
   #select transcript (first that matches) with same cds size as uniprot product
   GOI_TRANSCRIPT <- GOI_exon_annotation$ensembl_transcript_id[which((GOI_exon_annotation$cds_length/3-1) == GOI_UNIPROT_AA_LENGTH)][1]
