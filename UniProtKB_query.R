@@ -25,23 +25,20 @@ parse_uniprotKB_annotation <- function(gene = GOI){
   cat("Querying UniProtKB GOI page via RCurl","\n\n")
   # retrieve features with some filetering
   
-  # old method produced SSL connect errors; use RCurl::getURL
-  # still an issue, seems to just require persistant attempts?
-  #   read.df <- read.delim(paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt"),stringsAsFactors = FALSE) 
-  #   read.delim(textConnection(getURL(UniProt_URL, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
   UniProt_URL <- paste0("https://www.uniprot.org/uniprot/",GOI_uniprot_id,".txt") #returns data frame with one col of lines
   cat("\tURL: ",UniProt_URL,"\n\n")
   library(RCurl)
   # attempt to access url, if fail try up to 19 more times every 15s
+  #   may no longer be an issue now that SSL error is avoided
   attempt<-1
   success <- FALSE
   while(attempt < 20 & success == FALSE){
     read.df <- tryCatch({
       success <- TRUE
+        #curl is broken for UniProt (SSL connect error) in container: use wget via system() instread
+        #read.delim(textConnection(getURL(UniProt_URL, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
       system(paste0("wget ",UniProt_URL," -O uniprot_temp.txt"))
       read.delim("uniprot_temp.txt",stringsAsFactors = FALSE)
-      #read.delim(textConnection(getURL(UniProt_URL, ssl.verifypeer=FALSE)),stringsAsFactors = FALSE)
-      #read.delim(url(UniProt_URL),stringsAsFactors = FALSE)
       },error=function(cond){
       print(cond)
       cat("\tAttempt",attempt,"failed. Attemting ",20-attempt," more times.\n")
