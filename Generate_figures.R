@@ -63,6 +63,14 @@ truncate.feature.labels <- function(df,char_number_cap){
 
 cat("Figure1\n")
 #Figure 1 - features; domains,regions, DNA_bind, MOTIF
+
+# if there are no figure-compatable features returned make one outside the GOI_UNIPROT_AA_LENGTH 
+if(sum(GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION")) == 0){
+  GOI_protein_feature_annotation <- rbind(GOI_protein_feature_annotation,c("DOMAIN",GOI_UNIPROT_AA_LENGTH + 5,GOI_UNIPROT_AA_LENGTH + 10,"NO DOMAINS/REGIONS RETURNED"))
+  GOI_protein_feature_annotation$AA_start <- as.numeric(GOI_protein_feature_annotation$AA_start)
+  GOI_protein_feature_annotation$AA_end <- as.numeric(GOI_protein_feature_annotation$AA_end)
+}
+  
 F1_feature_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION","DNA_BIND","MOTIF"),]
 F1_feature_df$fill <- combined_qualitative_palette[1:length(F1_feature_df[,1])]
 #F1_site_df <- GOI_protein_feature_annotation[GOI_protein_feature_annotation$TYPE %in% c("METAL","SITE","MOD_RES","CROSSLNK"),]
