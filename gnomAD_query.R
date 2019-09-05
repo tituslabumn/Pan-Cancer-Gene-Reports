@@ -44,7 +44,7 @@ while (success == FALSE) {
     cat("\tNavigating to gnomAD browser GOI page(non-cancer):\n")
     cat("\t\t",URL_gnomAD,"\n")
     remDr$navigate(URL_gnomAD)
-    Sys.sleep(3) #wait for page to load
+    Sys.sleep(5) #wait for page to load
     cat("\t\tPage title:\n")
     print(remDr$getTitle())
     # find download button (xpath found by exploring element in chromium)

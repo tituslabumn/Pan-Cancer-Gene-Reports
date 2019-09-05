@@ -33,15 +33,18 @@
   
   save.image("troubleshooting_workspace.RData") #####################
   
-  cat("query mutations and clinical data from each mutation-data-containing study:","\n")
+  cat("query mutations and clinical data from each mutation-data-containing study:","\n\n")
   #get mut data for all relavent studies and append all hits to the df
+  
+  count <- 1
   for (x in all.mut.studies.filtered) {
-    cat("\t",x,"...","\t")
+    cat("[",count,"/",length(all.mut.studies.filtered),"]\t\t")
     mut.study <- getMutationData(mycgds,paste(x,"all",sep = "_"),paste(x,"mutations",sep = "_"),GOI)
-    cat(length(mut.study[,1]),"\t")
+    cat(length(mut.study[,1]),"\t\t",x,"\n")
     mut.df <- rbind(mut.df,mut.study)
-    cat("OK","\n")
+    count <- count + 1
   }
+  rm(x,count)
   
   assign("pre_filter_diagotstic_df",mut.df)
   save.image("troubleshooting_workspace.RData") #####################

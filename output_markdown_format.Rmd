@@ -12,7 +12,8 @@ date: "`r paste(date(),Sys.timezone())`"
     }
 </style>
 
-#  `r GOI` metadata 
+##  `r GOI` metadata 
+
 Gene symbol: **`r GOI`**  
 UniProtKB ID: **`r GOI_uniprot_id`**  
 Gene product name: **`r GOI_protein_feature_annotation$LABEL[GOI_protein_feature_annotation$TYPE == "CHAIN"]`**  
@@ -20,8 +21,11 @@ Chromosome: **`r GOI_CHR`**
 Strand: **`r GOI_exon_annotation_main_transcript$strand[1]`**  
 Number of unique Ensembl transcripts: **`r length(unique(GOI_exon_annotation$ensembl_transcript_id))`**  
 Number of unique Ensembl exons for all transcripts: **`r length(unique(GOI_exon_annotation$ensembl_exon_id))`**  
+Genomic start (GRCh38): **`r min(as.numeric(row.names(union_transcripts_relative_pos_key)))`**  
+Genomic end (GRCh38): **`r max(as.numeric(row.names(union_transcripts_relative_pos_key)))`**  
 
 ## Primary representative transcript:
+
 Ensembl gene ID **`r GOI_ENSG`**  
 Ensembl transcript ID **`r GOI_TRANSCRIPT`**  
 Number of exons: **`r length(unique(GOI_exon_annotation_main_transcript$ensembl_exon_id))`**  
@@ -30,7 +34,7 @@ Coding sequence length: **`r GOI_exon_annotation_main_transcript$cds_length[1]`*
 Transcript start position: **`r GOI_exon_annotation_main_transcript$transcript_start[1]`**  
 Transcript end position: **`r GOI_exon_annotation_main_transcript$transcript_end[1]`**  
 
-# cBioPortal Query Metadata
+## cBioPortal Query Metadata
 
 Total number of studies returned by cBioPortal: **`r length(all.studies[,1])`**  
 Total number of unique case IDs returned by cBioPortal: **`r (length(unique(master_case_df$case_id)))`**  
@@ -40,6 +44,11 @@ Total number of cases queried for **`r GOI`** variants: **`r sum(!duplicated(all
 Total number of studies with **`r GOI`** variants: **`r length(unique(all_mut_cases$study))`**  
 Total number of unique cases represented in filtered mutation data: **`r length(unique(GOI_cBP_mutations$altered_case_id))`**  
 Total number of unique variants for **`r GOI`** returned:  **`r length(unique(GOI_cBP_mutations$amino_acid_change))`**  
+
+## gnomAD Query Metadata
+
+Total number of variants returned by gnomAD (non-cancer-associated and filtered): **`r length(length(GOI_gnomAD_df_filtered[,1]))`**  
+Number of unique variants found in both cBioPortal and gnomAD data: **`r sum(GOI_cBP_mutations$cBPgnomAD_overlap)`**
 
 ```{r echo=FALSE}
 kable(multi_mut_table, row.names = FALSE, align = 'l',caption = "Cases with multiple variants")
