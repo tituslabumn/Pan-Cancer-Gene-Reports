@@ -52,15 +52,17 @@ kable(all_tissue_types_table, row.names = FALSE, align = 'l',caption = "Tissue t
 # Protein features: Domains, Regions, Motifs and Modifications
 
 ```{r echo=FALSE, fig.height=5, fig.width=10, message=FALSE, warning=FALSE, out.width='\\textwidth', strip.white=TRUE}
-F1_magick_img <- image_graph(width = 1500, height = 1000,res = 150, clip = FALSE) #Graphics device that produces a Magick image
-lolliplot(SNP.gr = F1_variants,
-          features = F1_features,
-          ranges = F1_ranges,
-          ylab = FALSE,
-          xaxis = F1_x_axis)
-invisible(dev.off()) # shuts down graphics device
-par(mar=c(0,0,0,0)) # (bottom,left,top,right)
-plot(image_trim(F1_magick_img))
+if(skip_F1){
+  F1_magick_img <- image_graph(width = 1500, height = 1000,res = 150, clip = FALSE) #Graphics device that produces a Magick image
+  lolliplot(SNP.gr = F1_variants,
+            features = GRanges(),#F1_features,
+            ranges = F1_ranges,
+            ylab = FALSE,
+            xaxis = F1_x_axis)
+  invisible(dev.off()) # shuts down graphics device
+  par(mar=c(0,0,0,0)) # (bottom,left,top,right)
+  plot(image_trim(F1_magick_img))
+}else print("NO FEATURES RETURNED BY UNIPROT")
 ```
 
 

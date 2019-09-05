@@ -64,7 +64,11 @@ truncate.feature.labels <- function(df,char_number_cap){
 cat("Figure1\n")
 #Figure 1 - features; domains,regions, DNA_bind, MOTIF
 
-# if there are no figure-compatable features returned make one outside the GOI_UNIPROT_AA_LENGTH 
+# if there are no figure-compatable features returned make one outside the GOI_UNIPROT_AA_LENGTH
+skip_F1 <- FALSE
+if(sum(GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION","DNA_BIND","MOTIF")) == 0){
+  skip_F1 <- TRUE
+}
 if(sum(GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION")) == 0){
   GOI_protein_feature_annotation <- rbind(GOI_protein_feature_annotation,c("DOMAIN",GOI_UNIPROT_AA_LENGTH + 5,GOI_UNIPROT_AA_LENGTH + 10,"NO DOMAINS/REGIONS RETURNED"))
   GOI_protein_feature_annotation$AA_start <- as.numeric(GOI_protein_feature_annotation$AA_start)
