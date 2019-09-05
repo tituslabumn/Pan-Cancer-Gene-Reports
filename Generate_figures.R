@@ -70,7 +70,7 @@ if(sum(GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION","DNA_BIND","
   skip_F1 <- TRUE
 }
 if(sum(GOI_protein_feature_annotation$TYPE %in% c("DOMAIN","REGION")) == 0){
-  GOI_protein_feature_annotation <- rbind(GOI_protein_feature_annotation,c("DOMAIN",GOI_UNIPROT_AA_LENGTH + 5,GOI_UNIPROT_AA_LENGTH + 10,"NO DOMAINS/REGIONS RETURNED"))
+  GOI_protein_feature_annotation <- rbind(GOI_protein_feature_annotation,c("DOMAIN",1,1,"NO DOMAINS/REGIONS"))
   GOI_protein_feature_annotation$AA_start <- as.numeric(GOI_protein_feature_annotation$AA_start)
   GOI_protein_feature_annotation$AA_end <- as.numeric(GOI_protein_feature_annotation$AA_end)
 }
