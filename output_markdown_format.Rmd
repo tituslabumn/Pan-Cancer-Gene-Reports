@@ -31,8 +31,8 @@ Ensembl transcript ID **`r GOI_TRANSCRIPT`**
 Number of exons: **`r length(unique(GOI_exon_annotation_main_transcript$ensembl_exon_id))`**  
 Transcript length: **`r GOI_exon_annotation_main_transcript$transcript_length[1]`**  
 Coding sequence length: **`r GOI_exon_annotation_main_transcript$cds_length[1]`**  
-Transcript start position: **`r GOI_exon_annotation_main_transcript$transcript_start[1]`**  
-Transcript end position: **`r GOI_exon_annotation_main_transcript$transcript_end[1]`**  
+Transcript start position: **`r as.character(GOI_exon_annotation_main_transcript$transcript_start[1])`**  
+Transcript end position: **`r as.character(GOI_exon_annotation_main_transcript$transcript_end[1])`**  
 
 ## cBioPortal Query Metadata
 
@@ -47,7 +47,7 @@ Total number of unique variants for **`r GOI`** returned:  **`r length(unique(GO
 
 ## gnomAD Query Metadata
 
-Total number of variants returned by gnomAD (non-cancer-associated and filtered): **`r length(length(GOI_gnomAD_df_filtered[,1]))`**  
+Total number of variants returned by gnomAD (non-cancer-associated and filtered): **`r length(GOI_gnomAD_df_filtered[,1])`**  
 Number of unique variants found in both cBioPortal and gnomAD data: **`r sum(GOI_cBP_mutations$cBPgnomAD_overlap)`**
 
 ```{r echo=FALSE}
