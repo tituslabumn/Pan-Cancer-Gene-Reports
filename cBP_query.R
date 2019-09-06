@@ -302,7 +302,7 @@
   cat("Most frequently occuring specific alterations:","\n")
   AAC_freq <- as.data.frame(table(mut.df$amino_acid_change))
   print(head(AAC_freq[order(-AAC_freq$Freq) ,],20))
-  cat("\n")
+  cat("\n\n\n")
   
   #assign out final df and save the df name for referencing below
   GOI_cBP_mutations <<- mut.df
@@ -312,3 +312,72 @@
   assign(paste0(GOI,"_cBP_fusions"),fusion.df)
   assign(paste0(GOI,"_cBP_study_mut_totals"),mut.study.seqtotals) # won't reference later, dont need name holder
   assign(paste0(GOI,"_cBP_tissue_totals"),cancer.type.totals) # won't reference later, dont need name holder
+
+  save.image("troubleshooting_workspace.RData") #####################
+  
+############ expression query #################
+  cat("################### gene expression query #######################\n\n")
+  
+  # master_genetic_profile_df contains genetic profiles needed to query expression data, there are several types
+  MRNA_EXPRESSION_list <- unique(master_genetic_profile_df[master_genetic_profile_df$genetic_alteration_type == "MRNA_EXPRESSION","id_suffix"])
+  # remove zscore profiles
+  MRNA_EXPRESSION_list <- MRNA_EXPRESSION_list[!grepl("z",MRNA_EXPRESSION_list,ignore.case = TRUE)]
+  #remove mirna
+  MRNA_EXPRESSION_list <- MRNA_EXPRESSION_list[!grepl("mirna",MRNA_EXPRESSION_list)]
+  #remove mrna_seq_fpkm_polya
+  MRNA_EXPRESSION_list <- MRNA_EXPRESSION_list[!grepl("mrna_seq_fpkm_polya",MRNA_EXPRESSION_list)]
+  #remove mrna_outliers
+  MRNA_EXPRESSION_list <- MRNA_EXPRESSION_list[!grepl("mrna_outliers",MRNA_EXPRESSION_list)]
+  
+  # generate a list of profiles to query, scrape all to start
+  query_list <- master_genetic_profile_df[master_genetic_profile_df$id_suffix %in% MRNA_EXPRESSION_list,"genetic_profile_id"]
+  first <- TRUE
+  count <- 1
+  for (x in query_list) {
+    cat("\t",count,"\t\t",x,"\n")
+    genProf <- x
+    study <- master_genetic_profile_df[master_genetic_profile_df$genetic_profile_id == x,"cancer_study_name"]
+    case_list_id <- paste0(study,"_all")
+    expr_data <- getProfileData(mycgds,
+                                genes = GOI,
+                                geneticProfiles = genProf,
+                                caseList = case_list_id)
+    data <- data.frame(case_id = row.names(expr_data),
+                       expression = expr_data[,1],
+                       stringsAsFactors = FALSE)
+    data$study <- study
+    data$genetic_profile_id <- genProf
+    data$id_suffix <- master_genetic_profile_df[master_genetic_profile_df$genetic_profile_id == x,"id_suffix"]
+    data$manual_tissue <- master_case_df[master_case_df$study == study,"manual_tissue_annotation"][1]
+    if(first){
+      Data.df <- data
+      first <- FALSE
+    } else {
+      Data.df <- rbind(Data.df,data)
+    }
+    count <- count + 1
+  }
+  Data.df$altered_case_id <- gsub("_",".",Data.df$case_id)
+  Data.df$altered_case_id <- gsub("-",".",Data.df$altered_case_id)
+  Data.df <- Data.df
+  Data.df$duplicated_within_suffix <- FALSE
+  for(x in unique(Data.df$id_suffix)){
+    Data.df[Data.df$id_suffix == x, "duplicated_within_suffix"] <- duplicated(Data.df[Data.df$id_suffix == x, "altered_case_id"])
+  }
+  rm(first,count,genProf,case_list_id,expr_data,data,study)
+  
+  save.image("troubleshooting_workspace.RData") #####################
+  
+  # cat out nuber duplicated and unique for each suffix
+  cat("suffix\t\tn_dublicated\t\tn_unique\n")
+  for(x in unique(Data.df$id_suffix)) cat(x,
+                                          "\t",
+                                          sum(duplicated(Data.df[Data.df$id_suffix == x,
+                                          "altered_case_id"])),
+                                          "\t",
+                                          length(unique(Data.df[Data.df$id_suffix == x,
+                                          "altered_case_id"])),
+                                          "\n"
+                                          )
+  
+  # add expression values to mutation data frame
