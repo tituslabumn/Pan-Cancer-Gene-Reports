@@ -318,64 +318,74 @@
 ############ expression query #################
   cat("################### gene expression query #######################\n\n")
   
-  # master_genetic_profile_df contains genetic profiles needed to query expression data, there are several types
-  MRNA_EXPRESSION_list <- unique(master_genetic_profile_df[master_genetic_profile_df$genetic_alteration_type == "MRNA_EXPRESSION","id_suffix"])
-  # remove zscore profiles
-  MRNA_EXPRESSION_list <- MRNA_EXPRESSION_list[!grepl("z",MRNA_EXPRESSION_list,ignore.case = TRUE)]
+  # master_genetic_profile_df contains genetic profiles needed to query expression and cnv data, there are several types
+  EXPR_CNV_list <- unique(master_genetic_profile_df[master_genetic_profile_df$genetic_alteration_type %in% c("MRNA_EXPRESSION","COPY_NUMBER_ALTERATION"),"id_suffix"])
+  
+  #generate filtered list removing profiles that will never be used up fromt - use remainder for cgdsr query
   #remove mirna
-  MRNA_EXPRESSION_list <- MRNA_EXPRESSION_list[!grepl("mirna",MRNA_EXPRESSION_list)]
+  EXPR_CNV_list_filtered <- EXPR_CNV_list[!grepl("mirna",EXPR_CNV_list)]
   #remove mrna_seq_fpkm_polya
-  MRNA_EXPRESSION_list <- MRNA_EXPRESSION_list[!grepl("mrna_seq_fpkm_polya",MRNA_EXPRESSION_list)]
+  EXPR_CNV_list_filtered <- EXPR_CNV_list_filtered[!grepl("mrna_seq_fpkm_polya",EXPR_CNV_list_filtered)]
   #remove mrna_outliers
-  MRNA_EXPRESSION_list <- MRNA_EXPRESSION_list[!grepl("mrna_outliers",MRNA_EXPRESSION_list)]
+  EXPR_CNV_list_filtered <- EXPR_CNV_list_filtered[!grepl("mrna_outliers",EXPR_CNV_list_filtered)]
+  
+  # get list of expression z score lists
+  EXPR_Z_list <- EXPR_CNV_list_filtered[grepl("z",EXPR_CNV_list_filtered,ignore.case = TRUE)]
+  # get list of non-z expression profiles
+  EXPR_value_list <- EXPR_CNV_list_filtered[(EXPR_CNV_list_filtered %in% unique(master_genetic_profile_df[master_genetic_profile_df$genetic_alteration_type == "MRNA_EXPRESSION","id_suffix"])) & (!grepl("z",EXPR_CNV_list_filtered,ignore.case = TRUE))]
+  # get list of CNV profiles
+  CNV_list <- EXPR_CNV_list_filtered[(EXPR_CNV_list_filtered %in% unique(master_genetic_profile_df[master_genetic_profile_df$genetic_alteration_type == "COPY_NUMBER_ALTERATION","id_suffix"])) & (!grepl("z",EXPR_CNV_list_filtered,ignore.case = TRUE))]
   
   # generate a list of profiles to query, scrape all to start
-  query_list <- master_genetic_profile_df[master_genetic_profile_df$id_suffix %in% MRNA_EXPRESSION_list,"genetic_profile_id"]
+  query_list <- master_genetic_profile_df[master_genetic_profile_df$id_suffix %in% EXPR_CNV_list_filtered,"genetic_profile_id"]
   first <- TRUE
   count <- 1
   for (x in query_list) {
-    cat("\t",count,"\t\t",x,"\n")
+    cat("[",count,"/",length(query_list),"]\t\t",x)
     genProf <- x
     study <- master_genetic_profile_df[master_genetic_profile_df$genetic_profile_id == x,"cancer_study_name"]
     case_list_id <- paste0(study,"_all")
-    expr_data <- getProfileData(mycgds,
+    expr_cnv_data <- getProfileData(mycgds,
                                 genes = GOI,
                                 geneticProfiles = genProf,
                                 caseList = case_list_id)
-    data <- data.frame(case_id = row.names(expr_data),
-                       expression = expr_data[,1],
+    data <- data.frame(case_id = row.names(expr_cnv_data),
+                       expression = expr_cnv_data[,1],
                        stringsAsFactors = FALSE)
+    cat("\t",length(data[,1]),"\n")
     data$study <- study
     data$genetic_profile_id <- genProf
     data$id_suffix <- master_genetic_profile_df[master_genetic_profile_df$genetic_profile_id == x,"id_suffix"]
     data$manual_tissue <- master_case_df[master_case_df$study == study,"manual_tissue_annotation"][1]
     if(first){
-      Data.df <- data
+      GOI_cBP_EXPR_CNV <- data
       first <- FALSE
     } else {
-      Data.df <- rbind(Data.df,data)
+      GOI_cBP_EXPR_CNV <- rbind(GOI_cBP_EXPR_CNV,data)
     }
     count <- count + 1
   }
-  Data.df$altered_case_id <- gsub("_",".",Data.df$case_id)
-  Data.df$altered_case_id <- gsub("-",".",Data.df$altered_case_id)
-  Data.df <- Data.df
-  Data.df$duplicated_within_suffix <- FALSE
-  for(x in unique(Data.df$id_suffix)){
-    Data.df[Data.df$id_suffix == x, "duplicated_within_suffix"] <- duplicated(Data.df[Data.df$id_suffix == x, "altered_case_id"])
+  GOI_cBP_EXPR_CNV$altered_case_id <- gsub("_",".",GOI_cBP_EXPR_CNV$case_id)
+  GOI_cBP_EXPR_CNV$altered_case_id <- gsub("-",".",GOI_cBP_EXPR_CNV$altered_case_id)
+  GOI_cBP_EXPR_CNV <- GOI_cBP_EXPR_CNV
+  GOI_cBP_EXPR_CNV$duplicated_within_suffix <- FALSE
+  for(x in unique(GOI_cBP_EXPR_CNV$id_suffix)){
+    GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$id_suffix == x, "duplicated_within_suffix"] <- duplicated(GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$id_suffix == x, "altered_case_id"])
   }
-  rm(first,count,genProf,case_list_id,expr_data,data,study)
+  rm(first,count,genProf,case_list_id,expr_cnv_data,data,study)
+  
+  EXPR_CNV_summary_table <- 
   
   save.image("troubleshooting_workspace.RData") #####################
   
   # cat out nuber duplicated and unique for each suffix
   cat("suffix\t\tn_dublicated\t\tn_unique\n")
-  for(x in unique(Data.df$id_suffix)) cat(x,
+  for(x in unique(GOI_cBP_EXPR_CNV$id_suffix)) cat(x,
                                           "\t",
-                                          sum(duplicated(Data.df[Data.df$id_suffix == x,
+                                          sum(duplicated(GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$id_suffix == x,
                                           "altered_case_id"])),
                                           "\t",
-                                          length(unique(Data.df[Data.df$id_suffix == x,
+                                          length(unique(GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$id_suffix == x,
                                           "altered_case_id"])),
                                           "\n"
                                           )
