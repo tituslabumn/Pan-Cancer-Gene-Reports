@@ -374,7 +374,7 @@
   }
   rm(first,count,genProf,case_list_id,expr_cnv_data,data,study)
   
-  EXPR_CNV_summary_table <- 
+  EXPR_CNV_summary_table <- "empty for now"
   
   save.image("troubleshooting_workspace.RData") #####################
   

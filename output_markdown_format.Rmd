@@ -782,19 +782,19 @@ if(length(GOI_cBP_fusions[,1])>0){
 ```
 
 ```{r echo=FALSE,fig.width=10,fig.height=100,fig.fullwidth = TRUE,warning=FALSE}
-  FA <- image_graph(width = 2000, height = 20000,res = 150, clip = FALSE)
-      ggplot(Data.df[Data.df$id_suffix == "rna_seq_v2_mrna" & !Data.df$duplicated_within_suffix,],
-              aes(expression,
-                  study, 
-                  alpha = 0.1,
-                  size = 2,
-                  )
-             ) +
-      geom_jitter(na.rm = TRUE) +
-        # geom_quasirandom(groupOnX = FALSE, na.rm = TRUE, varwidth = TRUE,width = 1,bandwidth = 1.5) +
-      scale_x_continuous(trans = "log2")
-  invisible(dev.off())
-  par(mar=c(0,0,0,0)) # (bottom,left,top,right)
-  plot(image_trim(FA))
+  # FA <- image_graph(width = 2000, height = 20000,res = 150, clip = FALSE)
+  #     ggplot(Data.df[Data.df$id_suffix == "rna_seq_v2_mrna" & !Data.df$duplicated_within_suffix,],
+  #             aes(expression,
+  #                 study, 
+  #                 alpha = 0.1,
+  #                 size = 2,
+  #                 )
+  #            ) +
+  #     geom_jitter(na.rm = TRUE) +
+  #       # geom_quasirandom(groupOnX = FALSE, na.rm = TRUE, varwidth = TRUE,width = 1,bandwidth = 1.5) +
+  #     scale_x_continuous(trans = "log2")
+  # invisible(dev.off())
+  # par(mar=c(0,0,0,0)) # (bottom,left,top,right)
+  # plot(image_trim(FA))
   # yaxis label
 ```
