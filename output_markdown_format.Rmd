@@ -15,18 +15,18 @@ date: "`r paste(date(),Sys.timezone())`"
 ##  `r GOI` metadata 
 
 Gene symbol: **`r GOI`**  
+Ensembl gene ID **`r GOI_ENSG`**  
 UniProtKB ID: **`r GOI_uniprot_id`**  
-Gene product name: **`r GOI_protein_feature_annotation$LABEL[GOI_protein_feature_annotation$TYPE == "CHAIN"]`**  
+Gene product name (via UniProt): **`r GOI_protein_feature_annotation$LABEL[GOI_protein_feature_annotation$TYPE == "CHAIN"]`**  
 Chromosome: **`r GOI_CHR`**  
 Strand: **`r GOI_exon_annotation_main_transcript$strand[1]`**  
 Number of unique Ensembl transcripts: **`r length(unique(GOI_exon_annotation$ensembl_transcript_id))`**  
 Number of unique Ensembl exons for all transcripts: **`r length(unique(GOI_exon_annotation$ensembl_exon_id))`**  
-Genomic start (GRCh38): **`r min(as.numeric(row.names(union_transcripts_relative_pos_key)))`**  
-Genomic end (GRCh38): **`r max(as.numeric(row.names(union_transcripts_relative_pos_key)))`**  
+Genomic start (GRCh38): **`r as.character(min(as.numeric(row.names(union_transcripts_relative_pos_key))))`**  
+Genomic end (GRCh38): **`r as.character(max(as.numeric(row.names(union_transcripts_relative_pos_key))))`**  
 
 ## Primary representative transcript:
 
-Ensembl gene ID **`r GOI_ENSG`**  
 Ensembl transcript ID **`r GOI_TRANSCRIPT`**  
 Number of exons: **`r length(unique(GOI_exon_annotation_main_transcript$ensembl_exon_id))`**  
 Transcript length: **`r GOI_exon_annotation_main_transcript$transcript_length[1]`**  
@@ -82,7 +82,7 @@ kable(GOI_protein_feature_annotation, row.names = FALSE, caption = "All features
 
 # Filtered Ensembl Transcripts (Union of Exonic sequence)
 
-All transcripts are ploted to their relative genomic positions with all shared intronic regions removed. Transcription start sites are always on the left regardless of coding strand. **'Main' representative transcript used for variant alignment is in red**  
+Ensembl tanscripts with low or no transcript support are not displayed. All transcripts are ploted to their relative genomic positions with all shared intronic regions removed (resulting in the union of exonic genomic sequence). Transcription start sites are always on the left regardless of coding strand (5' -> 3'). **'Main' representative transcript used for variant alignment is in red**  
 ```{r echo=FALSE,fig.width=14,fig.height=10,out.width='\\textwidth',strip.white=TRUE}
 F2_magick_img <- image_graph(width = 2000, height = 2000,res = 150, clip = FALSE)
 lolliplot(SNP.gr = F2_variants,
@@ -112,7 +112,7 @@ if(length(F3_variants$score)>0){
             features = F3_features, 
             ranges = F3_ranges, 
             xaxis = F3_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -125,7 +125,7 @@ if(length(F3_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,3,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F3_magick_img))
   # yaxis label
   grid.text(paste0("Variant count"),
@@ -150,7 +150,7 @@ if(length(F4_variants$score)>0){
             features = F3_features, 
             ranges = F3_ranges, 
             xaxis = F3_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -163,7 +163,7 @@ if(length(F4_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,3,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F4_magick_img))
   # yaxis label
   grid.text(paste0("Variant count"),
@@ -197,7 +197,7 @@ if(length(F5_variants$score)>0){
             features = F3_features, 
             ranges = F3_ranges, 
             xaxis = F3_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -213,7 +213,7 @@ if(length(F5_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,3,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F5_magick_img))
   # yaxis label
   grid.text(paste0("Variant count"),
@@ -238,7 +238,7 @@ if(length(F6_variants$score)>0){
             features = F3_features, 
             ranges = F3_ranges, 
             xaxis = F3_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -254,7 +254,7 @@ if(length(F6_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,3,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F6_magick_img))
   # yaxis label
   grid.text(paste0("Variant count"),
@@ -279,7 +279,7 @@ if(length(F7_variants$score)>0){
             features = c(F7_features,F3_features), 
             ranges = F3_ranges, 
             xaxis = F3_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -378,7 +378,7 @@ if(length(F9_gnomAD$score)>0){
             features = F9_features, 
             ranges = F9_ranges, 
             xaxis = F9_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -390,7 +390,7 @@ if(length(F9_gnomAD$score)>0){
                                 res = 150,
                                 clip = FALSE
   )
-  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F9_magick_img))
   # yaxis label
   grid.text(paste0("log2(allele count)\n[max count = ",max_gnomAD_allele_count,"]"),
@@ -415,7 +415,7 @@ if(length(F10_gnomAD$score)>0){
             features = F9_features, 
             ranges = F9_ranges, 
             xaxis = F9_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -427,7 +427,7 @@ if(length(F10_gnomAD$score)>0){
                                 res = 150,
                                 clip = FALSE
   )
-  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F10_magick_img))
   # yaxis label
   grid.text(paste0("log2(allele count)\n[max count = ",F10_max_gnomAD_allele_count,"]"),
@@ -461,7 +461,7 @@ if(length(F11_gnomAD$score)>0){
             features = F9_features, 
             ranges = F9_ranges, 
             xaxis = F9_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -477,7 +477,7 @@ if(length(F11_gnomAD$score)>0){
                                 res = 150,
                                 clip = FALSE
   )
-  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F11_magick_img))
   # yaxis label
   grid.text(paste0("log2(allele count)\n[max count = ",F11_max_gnomAD_allele_count,"]"),
@@ -502,7 +502,7 @@ if(length(F12_gnomAD$score)>0){
             features = F9_features, 
             ranges = F9_ranges, 
             xaxis = F9_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -518,7 +518,7 @@ if(length(F12_gnomAD$score)>0){
                                 res = 150,
                                 clip = FALSE
   )
-  par(mar=c(0,3.5,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F12_magick_img))
   # yaxis label
   grid.text(paste0("log2(allele count)\n[max count = ",F12_max_gnomAD_allele_count,"]"),
@@ -543,7 +543,7 @@ if(length(F13_gnomAD$score)>0){
             features = c(F7_features,F9_features), 
             ranges = F9_ranges, 
             xaxis = F9_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -559,7 +559,7 @@ if(length(F13_gnomAD$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,3.5,1,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,1,0)) # (bottom,left,top,right)
   plot(image_trim(F13_magick_img))
   # yaxis label
   grid.text(paste0("log2(allele count)\n[max count = ",F13_max_gnomAD_allele_count,"]"),
@@ -691,12 +691,12 @@ if(length(unique_cBP_overlap_df[,1]) > 1){
   par(mar=c(0,3.5,0,0)) # (bottom,left,bottom,right)
   plot(image_trim(F15_magick_img_bottom))
   # yaxis label
-    grid.text(paste0("gnomAD: log2(allele count)\n[max count = ",F15_max_gnomAD_allele_count,"]"),
+    grid.text(paste0("gnomAD:log2(allele count)\n[max count = ",F15_max_gnomAD_allele_count,"]"),
               x=0.001,
               y=0.5,
               just="top",
               rot=90,
-              gp=gpar(cex=1, fontface="bold")
+              gp=gpar(cex=0.75, fontface="bold")
               )
   invisible(dev.off())
   
@@ -727,7 +727,7 @@ if(length(F3_variants$score)>0){
             features = F3_features, 
             ranges = F3_ranges, 
             xaxis = F3_x_axis,
-            yaxis.gp = gpar(cex = 1.5),
+            yaxis.gp = gpar(cex = 1),
             xaxis.gp = gpar(cex = 1.5),
             cex = 1,
             ylab = FALSE,
@@ -740,7 +740,7 @@ if(length(F3_variants$score)>0){
                                 res = 150,
                                 clip = FALSE
                                 )
-  par(mar=c(0,3,0,0)) # (bottom,left,top,right)
+  par(mar=c(0,4,0,0)) # (bottom,left,top,right)
   plot(image_trim(F16_magick_img))
   # yaxis label
   grid.text(paste0("Variant count"),
