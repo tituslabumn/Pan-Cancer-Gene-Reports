@@ -374,7 +374,16 @@
   }
   rm(first,count,genProf,case_list_id,expr_cnv_data,data,study)
   
-  EXPR_CNV_summary_table <- "empty for now"
+  EXPR_CNV_summary_table <- data.frame(row.names = unique(GOI_cBP_EXPR_CNV$study),stringsAsFactors = FALSE)
+  for(x in unique(GOI_cBP_EXPR_CNV$id_suffix)){
+    EXPR_CNV_summary_table[,x] <- sapply(
+      row.names(EXPR_CNV_summary_table),
+      function(y){
+        sum(GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$study == y,"id_suffix"] == x,na.rm = TRUE)
+      }
+    )
+  }
+  rm(x)
   
   save.image("troubleshooting_workspace.RData") #####################
   
