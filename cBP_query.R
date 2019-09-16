@@ -385,6 +385,23 @@
   }
   rm(x)
   
+  EXPR_CNV_summary_table[,"totals"] <- sapply(
+    row.names(EXPR_CNV_summary_table),
+    function(x){
+      sum(EXPR_CNV_summary_table[x,] > 0,na.rm = TRUE)
+    }
+  )
+  
+  EXPR_CNV_summary_table["totals",] <- sapply(
+    colnames(EXPR_CNV_summary_table),
+    function(x){
+      sum(EXPR_CNV_summary_table[,x] > 0,na.rm = TRUE)
+    }
+  )
+  
+  EXPR_CNV_summary_table <- EXPR_CNV_summary_table[rev(order(EXPR_CNV_summary_table$totals)),rev(order(EXPR_CNV_summary_table["totals",]))]
+  
+  
   save.image("troubleshooting_workspace.RData") #####################
   
   # cat out nuber duplicated and unique for each suffix
