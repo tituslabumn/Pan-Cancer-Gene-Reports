@@ -374,6 +374,21 @@
   }
   rm(first,count,genProf,case_list_id,expr_cnv_data,data,study)
   
+  # cat out nuber duplicated and unique for each suffix
+  cat("suffix\t\tn_dublicated\t\tn_unique\n")
+  for(x in unique(GOI_cBP_EXPR_CNV$id_suffix)) cat(x,
+                                                   "\t",
+                                                   sum(duplicated(GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$id_suffix == x,
+                                                                                   "altered_case_id"])),
+                                                   "\t",
+                                                   length(unique(GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$id_suffix == x,
+                                                                                  "altered_case_id"])),
+                                                   "\n"
+  )
+  
+  save.image("troubleshooting_workspace.RData") #####################
+  
+  cat("Generating summary table and colname key\n\n")
   EXPR_CNV_summary_table <- data.frame(row.names = unique(GOI_cBP_EXPR_CNV$study),stringsAsFactors = FALSE)
   for(x in unique(GOI_cBP_EXPR_CNV$id_suffix)){
     EXPR_CNV_summary_table[,x] <- sapply(
@@ -401,19 +416,124 @@
   
   EXPR_CNV_summary_table <- EXPR_CNV_summary_table[rev(order(EXPR_CNV_summary_table$totals)),rev(order(EXPR_CNV_summary_table["totals",]))]
   
+  EXPR_CNV_colnames_key <- data.frame(row.names = colnames(EXPR_CNV_summary_table)[colnames(EXPR_CNV_summary_table) != "totals"],
+                                      type = sapply(colnames(EXPR_CNV_summary_table)[colnames(EXPR_CNV_summary_table) != "totals"], 
+                                                    function(x) {
+                                                      (master_genetic_profile_df[master_genetic_profile_df$id_suffix == x,"genetic_alteration_type"])[1]
+                                                    }
+                                              ),
+                                      stringsAsFactors = FALSE
+                                      )
+
+  print(EXPR_CNV_colnames_key)
   
   save.image("troubleshooting_workspace.RData") #####################
   
-  # cat out nuber duplicated and unique for each suffix
-  cat("suffix\t\tn_dublicated\t\tn_unique\n")
-  for(x in unique(GOI_cBP_EXPR_CNV$id_suffix)) cat(x,
-                                          "\t",
-                                          sum(duplicated(GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$id_suffix == x,
-                                          "altered_case_id"])),
-                                          "\t",
-                                          length(unique(GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$id_suffix == x,
-                                          "altered_case_id"])),
-                                          "\n"
-                                          )
+  # generate final GOI_EXPR_CNV_final
+  #   get df of unique case id's as rows
+  #   add expr and cnv cols (add 'ND' where a case has expr data but not cnv)
+  #   based prioritized colnames as follows:
+  #     1) rna_seq_v2_mrna
+  #       - gistic
+  #     2) rna_seq_mrna
+  #       - gistic
+  #       - cna
+  #     3) mrna
+  #       - gistic
+  #       - cna
+  #       - cna-rae
+  #   with leftoves that dont have selected expr data types dump into another df that catalogs gistic and cna data for each
+  cat("Generating empty GOI_EXPR_CNV_final df\n\n")
+  GOI_EXPR_CNV_final <- data.frame(row.names = unique(GOI_cBP_EXPR_CNV$altered_case_id),
+                                     study = sapply(unique(GOI_cBP_EXPR_CNV$altered_case_id),
+                                        function(x) (GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$altered_case_id == x,"study"])[1]
+                                     ),
+                                     manual_tissue = sapply(unique(GOI_cBP_EXPR_CNV$altered_case_id),
+                                        function(x) (GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$altered_case_id == x,"manual_tissue"])[1]
+                                     ),
+                                     expr = NA, # NaN will signify 
+                                     cnv = NA,
+                                     expr_suffix = "",
+                                     cnv_suffix = "",
+                                     stringsAsFactors = FALSE
+                                  )
+  cat("Generating empty GOI_CNV_only_final df\n\n")
+  GOI_CNV_only_final <- GOI_EXPR_CNV_final[,c("study","manual_tissue","cnv","cnv_suffix")]
+  cat("Populating both dfs\n\n")
+  for (x in row.names(GOI_EXPR_CNV_final)) {
+    # subset master df for all with alterd case id
+    data <- GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$altered_case_id == x,]
+    # check each suffix to be used for conditionals
+    rna_A <- "rna_seq_v2_mrna" %in% data$id_suffix
+    rna_B <- "rna_seq_mrna" %in% data$id_suffix
+    rna_C <- "mrna" %in% data$id_suffix
+    cnv_A <- "gistic" %in% data$id_suffix
+    cnv_B <- "cna" %in% data$id_suffix
+    cnv_C <- "cna_rae" %in% data$id_suffix
+    
+    if(rna_A){ # 'rna_seq_v2_mrna'
+      GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "rna_seq_v2_mrna","expression"])[1]
+      GOI_EXPR_CNV_final[x,"expr_suffix"] <- "rna_seq_v2_mrna"
+      if(cnv_A){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
+      } else if(cnv_B){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "cna","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "cna"
+      } else if(cnv_C){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "cna_rae","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "cna_rae"
+      }
+    }else if(rna_B){ # 'rna_seq_mrna'
+      GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "rna_seq_mrna","expression"])[1]
+      GOI_EXPR_CNV_final[x,"expr_suffix"] <- "rna_seq_mrna"
+      if(cnv_A){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
+      } else if(cnv_B){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "cna","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "cna"
+      } else if(cnv_C){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "cna_rae","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "cna_rae"
+      }
+    }else if(rna_C){ # 'mrna'
+      GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "mrna","expression"])[1]
+      GOI_EXPR_CNV_final[x,"expr_suffix"] <- "mrna"
+      if(cnv_A){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
+      } else if(cnv_B){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "cna","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "cna"
+      } else if(cnv_C){
+        GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "cna_rae","expression"])[1]
+        GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "cna_rae"
+      }
+    }else if(cnv_A){ # no expr data
+      GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
+      GOI_CNV_only_final[x,"cnv_suffix"] <- "gistic"
+    }else if(cnv_B){
+      GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "cna","expression"])[1]
+      GOI_CNV_only_final[x,"cnv_suffix"] <- "cna"
+    }else if(cnv_C){
+      GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "cna_rae","expression"])[1]
+      GOI_CNV_only_final[x,"cnv_suffix"] <- "cna_rae"
+    }
+  }
+  rm(x,data,rna_A,rna_B,rna_C,cnv_A,cnv_B,cnv_C)
+  
+  # remove cases with no expr values
+  cat("removing empty rows\n\n")
+  GOI_EXPR_CNV_final <- GOI_EXPR_CNV_final[!(is.na(GOI_EXPR_CNV_final$expr) | GOI_EXPR_CNV_final$expr == "NaN"),]
+  GOI_CNV_only_final <- GOI_CNV_only_final[!(is.na(GOI_CNV_only_final$cnv) | GOI_CNV_only_final$cnv == "NaN"),]
+  
+  cat("\ttotal unique cases with expr data: ",length(GOI_EXPR_CNV_final[,1]),"\n\n")
+  cat("\ttotal unique cases with cnv data: ",sum(!(GOI_EXPR_CNV_final$cnv %in% c(NA,"NaN"))) + length(GOI_CNV_only_final[,1]),"\n\n")
+  cat("\ttotal unique cases with both: ",sum(!(GOI_EXPR_CNV_final$cnv %in% c(NA,"NaN"))),"\n\n")
+  
+  save.image("troubleshooting_workspace.RData") #####################
   
   # add expression values to mutation data frame
+  
+  
