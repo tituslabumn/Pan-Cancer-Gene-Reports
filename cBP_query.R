@@ -455,6 +455,8 @@
                                      cnv = NA,
                                      expr_suffix = "",
                                      cnv_suffix = "",
+                                     n_muts = 0,
+                                     n_fusions = 0,
                                      stringsAsFactors = FALSE
                                   )
   cat("Generating empty GOI_CNV_only_final df\n\n")
