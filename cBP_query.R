@@ -50,8 +50,12 @@
   save.image("troubleshooting_workspace.RData") #####################
   
   #make fusion.df and remove fusions from mut.df
-  cat("splitting fusions and other muts","\n")
+  cat("splitting fusions into separate df","\n")
   fusion.df <- mut.df[mut.df$start_position == -1,] #fusions are the only types to return -1
+  # add altered case id
+  fusion.df$altered_case_id <- gsub("_",".",fusion.df$case_id)
+  fusion.df$altered_case_id <- gsub("-",".",fusion.df$altered_case_id)
+  
   cat("\n","total fusions returned:",length(fusion.df[,1]),"\n")
   mut.df <- mut.df[mut.df$start_position != -1,]
   cat("\n","total alterations so far:",length(mut.df[,1]),"\n")
@@ -472,7 +476,12 @@
     cnv_A <- "gistic" %in% data$id_suffix
     cnv_B <- "cna" %in% data$id_suffix
     cnv_C <- "cna_rae" %in% data$id_suffix
-    
+    nmut <- sum(GOI_cBP_mutations$altered_case_id == x)
+    nfusions <- sum(fusion.df$altered_case_id == x)
+    GOI_EXPR_CNV_final[x,"n_muts"] <- nmut
+    GOI_EXPR_CNV_final[x,"n_fusions"] <- nfusions
+    GOI_CNV_only_final[x,"n_muts"] <- nmut
+    GOI_CNV_only_final[x,"n_fusions"] <- nfusions
     if(rna_A){ # 'rna_seq_v2_mrna'
       GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "rna_seq_v2_mrna","expression"])[1]
       GOI_EXPR_CNV_final[x,"expr_suffix"] <- "rna_seq_v2_mrna"
