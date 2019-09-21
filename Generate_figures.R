@@ -390,6 +390,7 @@ if(sum(Unique_mutations_plot$unified_annotation %in% F7_types,na.rm = TRUE) > 0)
   F8_variants <- GRanges(seqnames = "chr", IRanges(start = F8_df$nearest_exonic_pos, width = 1,names = NULL))
   F8_variants$score <- F8_df$AA_change_freq
   F8_variants$color <- mut_type_color_key[F8_df$unified_annotation,"color"]
+  F8_empty <- FALSE
 }else{
   F8_empty <- TRUE
 }
@@ -397,7 +398,7 @@ if(sum(Unique_mutations_plot$unified_annotation %in% F7_types,na.rm = TRUE) > 0)
 # need this code regardless of F8_empty for F14:
 F8_features <- F2_features
 F8_features$fill[F8_features$fill == "red"] <- rep(c("green","red"),100)[1:length(F7_exons[,1])]
-F8_empty <- FALSE
+
 
 cat("Figure9\n")
 GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
