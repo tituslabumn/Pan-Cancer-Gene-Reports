@@ -376,11 +376,11 @@ F7_features$featureLayerID <- 7
 colnames(F7_exons)<- c("Exon","Genomic Start","Genomic End","Nearest Peptide Start","Nearest Peptide End")
 cat("Figure8\n")
 # F8 will be identical to F2 except with variants displayed
+  # find nearest relative position from union of exonic sequence
+  exonic_relative_positions <- as.numeric(rownames(union_transcripts_relative_pos_key))
 if(sum(Unique_mutations_plot$unified_annotation %in% F7_types,na.rm = TRUE) > 0){
   F8_exons <- F7_exons # note altered colnames
   F8_df <- Unique_mutations_plot[Unique_mutations_plot$unified_annotation %in% F7_types,]
-  # find nearest relative position from union of exonic sequence
-  exonic_relative_positions <- as.numeric(rownames(union_transcripts_relative_pos_key))
   # for each unified_pos what is the minimal abs(list_of_exonic_pos's - unified_pos)
   F8_df$nearest_exonic_pos <- sapply(1:length(F8_df[,1]),
                                      function(x){
