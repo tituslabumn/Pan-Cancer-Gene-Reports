@@ -376,22 +376,28 @@ F7_features$featureLayerID <- 7
 colnames(F7_exons)<- c("Exon","Genomic Start","Genomic End","Nearest Peptide Start","Nearest Peptide End")
 cat("Figure8\n")
 # F8 will be identical to F2 except with variants displayed
-F8_exons <- F7_exons # note altered colnames
-F8_df <- Unique_mutations_plot[Unique_mutations_plot$unified_annotation %in% F7_types,]
-# find nearest relative position from union of exonic sequence
-exonic_relative_positions <- as.numeric(rownames(union_transcripts_relative_pos_key))
-# for each unified_pos what is the minimal abs(list_of_exonic_pos's - unified_pos)
-F8_df$nearest_exonic_pos <- sapply(1:length(F8_df[,1]),
-                                   function(x){
-                                     union_transcripts_relative_pos_key[which.min(abs(exonic_relative_positions - F8_df$unified_pos[x])),"relative_union_transcript_position"]
-                                   }
-                                   )
-F8_variants <- GRanges(seqnames = "chr", IRanges(start = F8_df$nearest_exonic_pos, width = 1,names = NULL))
-F8_variants$score <- F8_df$AA_change_freq
-F8_variants$color <- mut_type_color_key[F8_df$unified_annotation,"color"]
-#use same features except for main transcript adopt same alternating green/red color scheme
+if(sum(Unique_mutations_plot$unified_annotation %in% F7_types,na.rm = TRUE) > 0){
+  F8_exons <- F7_exons # note altered colnames
+  F8_df <- Unique_mutations_plot[Unique_mutations_plot$unified_annotation %in% F7_types,]
+  # find nearest relative position from union of exonic sequence
+  exonic_relative_positions <- as.numeric(rownames(union_transcripts_relative_pos_key))
+  # for each unified_pos what is the minimal abs(list_of_exonic_pos's - unified_pos)
+  F8_df$nearest_exonic_pos <- sapply(1:length(F8_df[,1]),
+                                     function(x){
+                                       union_transcripts_relative_pos_key[which.min(abs(exonic_relative_positions - F8_df$unified_pos[x])),"relative_union_transcript_position"]
+                                     }
+                                     )
+  F8_variants <- GRanges(seqnames = "chr", IRanges(start = F8_df$nearest_exonic_pos, width = 1,names = NULL))
+  F8_variants$score <- F8_df$AA_change_freq
+  F8_variants$color <- mut_type_color_key[F8_df$unified_annotation,"color"]
+}else{
+  F8_empty <- TRUE
+}
+# use same features except for main transcript adopt same alternating green/red color scheme
+# need this code regardless of F8_empty for F14:
 F8_features <- F2_features
 F8_features$fill[F8_features$fill == "red"] <- rep(c("green","red"),100)[1:length(F7_exons[,1])]
+F8_empty <- FALSE
 
 cat("Figure9\n")
 GOI_gnomAD_df_filtered$imaging_AA <- GOI_mapping_key[as.character(GOI_gnomAD_df_filtered$unified_pos),"nearest_junction_codon"]
