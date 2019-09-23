@@ -461,6 +461,7 @@
                                      cnv_suffix = "",
                                      n_muts = 0,
                                      n_fusions = 0,
+                                     mut_type = "none",
                                      stringsAsFactors = FALSE
                                   )
   cat("Generating empty GOI_CNV_only_final df\n\n")
@@ -477,6 +478,12 @@
     cnv_B <- "cna" %in% data$id_suffix
     cnv_C <- "cna_rae" %in% data$id_suffix
     nmut <- sum(GOI_cBP_mutations$altered_case_id == x)
+    # add mut type for color mapping during figure generation
+    if(nmut == 1){
+      GOI_EXPR_CNV_final[x,"mut_type"] <- GOI_cBP_mutations[GOI_cBP_mutations$altered_case_id == x,"unified_annotation"]
+    }else if(nmut > 1){
+      GOI_EXPR_CNV_final[x,"mut_type"] <- "multiple"
+    }
     nfusions <- sum(fusion.df$altered_case_id == x)
     GOI_EXPR_CNV_final[x,"n_muts"] <- nmut
     GOI_EXPR_CNV_final[x,"n_fusions"] <- nfusions
@@ -546,5 +553,5 @@
   save.image("troubleshooting_workspace.RData") #####################
   
   # add expression values to mutation data frame
-  
+  for(x in GOI_cBP_mutations$altered_case_id)
   
