@@ -553,5 +553,36 @@
   save.image("troubleshooting_workspace.RData") #####################
   
   # add expression values to mutation data frame
-  for(x in GOI_cBP_mutations$altered_case_id)
-  
+  GOI_cBP_mutations$expr <- NA
+  GOI_cBP_mutations$cnv <- NA
+  GOI_cBP_mutations$expr_suffix <- NA 
+  GOI_cBP_mutations$cnv_suffix <- NA
+  for(x in 1:length(GOI_cBP_mutations[,1])){
+    alt_id <- GOI_cBP_mutations$altered_case_id[x]
+    cat(alt_id," ")
+    if(alt_id %in% row.names(GOI_EXPR_CNV_final)){
+      GOI_cBP_mutations[x,c("expr","cnv","expr_suffix","cnv_suffix")] <- GOI_EXPR_CNV_final[alt_id,c("expr","cnv","expr_suffix","cnv_suffix")]
+    }
+    if(alt_id %in% row.names(GOI_CNV_only_final)){
+      GOI_cBP_mutations[x,c("cnv","cnv_suffix")] <- GOI_CNV_only_final[alt_id,c("cnv","cnv_suffix")]
+    }
+  }
+  rm(x,alt_id)
+  # add expression values to fusion data frame
+  if(length(GOI_cBP_fusions[,1]) > 0){
+    GOI_cBP_fusions$expr <- NA
+    GOI_cBP_fusions$cnv <- NA
+    GOI_cBP_fusions$expr_suffix <- NA 
+    GOI_cBP_fusions$cnv_suffix <- NA
+    for(x in 1:length(GOI_cBP_fusions[,1])){
+      alt_id <- GOI_cBP_fusions$altered_case_id[x]
+      cat(alt_id," ")
+      if(alt_id %in% row.names(GOI_EXPR_CNV_final)){
+        GOI_cBP_fusions[x,c("expr","cnv","expr_suffix","cnv_suffix")] <- GOI_EXPR_CNV_final[alt_id,c("expr","cnv","expr_suffix","cnv_suffix")]
+      }
+      if(alt_id %in% row.names(GOI_CNV_only_final)){
+        GOI_cBP_fusions[x,c("cnv","cnv_suffix")] <- GOI_CNV_only_final[alt_id,c("cnv","cnv_suffix")]
+      }
+    }
+    rm(x,alt_id)
+  }
