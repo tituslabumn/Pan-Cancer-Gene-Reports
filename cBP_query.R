@@ -461,7 +461,6 @@
                                      cnv_suffix = "",
                                      n_muts = 0,
                                      n_fusions = 0,
-                                     mut_type = "none",
                                      stringsAsFactors = FALSE
                                   )
   cat("Generating empty GOI_CNV_only_final df\n\n")
@@ -478,12 +477,6 @@
     cnv_B <- "cna" %in% data$id_suffix
     cnv_C <- "cna_rae" %in% data$id_suffix
     nmut <- sum(GOI_cBP_mutations$altered_case_id == x)
-    # add mut type for color mapping during figure generation
-    if(nmut == 1){
-      GOI_EXPR_CNV_final[x,"mut_type"] <- GOI_cBP_mutations[GOI_cBP_mutations$altered_case_id == x,"unified_annotation"]
-    }else if(nmut > 1){
-      GOI_EXPR_CNV_final[x,"mut_type"] <- "multiple"
-    }
     nfusions <- sum(fusion.df$altered_case_id == x)
     GOI_EXPR_CNV_final[x,"n_muts"] <- nmut
     GOI_EXPR_CNV_final[x,"n_fusions"] <- nfusions
@@ -559,7 +552,6 @@
   GOI_cBP_mutations$cnv_suffix <- NA
   for(x in 1:length(GOI_cBP_mutations[,1])){
     alt_id <- GOI_cBP_mutations$altered_case_id[x]
-    cat(alt_id," ")
     if(alt_id %in% row.names(GOI_EXPR_CNV_final)){
       GOI_cBP_mutations[x,c("expr","cnv","expr_suffix","cnv_suffix")] <- GOI_EXPR_CNV_final[alt_id,c("expr","cnv","expr_suffix","cnv_suffix")]
     }
@@ -569,19 +561,19 @@
   }
   rm(x,alt_id)
   # add expression values to fusion data frame
-  if(length(GOI_cBP_fusions[,1]) > 0){
-    GOI_cBP_fusions$expr <- NA
-    GOI_cBP_fusions$cnv <- NA
-    GOI_cBP_fusions$expr_suffix <- NA 
-    GOI_cBP_fusions$cnv_suffix <- NA
-    for(x in 1:length(GOI_cBP_fusions[,1])){
-      alt_id <- GOI_cBP_fusions$altered_case_id[x]
+  if(length(fusion.df[,1]) > 0){
+    fusion.df$expr <- NA
+    fusion.df$cnv <- NA
+    fusion.df$expr_suffix <- NA 
+    fusion.df$cnv_suffix <- NA
+    for(x in 1:length(fusion.df[,1])){
+      alt_id <- fusion.df$altered_case_id[x]
       cat(alt_id," ")
       if(alt_id %in% row.names(GOI_EXPR_CNV_final)){
-        GOI_cBP_fusions[x,c("expr","cnv","expr_suffix","cnv_suffix")] <- GOI_EXPR_CNV_final[alt_id,c("expr","cnv","expr_suffix","cnv_suffix")]
+        fusion.df[x,c("expr","cnv","expr_suffix","cnv_suffix")] <- GOI_EXPR_CNV_final[alt_id,c("expr","cnv","expr_suffix","cnv_suffix")]
       }
       if(alt_id %in% row.names(GOI_CNV_only_final)){
-        GOI_cBP_fusions[x,c("cnv","cnv_suffix")] <- GOI_CNV_only_final[alt_id,c("cnv","cnv_suffix")]
+        fusion.df[x,c("cnv","cnv_suffix")] <- GOI_CNV_only_final[alt_id,c("cnv","cnv_suffix")]
       }
     }
     rm(x,alt_id)
