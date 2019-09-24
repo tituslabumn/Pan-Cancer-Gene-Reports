@@ -578,3 +578,42 @@
     }
     rm(x,alt_id)
   }
+  
+  save.image("troubleshooting_workspace.RData") #####################
+  
+  # get ranges and means for expr values for each study - suffix pair
+  EXPR_CNV_final_table <- GOI_EXPR_CNV_final
+  EXPR_CNV_final_table$merged_label <- paste(EXPR_CNV_final_table$study,EXPR_CNV_final_table$expr_suffix, sep = "_")
+  EXPR_CNV_final_table_unique <- data.frame(
+    row.names = unique(EXPR_CNV_final_table$merged_label),
+    stringsAsFactors = FALSE
+  )
+  EXPR_CNV_final_table_unique$n <- sapply(row.names(EXPR_CNV_final_table_unique),
+                                          function(x){
+                                            sum(EXPR_CNV_final_table$merged_label == x, na.rm = TRUE)
+                                          })
+  EXPR_CNV_final_table_unique$min <- sapply(row.names(EXPR_CNV_final_table_unique),
+                                            function(x){
+                                              min(EXPR_CNV_final_table[EXPR_CNV_final_table$merged_label == x,"expr"], na.rm = TRUE)
+                                            })
+  EXPR_CNV_final_table_unique$max <- sapply(row.names(EXPR_CNV_final_table_unique),
+                                            function(x){
+                                              max(EXPR_CNV_final_table[EXPR_CNV_final_table$merged_label == x,"expr"], na.rm = TRUE)
+                                            })
+  EXPR_CNV_final_table_unique$mean <- sapply(row.names(EXPR_CNV_final_table_unique),
+                                             function(x){
+                                               mean(EXPR_CNV_final_table[EXPR_CNV_final_table$merged_label == x,"expr"], na.rm = TRUE)
+                                             })
+  EXPR_CNV_final_table_unique$stdev <- sapply(row.names(EXPR_CNV_final_table_unique),
+                                              function(x){
+                                                sd(EXPR_CNV_final_table[EXPR_CNV_final_table$merged_label == x,"expr"], na.rm = TRUE)
+                                              })
+  EXPR_CNV_final_table_unique$genetic_profile_name <- sapply(row.names(EXPR_CNV_final_table_unique),
+                                              function(x){
+                                                master_genetic_profile_df[x,"genetic_profile_name"]
+                                              })
+  EXPR_CNV_final_table_unique$genetic_profile_description <- sapply(row.names(EXPR_CNV_final_table_unique),
+                                                             function(x){
+                                                               master_genetic_profile_df[x,"genetic_profile_description"]
+                                                             })
+  save.image("troubleshooting_workspace.RData") #####################
