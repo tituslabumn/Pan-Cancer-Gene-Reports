@@ -587,7 +587,7 @@ colnames(hits_table)<- c("AA position",
 
 
 cat("Figure 17 (expr/cnv)\n\n")
-
+    
 
 
 cat("############### Figure data ready for export #################\n\n\n")
