@@ -617,4 +617,6 @@
                                                              function(x){
                                                                master_genetic_profile_df[x,"genetic_profile_description"]
                                                              })
+  EXPR_CNV_final_table_unique$genetic_profile <- row.names(EXPR_CNV_final_table_unique)
+  
   save.image("troubleshooting_workspace.RData") #####################
