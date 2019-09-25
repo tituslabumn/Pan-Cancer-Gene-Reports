@@ -448,22 +448,21 @@
   #       - cna-rae
   #   with leftoves that dont have selected expr data types dump into another df that catalogs gistic and cna data for each
   cat("Generating empty GOI_EXPR_CNV_final df\n\n")
-  GOI_EXPR_CNV_final <- data.frame(row.names = unique(GOI_cBP_EXPR_CNV$altered_case_id),
-                                     study = "",
-                                     manual_tissue = "",
-                                     expr = NA, # NaN will signify unsequenced
-                                     cnv = NA,
-                                     expr_suffix = "",
-                                     cnv_suffix = "",
-                                     n_muts = 0,
-                                     n_fusions = 0,
-                                     stringsAsFactors = FALSE
-                                  )
+  GOI_EXPR_CNV_final <- data.frame(row.names = unique(GOI_cBP_EXPR_CNV$altered_case_id),stringsAsFactors = FALSE)
+  GOI_EXPR_CNV_final$study = ""
+  GOI_EXPR_CNV_final$manual_tissue = ""
+  GOI_EXPR_CNV_final$expr = NA # NaN will signify unsequenced
+  GOI_EXPR_CNV_final$cnv = NA
+  GOI_EXPR_CNV_final$expr_suffix = ""
+  GOI_EXPR_CNV_final$cnv_suffix = ""
+  GOI_EXPR_CNV_final$n_muts = 0
+  GOI_EXPR_CNV_final$n_fusions = 0
   cat("Generating empty GOI_CNV_only_final df\n\n")
   GOI_CNV_only_final <- GOI_EXPR_CNV_final[,c("study","manual_tissue","cnv","cnv_suffix")]
   cat("Populating both dfs\n\n")
   for (x in row.names(GOI_EXPR_CNV_final)) {
     # subset master df for all with alterd case id
+    cat(x," ")
     data <- GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$altered_case_id == x,]
     # check each suffix to be used for conditionals
     rna_A <- "rna_seq_v2_mrna" %in% data$id_suffix
@@ -482,7 +481,7 @@
     if(rna_A){ # 'rna_seq_v2_mrna'
       GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "rna_seq_v2_mrna","expression"])[1]
       GOI_EXPR_CNV_final[x,"expr_suffix"] <- "rna_seq_v2_mrna"
-      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$id_suffix == "rna_seq_v2_mrna"),"study"]
+      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$id_suffix == "rna_seq_v2_mrna"),"study"][1]
       if(cnv_A){
         GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
         GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
@@ -496,7 +495,7 @@
     }else if(rna_B){ # 'rna_seq_mrna'
       GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "rna_seq_mrna","expression"])[1]
       GOI_EXPR_CNV_final[x,"expr_suffix"] <- "rna_seq_mrna"
-      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$expr_suffix == "rna_seq_mrna"),"study"]
+      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$id_suffix == "rna_seq_mrna"),"study"][1]
       if(cnv_A){
         GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
         GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
@@ -510,7 +509,7 @@
     }else if(rna_C){ # 'mrna'
       GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "mrna","expression"])[1]
       GOI_EXPR_CNV_final[x,"expr_suffix"] <- "mrna"
-      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$id_suffix == "mrna"),"study"]
+      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$id_suffix == "mrna"),"study"][1]
       if(cnv_A){
         GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
         GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
@@ -524,15 +523,15 @@
     }else if(cnv_A){ # no expr data
       GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
       GOI_CNV_only_final[x,"cnv_suffix"] <- "gistic"
-      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "gistic"),"study"]
+      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "gistic"),"study"][1]
     }else if(cnv_B){
       GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "cna","expression"])[1]
       GOI_CNV_only_final[x,"cnv_suffix"] <- "cna"
-      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "cna"),"study"]
+      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "cna"),"study"][1]
     }else if(cnv_C){
       GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "cna_rae","expression"])[1]
       GOI_CNV_only_final[x,"cnv_suffix"] <- "cna_rae"
-      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "cna_rae"),"study"]
+      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "cna_rae"),"study"][1]
     }
   }
   rm(x,data,rna_A,rna_B,rna_C,cnv_A,cnv_B,cnv_C)
