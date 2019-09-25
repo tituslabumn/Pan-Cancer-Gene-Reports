@@ -462,7 +462,6 @@
   cat("Populating both dfs\n\n")
   for (x in row.names(GOI_EXPR_CNV_final)) {
     # subset master df for all with alterd case id
-    cat(x," ")
     data <- GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$altered_case_id == x,]
     # check each suffix to be used for conditionals
     rna_A <- "rna_seq_v2_mrna" %in% data$id_suffix
