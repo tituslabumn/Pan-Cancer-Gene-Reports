@@ -449,13 +449,9 @@
   #   with leftoves that dont have selected expr data types dump into another df that catalogs gistic and cna data for each
   cat("Generating empty GOI_EXPR_CNV_final df\n\n")
   GOI_EXPR_CNV_final <- data.frame(row.names = unique(GOI_cBP_EXPR_CNV$altered_case_id),
-                                     study = sapply(unique(GOI_cBP_EXPR_CNV$altered_case_id),
-                                        function(x) (GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$altered_case_id == x,"study"])[1]
-                                     ),
-                                     manual_tissue = sapply(unique(GOI_cBP_EXPR_CNV$altered_case_id),
-                                        function(x) (GOI_cBP_EXPR_CNV[GOI_cBP_EXPR_CNV$altered_case_id == x,"manual_tissue"])[1]
-                                     ),
-                                     expr = NA, # NaN will signify 
+                                     study = "",
+                                     manual_tissue = "",
+                                     expr = NA, # NaN will signify unsequenced
                                      cnv = NA,
                                      expr_suffix = "",
                                      cnv_suffix = "",
@@ -478,6 +474,7 @@
     cnv_C <- "cna_rae" %in% data$id_suffix
     nmut <- sum(GOI_cBP_mutations$altered_case_id == x)
     nfusions <- sum(fusion.df$altered_case_id == x)
+    GOI_CNV_only_final[x,"manual_tissue"] <- (data[,"manual_tissue"])[1]
     GOI_EXPR_CNV_final[x,"n_muts"] <- nmut
     GOI_EXPR_CNV_final[x,"n_fusions"] <- nfusions
     GOI_CNV_only_final[x,"n_muts"] <- nmut
@@ -485,6 +482,7 @@
     if(rna_A){ # 'rna_seq_v2_mrna'
       GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "rna_seq_v2_mrna","expression"])[1]
       GOI_EXPR_CNV_final[x,"expr_suffix"] <- "rna_seq_v2_mrna"
+      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$id_suffix == "rna_seq_v2_mrna"),"study"]
       if(cnv_A){
         GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
         GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
@@ -498,6 +496,7 @@
     }else if(rna_B){ # 'rna_seq_mrna'
       GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "rna_seq_mrna","expression"])[1]
       GOI_EXPR_CNV_final[x,"expr_suffix"] <- "rna_seq_mrna"
+      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$expr_suffix == "rna_seq_mrna"),"study"]
       if(cnv_A){
         GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
         GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
@@ -511,6 +510,7 @@
     }else if(rna_C){ # 'mrna'
       GOI_EXPR_CNV_final[x,"expr"] <- (data[data$id_suffix == "mrna","expression"])[1]
       GOI_EXPR_CNV_final[x,"expr_suffix"] <- "mrna"
+      GOI_EXPR_CNV_final[x,"study"] <- data[which(data$id_suffix == "mrna"),"study"]
       if(cnv_A){
         GOI_EXPR_CNV_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
         GOI_EXPR_CNV_final[x,"cnv_suffix"] <- "gistic"
@@ -524,12 +524,15 @@
     }else if(cnv_A){ # no expr data
       GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "gistic","expression"])[1]
       GOI_CNV_only_final[x,"cnv_suffix"] <- "gistic"
+      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "gistic"),"study"]
     }else if(cnv_B){
       GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "cna","expression"])[1]
       GOI_CNV_only_final[x,"cnv_suffix"] <- "cna"
+      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "cna"),"study"]
     }else if(cnv_C){
       GOI_CNV_only_final[x,"cnv"] <- (data[data$id_suffix == "cna_rae","expression"])[1]
       GOI_CNV_only_final[x,"cnv_suffix"] <- "cna_rae"
+      GOI_CNV_only_final[x,"study"] <- data[which(data$id_suffix == "cna_rae"),"study"]
     }
   }
   rm(x,data,rna_A,rna_B,rna_C,cnv_A,cnv_B,cnv_C)
