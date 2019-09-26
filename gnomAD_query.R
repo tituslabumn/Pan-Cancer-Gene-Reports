@@ -117,6 +117,10 @@ save.image("troubleshooting_workspace.RData") #####################
 
 cat("\tConverting coordinates from hg19 to hg38\n")
 # this returns coordinates aligned to GRCh37/hg19; change to hg38
+GOI_gnomAD_df_filtered <- GOI_gnomAD_df_filtered[unlist(
+  lapply(
+    (start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = as.numeric(GOI_gnomAD_df_filtered$Position), width = 1)),Chain_19to38))),
+    length)),]
 GOI_gnomAD_df_filtered$Position <- unlist(start(liftOver(GRanges(paste0('chr',GOI_CHR), IRanges(start = as.numeric(GOI_gnomAD_df_filtered$Position), width = 1)),Chain_19to38)))
 
 save.image("troubleshooting_workspace.RData") #####################
