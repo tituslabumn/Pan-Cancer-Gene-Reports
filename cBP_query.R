@@ -472,6 +472,7 @@
     cnv_C <- "cna_rae" %in% data$id_suffix
     nmut <- sum(GOI_cBP_mutations$altered_case_id == x)
     nfusions <- sum(fusion.df$altered_case_id == x)
+    GOI_EXPR_CNV_final[x,"manual_tissue"] <- (data[,"manual_tissue"])[1]
     GOI_CNV_only_final[x,"manual_tissue"] <- (data[,"manual_tissue"])[1]
     GOI_EXPR_CNV_final[x,"n_muts"] <- nmut
     GOI_EXPR_CNV_final[x,"n_fusions"] <- nfusions
@@ -583,10 +584,13 @@
   save.image("troubleshooting_workspace.RData") #####################
   
   # get ranges and means for expr values for each study - suffix pair
+  cat("tabulating EXPR and CNV metadata for grouping and sorting\n\n")
   EXPR_CNV_final_table <- GOI_EXPR_CNV_final
   EXPR_CNV_final_table$merged_label <- paste(EXPR_CNV_final_table$study,EXPR_CNV_final_table$expr_suffix, sep = "_")
   EXPR_CNV_final_table_unique <- data.frame(
     row.names = unique(EXPR_CNV_final_table$merged_label),
+    study = EXPR_CNV_final_table[!duplicated(EXPR_CNV_final_table$merged_label),"study"],
+    manual_tissue = EXPR_CNV_final_table[!duplicated(EXPR_CNV_final_table$merged_label),"manual_tissue"],
     stringsAsFactors = FALSE
   )
   EXPR_CNV_final_table_unique$n <- sapply(row.names(EXPR_CNV_final_table_unique),
@@ -618,5 +622,24 @@
                                                                master_genetic_profile_df[x,"genetic_profile_description"]
                                                              })
   EXPR_CNV_final_table_unique$genetic_profile <- row.names(EXPR_CNV_final_table_unique)
-  
+  EXPR_CNV_final_table_unique$type <- sapply(
+    paste(EXPR_CNV_final_table_unique$genetic_profile_name,EXPR_CNV_final_table_unique$genetic_profile_description,sep = " "),
+    function(x){
+      if(grepl("mRNA expression values, median values from all th",x, ignore.case = TRUE)){ # right now pertains to a single case - remove
+        return("REMOVE")
+      }else if(grepl("RSEM",x, ignore.case = TRUE)){
+        return("RSEM")
+      }else if(grepl("RPKM",x, ignore.case = TRUE)){
+        return("RPKM")
+      }else if(grepl("FPKM",x, ignore.case = TRUE)){
+        return("FPKM")
+      }else if(grepl("microarray",x, ignore.case = TRUE)){
+        return("microarray")
+      }else{
+        return("UNKNOWN")
+      }
+    }
+  )
+  cat("assigning expr types to each genetic_profile\n")
+  print(table(EXPR_CNV_final_table_unique$type))
   save.image("troubleshooting_workspace.RData") #####################
