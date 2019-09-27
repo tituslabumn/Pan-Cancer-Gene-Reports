@@ -640,6 +640,24 @@
       }
     }
   )
+  rm(x)
   cat("assigning expr types to each genetic_profile\n")
+  # remove cases flaged for removal
+  EXPR_CNV_final_table_unique <- EXPR_CNV_final_table_unique[EXPR_CNV_final_table_unique$type != "REMOVE",]
+  # assign number type
+  EXPR_CNV_final_table_unique$type_number <- 0
+  EXPR_CNV_final_table_unique[EXPR_CNV_final_table_unique$type == "RSEM","type_number"] <- 1
+  EXPR_CNV_final_table_unique[EXPR_CNV_final_table_unique$type == "RPKM","type_number"] <- 2
+  EXPR_CNV_final_table_unique[EXPR_CNV_final_table_unique$type == "FPKM","type_number"] <- 3
+  EXPR_CNV_final_table_unique[EXPR_CNV_final_table_unique$type == "microarray","type_number"] <- 4
+  # resolve and assign unknowns based on range and distribution of expr values
+  # some unresolved left as UNKNOWN
+  for (x in which(EXPR_CNV_final_table_unique$type == "UNKNOWN")) {
+    if(EXPR_CNV_final_table_unique[x,"stdev"] > 20){
+      EXPR_CNV_final_table_unique[x,"type_number"] <- 1
+    }
+  }
+  EXPR_CNV_final_table_unique[EXPR_CNV_final_table_unique$type_number == 0,"type_number"] <- 5
   print(table(EXPR_CNV_final_table_unique$type))
+  
   save.image("troubleshooting_workspace.RData") #####################
