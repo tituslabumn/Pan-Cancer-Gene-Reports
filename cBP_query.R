@@ -541,6 +541,9 @@
   GOI_EXPR_CNV_final <- GOI_EXPR_CNV_final[!(is.na(GOI_EXPR_CNV_final$expr) | GOI_EXPR_CNV_final$expr == "NaN"),]
   GOI_CNV_only_final <- GOI_CNV_only_final[!(is.na(GOI_CNV_only_final$cnv) | GOI_CNV_only_final$cnv == "NaN"),]
   
+  # add $genetic_profile
+  GOI_EXPR_CNV_final$genetic_profile <- paste(GOI_EXPR_CNV_final$study,GOI_EXPR_CNV_final$expr_suffix, sep = "_")
+  
   cat("\ttotal unique cases with expr data: ",length(GOI_EXPR_CNV_final[,1]),"\n\n")
   cat("\ttotal unique cases with cnv data: ",sum(!(GOI_EXPR_CNV_final$cnv %in% c(NA,"NaN"))) + length(GOI_CNV_only_final[,1]),"\n\n")
   cat("\ttotal unique cases with both: ",sum(!(GOI_EXPR_CNV_final$cnv %in% c(NA,"NaN"))),"\n\n")
@@ -659,5 +662,4 @@
   }
   EXPR_CNV_final_table_unique[EXPR_CNV_final_table_unique$type_number == 0,"type_number"] <- 5
   print(table(EXPR_CNV_final_table_unique$type))
-  
   save.image("troubleshooting_workspace.RData") #####################

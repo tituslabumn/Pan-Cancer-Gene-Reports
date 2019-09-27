@@ -587,8 +587,21 @@ colnames(hits_table)<- c("AA position",
 
 
 cat("Figure 17 (expr/cnv)\n\n")
-    
-
+# make dfs for imaging, one for each type (RSEM,RPKM,FPKM,microarray and other (1 thru 5))
+cat("assigning image df's for each expr type (RSEM,RPKM,FPKM,microarray and other)\n")
+for(x in 1:5){
+  cat("\tEXPR_CNV_image_df_",x,"\n")
+  assign(
+    paste0("EXPR_CNV_image_df_",x),
+    GOI_EXPR_CNV_final[GOI_EXPR_CNV_final$genetic_profile %in% EXPR_CNV_final_table_unique[EXPR_CNV_final_table_unique$type_number == x,"genetic_profile"],]
+  )
+}
+rm(x)
+# convert RSEM,RPKM,FPKM to log scale expr
+# manually change any value below 0.01 to 0.01 (some batch normalization may have made neg values)
+for(x in 1:3){
+  
+}
 
 cat("############### Figure data ready for export #################\n\n\n")
 
